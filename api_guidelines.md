@@ -1,43 +1,44 @@
-
 # API Guidelines
 
-## Abstract
+    ## Abstract
+    
+    To achieve a RESTful web service follow the six guiding constraints.
+    
+    [whatisrest]: http://whatisrest.com
+    [REST]: https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints
+    
+    REST Constraints
+    
+    1. Client-server
+    2. Stateless
+    3. Cacheable
+    4. Uniform interface
+    5. Layered System
+    6. Code on demand (optional)
+    
+    REST Architectural Goals
+    
+    * Performance
+    * Scalability
+    * Simplicity
+    * Modifiability
+    * Visibility
+    * Portability
+    * Reliability
+    
+    The REST uniform contract is based on three fundamental elements:
+    
+    1. *resource identifier syntax* - How can we express where is the data being transferred to or from?
+    2. *methods* - What are the protocol mechanisms used to transfer the data?
+    3. *media types* - What type of data is being transferred?
+    
+    Aspects of designing RESTful web services:
+    
+    - identification of resources
+    - choice of media types and formats
+    - application of the uniform interface
 
-To achieve a RESTful web service follow the six guiding constraints.
 
-[whatisrest]: http://whatisrest.com
-[REST]: https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints
-
-REST Constraints
-
-1. Client-server
-2. Stateless
-3. Cacheable
-4. Uniform interface
-5. Layered System
-6. Code on demand (optional)
-
-REST Architectural Goals
-
-* Performance
-* Scalability
-* Simplicity
-* Modifiability
-* Visibility
-* Portability
-* Reliability
-
-The REST uniform contract is based on three fundamental elements:
-
-1. *resource identifier syntax* - How can we express where is the data being transferred to or from?
-2. *methods* - What are the protocol mechanisms used to transfer the data?
-3. *media types* - What type of data is being transferred?
-
-Aspects of designing RESTful web services:
-
-- identification of resources
-- choice of media types and formats
-- application of the uniform interface
 
 ## HTTP as the Uniform Interface
 
@@ -66,10 +67,12 @@ Consider trading visibility:
 - for better resource granularity
 - or simply for pure client convenience
 
+
+
 ## Resource Identifiers (URIs)
 
-<!-- TODO -->
-<!-- *url regression* -->
+    <!-- TODO -->
+    <!-- *url regression* -->
 
 URIs should be treated as opaque resource identifiers.
 
@@ -108,6 +111,31 @@ Clients should be able to use server-provided URIs to make additional request wi
 - **AVOID** leaking implementation details to clients, by keeping the creating of URIs on the server, as those details will become part of the public interface.
 - **DO NOT** use an URI as a generic gateway, by tunneling repeated state changes over `POST` using the same URI.
 - **DO NOT** use custom headers to overload URIs.
+
+### URIs For Queries
+
+Queries usually involve filtering, sorting and projections.
+
+- **DO** use query parameters to let clients specify filter conditions, sort fields, and projections.
+- **DO** treat query parameters as optional with sensible defaults.
+- **DO** document each parameter.
+- **CONSIDER** using a generic `sort` parameter to describe sorting rules. To accommodate more complex sorting requirements, let the `sort` parameter take a lift of comma-separated fields, each with a possible unary negative to imply descending sort order. Like: `GET /tickets?sort=-priority,created_at`
+- **CONSIDER** using a `fields` query parameter for projections, like `http://www.example.org/customers?fields=name,gender,birthday`
+- **CONSIDER** using a `view` query parameter for predefined projections, like `http://www.example.org/customers?view=summary`
+- 
+- **CONSIDER** supporting aliases for commonly used queries (it may also improve cacheability). For instance, `GET /tickets/recently_closed`
+- **AVOID** ad hoc queries that use general-purpose query languages such as *SQL* or *XPath*.
+- **AVOID** `Range` requests for implementing queries.
+
+    <!-- TODO -->
+    *Filtering, Searching, Sorting, and Projection*
+
+### Using URIs in Clients
+
+- **DO** update local copies of old URIs when receiving `301 Moved Permanently`.
+- **DO** verify that the `Location` URI maps to a trusted server.
+- **DO NOT** disable support of redirects in client applications. Instead, consider a sensible limit on the number of redirects a client can follow. Disabling redirects altogether will break the client when the server change URIs.
+
 
 ## Methods
 
@@ -152,13 +180,13 @@ Safety and idempotency are guarantees that a server must provide to clients for 
 
 #### Creating Resources
 
-It is legitimate to use either `PUT` or `POST` create new resources, however, the general consensus is that creating a new resource without knowing the final URI is a `POST` operation (each call will yield a new resource). If the URI (or part of it) is known, use `PUT`, because successive calls will not create a new resource, as `PUT` is idempotent.
+While it is valid to use either `PUT` or `POST` to create new resources, the general consensus is that creating a new resource without knowing the final URI is a `POST` operation (each call will yield a new resource). If the URI (or part of it) is known, use `PUT`, because successive calls will not create a new resource, as `PUT` is idempotent.
 
 - **DO** return `201 Created` and a `Location` header containing the URI of the newly created resource.
 - **DO** include a `Content-Location` header containing the URI of the newly created resource, if the response body includes a complete representation of the newly created resource.
 - **CONSIDER** including the `Last-Modified` and `ETag` headers of the newly created resource for optimistic concurrency.
 
-### Large Queries/Stored Queries
+#### Large and Stored Queries
 
 Sometimes it may be necessary to support queries with large inputs, and the query string may no longer be an option. For those cases:
 
@@ -177,11 +205,11 @@ To enable asynchronous processing of request, follow these guidelines (these ste
 
 - **DO** use `POST` to create and return a representation of a new *task* resource, and return status code `202 Accepted`. The purpose of this resource is to let a client track the status of the asynchronous task. Design this resource such that its representation includes the current status of the request and related information such as a time estimate.
 - **DO** use `GET` to return a representation of the task resource, depending of the current status:
-   - **DO** return `200 Ok` and a representation of the task resource with the current status, when *still processing*
-   - **DO** return `303 See Other` and a `Location` header containing a URI of a resource that shows the outcome of the task, once the task has *successfully completed*
-   - **DO** return `200 Ok` with a representation of the task resource informing that the resource creation has *failed*. Clients will need to read the body of the representation to find the reason for failure
+   - **DO** return `200 Ok` and a representation of the task resource with the current status, when *still processing* (pending).
+   - **DO** return `303 See Other` and a `Location` header containing a URI of a resource that shows the outcome of the task, once the task has *successfully completed*.
+   - **DO** return `200 Ok` with a representation of the task resource informing that the resource creation has *failed*. Clients will need to read the body of the representation to find the reason for failure.
 
-Example:
+Example of *pending*:
 
 ```
 HTTP/1.1 202 Accepted
@@ -200,6 +228,8 @@ Content-Location: http://www.example.org/images/task/1
 
 ```
 
+Example of *done*:
+
 ```
 HTTP/1.1 303 See Other
 Content-Type: application/json
@@ -216,26 +246,25 @@ Content-Location: http://www.example.org/images/task/1
 }
 ```
 
-> ###### NOTE
-> The `303 See Other` does not mean that the resource at the request URI has moved to a new location. It merely states that the result exists at the URI indicated in the `Location` header.
+> Note that the `303 See Other` does not mean that the resource at the request URI has moved to a new location. It merely states that the result exists at the URI indicated in the `Location` header.
 
 ### `PATCH`
 
-<!-- TODO -->
-
-Doing PATCH “properly”
-According to the HTTP specification, PUT must take the full resource representation in the request. This can be a bit cumbersome, so PATCH is increasingly being adopted for partial updates.
-
-Given that PATCH is only a proposed standard there are details around the semantics of the method that are not widely understood. It’s not a simple replacement for POST and PUT where you supply a flat list of values to change. The request should supply a set of instructions for updating an entity and these should be applied atomically.
-
-A “set of instructions” is very different from a “set of values” and the specification clearly states that a request should be a different content type to the resource being modified. The detail of the representation is down to you, but RFC6902 describes a JSON format for PATCH where each object represents a single operation, e.g. “add”, “copy”, “delete” and so on. Each type of operation is described in eye-watering detail in the specification.
-
-The point here is that there is a lot more to PATCH than meets the eye. Unless you adopt a complex semantic format for describing change then you are likely to arouse the ire of the “you’re doing it wrong” brigade.
-
-<!-- TODO -->
-
-- 11.8. How to Refine Resources for Partial Updates
-- 11.9. How to use the `PATCH` Method
+    <!-- TODO -->
+    
+    Doing PATCH “properly”
+    According to the HTTP specification, PUT must take the full resource representation in the request. This can be a bit cumbersome, so PATCH is increasingly being adopted for partial updates.
+    
+    Given that PATCH is only a proposed standard there are details around the semantics of the method that are not widely understood. It’s not a simple replacement for POST and PUT where you supply a flat list of values to change. The request should supply a set of instructions for updating an entity and these should be applied atomically.
+    
+    A “set of instructions” is very different from a “set of values” and the specification clearly states that a request should be a different content type to the resource being modified. The detail of the representation is down to you, but RFC6902 describes a JSON format for PATCH where each object represents a single operation, e.g. “add”, “copy”, “delete” and so on. Each type of operation is described in eye-watering detail in the specification.
+    
+    The point here is that there is a lot more to PATCH than meets the eye. Unless you adopt a complex semantic format for describing change then you are likely to arouse the ire of the “you’re doing it wrong” brigade.
+    
+    <!-- TODO -->
+    
+    - 11.8. How to Refine Resources for Partial Updates
+    - 11.9. How to use the `PATCH` Method
 
 ### Using Methods in Clients
 
@@ -277,56 +306,6 @@ When organizing resources into collections:
 - **DO** embed commonly requested relations alongside the resource, for client convenience.
 - **DO** organize resources according to relationship (`GET /bookings/1/departures/2`), if a relation can only exist within another resource.
 - **CONSIDER** providing a link, if a relation can exist independently of the resource. However, if the relation is commonly requested it might be better to always embed the relation's representation, or perhaps offer a functionality to automatically embed the relation's representation and save the client a second round-trip (`GET /bookings?embed=departures,vehicles`).
- 
-
-### Queries
-
-Queries usually involve three components: filtering, sorting and projections.
-
-#### Filtering
-
-<!-- TODO -->
-
-Aliases for common queries (GET /tickets/recently_closed)
-
-#### Searching
-
-<!-- TODO -->
-
-#### Sorting
-
-<!-- TODO -->
-
-Sorting: Similar to filtering, a generic parameter sort can be used to describe sorting rules. Accommodate complex sorting requirements by letting the sort parameter take in list of comma separated fields, each with a possible unary negative to imply descending sort order. Let's look at some examples: GET /tickets?sort=-priority,created_at
-
-#### Projection
-
-<!-- TODO -->
-
-Limiting which fields are returned by the API: 
-
-`GET /tickets?fields=id,subject,customer_name,updated_at&state=open&sort=-updated_at`
-
-
-
-### URIs For Queries
-
-- **DO** use query parameters to let clients specify filter conditions, sort fields, and projections.
-- **DO** treat query parameters as optional with sensible defaults.
-- **DO** document each parameter.
-- **CONSIDER** using a `fields` query parameter for projections, like `http://www.example.org/customers?fields=name,gender,birthday`
-- **CONSIDER** using a `view` query parameter for predefined projections, like `http://www.example.org/customers?view=summary`
-- **CONSIDER** using redefined named queries to support commonly used queries (it may also improve cacheability).
-- **AVOID** ad hoc queries that use general-purpose query languages such as SQL or XPath.
-- **AVOID** `Range` requests for implementing queries.
-
-
-### Using URIs in Clients
-
-- **DO** update local copies of old URIs when receiving `301 Moved Permanently`.
-- **DO** verify that the `Location` URI maps to a trusted server.
-- **DO NOT** disable support of redirects in client applications. Instead, consider a sensible limit on the number of redirects a client can follow. Disabling redirects altogether will break the client when the server change URIs.
-
 
 ### Composite Resources
 
@@ -354,46 +333,14 @@ A *controller* is a resource that can atomically make changes to resources. It c
 
 ## Representations
 
-<!-- TODO -->
-<!--
-good response design
-enveloping response data
+A *representation* (request/response) is concrete and real.
 
-Use Envelopes
-Media Types — JSON Responses and Requests
-Use HTTP Status Codes and Error Responses
-    Field Validation Errors
-    Operational Validation Errors
-
-Updates & creation should return a resource representation
-
-Pretty print by default & ensure gzip is supported
-
-Don't use an envelope by default, and enveloping only in exceptional cases.
-
-Validation errors for PUT, PATCH and POST requests will need a field breakdown. This is best modeled by using a fixed top-level error code for validation failures and providing the detailed errors in an additional errors field, like so:
-
-
-{
-  "code" : 1024,
-  "message" : "Validation Failed",
-  "errors" : [
-    {
-      "code" : 5432,
-      "field" : "first_name",
-      "message" : "First name cannot have fancy characters"
-    },
-    {
-       "code" : 5622,
-       "field" : "password",
-       "message" : "Password cannot be blank"
-    }
-  ]
-}
-
--->
-
-- A *representation* (request/respons) is concrete and real.
+    <!-- TODO -->
+    Concerns:
+    - What is good response design
+    - Enveloping response data
+        - Use Envelopes
+        - Don't use an envelope by default, and enveloping only in exceptional cases.
 
 ### HTTP Headers
 
@@ -427,10 +374,7 @@ Use the following headers to annotate representations that contain message bodie
 - **DO** let your parser interpret the character set, if you receive an XML representation with a missing `charset` parameter.
 - **AVOID** using the `text/xml` media type for XML-formatted representations. The default charset for `text/xml` is `us-ascii`, whereas `application/xml` uses `UTF-8`.
 
-> ###### Note
-> Text and XML media types let you specify the character encoding.
->
-> The JSON media type `application/json` does not specify a `charset` parameter, but uses `UTF-8` as the default encoding.
+> Note that Text and XML media types let you specify the character encoding. The JSON media type `application/json` does not specify a `charset` parameter, but uses `UTF-8` as the default encoding.
 
 #### Custom HTTP Headers
 
@@ -460,19 +404,20 @@ If you choose to create new media types of your own, consider:
 - **DO** register your media type with IANA as per RFC 4288, if the media type is for public use,
 - **AVOID** introducing new application-specific media types unless they are expected to be broadly used, as this may impede interoperability.
 
-Although custom media types improve protocol-level visibility, existing protocol-level tools for monitoring, filtering, or routing HTTP traffic pay little or no attention to media types. Hence, using custom media types only for the sake of protocol-level visibility is not necessary.
+> Note that although custom media types improve protocol-level visibility, existing protocol-level tools for monitoring, filtering, or routing HTTP traffic pay little or no attention to media types. Hence, using custom media types only for the sake of protocol-level visibility is not necessary.
 
-#### *XML Representations*
-
-*TBD*
-
-*Suggested topics:*<br/>
-*Atom resources, AtomPub Service, category documents, AtomPub for feed and entry resources, media resources*
+    #### *XML Representations*
+    
+    *TBD*
+    
+    *Suggested topics:*<br/>
+    *Atom resources, AtomPub Service, category documents, AtomPub for feed and entry resources, media resources*
 
 #### JSON Representations
 
 - **DO** include a *self* link to the resource in each representation.
 - **DO** add a property to indicate the language, if an object in the representation is localized.
+- **DO** pretty print the representation by default, as this will help when using a browser to access the public API. Together with compression the additional white-space characters are negligible.
 - **CONSIDER** including entity identifiers for each of the application domain entities that make up the resource.
 
 ```json
@@ -504,7 +449,6 @@ Although custom media types improve protocol-level visibility, existing protocol
 }
 ```
 
-
 #### Representations of Collections
 
 - **DO** return an empty collection, if the query does not match any resources.
@@ -512,48 +456,48 @@ Although custom media types improve protocol-level visibility, existing protocol
 
 #### Pagination
 
-<!-- TODO -->
-
-Pagination: The right way to include pagination details today is using the Link header introduced by RFC 5988. An API that requires sending a count can use a custom HTTP header like X-Total-Count.
-
-- OData
-- The GitHub way:
-```
-# Request
-GET /user/repos?page=4&per_page=2
-
-# Response
-Link: <https://api.github.com/user/repos?page=5&per_page=2>; rel="next",
-      <https://api.github.com/user/repos?page=8&per_page=2>; rel="last",
-      <https://api.github.com/user/repos?page=1&per_page=2>; rel="first",
-      <https://api.github.com/user/repos?page=3&per_page=2>; rel="prev"
-```
-- Pivotal Tracker
-```
-# Request
-GET projects/1/stories?offset=1300&limit=300
-
-# Response
-X-Tracker-Pagination-Total: 1543
-X-Tracker-Pagination-Limit: 300
-X-Tracker-Pagination-Offset: 1300
-X-Tracker-Pagination-Returned: 243
-```
-```
-# Request
-GET projects/1/stories?offset=1300&limit=300&envelope=true
-
-# Response
-{
-   "data": { /* ... */ },
-   "pagination": {
-       "total": 1543,
-       "limit": 300,
-       "offset": 1300,
-       "returned": 243
-   }
-}
-```
+    <!-- TODO -->
+    
+    Pagination: The right way to include pagination details today is using the Link header introduced by RFC 5988. An API that requires sending a count can use a custom HTTP header like X-Total-Count.
+    
+    - OData
+    - The GitHub way:
+    ```
+    # Request
+    GET /user/repos?page=4&per_page=2
+    
+    # Response
+    Link: <https://api.github.com/user/repos?page=5&per_page=2>; rel="next",
+          <https://api.github.com/user/repos?page=8&per_page=2>; rel="last",
+          <https://api.github.com/user/repos?page=1&per_page=2>; rel="first",
+          <https://api.github.com/user/repos?page=3&per_page=2>; rel="prev"
+    ```
+    - Pivotal Tracker
+    ```
+    # Request
+    GET projects/1/stories?offset=1300&limit=300
+    
+    # Response
+    X-Tracker-Pagination-Total: 1543
+    X-Tracker-Pagination-Limit: 300
+    X-Tracker-Pagination-Offset: 1300
+    X-Tracker-Pagination-Returned: 243
+    ```
+    ```
+    # Request
+    GET projects/1/stories?offset=1300&limit=300&envelope=true
+    
+    # Response
+    {
+       "data": { /* ... */ },
+       "pagination": {
+           "total": 1543,
+           "limit": 300,
+           "offset": 1300,
+           "returned": 243
+       }
+    }
+    ```
 
 - **DO** add a self link to the collection resource
 - **DO** add link to the next page, if the collection is paginated and has a next page
@@ -594,10 +538,39 @@ GET projects/1/stories?offset=1300&limit=300&envelope=true
 - **AVOID** including details such as stack traces, errors from database connections failures, etc.
 - **DO NOT** return `2xx` (`OK`), but include a message body that describes an error condition. Doing so prevents HTTP-aware software from detecting errors.
 
+
+<!-- TODO -->
+
+    Use HTTP Status Codes and Error Responses
+        Field Validation Errors
+        Operational Validation Errors
+    
+    Updates & creation should return a resource representation
+    
+    Validation errors for PUT, PATCH and POST requests will need a field breakdown. This is best modeled by using a fixed top-level error code for validation failures and providing the detailed errors in an additional errors field, like so:
+    
+    
+    {
+      "code" : 1024,
+      "message" : "Validation Failed",
+      "errors" : [
+        {
+          "code" : 5432,
+          "field" : "first_name",
+          "message" : "First name cannot have fancy characters"
+        },
+        {
+           "code" : 5622,
+           "field" : "password",
+           "message" : "Password cannot be blank"
+        }
+      ]
+    }
+
 ### HTML Representations
 
 - **DO** provide HTML representations, for resources that are expected to be consumed by end users.
-- **CONSIDER**  using microformats or RDFa to annotate data within the markup.
+- **CONSIDER**  using microformats or RDFx to annotate data within the markup.
 - **AVOID** avoid designing HTML representations for machine clients.
 
 ### HTTP Status Codes
@@ -643,54 +616,55 @@ Always return meaningful HTTP Status Codes.
 ### Entity Identifiers in Representations
 
 <!-- TODO -->
+    
+    When a client or a server is part of a larger heterogeneous set of applications, information from resources may cross several system boundaries, and identifiers can be used to cross-reference or transform data.
+    
+    For each of the application domain entities included in the representation of a resource, include identifiers formatted as URNs.
+    
+    Entity identifiers can come in handy for the following:
 
-When a client or a server is part of a larger heterogeneous set of applications, information from resources may cross several system boundaries, and identifiers can be used to cross-reference or transform data.
-
-For each of the application domain entities included in the representation of a resource, include identifiers formatted as URNs.
-
-Entity identifiers can come in handy for the following:
-
-- When your clients and servers are part of a larger environment containing applications using RPC, SOAP, asynchronous messaging, stored procedures, and even third-party applications, entity identifiers may be the only common denominator across all those systems to provide the identity of data uniformly.
-- Clients and servers can maintain their own stored copies of entities included in a resource without having to decode from resource URIs or having to use URIs as database keys. Although not ideal, URIs may change. Clients can use these identifiers to cross-reference various entities referred to form different representations.
-- When not all entities in your application domain are mapped to resources.
+    - When your clients and servers are part of a larger environment containing applications using RPC, SOAP, asynchronous messaging, stored procedures, and even third-party applications, entity identifiers may be the only common denominator across all those systems to provide the identity of data uniformly.
+    - Clients and servers can maintain their own stored copies of entities included in a resource without having to decode from resource URIs or having to use URIs as database keys. Although not ideal, URIs may change. Clients can use these identifiers to cross-reference various entities referred to form different representations.
+    - When not all entities in your application domain are mapped to resources.
 
 To maintain uniqueness of identifiers, consider formatting identifiers as URNs.
 
 ### Linking and Application State
 
-<!-- TODO -->
-
-<!--
-HATEOS / HAL / JSONAPI etc.
--->
-
-A link provides a mean to navigate from one resource to another.
-
-Application state is the state the server needs to maintain between each request for each client. Keeping state in clients does not mean serializing session state into URIs or HTML forms.
-
-If the amount of data is small, the best place to maintain application state is within links in representations of resources, where the server can encode the state within the URI itself. However, the server can stores data in a durable storage and encodes its primary key in the URI. Use a combination of both approaches for managing application state to strike a balance between network performance, scalability and reliability.
-
-```
-HTTP/1.1 200 OK
-Content-Type: application/xml;charset=UTF-8
-
-<quote xmlns:atom="http://www.w3.org/2005/Atom">
-    <driver>...</driver>
-    <vehicle>...</vehicle>
-    <offer>
-        <valid-until>2009-10-02</valid-until>
-        <atom:link href="http://www.example.org/quotes/buy?quote=abc1234" rel="http://www.example.org/rels/quotes/buy" />
-    </offer>
-</quote>
-```
+    <!-- TODO -->
+    
+    <!--
+    HATEOS / HAL / JSONAPI etc.
+    -->
+    
+    A link provides a mean to navigate from one resource to another.
+    
+    Application state is the state the server needs to maintain between each request for each client. Keeping state in clients does not mean serializing session state into URIs or HTML forms.
+    
+    If the amount of data is small, the best place to maintain application state is within links in representations of resources, where the server can encode the state within the URI itself. However, the server can stores data in a durable storage and encodes its primary key in the URI. Use a combination of both approaches for managing application state to strike a balance between network performance, scalability and reliability.
+    
+    ```
+    HTTP/1.1 200 OK
+    Content-Type: application/xml;charset=UTF-8
+    
+    <quote xmlns:atom="http://www.w3.org/2005/Atom">
+        <driver>...</driver>
+        <vehicle>...</vehicle>
+        <offer>
+            <valid-until>2009-10-02</valid-until>
+            <atom:link href="http://www.example.org/quotes/buy?quote=abc1234" rel="http://www.example.org/rels/quotes/buy" />
+        </offer>
+    </quote>
+    ```
 
 - **DO** encode application state into URIs, and include those URIs into representations via links.
 - **DO** store the application state in a durable storage, and encode a reference to that state in URIs, if the state is large or cannot be transported to the clients for security or privacy reasons.
 - **DO** make sure to add checks (such as signatures) to detect/prevent tampering of state, when using application state in links. [**Chapter 12**]
 
-#### *Links in XML Representations*
-
-*[Atom](http://www.w3.org/2005/Atom)*
+<!-- TODO -->
+    #### *Links in XML Representations*
+    
+    *[Atom](http://www.w3.org/2005/Atom)*
 
 #### Links in JSON Representations
 
@@ -763,7 +737,7 @@ Link: <{URI}>;rel="{relation}";type="{media type"};title="{title}"...
 - **DO** use multiple values in link relations, if applicable
 - **CONSIDER** providing an informational resource as an HTML document at that URI, describing the semantics of the link relation type. Include details such as HTTP methods supported, formats supported, and business rules about using the link.
 
-Link relation types meant for public use should register that link relation per the process outlined in section 6.2 of the Web Linking Internet-Draft.
+> Link relation types meant for public use should register that link relation per the process outlined in section 6.2 of the Web Linking Internet-Draft.
 
 #### Managing Application Flow with Links
 
@@ -819,6 +793,7 @@ To include URI templates in a representation:
 - **DO** make flow decisions based on the presence or absence of links.
 - **DO** store the knowledge of whether a representation contains a given link.
 - **DO** check the documentation of the link relation to learn any associated business rules regarding authentication, permanence of the URI, methods, and media types supported, etc.
+
 
 
 ## Content Negotiation (conneg)
@@ -925,179 +900,181 @@ Agent-driven negotiation simply mean providing distinct URIs for each variant an
 
 Although it is possible to implement agent-driven negotiation for all `Accept-*` headers, in practice it is most commonly used for media types and languages.
 
+
+
 ## Caching and Conditional Requests
 
-<!-- TODO -->
-
-- 9.1. How to set Expiration Caching Headers
-- 9.2. When to set Expiration Caching Headers
-- 9.3. When and how to use Expiration Headers in Clients
-- 9.4. How to Support Caching for Composite Resources
-- 9.5. How to Keep Caches Fresh and Warm
-- 10.1. How to Generate `Last-Modified` and `ETag` Headers
-- 10.2. How to Implement Conditional `GET` Requests in Servers
-- 10.3. How to Submit Conditional `GET` and `HEAD` Requests from Clients
-- 10.4. How to Implement Conditional `PUT` Requests in Servers
-- 10.5. How to Implement Conditional `DELETE` Requests in Servers
-- 10.6. How to Make Unconditional `GET` Requests from Clients
-- 10.7. How to Submit Conditional `PUT` and `DELETE` Requests from Clients
-- 10.8. How to Make `POST` Requests Conditional
-- 10.9. How to Generate One-Time URIs
+    <!-- TODO -->
+    
+    - 9.1. How to set Expiration Caching Headers
+    - 9.2. When to set Expiration Caching Headers
+    - 9.3. When and how to use Expiration Headers in Clients
+    - 9.4. How to Support Caching for Composite Resources
+    - 9.5. How to Keep Caches Fresh and Warm
+    - 10.1. How to Generate `Last-Modified` and `ETag` Headers
+    - 10.2. How to Implement Conditional `GET` Requests in Servers
+    - 10.3. How to Submit Conditional `GET` and `HEAD` Requests from Clients
+    - 10.4. How to Implement Conditional `PUT` Requests in Servers
+    - 10.5. How to Implement Conditional `DELETE` Requests in Servers
+    - 10.6. How to Make Unconditional `GET` Requests from Clients
+    - 10.7. How to Submit Conditional `PUT` and `DELETE` Requests from Clients
+    - 10.8. How to Make `POST` Requests Conditional
+    - 10.9. How to Generate One-Time URIs
 
 ## Security
 
-<!-- TODO -->
-
-<!--
-Out-of-band authentication
-CORS
-
-Use Access and Refresh Tokens
-    Access Tokens
-    Refresh Tokens
-    Logging In
-    Renewing a Token
-    Validating a Token
-    Terminating a Session
-    Keep JWTs Small
-
-Always use SSL. No exceptions. One thing to watch out for is non-SSL access to API URLs. Do not redirect these to their SSL counterparts. Throw a hard error instead!
-
-A RESTful API should be stateless. This means that request authentication should not depend on cookies or sessions. Instead, each request should come with some sort authentication credentials.
-
--->
-
-- 12.1. How to use Basic Authentication to Authenticate Clients
-- 12.2. How to use Digest Authentication to Authenticate Clients
-- 12.3. How to use Three-Legged OAuth
-- 12.4. How to use Two-Legged OAuth
-- 12.5. How to Deal with Sensitive Information in URIs
-- 12.6. How to Maintain the Confidentiality and Integrity of Representations
+    <!-- TODO -->
+    
+    <!--
+    Out-of-band authentication
+    CORS
+    
+    Use Access and Refresh Tokens
+        Access Tokens
+        Refresh Tokens
+        Logging In
+        Renewing a Token
+        Validating a Token
+        Terminating a Session
+        Keep JWTs Small
+    
+    Always use SSL. No exceptions. One thing to watch out for is non-SSL access to API URLs. Do not redirect these to their SSL counterparts. Throw a hard error instead!
+    
+    A RESTful API should be stateless. This means that request authentication should not depend on cookies or sessions. Instead, each request should come with some sort authentication credentials.
+    
+    -->
+    
+    - 12.1. How to use Basic Authentication to Authenticate Clients
+    - 12.2. How to use Digest Authentication to Authenticate Clients
+    - 12.3. How to use Three-Legged OAuth
+    - 12.4. How to use Two-Legged OAuth
+    - 12.5. How to Deal with Sensitive Information in URIs
+    - 12.6. How to Maintain the Confidentiality and Integrity of Representations
 
 ## 13. Versioning and Extensibility
 
-<!-- TODO -->
-
-<!-- 
-versioning
-    Use API Versioning
-what is a breaking change
-breaking changes
-
-http://www.jenitennison.com/2009/07/22/versioning-uris.html
-
-A lot of things that we want to talk about (make RDF assertions about) are non-information resources. We give them URIs to name them, so that we can talk about them unambiguously, and we give them HTTP URIs so that we have a way of finding information resources (documents) that give us information about them.
-
-non-information resource URIs must not include information that is likely to change
-non-information resource URIs must not include unnecessary hierarchy
-
-
-Always version your API. Versioning helps you iterate faster and prevents invalid requests from hitting updated endpoints. It also helps smooth over any major API version transitions as you can continue to offer old API versions for a period of time.
-However, the version needs to be in the URL to ensure browser explorability of the resources across versions
-Well documented and announced multi-month deprecation schedules can be an acceptable practice for many APIs.
-https://stripe.com/docs/api#versioning
-
--->
-
-- 13.1. How to Maintain URI Compatibility
-- 13.2. How to Maintain Compatibility of XML and JSON Representations
-- 13.3. How to Extend Atom
-- 13.4. How to Maintain Compatibility of Links
-- 13.5. How to Implement Clients to Support Extensibility
-- 13.6. When to Version
-- 13.7. How to Version RESTful Web Services
+    <!-- TODO -->
+    
+    <!-- 
+    versioning
+        Use API Versioning
+    what is a breaking change
+    breaking changes
+    
+    http://www.jenitennison.com/2009/07/22/versioning-uris.html
+    
+    A lot of things that we want to talk about (make RDF assertions about) are non-information resources. We give them URIs to name them, so that we can talk about them unambiguously, and we give them HTTP URIs so that we have a way of finding information resources (documents) that give us information about them.
+    
+    non-information resource URIs must not include information that is likely to change
+    non-information resource URIs must not include unnecessary hierarchy
+    
+    
+    Always version your API. Versioning helps you iterate faster and prevents invalid requests from hitting updated endpoints. It also helps smooth over any major API version transitions as you can continue to offer old API versions for a period of time.
+    However, the version needs to be in the URL to ensure browser explorability of the resources across versions
+    Well documented and announced multi-month deprecation schedules can be an acceptable practice for many APIs.
+    https://stripe.com/docs/api#versioning
+    
+    -->
+    
+    - 13.1. How to Maintain URI Compatibility
+    - 13.2. How to Maintain Compatibility of XML and JSON Representations
+    - 13.3. How to Extend Atom
+    - 13.4. How to Maintain Compatibility of Links
+    - 13.5. How to Implement Clients to Support Extensibility
+    - 13.6. When to Version
+    - 13.7. How to Version RESTful Web Services
 
 ## 14. Documentation and Discovery
 
-<!-- TODO -->
-
-<!--
-how to document api’s
-swagger
-for internal developers (readme.md in the repo)
-
-API documentation (https://apihandyman.io/the-data-the-hypermedia-and-the-documentation/)
-    Machine readable documentation
-        RAML, Swagger and Blueprint.
-        None of them, for now, handles hypermedia APIs definition.
-        ALPS
-    Human readable documentation
-
-Documentation: https://blog.smartbear.com/documentation/the-utopia-of-api-documentation/
-
-For some more or less agreed-upon qualities of good API documentation. It must be:
-
-adapted for audience — like all good marketing and customer support, perhaps multiple documentation depending on the audience’s needs
-DX-first — made for humans, by humans
-machine-readable
-Google-readable — search engine optimization matters when most people are typing “X API” into Google
-well-organized like a reference guide or table of contents
-entwined with the API itself — dual-screens or opening in new window, allowing users to try something out right away
-not a burden to create
-with pricing and usage policies
-with contact information
-adapted to the learner or user
-riddled with use cases and code examples
-made up of everything you could need to use the API
-paired with a story — why you are doing this to achieve that
-easy to produce, publish and maintain
-adapted to what kind of software is being documented, like SaaS versus platform
-adapted to audience to the people that will use it — end user versus inside your company
-adapted to context — when in the discovery process and how people will use it
-equipped with some sort of way to collect user feedback on how you can further improve it
-easily found, whether within the developer portal or prominently placed on your website
-
-    “If all your APIs are true REST APIs and you always them design them the same way, you lessen the need for documentation. If you write documentation using command and shared structures, templates, and common and shared vocabulary and concepts, they become easier to write, read, understand.”
-
-Documentation and its subjects are analyzed to check that they are consistent with each other. For example, if you have an API descriptor, the system checks that the API is conforming to that descriptor. This already exists with ReadyAPI from SmartBear. You can take an API descriptor in Swagger, and ReadyAPI will create the basic testing to check that the implementation for the API is correct compared to the API descriptor,”
-
-    remember that Swagger isn’t the final piece of the puzzle. It’ll get down your specs and build the perimeter of your API, but Swagger alone does not make complete API documentation. While formats like Swagger and RAML can automate the raw specification, you can also try a tool like LucyBot, to make Swagger more human-readable.
-
-
-- An API is only as good as its documentation.
-- The docs should be easy to find and publically accessible.
-- When the docs are hidden inside a PDF file or require signing in, they're not only difficult to find but also not easy to search.
-The docs should show examples of complete request/response cycles. (Pastable examples)
-- The documentation must include any deprecation schedules and details surrounding externally visible API updates. Updates should be delivered via a blog (i.e. a changelog) or a mailing list (preferably both!).
-
-
--->
-
-- 14.1. How to Document RESTful Web Services
-- 14.2. How to use `OPTIONS`
+    <!-- TODO -->
+    
+    <!--
+    how to document api’s
+    swagger
+    for internal developers (readme.md in the repo)
+    
+    API documentation (https://apihandyman.io/the-data-the-hypermedia-and-the-documentation/)
+        Machine readable documentation
+            RAML, Swagger and Blueprint.
+            None of them, for now, handles hypermedia APIs definition.
+            ALPS
+        Human readable documentation
+    
+    Documentation: https://blog.smartbear.com/documentation/the-utopia-of-api-documentation/
+    
+    For some more or less agreed-upon qualities of good API documentation. It must be:
+    
+    adapted for audience — like all good marketing and customer support, perhaps multiple documentation depending on the audience’s needs
+    DX-first — made for humans, by humans
+    machine-readable
+    Google-readable — search engine optimization matters when most people are typing “X API” into Google
+    well-organized like a reference guide or table of contents
+    entwined with the API itself — dual-screens or opening in new window, allowing users to try something out right away
+    not a burden to create
+    with pricing and usage policies
+    with contact information
+    adapted to the learner or user
+    riddled with use cases and code examples
+    made up of everything you could need to use the API
+    paired with a story — why you are doing this to achieve that
+    easy to produce, publish and maintain
+    adapted to what kind of software is being documented, like SaaS versus platform
+    adapted to audience to the people that will use it — end user versus inside your company
+    adapted to context — when in the discovery process and how people will use it
+    equipped with some sort of way to collect user feedback on how you can further improve it
+    easily found, whether within the developer portal or prominently placed on your website
+    
+        “If all your APIs are true REST APIs and you always them design them the same way, you lessen the need for documentation. If you write documentation using command and shared structures, templates, and common and shared vocabulary and concepts, they become easier to write, read, understand.”
+    
+    Documentation and its subjects are analyzed to check that they are consistent with each other. For example, if you have an API descriptor, the system checks that the API is conforming to that descriptor. This already exists with ReadyAPI from SmartBear. You can take an API descriptor in Swagger, and ReadyAPI will create the basic testing to check that the implementation for the API is correct compared to the API descriptor,”
+    
+        remember that Swagger isn’t the final piece of the puzzle. It’ll get down your specs and build the perimeter of your API, but Swagger alone does not make complete API documentation. While formats like Swagger and RAML can automate the raw specification, you can also try a tool like LucyBot, to make Swagger more human-readable.
+    
+    
+    - An API is only as good as its documentation.
+    - The docs should be easy to find and publically accessible.
+    - When the docs are hidden inside a PDF file or require signing in, they're not only difficult to find but also not easy to search.
+    The docs should show examples of complete request/response cycles. (Pastable examples)
+    - The documentation must include any deprecation schedules and details surrounding externally visible API updates. Updates should be delivered via a blog (i.e. a changelog) or a mailing list (preferably both!).
+    
+    
+    -->
+    
+    - 14.1. How to Document RESTful Web Services
+    - 14.2. How to use `OPTIONS`
 
 ## Other Topics
 
-<!-- TODO -->
-
-<!--
-
-typical usage (adhere to standard http verbs etc. and how it relates to interacting with various resources)
-communicating with services - public facing API’s
-for the public
-Use HTTP Methods
-testing api’s
-automated in-memory integration tests (with live dependencies stubed out)
-
-Avoid Operations on Nested Routes
-Implement a “Health-Check” Endpoint
-
-Rate limiting (Twitter-style):
-    X-Rate-Limit-Limit - The number of allowed requests in the current period
-    X-Rate-Limit-Remaining - The number of remaining requests in the current period
-    X-Rate-Limit-Reset - The number of seconds left in the current period
-
--->
+    <!-- TODO -->
+    
+    <!--
+    
+    typical usage (adhere to standard http verbs etc. and how it relates to interacting with various resources)
+    communicating with services - public facing API’s
+    for the public
+    Use HTTP Methods
+    testing api’s
+    automated in-memory integration tests (with live dependencies stubed out)
+    
+    Avoid Operations on Nested Routes
+    Implement a “Health-Check” Endpoint
+    
+    Rate limiting (Twitter-style):
+        X-Rate-Limit-Limit - The number of allowed requests in the current period
+        X-Rate-Limit-Remaining - The number of remaining requests in the current period
+        X-Rate-Limit-Reset - The number of seconds left in the current period
+    
+    -->
 
 ## B. Overview of REST
 
-<!-- TODO -->
-
-- Uniform Resource Identifier
-- Resources
-- Representations
-- Uniform Interface
-- Hypermedia And Application State
+    <!-- TODO -->
+    
+    - Uniform Resource Identifier
+    - Resources
+    - Representations
+    - Uniform Interface
+    - Hypermedia And Application State
 
 ## References
 
