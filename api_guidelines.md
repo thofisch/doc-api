@@ -36,6 +36,20 @@
     - choice of media types and formats
     - application of the uniform interface
 
+    Key questions to ask:
+    
+    - Who is our target user for this API (are they your customers, or third party services, or developers who are looking to extend upon your application for their customers)
+    - Which of our products/services do we want them to be working with? 
+    - What are THEIR use cases for integrating with our API?
+    - What technologies will they be using to integrate with our API?
+    - What other services will they want our API to interact with?
+    
+    Understand what TYPE of API you are building
+    
+    - However, most APIs are not truly REST or RESTful APIs. Instead they tend to follow some REST ideals or be JSON-RPC.
+    - If all of your clients are using legacy systems that depend on SOAP libraries, it may make more sense in that case to build a SOAP API for them.
+    - However, if you are building for today's standards and longevity, REST is a clear winner.
+
 
 
 ## HTTP as the Uniform Interface
@@ -974,6 +988,42 @@ Although it is possible to implement agent-driven negotiation for all `Accept-*`
     
     -->
     
+    - Like building an application it is important to keep your API standardized and extensible.
+    - It's easy to want to add "quick fixes" to make customers happy, but everything you do should be carefully thought out in order to make sure your API continues to serve not only your needs, but also your clients.
+    - Remember, when you create an API you are creating a contract- your users are depending on your API not just to make their application work, but in order to make a living and feed their families.
+    - When you break things, or when you break backwards compatibility you are taking their time and resources to fix their application instead of adding features and keeping their customers happy.
+    
+    The industry solution to this has been versioning, however, versioning is merely a Band-Aid, a temporary solution to make migration to the new system less stressful for your clients, but increasingly difficult on you.
+    
+    Keep in mind, when you have multiple versions of your API you end up supporting and maintaining those versions.
+    
+    One of the greatest challenges in regards to versioning is getting developers to migrate from one version to another, all while keeping your support staff from going insane.
+    
+    This doesn't mean that you shouldn't plan for versioning.
+    
+    Rather it means that you should plan to incorporate a version identifier (either in the URI or in the content-header of the response), but work under the mindset that you will only version your API if...
+    
+    - You have backwards incompatible PLATFORM changes – in other words you completely change the UI or way your platform works
+    - You find that your API is no longer extendable – which is exactly what we are trying to avoid here
+    - You find that your spec no longer meets your developer's needs – for example, they are demanding REST instead of SOAP
+    
+    You should NOT version your API just because:
+    
+    - You added additional endpoints
+    - You added additional data in the response
+    - You changed technologies – your API should be decoupled from your technology stack
+    - You changed your applications services or code – your API should be decoupled from your service layer
+    
+    To clarify on the last two, it shouldn't matter what technologies you are using, or how your services work.
+    
+    The API should interact with both, but be decoupled enough that changing something in the background does not effect the API adversely.
+    
+    Any changes you make to your API in regards to the technology or service layer should be as seamless and transparent as possible.
+    
+    After all, the less you can break backwards compatibility, the happier you, and your customers will be.
+    
+    And this can only happen if you go into building your API with a long-term, flexibility, and extensibility focus.
+    
     - 13.1. How to Maintain URI Compatibility
     - 13.2. How to Maintain Compatibility of XML and JSON Representations
     - 13.3. How to Extend Atom
@@ -1063,6 +1113,25 @@ Although it is possible to implement agent-driven negotiation for all `Accept-*`
         X-Rate-Limit-Reset - The number of seconds left in the current period
     
     -->
+
+    # Tools
+
+    The demand for flexibility and extensibility has driven the development of APIs and tools alike, and in many regards it has never been easier to create an API than it is today with multitudes of frameworks (such as JAX-RS, Apigility, Django REST Framework, Grape), specs (RAML, Swagger, API Blueprint, IO Docs), and tools (API Designer, API Science, APImatic) available.
+
+
+
+## Spec-Driven Development 
+
+One of the quickest ways to get feedback on your API is to define it using a specification language. An API specification language allows for building APIs in a consistent manner, utilizing pattern design and code reuse to help ensure that the APIs remains uniform across the full interface, keeping resources and methods standardized.
+
+- **DO** define Your API in a flexible, but standard specification language (e.g. RAML, Swagger, JSON-API, etc.).
+
+> Be aware that none of the popular specification frameworks support Hypermedia Links (let alone HATEOS). <!-- TODO: link to Jimmy Bogart blog -->
+    
+    ### Code to the Spec... and Don't Deviate
+    
+    If you have taken advantage of the above steps and carefully laid out your API, carefully designed your spec, user tested, and perfected your API – there is nothing worse than throwing all that work away by deviating from the spec and doing one-off things.
+
 
 ## B. Overview of REST
 
