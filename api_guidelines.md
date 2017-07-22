@@ -80,7 +80,7 @@ Clients should be able to use server-provided URIs to make additional request wi
 - *Readable URIs* help users understand something about the resource that the URI is pointing to. 
 - *Hackable URIs* (manipulated by altering/removing portions of the path or query) enable human users to locate other resources that they might be interested in.
 
-When designing URIs:
+### Designing URIs
 
 - **DO** design URIs to last a long time - [Cool URIs don't change](<http://www.w3.org/Provider/Style/URI>).
 - **DO** design URIs based on stable concepts, identifiers, and information.
@@ -104,15 +104,10 @@ When designing URIs:
 - **AVOID** using uppercase characters in URIs.
 - **AVOID** using trailing forward slash, as some frameworks may incorrectly remove or add such slashes during URI normalization.
 - **AVOID** expecting clients to construct URIs.
+- **AVOID** unnecessary query strings in URIs.
 - **AVOID** leaking implementation details to clients, by keeping the creating of URIs on the server, as those details will become part of the public interface.
 - **DO NOT** use an URI as a generic gateway, by tunneling repeated state changes over `POST` using the same URI.
 - **DO NOT** use custom headers to overload URIs.
-
-For clients:
-
-- **DO** update local copies of old URIs when receiving `301 Moved Permanently`.
-- **DO** verify that the `Location` URI maps to a trusted server.
-- **DO NOT** disable support of redirects in client applications. Instead, consider a sensible limit on the number of redirects a client can follow. Disabling redirects altogether will break the client when the server change URIs.
 
 ## Methods
 
@@ -157,11 +152,24 @@ Safety and idempotency are guarantees that a server must provide to clients for 
 
 #### Creating Resources
 
-It is legitimate to use either `PUT` or `POST` create new resources. So which should you use for creating new resources? The correct answer, inevitably, is "it depends". However, the general consensus is that adding a new resource without knowing the new URI is a `POST` operation (each call will yield a new resource). If the URI is known use `PUT` because successive calls will not create a new resource, as `PUT` is idempotent.
+It is legitimate to use either `PUT` or `POST` create new resources, however, the general consensus is that creating a new resource without knowing the final URI is a `POST` operation (each call will yield a new resource). If the URI (or part of it) is known, use `PUT`, because successive calls will not create a new resource, as `PUT` is idempotent.
 
 - **DO** return `201 Created` and a `Location` header containing the URI of the newly created resource.
 - **DO** include a `Content-Location` header containing the URI of the newly created resource, if the response body includes a complete representation of the newly created resource.
 - **CONSIDER** including the `Last-Modified` and `ETag` headers of the newly created resource for optimistic concurrency.
+
+### Large Queries/Stored Queries
+
+Sometimes it may be necessary to support queries with large inputs, and the query string may no longer be an option. For those cases:
+
+- **DO** use `POST` to support large queries, as a necessary trade-off to address a practical limitation, even though this is a misuse of the uniform interface, and a consequence is a loss of cacheability
+- **CONSIDER** the fact pagination may also cause extra latency, since `POST`s are not cached.
+- **CONSIDER** using stored queries to improve cacheability and reuse across clients:
+    - **DO** create a new resource whose state contains the query criteria. Return `201 Created` and a `Location` header referring to a resource created.
+    - **DO** implement a `GET` request for the new resource such that it returns query results.
+    - **DO** find the resource that matches the request, and redirect the client to the URI of that resource, if the same or another client repeats the same query request using `POST`.
+    - **DO** support pagination via `GET` instead of `POST`.
+    - **CONSIDER** the number of different queries and evaluate cache hit ratio, and whether named queries are a better option.
 
 #### Asynchronous Tasks
 
@@ -224,8 +232,6 @@ A “set of instructions” is very different from a “set of values” and the
 
 The point here is that there is a lot more to PATCH than meets the eye. Unless you adopt a complex semantic format for describing change then you are likely to arouse the ire of the “you’re doing it wrong” brigade.
 
-#### Miscellaneous Writes
-
 <!-- TODO -->
 
 - 11.8. How to Refine Resources for Partial Updates
@@ -234,7 +240,7 @@ The point here is that there is a lot more to PATCH than meets the eye. Unless y
 ### Using Methods in Clients
 
 - **DO** treat `GET`, `OPTIONS`, and `HEAD` as safe operations, and send as required. Include `If-Unmodified-Since` and/or `If-Match` conditional headers, if applicable.
-- **DO** resubmit `GET`, `PUT`, and `DELETE` requests, in case failures, to confirm.
+- **DO** resubmit `GET`, `PUT`, and `DELETE` requests, in case of failures, to confirm.
 - **DO** implement retry logic, whenever you encounter a failure for an idempotent method.
 - **DO** submit a `POST` request with a representation of the resource to be created to the factory resource.
 - **DO NOT** repeat `POST` requests unless the documentation states that is idempotent.
@@ -254,28 +260,73 @@ Care should be taking when identifying resources and finding the right resource 
 - **DO** pluralize resource names for collections resources. To keep things simple, pragmatic and consistent always use plural to avoid odd pluralization (person/people).
 - **DO** think about frequency of change and cacheability. Try to separate immutable (less frequently changing) resources from less cacheable resources.
 - **DO NOT** blindly apply the same techniques for identifying resources, as for object-oriented design and database modeling.
-- **DO NOT** bluntly map domain entities into resources, as this may lead to resources that a inefficient and inconvenient to usem and also leak irrelevant implementation details out to your public API.
+- **DO NOT** bluntly map domain entities into resources, as this may lead to resources that a inefficient and inconvenient to use and also leak irrelevant implementation details out to your public API.
 - **DO NOT** limit yourself to identifying resources based on domain nouns alone, you are likely to find that the fixed set of methods in HTTP is quite a limitation. *Using a root-level "Me" endpoint is perfectly valid.*
 
-<!--
-TODO
-If a relation can only exist within another resource, RESTful principles provide useful guidance. (GET /tickets/12/messages/5) Alternatively, if a relation can exist independently of the resource, it makes sense to just include an identifier for it within the output representation of the resource. The API consumer would then have to hit the relation's endpoint. However, if the relation is commonly requested alongside the resource, the API could offer functionality to automatically embed the relation's representation and avoid the second hit to the API.
--->
+### Collection Resources
 
-### Collections Resources
+Collection resources can give the ability to refer to a group of a resources as one, to perform queries on the collection, or use the collection as a factory to create new resources.
+
+> A collection does not necessarily imply hierarchical containment. A resource may be part of more than one collection resource.
+
+When organizing resources into collections:
+
+- **DO** provide a way of searching the collection for it members, if applicable.
+- **DO** provide a filtered view of the collection, if applicable.
+- **DO** provide a paginated view of a collection, when appropriate.
+- **DO** embed commonly requested relations alongside the resource, for client convenience.
+- **DO** organize resources according to relationship (`GET /bookings/1/departures/2`), if a relation can only exist within another resource.
+- **CONSIDER** providing a link, if a relation can exist independently of the resource. However, if the relation is commonly requested it might be better to always embed the relation's representation, or perhaps offer a functionality to automatically embed the relation's representation and save the client a second round-trip (`GET /bookings?embed=departures,vehicles`).
+ 
+
+### Queries
+
+Queries usually involve three components: filtering, sorting and projections.
+
+#### Filtering
 
 <!-- TODO -->
 
-Organizing resources into collections gives clients and servers an ability to refer to a group of a resources as one, to perform queries on the collection, or even to use the collection as a factory to create new resources.
+Aliases for common queries (GET /tickets/recently_closed)
 
-Note that a collection does not necessarily imply hierarchical containment. A given resource may be part of more than one collection resource.
+#### Searching
 
-You can use collection resources for the following:
+<!-- TODO -->
 
-- To retrieve paginated view of a [collection](#representation-of-collections)
-- To search the collection for it members of obtain a filtered view of the collection, see [Queries](#queries).
-- To create a new member resource using the collection as a factory, by submitting HTTP `POST` requests to the collection resource.
-- To perform the same operation on a number of resources at once [See **11.10**]
+#### Sorting
+
+<!-- TODO -->
+
+Sorting: Similar to filtering, a generic parameter sort can be used to describe sorting rules. Accommodate complex sorting requirements by letting the sort parameter take in list of comma separated fields, each with a possible unary negative to imply descending sort order. Let's look at some examples: GET /tickets?sort=-priority,created_at
+
+#### Projection
+
+<!-- TODO -->
+
+Limiting which fields are returned by the API: 
+
+`GET /tickets?fields=id,subject,customer_name,updated_at&state=open&sort=-updated_at`
+
+
+
+### URIs For Queries
+
+- **DO** use query parameters to let clients specify filter conditions, sort fields, and projections.
+- **DO** treat query parameters as optional with sensible defaults.
+- **DO** document each parameter.
+- **CONSIDER** using a `fields` query parameter for projections, like `http://www.example.org/customers?fields=name,gender,birthday`
+- **CONSIDER** using a `view` query parameter for predefined projections, like `http://www.example.org/customers?view=summary`
+- **CONSIDER** using redefined named queries to support commonly used queries (it may also improve cacheability).
+- **AVOID** ad hoc queries that use general-purpose query languages such as SQL or XPath.
+- **AVOID** `Range` requests for implementing queries.
+
+
+### Using URIs in Clients
+
+- **DO** update local copies of old URIs when receiving `301 Moved Permanently`.
+- **DO** verify that the `Location` URI maps to a trusted server.
+- **DO NOT** disable support of redirects in client applications. Instead, consider a sensible limit on the number of redirects a client can follow. Disabling redirects altogether will break the client when the server change URIs.
+
 
 ### Composite Resources
 
@@ -356,6 +407,7 @@ Use the following headers to annotate representations that contain message bodie
 - **DO** use `Content-Length`, to specify the size in bytes of the body. Or specify `Transfer-Encoding: chunked`. Some proxies reject `POST` and `PUT` requests that contain neither of these headers.
 - **DO** use `Content-Language`, two-letter RFC 5646 language tag, optionally followed by a hyphen (-) and any two-letter country code.
 - **DO** use `Content-MD5`, when sending or receiving large representations over potentially unreliable networks to verify the integrity of the message.
+- **DO** set the appropriate expiration caching headers [**9.1**]
 - **DO NOT** use `Content-MD5` as a measure of security.
 - **DO** use `Content-Encoding`. Clients can indicate their preference for `Content-Encoding` using the `Accept-Encoding` header, however, there is no standard way for the client to learn whether a server can process representations compressed in a given encoding.
 - **DO NOT** use `Content-Encoding` in HTTP requests, unless you know out of band that the target server supports a particular encoding method.
@@ -452,7 +504,56 @@ Although custom media types improve protocol-level visibility, existing protocol
 }
 ```
 
+
 #### Representations of Collections
+
+- **DO** return an empty collection, if the query does not match any resources.
+- **DO** include pagination links.
+
+#### Pagination
+
+<!-- TODO -->
+
+Pagination: The right way to include pagination details today is using the Link header introduced by RFC 5988. An API that requires sending a count can use a custom HTTP header like X-Total-Count.
+
+- OData
+- The GitHub way:
+```
+# Request
+GET /user/repos?page=4&per_page=2
+
+# Response
+Link: <https://api.github.com/user/repos?page=5&per_page=2>; rel="next",
+      <https://api.github.com/user/repos?page=8&per_page=2>; rel="last",
+      <https://api.github.com/user/repos?page=1&per_page=2>; rel="first",
+      <https://api.github.com/user/repos?page=3&per_page=2>; rel="prev"
+```
+- Pivotal Tracker
+```
+# Request
+GET projects/1/stories?offset=1300&limit=300
+
+# Response
+X-Tracker-Pagination-Total: 1543
+X-Tracker-Pagination-Limit: 300
+X-Tracker-Pagination-Offset: 1300
+X-Tracker-Pagination-Returned: 243
+```
+```
+# Request
+GET projects/1/stories?offset=1300&limit=300&envelope=true
+
+# Response
+{
+   "data": { /* ... */ },
+   "pagination": {
+       "total": 1543,
+       "limit": 300,
+       "offset": 1300,
+       "returned": 243
+   }
+}
+```
 
 - **DO** add a self link to the collection resource
 - **DO** add link to the next page, if the collection is paginated and has a next page
@@ -719,102 +820,6 @@ To include URI templates in a representation:
 - **DO** store the knowledge of whether a representation contains a given link.
 - **DO** check the documentation of the link relation to learn any associated business rules regarding authentication, permanence of the URI, methods, and media types supported, etc.
 
-## Queries
-
-<!--
-
-Avoid Unnecessary Query Strings (https://medium.com/studioarmix/learn-restful-api-design-ideals-c5ec915a430f)
-Provide Pagination
-
-http://www.jerriepelser.com/blog/paging-in-aspnet-webapi-introduction/?mb=0
-
-Pagination
-
-- OData
-- The GitHub way, GET /user/repos?page=4&per_page=2
-    Link: <https://api.github.com/user/repos?page=5&per_page=2>; rel="next",
-    	  <https://api.github.com/user/repos?page=8&per_page=2>; rel="last",
-    	  <https://api.github.com/user/repos?page=1&per_page=2>; rel="first",
-          <https://api.github.com/user/repos?page=3&per_page=2>; rel="prev"
-- Pivotal Tracker
-    GET projects/1/stories?offset=1300&limit=300
-        X-Tracker-Pagination-Total: 1543
-        X-Tracker-Pagination-Limit: 300
-        X-Tracker-Pagination-Offset: 1300
-        X-Tracker-Pagination-Returned: 243
-    GET projects/1/stories?offset=1300&limit=300&envelope=true
-        {
-           "http_status": "200",
-           "data":
-        	[
-        	   {
-        	       "id": 1,
-        			...
-        	   },
-        	   {
-        	       "id": 25,
-        			...
-        	   },
-        	   {
-        	       "id": 24,
-        			...
-        	   },
-        		...
-        	],
-           "pagination":
-           {
-               "total": 1543,
-               "limit": 300,
-               "offset": 1300,
-               "returned": 243
-           }
-        }
-
-
-Sorting: Similar to filtering, a generic parameter sort can be used to describe sorting rules. Accommodate complex sorting requirements by letting the sort parameter take in list of comma separated fields, each with a possible unary negative to imply descending sort order. Let's look at some examples: GET /tickets?sort=-priority,created_at
-
-Aliases for common queries (GET /tickets/recently_closed)
-
-Limiting which fields are returned by the API: GET /tickets?fields=id,subject,customer_name,updated_at&state=open&sort=-updated_at
-
-Pagination: The right way to include pagination details today is using the Link header introduced by RFC 5988. An API that requires sending a count can use a custom HTTP header like X-Total-Count.
-
--->
-
-Queries usually involve three components: filtering, sorting and projections.
-
-### URIs For Queries
-
-- **DO** use query parameters to let clients specify filter conditions, sort fields, and projections.
-- **DO** treat query parameters as optional with sensible defaults.
-- **DO** document each parameter.
-- **CONSIDER** using a `fields` query parameter for projections, like `http://www.example.org/customers?fields=name,gender,birthday`
-- **CONSIDER** using a `view` query parameter for predefined projections, like `http://www.example.org/customers?view=summary`
-- **CONSIDER** using redefined named queries to support commonly used queries (it may also improve cacheability).
-- **AVOID** ad hoc queries that use general-purpose query languages such as SQL or XPath.
-- **AVOID** `Range` requests for implementing queries.
-
-### Responses
-
-- **DO** set the appropriate expiration caching headers [**9.1**]
-- **DO** return an empty collection, if the query does not match any resources.
-- **DO** include pagination links.
-
-### Queries with Large Inputs
-
-- **DO** use `POST` to support large queries, as a necessary trade-off to address a practical limitation, even though this is a misuse of the uniform interface, and a consequence is a loss of cacheability
-- **CONSIDER** the fact pagination may also cause extra latency, since `POST`s are not cached.
-- **CONSIDER** storing queries as described below.
-
-### Stored Queries
-
-When a client makes a query request using `POST`:
-
-- **DO** create a new resource whose state contains the query criteria. Return `201 Created` and a `Location` header referring to a resource created.
-- **DO** implement a `GET` request for the new resource such that it returns query results.
-- **DO** find the resource that matches the request, and redirect the client to the URI of that resource, if the same or another client repeats the same query request using `POST`.
-- **DO** support pagination via `GET` instead of `POST`.
-- **CONSIDER** the number of different queries and evaluate cache hit ratio, and whether named queries are a better option.
 
 ## Content Negotiation (conneg)
 
@@ -1105,6 +1110,8 @@ Rate limiting (Twitter-style):
 - <https://www.w3.org/DesignIssues/Axioms.html#opaque>
 - <http://www.jenitennison.com/2009/07/25/opaque-uris-unreadable-uris.html>
 - <http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api>
+- <https://medium.com/studioarmix/learn-restful-api-design-ideals-c5ec915a430f>
+- <http://www.jerriepelser.com/blog/paging-in-aspnet-webapi-introduction/?mb=0>
 
 ### Citations
 ### Bibliography
