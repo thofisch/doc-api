@@ -4,8 +4,6 @@
     
     To achieve a RESTful web service follow the six guiding constraints.
     
-    [whatisrest]: http://whatisrest.com
-    [REST]: https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints
     
     REST Constraints
     
@@ -1080,6 +1078,8 @@ Although it is possible to implement agent-driven negotiation for all `Accept-*`
 
 - Boyer, P. (2017, May 31). "RESTful API Design Tips from Experience". Medium. .  https://medium.com/studioarmix/learn-restful-api-design-ideals-c5ec915a430f
 
+- <http://whatisrest.com>
+- <https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints>
 - <http://apistylebook.com/>
 - <https://apihandyman.io/api-design-tips-and-tricks-getting-creating-updating-or-deleting-multiple-resources-in-one-api-call/>
 - <http://www.ben-morris.com/the-restafarian-flame-wars-common-points-of-disagreement-over-rest-api-design/>
@@ -1089,6 +1089,8 @@ Although it is possible to implement agent-driven negotiation for all `Accept-*`
 - <http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api>
 - <https://medium.com/studioarmix/learn-restful-api-design-ideals-c5ec915a430f>
 - <http://www.jerriepelser.com/blog/paging-in-aspnet-webapi-introduction/?mb=0>
+- <https://blogs.mulesoft.com/dev/api-dev/api-best-practices-series-intro/>
+- <https://apigility.org/documentation/api-primer/what-is-an-api>
 
 ### Citations
 ### Bibliography
