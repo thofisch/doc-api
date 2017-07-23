@@ -2,164 +2,55 @@
 
 When we refer to an API, we are referring to a web API, more specifically one delivered over HTTP, and as a term, specifies how software should interact. An API specifies how a client can use a public API exposed by a server. What URIs are available, what HTTP methods may be used, what query string parameters it accepts, what data can be sent, and what responses to expect.
 
-Web APIs can typically be broken into two broad categories:
+Web APIs can typically be broken into two broad categories: *RPC* and *REST*.
  
-- Remote Procedure Call (RPC), e.g., XML-RPC and SOAP.
-- REpresentational State Transfer (REST)
+> ###### RPC (Remote Procedure Call)
+> RPC (e.g., XML-RPC, SOAP, etc.) is generally a poor fit for most web API implementations, as they usually require special purpose libraries or SDKs to work properly. A requirement that a lot of clients cannot meat without a lot of extra work and/or clunky third-party libraries. This, and the fact that most RPC implementations do not use HTTP to its full extend, has let us to **not include RPC in any further discussions**. However, if all of your clients are using legacy systems that depend on SOAP libraries, it may make more sense in that case to build a SOAP API for them. A lot of documentation, best practices and general advise on how to build RPC APIs can be found throughout the web.
 
-RPC is generally a poor fit for most web API implementations, as they usually requires special purpose libraries or SDKs to work properly. A requirement that a lot of clients cannot meat without a lot of extra work, or without clunky third-party libraries. This, and the fact that most RPC variants do not use HTTP to its full capabilities, has let us to not including RPC implementations in any further discussions. A lot of documentation for best practices and general advises can be found throughout the web.
+We will focus our discussion on REST (REpresentational State Transfer). Especially on how to achieve a more RESTful web API, by leveraging the capabilities of HTTP. For more information about REST itself, please refer to the [Wikipedia article on REST](http://en.wikipedia.org/wiki/Representational_state_transfer) or [WhatIsREST](<http://whatisrest.com>).
 
+Some of the aspects of designing RESTful web APIs include:
 
-    REpresentational State Transfer (REST) is not a specification, but an architecture designed around the HTTP specification.
-    
-    The [Wikipedia article on REST](http://en.wikipedia.org/wiki/Representational_state_transfer) provides an excellent overview of the concepts, and copious resources.
-    
-    REST leverages HTTP's strengths, and builds on:
-    
-    URIs as unique identifiers for resources.
-    Rich set of HTTP verbs for operations on resources.
-    The ability for clients to specify representation formats they can render, and for the server to honor those (or indicate if it cannot).
-    Linking between resources to indicate relationships.
-    
-    (E.g., hypermedia links, such as those found in plain old HTML documents!)
-    When talking about REST, the Richardson Maturity Model is often used to describe the concerns necessary when implementing a well-designed REST API.
-    
-    It consists of four levels, indexed from zero:
-    
-    When talking about REST, the [Richardson Maturity Model](http://martinfowler.com/articles/richardsonMaturityModel.html) is often used to describe the concerns necessary when implementing a well-designed REST API.
-    
-    It consists of four levels, indexed from zero:
-    
-    - Level 0: HTTP as a transport mechanism for remote procedure calls.
-    
-    Essentially, this is RPC as described in a previous section.
-    
-    HTTP is being used as a tunnelling mechanism, with a single entry point for all services, and does not take advantage of the hypermedia aspects of HTTP: URIs to denote unique resources, HTTP verbs, ability to specify and return multiple media types, or to link between services.
-    
-    (Note: some Level 0 services will use more than one HTTP verb, but usually only a mix of POST (for operations that may cause data changes) and GET (when only fetching data).)
-    - Level 1: Using URIs to denote individual resources as services.
-    
-    This differentiates from Level 0 by using a URI per operation or "resource" (the "R" in "URI" stands for "Resource" after all!).
-    
-    Instead of a /services URI, you will have one per service: /users, /contacts, etc; furthermore, you will likely allow addressing individual items within the service as well via unique URIs: /users/mwop would allow access to the "mwop" user.
-    
-    However, at Level 1, you're still not using HTTP verbs well, varying media types, or linking between services.
-    - Level 2: Using HTTP verbs and headers for interactions with resources.
-    
-    Building on Level 1, a Level 2 service starts using the full spectrum of HTTP request methods: PATCH, PUT, and DELETE are added to the arsenal.
-    
-    GET is used for safe operations that do not change state, and can be used any number of times in order to get the same results; in other words, it's cacheable using HTTP request caching.
-    
-    The service returns appropriate HTTP response statuses for errors, based on the error type; no more 200 OK with errors embedded in the body.
-    
-    HTTP headers can be used to vary responses; for instance, different representations may be returned based on the Accept header (and the Accept header is used to request alternate representations, instead of a file extension, in order to promote the idea that the same resource is being manipulated regardless of representation).
-    - Level 3: Hypermedia controls.
-    
-    Most API designers get as far as Level 2, and feel they've done their job well; they have.
-    
-    However, one more aspect to the API can make it even more usable: linking resources.
-    
-    Consider this: you make a request to an API for available event tickets.
-    
-    At Level 2, the response might be a list of tickets; Level 3, however, goes a step further, and provides links to each ticket resource, so that you can reserve any one of them!
-    The point of links is to tell the API consumer what can be done next.
-    
-    One aspect of this is it allows the server to change the URIs to resources, on the assumption that the consumer will follow only those links that the server itself has returned.
-    
-    Another aspect is that the links help the API document itself; a consumer can follow links in the API in order to understand how the various resources are related, and what they can do.
-    
-    
-    Essentially, a good REST API:
-    
-    - Uses unique URIs for services and the items exposed by those services.
-    - Uses the full spectrum of HTTP verbs to perform operations on those resources, and the full spectrum of HTTP to allow varying representations of content, enabling HTTP-level caching, etc.
-    - Provides relational links for resources, to tell the consumer what can be done next.
-    
-    All of this theory helps tell us how REST services should act, but tell us very little about how to implement them.
-    
-    This is somewhat by design; REST is more of an architectural consideration.
-    
-    However, it means that the API designer now has to make a ton of choices:
-    
-    - What representation formats will you expose? How will you report that you cannot fulfill a request for a given representation? REST does not dictate any specific formats.
-    - How will you report errors? Again, REST does not dictate any specific error reporting format, beyond suggesting that appropriate HTTP response codes should be used; however, these alone do not provide enough detail to be useful for consumers.
-    - How will you advertise which HTTP methods are available for a given resource? What will you do if the consumer uses a request method you do not support?
-    - How will you handle features such as authentication? Web APIs are generally stateless, and should not rely on features such as session cookies; how will the consumer provide their credentials on each request? Will you use - HTTP authentication, or OAuth2, or create API tokens?
-    - How will you handle hypermedia linking? Some formats, such as XML, essentially have linking built-in; others, such as JSON, have no native format, which means you need to choose how you will provide links.
-    - How will you document what resources are available? Unlike RPC, there are no "built-in" mechanisms for describing REST services; while hypermedia linking will assist, the consumer still needs to know the various entry points for your API.
-    
-    These are not trivial questions, and in many cases, the choices you make for one will impact the choices you make for another.
-    
-    In a nutshell, most REST provides incredible flexibility and power, but requires you to make many choices in order to provide a solid, quality experience for consumers.
+- *Unique identification* of resources by using URIs.
+- Operation on resources by using the available *HTTP methods*.
+- The choice of *media types and formats* that gives clients the ability to specify what representation formats they can render, and for the server to honor those (or indicate if it cannot).
+- *Linking* between resources to indicate relationships (e.g., hypermedia links).
 
+Today, most web APIs are not truly REST APIs, instead they tend a varying degree of RESTfulness. Therefore, the [Richardson Maturity Model](http://martinfowler.com/articles/richardsonMaturityModel.html) is often used to describe what it takes to make a well-designed REST API. The higher the level, the more useful:
 
-# What Is an API?
-    
-    ## Types of APIs
-    
-    :
-    
-    
-    ### RPC
-    
+- Level 0: Uses HTTP as a transport mechanism for RPC, as mentioned above.
+- Level 1: Uses URIs for individual resources, but does not use HTTP methods, media types, or linking between resources.
+- Level 2: Uses HTTP methods and headers for interactions with resources, and returns appropriate HTTP status codes.
+- Level 3: Uses hypermedia controls for discoverability, providing a way of making an API more self-documenting.
 
-    ### REST
-    
-    ## Abstract
-    
-    To achieve a RESTful web service follow the six guiding constraints.
-    
-    
-    REST Constraints
-    
-    1. Client-server
-    2. Stateless
-    3. Cacheable
-    4. Uniform interface
-    5. Layered System
-    6. Code on demand (optional)
-    
-    REST Architectural Goals
-    
-    * Performance
-    * Scalability
-    * Simplicity
-    * Modifiability
-    * Visibility
-    * Portability
-    * Reliability
-    
-    The REST uniform contract is based on three fundamental elements:
-    
-    1. *resource identifier syntax* - How can we express where is the data being transferred to or from?
-    2. *methods* - What are the protocol mechanisms used to transfer the data?
-    3. *media types* - What type of data is being transferred?
-    
-    Aspects of designing RESTful web services:
-    
-    - identification of resources
-    - choice of media types and formats
-    - application of the uniform interface
+So a good REST API should:
 
-    Key questions to ask:
-    
-    - Who is our target user for this API (are they your customers, or third party services, or developers who are looking to extend upon your application for their customers)
-    - Which of our products/services do we want them to be working with? 
-    - What are THEIR use cases for integrating with our API?
-    - What technologies will they be using to integrate with our API?
-    - What other services will they want our API to interact with?
-    
-    Understand what TYPE of API you are building
-    
-    - However, most APIs are not truly REST or RESTful APIs. Instead they tend to follow some REST ideals or be JSON-RPC.
-    - If all of your clients are using legacy systems that depend on SOAP libraries, it may make more sense in that case to build a SOAP API for them.
-    - However, if you are building for today's standards and longevity, REST is a clear winner.
+- Use unique URIs to expose resources for clients to use.
+- Leverage the full spectrum of HTTP, to perform operations on those resources, and allow varying representations of content, enabling HTTP-level caching, etc.
+- Provide relational links for resources, to inform the client what can be done next.
 
+Here we will try to offer advise on how to achieve these goals, both in regards to implementing clients as well as servers. Specifically we will focus on:
 
+- How to identify resources by using URIs
+- How to use the available HTTP methods
+- What representation formats to you expose and what to do when the server cannot fulfill a request for a given representation
+- How to report errors, using HTTP status codes and representations
+- How to handle security, including HTTP authentication, OAuth2, and API tokens
+- How to handle hypermedia linking
+- How to document your API
+- And more... <!-- TODO -->
+
+But before jumping straight into designing an API, here are some key questions to think about:
+    
+- Who is the target audience for the API (customers, third-party services, or even developers looking to extend upon your services for their own customers)?
+- What are the use cases for integrating with the API?
+- What technologies will the client use to integrate with the API?
+- Which products/services to expose? 
+- What other services should the API interact with?
 
 ## HTTP as the Uniform Interface
 
-One of the key goals of the REST architecture is to maintain visibility, which let you benefit from existing software and infrastructure for features that you would otherwise have to build yourself.
+Before diving into the specific areas of designing a RESTful API, it is important to recognize that one of the key goals of the REST architecture is to maintain visibility. This will let the API benefit from existing software and infrastructure for features that would otherwise have to built as well.
 
 HTTP is an application-level protocol that is designed to keep interactions between clients and servers visible. HTTP defines operations (along with, e.g., headers), such as `GET`, `POST`, `PUT` and `DELETE`, for transferring representations between clients and servers, eliminating the need for application-specific operations (e.g. *createBooking*, *changeBooking*, etc.). This means that caches, proxies, firewalls, etc., can monitor and participate in the protocol.
 
