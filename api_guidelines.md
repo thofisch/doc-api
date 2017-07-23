@@ -54,17 +54,17 @@ Before diving into the specific areas of designing a RESTful API, it is importan
 
 HTTP is an application-level protocol that is designed to keep interactions between clients and servers visible. HTTP defines operations (along with, e.g., headers), such as `GET`, `POST`, `PUT` and `DELETE`, for transferring representations between clients and servers, eliminating the need for application-specific operations (e.g. *createBooking*, *changeBooking*, etc.). This means that caches, proxies, firewalls, etc., can monitor and participate in the protocol.
 
-> Visibility means that one component of an architecture can monitor (and even regulate) the interaction between other components of the same architecture
+> Visibility means that one component of an architecture can monitor (and even participate in) the interaction between other components of the same architecture
 
 For better visibility:
 
-- **DO** make interactions stateless
-- **DO** use HTTP methods (`GET`, `HEAD`,`POST`,`PUT`,`DELETE`, and `TRACE`).
-- **DO** use appropriate headers to describe requests and responses
-- **DO** use appropriate status codes and messages
-- **DO NOT** change syntax and meaning, specified by HTTP, from application to application or from resource to resource
+- **DO** make interactions stateless.
+- **DO** use HTTP methods.
+- **DO** use appropriate headers to describe requests and responses.
+- **DO** use appropriate status codes and messages.
+- **DO NOT** change syntax and meaning, specified by HTTP, from application to application or from resource to resource.
 
-Keep in mind that focusing solely on visibility may create too fine-grained resources and poor separation of concern between clients and servers, and trading visibility for other benefits is not necessarily bad.
+Keep in mind that focusing solely on visibility may create too fine-grained resources and poor separation of concern between clients and servers. Trading visibility for other benefits is not necessarily bad.
 
 Consider trading visibility:
 
@@ -147,22 +147,12 @@ Queries usually involve filtering, sorting and projections.
 
 ## Methods
 
-    # Use CRUD
-    
-    But put more simply, in regards to its use in RESTful APIs, CRUD is the standardized use of HTTP Action Verbs.
-    
-    This means that if you want to create a new record you should be using "POST." If you are trying to read a record, you should be using "GET." To update a record utilizing "PUT" or "PATCH." And to delete a record, using "DELETE."
+Before discussing the individual HTTP methods we will offer some general advise:
 
-    Utilize CRUD as that is what developers will be looking for when trying to utilize your API, and by deviating from it you are only make your API harder to use and maintain.
-    
-    Also keep in mind that not all browsers or servers support all the HTTP verbs currently out there.
-    Last but not least, do not mix HTTP Action Verb definitions – if you are telling your developers to make a POST, do not pass the data along as a querystring.
-    
-    That is not the definition of POST and will only cause more confusion for your users.
-    
-     Make sure you are staying consistent with the verb definition.
+- **DO** stay consistent with the HTTP verb definitions.
+- **DO** use CRUD for most basic operations, as most developers will be familiar with this standardized way of working with an API. This means using `POST` for **C**reating, `GET` for **R**eading, `PUT` for **U**pdating, and `DELETE` for **D**eleting.
 
-HTTP supports the following methods:
+HTTP supports the following methods (not all discussed in detail here):
 
 |Method   |Safe|Idempotent|
 |---------|----|----------|
@@ -174,9 +164,9 @@ HTTP supports the following methods:
 |`POST`   |No  |No        |
 |`PATCH`  |No  |No        |
 
-Safety and idempotency are guarantees that a server must provide to clients for certain methods:
+Safety and idempotency are guarantees a server must provide to clients:
 
-- *Safe methods* (or read-only operations) are expected not to cause side-effects, however, safety does not mean the server must return the same response every time.
+- *Safe methods* (or read-only operations) are expected not to cause side-effects, however, it does not mean the server must return the same response every time.
 - *Idempotent methods* must guarantee that every request has the same effect, and is highly important in case of failures.
 
 ### `GET`
@@ -199,6 +189,7 @@ Safety and idempotency are guarantees that a server must provide to clients for 
 - **DO** use `POST` to modify one or more resources.
 - **DO** use `POST` to for queries with large inputs.
 - **DO** use `POST` to perform any unsafe and nonidempotent operation, when no other HTTP method seems appropriate, and only as a last resort (avoid tunneling like SOAP).
+- **AVOID** passing data in query string along `POST` request, use the body instead.
 - **DO NOT** use nonstandard custom HTTP methods. Instead, design a controller resource that can abstract such operations, and `POST`.
 
 #### Creating Resources
