@@ -298,22 +298,9 @@ A *resource* is an abstract entity that is identified by a URI, and can be data,
 
 ### Identifying and Naming Resources
 
-    # Use Nouns as Resources
+Most often when identifying resources, the use of nouns instead of verbs will be obvious, however, sometimes it is necessary to veer from this naming convention, when exposing certain services through the public API.
     
-    If you are building a REST API, be sure that you are using nouns as resources instead of verbs.
-    
-    
-    As you can see, verbs are tightly coupled to a specific action and offer very little, if any flexibility.
-    
-     By using nouns, as recommended with REST and taking advantage of HTTP Action Verbs (such as GET, POST, PUT, etc) you can have loosely coupled resources that are able to accomplish multiple tasks and have new actions added at any time.
-    
-     Combined with hypermedia, this means that your users would be able to take advantage of any new actions immediately.
-    
-    Your RESTful endpoints should look like:
-    
-    Keep in mind that it is usually a good idea to use the plural form of the noun unless all available actions are explicit to the singular form.
-    
-Care should be taking when identifying resources and finding the right resource granularity.
+Care should be taking when identifying resources and finding the right resource granularity:
 
 - **DO** use network efficiency, size of representations, and client convenience to guide resource granularity.
 - **DO** analyze use cases to find domain nouns that can be operated using *create*, *read*, *update*, or *delete* operations. Designate each noun as a resource. Use `POST`, `GET`, `PUT`, or `DELETE` operations respectively, on each resource.
@@ -341,15 +328,20 @@ When organizing resources into collections:
 
 ### Composite Resources
 
+At times it may prove convenient to identify new composite resources.
+
 - **DO** identify new resources that aggregate other resources to reduce the number of client/server round-trips, based on client usage patterns, performance, and latency requirements.
 - **CONSIDER** a snapshot page to summarize information, using an URI of the form `http://www.example.org/customer/1234/snapshot`.
 - **CONSIDER**, if requests for composites are rare, or if network latency is an issue, whether caching may be a better option.
 
-### Processing Functions
+### Processing Function
+
+Use processing functions to abstract specific services through the public API that allows clients to perform tasks such computation or data validation.
 
 - **DO** treat the processing function as a resource
 - **DO** use `GET` to fetch a representation containing the output of the processing function.
 - **DO** use query parameters to supply inputs to the processing function.
+- **DO** treating the processing function as a resource, as most often it will be difficult to find appropriate nouns. So when validating a vehicle registration number: `http://www.example.org/vehicles/validate?regnum=ZY12345`
 
 ### Controller Resources
 
