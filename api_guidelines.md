@@ -1,52 +1,15 @@
 # API Guidelines
 
-    # What Is an API?
-    
-    API stands for "Application Programming Interface," and as a term, specifies how software should interact.
-    
-    Generally speaking, when we refer to APIs today, we are referring more specifically to web APIs, those delivered over HTTP.
-    
-    For this specific case, then, an API specifies how a consumer can consume the service the API exposes: what URIs are available, what HTTP methods may be used with each URI, what query string parameters it accepts, what data may be sent in the request body, and what the consumer can expect as a response.
-    
-    ## Types of APIs
-    
-    Web APIs can be broken into two general categories:
-    
-    - Remote Procedure Call (RPC)
-    - REpresentational State Transfer (REST)
-    
-    ### RPC
-    
-    RPC is generally characterized as a single URI on which many operations may be called, usually solely via POST.
-    
-    Exemplars include XML-RPC and SOAP.
-    
-    Usually, you will pass a structured request that includes the operation name to invoke and any arguments you wish to pass to the operation; the response will be in a structured format.
-    
-    One thing to note here is that RPC usually is doing all error reporting in the response body; the HTTP status code will not vary, meaning that you need to inspect the return value to determine if an error occurred!
-    
-    Finally, many RPC implementations also provide documentation to their end users via the protocol itself.
-    
-    For SOAP, this is WSDL; for XML-RPC, this is through the various "system." methods.
-    
-    This self-documenting feature when implemented (it isn't always!) can provide invaluable information to the consumer on how to interact with the service.
-    
-    The points to remember about RPC are:
-    
-    One service endpoint, many operations.
-    One service endpoint, one HTTP method (usually POST).
-    Structured, predictable request format, structured, predictable response format.
-    Structured, predictable error reporting format.
-    Structured documentation of available operations.
-    All that said, RPC is often a poor fit for web APIs:
-    
-    You cannot determine via the URI how many resources are available.
-    Lack of HTTP caching, inability to use native HTTP verbs for common operations; lack of HTTP response codes for error reporting requires introspection of results to determine if an error occurred.
-    "One size fits all" format can be limiting; clients that consume alternate serialization formats cannot be used, and message formats often impose unnecessary restrictions on the types of data that can be submitted or returned.
-    In a nutshell, most RPC variants commonly in usage for web APIs do not use HTTP to its full capabilities.
-    
-    ### REST
-    
+When we refer to an API, we are referring to a web API, more specifically one delivered over HTTP, and as a term, specifies how software should interact. An API specifies how a client can use a public API exposed by a server. What URIs are available, what HTTP methods may be used, what query string parameters it accepts, what data can be sent, and what responses to expect.
+
+Web APIs can typically be broken into two broad categories:
+ 
+- Remote Procedure Call (RPC), e.g., XML-RPC and SOAP.
+- REpresentational State Transfer (REST)
+
+RPC is generally a poor fit for most web API implementations, as they usually requires special purpose libraries or SDKs to work properly. A requirement that a lot of clients cannot meat without a lot of extra work, or without clunky third-party libraries. This, and the fact that most RPC variants do not use HTTP to its full capabilities, has let us to not including RPC implementations in any further discussions. A lot of documentation for best practices and general advises can be found throughout the web.
+
+
     REpresentational State Transfer (REST) is not a specification, but an architecture designed around the HTTP specification.
     
     The [Wikipedia article on REST](http://en.wikipedia.org/wiki/Representational_state_transfer) provides an excellent overview of the concepts, and copious resources.
@@ -128,6 +91,20 @@
     These are not trivial questions, and in many cases, the choices you make for one will impact the choices you make for another.
     
     In a nutshell, most REST provides incredible flexibility and power, but requires you to make many choices in order to provide a solid, quality experience for consumers.
+
+
+# What Is an API?
+    
+    ## Types of APIs
+    
+    :
+    
+    
+    ### RPC
+    
+
+    ### REST
+    
     ## Abstract
     
     To achieve a RESTful web service follow the six guiding constraints.
