@@ -1245,6 +1245,8 @@ Although it is possible to implement agent-driven negotiation for all `Accept-*`
 
     <!-- TODO -->
     
+    dog-food your own API
+    
     <!--
     
     typical usage (adhere to standard http verbs etc. and how it relates to interacting with various resources)
