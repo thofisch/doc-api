@@ -1372,6 +1372,7 @@ One of the quickest ways to get feedback on your API is to define it using a spe
 - <http://www.jerriepelser.com/blog/paging-in-aspnet-webapi-introduction/?mb=0>
 - <https://blogs.mulesoft.com/dev/api-dev/api-best-practices-series-intro/>
 - <https://apigility.org/documentation/api-primer/what-is-an-api>
+- <http://zalando.github.io/restful-api-guidelines>
 
 ### Citations
 ### Bibliography
