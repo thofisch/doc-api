@@ -1,0 +1,24 @@
+= API Guidelines
+Thomas Fischer
+:toc: right
+:icons: font
+
+When we refer to an API, we are referring to a web API, more specifically one delivered over HTTP, and as a term, specifies how software should interact. An API specifies how a client can use a public API exposed by a server. What URIs are available, what HTTP methods may be used, what query string parameters it accepts, what data can be sent, and what responses to expect.
+
+Web APIs can typically be broken into two broad categories: *RPC* and *REST*.
+
+[source,xml]
+----
+<section>
+  <title>Section Title</title> <!--1-->
+</section>
+----
+<1> The section title is required.
+
+icon:check-circle[] *DO* this is a test of the emergency broadcast system.
+
+WARNING: do not
+
+NOTE: test
+
+INFORMATION: please

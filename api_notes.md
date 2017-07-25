@@ -2,7 +2,7 @@
 
 The software architecture centers around decoupled microservices that provide functionality via RESTful APIs.
 
-Small teams own, deploy and operate these microservices. 
+Small teams own, deploy and operate these microservices.
 
 Our APIs most purely express what our systems do, and are therefore highly valuable business assets.
 
@@ -25,12 +25,6 @@ API First encompasses a set of quality-related standards and fosters a peer revi
 
 Ideally, all APIs will look like the same author created them.
 
-# Conventions Used in These Guidelines
-
-~~The requirement level keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" used in this document (case insensitive) are to be interpreted as described in RFC 2119.~~
-
-# Zalando specific information
-
 The purpose of our "RESTful API guidelines" is to define standards to successfully establish "consistent API look and feel" quality.~
 
 The API Guild drafted and owns this document.
@@ -46,7 +40,9 @@ In case guidelines are changing, following rules apply:
 - new APIs have to respect the current guidelines
 - Furthermore you should keep in mind that once an API becomes public externally available, it has to be re-reviewed and changed according to current guidelines - for sake of overall consistency.
 
-# Principles
+## Conventions Used in These Guidelines
+
+~~The requirement level keywords "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" used in this document (case insensitive) are to be interpreted as described in RFC 2119.~~
 
 ## API as a Product
 
@@ -79,19 +75,19 @@ An important principle for (RESTful) API design and usage is Postel's Law, aka t
 
 Be liberal in what you accept, be conservative in what you send
 
-# General Guidelines
+## General Guidelines
 
-## Must: Follow API First Principle
+### MUST: Follow API First Principle
 
 As mentioned in the introduction, API First is one of our engineering and architecture principles. In a nutshell API First requires two aspects:
 
-- define APIs outside the code first using a standard specification language
-get early review feedback from peers and client developers
+- define APIs outside the code first using a standard specification language get early review feedback from peers and client developers
 - By defining APIs outside the code, we want to facilitate early review feedback and also a development discipline that focus service interface design on...
-    - profound understanding of the domain and required functionality
-    - generalized business entities / resources, i.e. avoidance of use case specific APIs
-    - clear separation of WHAT vs. HOW concerns, i.e. abstraction from implementation aspects — APIs should be stable even if we replace complete service implementation including its underlying technology stack
-    - Moreover, API definitions with standardized specification format also facilitate...
+  - profound understanding of the domain and required functionality
+  - generalized business entities / resources, i.e. avoidance of use case specific APIs
+  - clear separation of WHAT vs. HOW concerns, i.e. abstraction from implementation aspects — APIs should be stable even if we 
+    replace complete service implementation including its underlying technology stack
+  - Moreover, API definitions with standardized specification format also facilitate...
 - single source of truth for the API specification; it is a crucial part of a contract between service provider and client users
 - infrastructure tooling for API discovery, API GUIs, API documents, automated quality checks
 
@@ -99,8 +95,7 @@ An element of API First are also this API Guidelines and a lightweight API revie
 
 It is important to learn, that API First is not in conflict with the agile development principles that we love. Service applications should evolve incrementally — and so its APIs. Of course, our API specification will and should evolve iteratively in different cycles; however, each starting with draft status and early team and peer review feedback. API may change and profit from implementation concerns and automated testing feedback. API evolution during development life cycle may include breaking changes for not yet productive features and as long as we have aligned the changes with the clients. Hence, API First does not mean that you must have 100% domain and requirement understanding and can never produce code before you have defined the complete API and get it confirmed by peer review. On the other hand, API First obviously is in conflict with the bad practice of publishing API definition and asking for peer review after the service integration or even the service productive operation has started. It is crucial to request and get early feedback — as early as possible, but not before the API changes are comprehensive with focus to the next evolution step and have a certain quality (including API Guideline compliance), already confirmed via team internal reviews.
 
-
-## Should: Provide User Manual Documentation
+### SHOULD:: Provide User Manual Documentation
 
 In addition to the API as OpenAPI Reference Definition, it’s good practice to provide an API User Manual documentation to improve client developer experience, especially of engineers that are less experienced in using this API. A helpful API User Manual typically describes the following API aspects:
 
@@ -109,15 +104,15 @@ In addition to the API as OpenAPI Reference Definition, it’s good practice to 
 - edge cases, error situation details and repair hints
 - architecture context and major dependencies - including figures and sequence flows
 
-## Must: Write APIs in U.S. English
+### MUST: Write APIs in U.S. English
 
-# Security
+## Security
 
-## Must: Secure Endpoints with OAuth 2.0
+### MUST: Secure Endpoints with OAuth 2.0
 
 # Compatibility
 
-## Must: Don’t Break Backward Compatibility
+### MUST: Don’t Break Backward Compatibility
 
 Change APIs, but keep all consumers running.
 
@@ -132,23 +127,22 @@ We strongly encourage using compatible API extensions and discourage versioning.
 
 Hint: Please note that the compatibility guarantees are for the "on the wire" format. Binary or source compatibility of code generated from an API definition is not covered by these rules. If client implementations update their generation process to a new version of the API definition, it has to be expected that code changes are necessary.
 
-## Should: Prefer Compatible Extensions
+### SHOULD:: Prefer Compatible Extensions
 
 API designers should apply the following rules to evolve RESTful APIs for services in a backward-compatible way:
 
 - Add only optional, never mandatory fields.
 - Never change the semantic of fields (e.g. changing the semantic from customer-number to customer-id, as both are different unique customer keys)
-Input fields may have (complex) constraints being validated via server-side business logic. - - Never change the validation logic to be more restrictive and make sure that all constraints a clearly defined in description.
+- Input fields may have (complex) constraints being validated via server-side business logic. - - Never change the validation logic to be more restrictive and make sure that all constraints a clearly defined in description.
 - Enum ranges can be reduced when used as input parameters, only if the server is ready to accept and handle old range values too. Enum range can be reduced when used as output parameters.
 - Enum ranges cannot not be extended when used for output parameters — clients may not be prepared to handle it. However, enum ranges can be extended when used for input parameters.
 - Support redirection in case an URL has to change (301 Moved Permanently).
 
-## Must: Prepare Clients To Not Crash On Compatible API Extensions
+### MUST: Prepare Clients To Not Crash On Compatible API Extensions
 
 Service clients should apply the robustness principle:
 
 - Be conservative with API requests and data passed as input, e.g. avoid to exploit definition eficits like passing megabytes for strings with unspecified maximum length.
-
 - Be tolerant in processing and reading data of API responses, more specifically...
 
 Service clients must be prepared for compatible API extensions of service providers:
@@ -157,7 +151,7 @@ Service clients must be prepared for compatible API extensions of service provid
 - Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions. Note also, that status codes are extensible. Default handling is how you would treat the corresponding x00 code (see RFC7231 Section 6).
 - Follow the redirect when the server returns HTTP status 301 Moved Permanently.
 
-## Should: Design APIs Conservatively
+### SHOULD:: Design APIs Conservatively
 
 Designers of service provider APIs should be conservative and accurate in what they accept from clients:
 
@@ -175,11 +169,11 @@ Future extensions of the input data structure might be in conflict with already 
 
 In specific situations, where a (known) input field is not needed anymore, it either can stay in the API definition with "not used anymore" description or can be removed from the API definition as long as the server ignores this specific parameter.
 
-## Must: Always Return JSON Objects As Top-Level Data Structures To Support Extensibility
+### MUST: Always Return JSON Objects As Top-Level Data Structures To Support Extensibility
 
 In a response body, you must always return a JSON objects (and not e.g. an array) as a top level data structure to support future extensibility. JSON objects support compatible extension by additional attributes. This allows you to easily extend your response and e.g. add pagination later, without breaking backwards compatibility.
 
-## Should: Avoid Versioning
+### SHOULD:: Avoid Versioning
 
 When changing your RESTful APIs, do so in a compatible way and avoid generating additional API versions. Multiple versions can significantly complicate understanding, testing, maintaining, evolving, operating and releasing our systems (supplementary reading).
 
@@ -191,7 +185,7 @@ If changing an API can’t be done in a compatible way, then proceed in one of t
 
 As we discourage versioning by all means because of the manifold disadvantages, we suggest to only use the first two approaches.
 
-## Must: Use Media Type Versioning
+### MUST: Use Media Type Versioning
 
 When API versioning is unavoidable, you have to design your multi-version RESTful APIs using media type versioning (instead of URI versioning, see below). Media type versioning is less tightly coupled since it supports content negotiation and hence reduces complexity of release management.
 
@@ -213,84 +207,84 @@ Using header versioning should:
 
 Until an incompatible change is necessary, it is recommended to stay with the standard application/json media type.
 
-## Must: Do Not Use URI Versioning
+### MUST: Do Not Use URI Versioning
 
 With URI versioning a (major) version number is included in the path, e.g. /v1/customers. The consumer has to wait until the provider has been released and deployed. If the consumer also supports hypermedia links — even in their APIs — to drive workflows (HATEOAS), this quickly becomes complex. So does coordinating version upgrades — especially with hyperlinked service dependencies — when using URL versioning. To avoid this tighter coupling and complexer release management we do not use URI versioning, and go instead with media type versioning and content negotiation (see above).
 
-# JSON Guidelines
+## JSON Guidelines
 
 These guidelines provides recommendations for defining JSON data at Zalando. JSON here refers to RFC 7159 (which updates RFC 4627), the "application/json" media type and custom JSON media types defined for APIs. The guidelines clarifies some specific cases to allow Zalando JSON data to have an idiomatic form across teams and services.
 
-## Must: Use Consistent Property Names
+### MUST: Use Consistent Property Names
 
-## Must: Property names must be snake_case (and never camelCase).
+### MUST: Property names must be snake_case (and never camelCase).
 
 No established industry standard exists. It’s essential to establish a consistent look and feel such that JSON looks as if it came from the same hand.
 
-## Must: Property names must be an ASCII subset
+### MUST: Property names must be an ASCII subset
 
 Property names are restricted to ASCII encoded strings. The first character must be a letter, an underscore or a dollar sign, and subsequent characters can be a letter, an underscore, a dollar sign, or a number.
 
-## Should: Array names should be pluralized
+### SHOULD:: Array names should be pluralized
 
 To indicate they contain multiple values prefer to pluralize array names. This implies that object names should in turn be singular.
 
-## Must: Use Consistent Property Values
+### MUST: Use Consistent Property Values
 
-## Must: Boolean property values must not be null
+### MUST: Boolean property values must not be null
 
 Schema based JSON properties that are by design booleans must not be presented as nulls. A boolean is essentially a closed enumeration of two values, true and false. If the content has a meaningful null value, strongly prefer to replace the boolean with enumeration of named values or statuses - for example accepted\_terms\_and\_conditions with true or false can be replaced with terms\_and\_conditions with values yes, no and unknown.
 
-## Should: Null values should have their fields removed
+### SHOULD:: Null values should have their fields removed
 
 Swagger/OpenAPI, which is in common use, doesn't support null field values (it does allow omitting that field completely if it is not marked as required). However that doesn't prevent clients and servers sending and receiving those fields with null values. Also, in some cases null may be a meaningful value - for example, JSON Merge Patch RFC 7382) using null to indicate property deletion.
 
-## Should: Empty array values should not be null
+### SHOULD:: Empty array values should not be null
 
 Empty array values can unambiguously be represented as the the empty list, [].
 
-## Should: Enumerations should be represented as Strings
+### SHOULD:: Enumerations should be represented as Strings
 
 Strings are a reasonable target for values that are by design enumerations.
 
-## Should: Date property values should conform to RFC 3399
+### SHOULD:: Date property values should conform to RFC 3399
 
-## May: Time durations and intervals could conform to ISO 8601
+### May: Time durations and intervals could conform to ISO 8601
 
-## May: Standards could be used for Language, Country and Currency
+### May: Standards could be used for Language, Country and Currency
 
 - ISO 3166-1-alpha2 country
 - ISO 639-1 language code
 - BCP-47 (based on ISO 639-1) for language variants
 - ISO 4217 currency codes
 
-# API Naming
+## API Naming
 
-## Must: Use lowercase separate words with hyphens for Path Segments
+### MUST: Use lowercase separate words with hyphens for Path Segments
 
-## Must: Use snake_case (never camelCase) for Query Parameters
+### MUST: Use snake_case (never camelCase) for Query Parameters
 
-## Must: Use Hyphenated HTTP Headers
+### MUST: Use Hyphenated HTTP Headers
 
-## Should: Prefer Hyphenated-Pascal-Case for HTTP header Fields
+### SHOULD:: Prefer Hyphenated-Pascal-Case for HTTP header Fields
 
 This is for consistency in your documentation (most other headers follow this convention). Avoid camelCase (without hyphens). Exceptions are common abbreviations like "ID."
 
-## May: Use Standardized Headers
+### May: Use Standardized Headers
 
-## Must: Pluralize Resource Names
+### MUST: Pluralize Resource Names
 
 Usually, a collection of resource instances is provided (at least API should be ready here). The special case of a resource singleton is a collection with cardinality 1.
 
-## May: Use /api as first Path Segment
+### May: Use /api as first Path Segment
 
 In most cases, all resources provided by a service are part of the public API, and therefore should be made available under the root "/" base path. If the service should also support non-public, internal APIs — for specific operational support functions, for example — add "/api" as base path to clearly separate public and non-public API resources.
 
-## Must: Avoid Trailing Slashes
+### MUST: Avoid Trailing Slashes
 
 The trailing slash must not have specific semantics. Resource paths must deliver the same results whether they have the trailing slash or not.
 
-## May: Use Conventional Query Strings
+### May: Use Conventional Query Strings
 
 If you provide query support for sorting, pagination, filtering functions or other actions, use the following standardized naming conventions:
 
@@ -302,9 +296,9 @@ sort — comma-separated list of fields to sort. To indicate sorting direction, 
 fields — to retrieve a subset of fields. See Support Filtering of Resource Fields below.
 embed — to expand embedded entities (ie.: inside of an article entity, expand silhouette code into the silhouette object). Implementing "expand" correctly is difficult, so do it with care. See Embedding resources for more details.
 
-# Resources
+## Resources
 
-## MUST: Avoid Actions — Think About Resources
+### MUST: Avoid Actions — Think About Resources
 
 REST is all about your resources, so consider the domain entities that take part in web service interaction, and aim to model your API around these using the standard HTTP methods as operation indicators. For instance, if an application has to lock articles explicitly so that only one user may edit them, create an article lock with PUT or POST instead of using a lock action.
 
@@ -314,25 +308,25 @@ PUT /article-locks/{article-id}
 
 The added benefit is that you already have a service for browsing and filtering article locks.
 
-## SHOULD: Model complete business processes
+### SHOULD:: Model complete business processes
 
 An API should contain the complete business processes containing all resources representing the process. This enables clients to understand the business process, foster a consistent design of the business process, allow for synergies from description and implementation perspective, and eliminates implicit invisible dependencies between APIs.
 
 In addition, it prevents services from being designed as thin wrappers around databases, which normally tends to shift business logic to the clients.
 
-## SHOULD: Define useful resources
+### SHOULD:: Define useful resources
 
 As a rule of thumb resources should be defined to cover 90% of all its client's use cases. A useful resource should contain as much information as necessary, but as little as possible. A great way to support the last 10% is to allow clients to specify their needs for more/less information by supporting filtering and embedding.
 
-## MUST: Keep URLs Verb-Free
+### MUST: Keep URLs Verb-Free
 
 The API describes resources, so the only place where actions should appear is in the HTTP methods. In URLs, use only nouns. Instead of thinking of actions (verbs), it's often helpful to think about putting a message in a letter box: e.g., instead of having the verb cancel in the URL, think of sending a message to cancel an order to the cancellations letter box on the server side.
 
-## MUST: Use Domain-Specific Resource Names
+### MUST: Use Domain-Specific Resource Names
 
 API resources represent elements of the application’s domain model. Using domain-specific nomenclature for resource names helps developers to understand the functionality and basic semantics of your resources. It also reduces the need for further documentation outside the API definition. For example, "sales-order-items" is superior to "order-items" in that it clearly indicates which business object it represents. Along these lines, "items" is too general.
 
-## MUST: Identify resources and Sub-Resources via Path Segments
+### MUST: Identify resources and Sub-Resources via Path Segments
 
 Some API resources may contain or reference sub-resources. Embedded sub-resources, which are not top-level resources, are parts of a higher-level resource and cannot be used outside of its scope. Sub-resources should be referenced by their name and identifier in the path segments.
 
@@ -348,27 +342,28 @@ Examples:
 /carts/1681e6b88ec1/items/1
 /customers/12ev123bv12v/addresses/DE_100100101
 
-## SHOULD: Only Use UUIDs If Necessary
+### SHOULD:: Only Use UUIDs If Necessary
 
 Generating IDs can be a scaling problem in high frequency and near real time use cases. UUIDs solve this problem, as they can be generated without collisions in a distributed, non-coordinated way and without additional server roundtrips.
 
 However, they also come with some disadvantages:
 
-pure technical key without meaning; not ready for naming or name scope conventions that might be helpful for pragmatic reasons, e.g. we learned to use names for product attributes, instead of UUIDs
-less usable, because...
-cannot be memorized and easily communicated by humans
-harder to use in debugging and logging analysis
-less convenient for consumer facing usage
-quite long: readable representation requires 36 characters and comes with higher memory and bandwidth consumption
-not ordered along their creation history and no indication of used id volume
-may be in conflict with additional backward compatibility support of legacy ids
+- pure technical key without meaning; not ready for naming or name scope conventions that might be helpful for pragmatic reasons, e.g. we learned to use names for product attributes, instead of UUIDs
+- less usable, because...
+  - cannot be memorized and easily communicated by humans
+  - harder to use in debugging and logging analysis
+  - less convenient for consumer facing usage
+  - quite long: readable representation requires 36 characters and comes with higher memory and bandwidth consumption
+  - not ordered along their creation history and no indication of used id volume
+  - may be in conflict with additional backward compatibility support of legacy ids
+
 UUIDs should be avoided were not needed for large scale id generation. Instead, for instance, server side support with id generation can be preferred (POST on id resource, followed by idempotent PUT on entity resource). Usage of UUIDs is especially discouraged as primary keys of master and configuration data, like brand-ids or attribute-ids which have low id volume but widespread steering functionality.
 
 In any case, we should always use string rather than number type for identifiers. This gives us more flexibility to evolve the identifier naming scheme. Accordingly, if used as identifiers, UUIDs should not be qualified using a format property.
 
-Hint: Usually, random UUID is used - see UUID version 4 in RFC 4122. Though UUID version 1 also contains leading timestamps it is not reflected by its lexicographic sorting. This deficit is addressed by ULID (Universally Unique Lexicographically Sortable Identifier). You may favour ULID instead of UUID, for instance, for pagination use cases ordered along creation time.
+> Hint: Usually, random UUID is used - see UUID version 4 in RFC 4122. Though UUID version 1 also contains leading timestamps it is not reflected by its lexicographic sorting. This deficit is addressed by ULID (Universally Unique Lexicographically Sortable Identifier). You may favour ULID instead of UUID, for instance, for pagination use cases ordered along creation time.
 
-## MAY: Consider Using (Non-) Nested URLs
+### MAY: Consider Using (Non-) Nested URLs
 
 If a sub-resource is only accessible via its parent resource and may not exists without parent resource, consider using a nested URL structure, for instance:
 
@@ -378,19 +373,19 @@ However, if the resource can be accessed directly via its unique id, then the AP
 /customers/1681e6b88ec1
 /sales-orders/5273gh3k525a
 
-## SHOULD: Limit number of Resources
+### SHOULD:: Limit number of Resources
 
 To keep maintenance and service evolution manageable, we should follow "functional segmentation" and "separation of concern" design principles and do not mix different business functionalities in same API definition. In this sense the number of resources exposed via API should be limited - our experience is that a typical range of resources for a well-designed API is between 4 and 8. There may be exceptions with more complex business domains that require more resources, but you should first check if you can split them into separate subdomains with distinct APIs.
 
 Nevertheless one API should hold all necessary resources to model complete business processes helping clients to understand these flows.
 
-## SHOULD: Limit number of Sub-Resource Levels
+### SHOULD:: Limit number of Sub-Resource Levels
 
 There are main resources (with root url paths) and sub-resources (or "nested" resources with non-root urls paths). Use sub-resources if their life cycle is (loosely) coupled to the main resource, i.e. the main resource works as collection resource of the subresource entities. You should use <= 3 sub-resource (nesting) levels -- more levels increase API complexity and url path length. (Remember, some popular web browsers do not support URLs of more than 2000 characters)
 
-# HTTP
+## HTTP
 
-## MUST: Use HTTP Methods Correctly
+### MUST: Use HTTP Methods Correctly
 
 Be compliant with the standardized HTTP method semantics summarized as follows:
 
@@ -472,7 +467,7 @@ OPTIONS are used to inspect the available operations (HTTP methods) of a given e
 OPTIONS requests usually either return a comma separated list of methods (provided by an Allow:-Header) or as a structured list of link templates
 Note: OPTIONS is rarely implemented, though it could be used to self-describe the full functionality of a resource.
 
-## MUST: Fulfill Safeness and Idempotency Properties
+### MUST: Fulfill Safeness and Idempotency Properties
 
 An operation can be...
 
@@ -490,7 +485,7 @@ DELETE	No	Yes
 PATCH	No	No
 Please see also Best Practices [internal link] for further hints on how to support the different HTTP methods on resources.
 
-## MUST: Use Specific HTTP Status Codes
+### MUST: Use Specific HTTP Status Codes
 
 This guideline groups the following rules for HTTP status codes usage:
 
@@ -539,7 +534,7 @@ Code	Meaning	Methods
 501	Not Implemented - server cannot fulfill the request (usually implies future availability, e.g. new feature).	All
 503	Service Unavailable - server is (temporarily) not available (e.g. due to overload) -- client retry may be senseful.	All
 
-## MUST: Provide Error Documentation
+### MUST: Provide Error Documentation
 
 APIs should define the functional, business view and abstract from implementation aspects. Errors become a key element providing context and visibility into how to use an API. The error object should be extended by an application-specific error identifier if and only if the HTTP status code is not specific enough to convey the domain-specific error semantic. For this reason, we use a standardized error return object definition — see Use Common Error Return Objects.
 
@@ -564,7 +559,7 @@ Even though they might not be documented - they may very much occur in productio
 
 Functional errors on the other hand, that convey domain-specific semantics, must be documented and are strongly encouraged to be expressed with Problem types.
 
-## MUST: Use 207 for Batch or Bulk Requests
+### MUST: Use 207 for Batch or Bulk Requests
 
 Some APIs are required to provide either batch or bulk requests using POST for performance reasons, i.e. for communication and processing efficiency. In this case services may be in need to signal multiple response codes for each part of an batch or bulk request. As HTTP does not provide proper guidance for handling batch/bulk requests and responses, we herewith define the following approach:
 
@@ -575,7 +570,7 @@ The before rules apply even in the case that processing of all individual part f
 
 Note: while a batch defines a collection of requests triggering independent processes, a bulk defines a collection of independent resources created or updated together in one request. With respect to response processing this distinction normally does not matter.
 
-## MUST: Use 429 with Headers for Rate Limits
+### MUST: Use 429 with Headers for Rate Limits
 
 APIs that wish to manage the request rate of clients must use the '429 Too Many Requests' response code if the client exceeded the request rate and therefore the request can't be fulfilled. Such responses must also contain header information providing further details to the client. There are two approaches a service can take for header information:
 
@@ -590,7 +585,7 @@ X-RateLimit-Remaining: The number of requests allowed in the current window.
 X-RateLimit-Reset: The relative time in seconds when the rate limit window will be reset.
 The reason to allow both approaches is that APIs can have different needs. Retry-After is often sufficient for general load handling and request throttling scenarios and notably, does not strictly require the concept of a calling entity such as a tenant or named account. In turn this allows resource owners to minimise the amount of state they have to carry with respect to client requests. The 'X-RateLimit' headers are suitable for scenarios where clients are associated with pre-existing account or tenancy structures. 'X-RateLimit' headers are generally returned on every request and not just on a 429, which implies the service implementing the API is carrying sufficient state to track the number of requests made within a given window for each named entity.
 
-## SHOULD: Explicitly define the Collection Format of Query Parameters
+### SHOULD:: Explicitly define the Collection Format of Query Parameters
 
 There are different ways of supplying a set of values as a query parameter. One particular type should be selected and stated explicitly in the API definition. The OpenAPI property [collectionFormat](http://swagger.io/specification/) is used to specify the format of the query parameter.
 
@@ -603,7 +598,7 @@ When choosing the collection format, take into account the tool support, the esc
 
 # Performance
 
-## SHOULD: Reduce Bandwidth Needs and Improve Responsiveness
+### SHOULD:: Reduce Bandwidth Needs and Improve Responsiveness
 
 APIs should support techniques for reducing bandwidth based on client needs. This holds for APIs that (might) have high payloads and/or are used in high-traffic scenarios like the public Internet and telecommunication networks. Typical examples are APIs used by mobile web app clients with (often) less bandwidth connectivity. (Zalando is a 'Mobile First' company, so be mindful of this point.)
 
@@ -617,13 +612,13 @@ pagination for incremental access of larger (result) lists
 
 Each of these items is described in greater detail below.
 
-## SHOULD: Use gzip Compression
+### SHOULD:: Use gzip Compression
 
 Compress the payload of your API’s responses with gzip, unless there’s a good reason not to — for example, you are serving so many requests that the time to compress becomes a bottleneck. This helps to transport data faster over the network (fewer bytes) and makes frontends respond faster.
 
 Though gzip compression might be the default choice for server payload, the server should also support payload without compression and its client control via Accept-Encoding request header -- see also RFC 7231 Section 5.3.4. The server should indicate used gzip compression via the Content-Encoding header.
 
-## SHOULD: Support Filtering of Resource Fields
+### SHOULD:: Support Filtering of Resource Fields
 
 Depending on your use case and payload size, you can significantly reduce network bandwidth need by supporting filtering of returned entity fields. Here, the client can determine the subset of fields he wants to receive via the fields query parameter — example see Google AppEngine API's partial response:
 
@@ -687,7 +682,7 @@ A fields_expression as defined by the grammar describes the properties of an obj
 
 > Hint: OpenAPI doesn't allow you to formally specify whether depending on a given parameter will return different parts of the specified result schema. Explain this in English in the parameter description.
 
-## SHOULD: Allow Optional Embedding of Sub-Resources
+### SHOULD:: Allow Optional Embedding of Sub-Resources
 
 Embedding related resources (also know as Resource expansion) is a great way to reduce the number of requests. In cases where clients know upfront that they need some related resources they can instruct the server to prefetch that data eagerly. Whether this is optimized on the server, e.g. a database join, or done in a generic way, e.g. an HTTP proxy that transparently embeds resources, is up to the implementation.
 
@@ -715,7 +710,7 @@ GET /order/123?embed=(items) HTTP/1.1
 
 # Pagination
 
-## MUST: Support Pagination
+### MUST: Support Pagination
 
 Access to lists of data items must support pagination for best client side batch processing and iteration experience. This holds true for all lists that are (potentially) larger than just a few hundred entries.
 
@@ -725,7 +720,7 @@ Offset/Limit-based pagination: numeric offset identifies the first page entry
 Cursor-based — aka key-based — pagination: a unique key element identifies the first page entry (see also Facebook’s guide)
 The technical conception of pagination should also consider user experience related issues. As mentioned in this article, jumping to a specific page is far less used than navigation via next/previous page links. This favours cursor-based over offset-based pagination.
 
-## SHOULD: Prefer Cursor-Based Pagination, Avoid Offset-Based Pagination
+### SHOULD:: Prefer Cursor-Based Pagination, Avoid Offset-Based Pagination
 
 Cursor-based pagination is usually better and more efficient when compared to offset-based pagination. Especially when it comes to high-data volumes and / or storage in NoSQL databases.
 
@@ -753,7 +748,7 @@ Twitter
 Use the Index, Luke
 Paging in PostgreSQL
 
-## MAY: Use Pagination Links Where Applicable
+### MAY: Use Pagination Links Where Applicable
 
 API implementing HATEOS may use simplified hypertext controls for pagination within collections.
 Those collections should then have an items attribute holding the items of the current page. The collection may contain additional metadata about the collection or the current page (e.g. index, page_size) when necessary.
@@ -789,22 +784,22 @@ E.g. a service for articles could represent the collection of hyperlinks to an a
 
 # Data Formats
 
-## MUST: Use JSON to Encode Structured Data
+### MUST: Use JSON to Encode Structured Data
 
 Use JSON-encoded body payload for transferring structured data. The JSON payload must follow RFC-7159 by having (if possible) a serialized object as the top-level structure, since it would allow for future extension. This also applies for collection resources where one naturally would assume an array. See the pagination section for an example.
 
-## MAY: Use non JSON Media Types for Binary Data or Alternative Content Representations
+### MAY: Use non JSON Media Types for Binary Data or Alternative Content Representations
 
 Other media types may be used in following cases:
 
 Transferring binary data or data whose structure is not relevant. This is the case if payload structure is not interpreted and consumed by clients as is. Example of such use case is downloading images in formats JPG, PNG, GIF.
 In addition to JSON version alternative data representations (e.g. in formats PDF, DOC, XML) may be made available through content negotiation.
 
-## MUST: Use Standard Date and Time Formats
+### MUST: Use Standard Date and Time Formats
 
 Use the HTTP date format defined in RFC 7231.
 
-## MAY: Use Standards for Country, Language and Currency Codes
+### MAY: Use Standards for Country, Language and Currency Codes
 
 Use the following standard formats for country, language and currency codes:
 
@@ -813,7 +808,7 @@ Use the following standard formats for country, language and currency codes:
 - BCP-47 (based on ISO 639-1) for language variants
 - ISO 4217 currency codes
 
-## MUST: Define Format for Type Number and Integer
+### MUST: Define Format for Type Number and Integer
 
 Whenever an API defines a property of type number or integer, the precision must be defined by the format as follows to prevent clients from guessing the precision incorrectly, and thereby changing the value unintentionally:
 
@@ -825,7 +820,7 @@ number	float	IEEE 754-2008/ISO 60559:2011 binary64 decimal number
 number	double	IEEE 754-2008/ISO 60559:2011 binary128 decimal number
 number	decimal	arbitrarily precise signed decimal number
 
-## SHOULD: Prefer standard Media type name application/json
+### SHOULD:: Prefer standard Media type name application/json
 
 Previously, this guideline allowed the use of custom media types like application/x.zalando.article+json. This usage is not recommended anymore and should be avoided, except where it is necessary for cases of media type versioning. Instead, the standard media type name application/json (or application/problem+json for HTTP error details) should be used for JSON-formatted data.
 
@@ -835,9 +830,9 @@ Custom media types with subtypes beginning with x bring no advantage compared to
 
 Definitions of data objects that are good candidates for wider usage:
 
-## SHOULD: Use a Decimal for Money/Amount Objects
+### SHOULD:: Use a Decimal for Money/Amount Objects
 
-## MUST: Use common field names and semantics
+### MUST: Use common field names and semantics
 
 There exist a variety of field types that are required in multiple places. To achieve consistency across all API implementations, you must use common field names and semantics whenever applicable.
 
@@ -857,13 +852,13 @@ type: the kind of thing this object is. If used, the type of this field should b
 
 These properties are not always strictly necessary, but making them idiomatic allows API client developers to build up a common understanding of Zalando's resources. There is very little utility for API consumers in having different names or value types for these fields across APIs.
 
-## MUST: Use Problem JSON
+### MUST: Use Problem JSON
 
 RFC 7807 defines the media type application/problem+json. Operations should return that (together with a suitable status code) when any problem occurred during processing and you can give more details than the status code itself can supply, whether it be caused by the client or the server (i.e. both for 4xx or 5xx errors).
 
 A previous version of this guideline (before the publication of that RFC and the registration of the media type) told to return application/x.problem+json in these cases (with the same contents). Servers for APIs defined before this change should pay attention to the Accept header sent by the client and set the Content-Type header of the problem response correspondingly. Clients of such APIs should accept both media types.
 
-## MUST: Do not expose Stack Traces
+### MUST: Do not expose Stack Traces
 
 Stack traces contain implementation details that are not part of an API, and on which clients should never rely. Moreover, stack traces can leak sensitive information that partners and third parties are not allowed to receive and may disclose insights about vulnerabilities to attackers.
 
@@ -871,7 +866,7 @@ Stack traces contain implementation details that are not part of an API, and on 
 
 This section describes a handful of headers, which we found raised the most questions in our daily usage, or which are useful in particular circumstances but not widely known.
 
-## MUST: Use Content Headers Correctly
+### MUST: Use Content Headers Correctly
 
 Content or entity headers are headers with a Content- prefix. They describe the content of the body of the message and they can be used in both, HTTP requests and responses. Commonly used content headers include but are not limited to:
 
@@ -883,7 +878,7 @@ Content-Location indicates where the body can be found otherwise (see below for 
 Content-Range is used in responses to range requests to indicate which part of the requested resource representation is delivered with the body.
 Content-Type indicates the media type of the body content.
 
-## MAY: Use Content-Location Header
+### MAY: Use Content-Location Header
 
 The Content-Location header is optional and can be used in successful write operations (PUT, POST or PATCH) or read operations (GET, HEAD) to guide caching and signal a receiver the actual location of the resource transmitted in the response body. This allows clients to identify the resource and to update their local copy when receiving a response with this header.
 
@@ -900,19 +895,19 @@ HTTP/1.1 200 OK
 Content-Type: image/png
 Content-Location: /products/123/images?format=raw
 
-## SHOULD: Use Location Header instead of Content-Location Header
+### SHOULD:: Use Location Header instead of Content-Location Header
 
 As the correct usage of Content-Location with respect to semantics and caching is difficult, we discourage the use of Content-Location. In most cases it is sufficient to direct clients to the resource location by using the Location header instead without hitting the Content-Location specific ambiguities and complexities.
 
 More details in RFC 7231 7.1.2 Location, 3.1.4.2 Content-Location
 
-## MAY: Use the Prefer header to indicate processing preferences
+### MAY: Use the Prefer header to indicate processing preferences
 
 The Prefer header defined in RFC7240 allows clients to request processing behaviors from servers. RFC7240 pre-defines a number of preferences and is extensible, to allow others to be defined. Support for the Prefer header is entirely optional and at the discretion of API designers, but as an existing Internet Standard, is recommended over defining proprietary "X-" headers for processing directives.
 
 Supporting APIs may return the Preference-Applied header also defined in RFC7240 to indicate whether the preference was applied.
 
-## MAY: Consider using ETag together with If-(None-)Match header
+### MAY: Consider using ETag together with If-(None-)Match header
 
 When creating or updating resources it may be necessary to expose conflicts and to prevent the lost update problem. This can be best accomplished by using the ETag header together with the If-Match and If-None-Match. The contents of an ETag: <entity-tag> header is either (a) a hash of the response body, (b) a hash of the last modified field of the entity, or (c) a version number or identifier of the entity version.
 
@@ -961,12 +956,12 @@ The ETag, If-Match, and If-None-Match headers can be defined as follows in the A
     type: string
     required: false
     example: "7da7a728-f910-11e6-942a-68f728c1ba70", *
-    
+
 # Proprietary Headers
 
 This section shares definitions of proprietary headers that should be named consistently because they address overarching service-related concerns. Whether services support these concerns or not is optional; therefore, the OpenAPI API specification is the right place to make this explicitly visible. Use the parameter definitions of the resource HTTP methods.
 
-## MUST: Use Only the Specified Proprietary Zalando Headers
+### MUST: Use Only the Specified Proprietary Zalando Headers
 
 As a general rule, proprietary HTTP headers should be avoided. Still they can be useful in cases where context needs to be passed through multiple services in an end-to-end fashion. As such, a valid use-case for a proprietary header is providing context information, which is not a part of the actual API, but is needed by subsequent communication.
 
@@ -989,7 +984,7 @@ X-Device-OS	String	On top of device type above, we even want to differ between d
 X-App-Domain	Integer	The app domain (i.e. shop channel context) of the request. Note, app-domain is a legacy concept that will be replaced in new platform by combinations of main CFA concerns like retailer, sales channel, country	16
 Exception: The only exception to this guideline are the conventional hop-by-hop X-RateLimit- headers which can be used as defined in HTTP/Must-Use-429-with-Headers-For-Rate-Limits.
 
-## MUST: Propagate Proprietary Headers
+### MUST: Propagate Proprietary Headers
 
 All Zalando's proprietary headers are end-to-end headers.
 
@@ -1007,41 +1002,41 @@ HTTP/1.1 standard (RFC-7230) defines two types of headers: end-to-end and hop-by
 
 Sometimes it is necessary to phase out an API endpoint (or version). I.e. this may be necessary if a field is no longer supported in the result or a whole business functionality behind an endpoint has to be shut down. There are many other reasons as well.
 
-## MUST: Obtain Approval of Clients
+### MUST: Obtain Approval of Clients
 
 Before shutting down an API (or version of an API) the producer must make sure, that all clients have given their consent to shut down the endpoint. Producers should help consumers to migrate to a potential new endpoint (i.e. by providing a migration manual). After all clients are migrated, the producer may shut down the deprecated API.
 
-## MUST: External Partners Must Agree on Deprecation Timespan
+### MUST: External Partners Must Agree on Deprecation Timespan
 
 If the API is consumed by any external partner, the producer must define a reasonable timespan that the API will be maintained after the producer has announced deprecation. The external partner (client) must agree to this minimum after-deprecation-lifespan before he starts using the API.
 
-## MUST: Reflect Deprecation in API Definition
+### MUST: Reflect Deprecation in API Definition
 
 API deprecation must be part of the OpenAPI definition. If a method on a path, a whole path or even a whole API endpoint (multiple paths) should be deprecated, the producers must set deprecated=true on each method / path element that will be deprecated (OpenAPI 2.0 only allows you to define deprecation on this level). If deprecation should happen on a more fine grained level (i.e. query parameter, payload etc.), the producer should set deprecated=true on the affected method / path element and add further explanation to the description section.
 
 If deprecated is set to true, the producer must describe what clients should use instead and when the API will be shut down in the description section of the API definition.
 
-## MUST: Monitor Usage of Deprecated APIs
+### MUST: Monitor Usage of Deprecated APIs
 
 Owners of APIs used in production must monitor usage of deprecated APIs until the API can be shut down in order to align deprecation and avoid uncontrolled breaking effects. See also the general rule on API usage monitoring
 
-## SHOULD: Add a Warning Header to Responses
+### SHOULD:: Add a Warning Header to Responses
 
 During deprecation phase, the producer should add a Warning header (see RFC 7234 - Warning header) field. When adding the Warning header, the warn-code must be 299 and the warn-text should be in form of "The path/operation/parameter/... {name} is deprecated and will be removed by {date}. Please see {link} for details." with a link to a documentation describing why the API is no longer supported in the current form and what clients should do about it. Adding the Warning header is not sufficient to gain client consent to shut down an API.
 
-## SHOULD: Add Monitoring for Warning Header
+### SHOULD:: Add Monitoring for Warning Header
 
 Clients should monitor the Warning header in HTTP responses to see if an API will be deprecated in future.
 
-## MUST: Not Start Using Deprecated APIs
+### MUST: Not Start Using Deprecated APIs
 
 Clients must not start using deprecated parts of an API.
 
 # API Operation
 
-## MUST: Provide Online Access to OpenAPI Reference Definition
+### MUST: Provide Online Access to OpenAPI Reference Definition
 
-## SHOULD: Monitor API Usage
+### SHOULD:: Monitor API Usage
 
 Owners of APIs used in production should monitor API service to get information about its using clients. This information, for instance, is useful to identify potential review partner for API changes.
 
@@ -1092,7 +1087,7 @@ But what it really comes down to isn't what do others think about hypermedia, as
 
 Some of the most common arguments for and against hypermedia include:
 
-## Hypermedia creates more work
+### Hypermedia creates more work
 
 This is absolutely true.
 
@@ -1104,7 +1099,7 @@ This will add to both the workload and the time it takes to build your API.
 
 However, by having these relationships already drawn out as suggested, the additional time required will be minimal.
 
-## Hypermedia will require more Data-Transfer
+### Hypermedia will require more Data-Transfer
 
 Again, absolutely true.
 
@@ -1116,7 +1111,7 @@ What you will do, however, is help avoid unnecessary calls that are not accessib
 
 See the next section for more on this.
 
-## You are creating an API for a client that doesn't exist
+### You are creating an API for a client that doesn't exist
 
 Another argument against APIs is that unlike web browsers, there are no browsers for APIs.
 
@@ -1135,7 +1130,7 @@ Because this is dynamic data the developer has no way to determine what actions 
 
 Hypertext links in this case allow the developer to rely on YOUR rules and architecture, rather than trying to mimic it with their own.
 
-## Nobody knows how to use Hypermedia
+### Nobody knows how to use Hypermedia
 
 There is some truth into this.
 
@@ -1149,7 +1144,7 @@ However, unlike many specs and challenges out there, utilizing hypermedia from a
 
 And once implemented correctly, many developers appreciate knowing that as resource URIs change or additional query parameters are required of them, that their application will be able to "automatically upgrade" to these new requirements without any work or concern on their part.
 
-## Hypermedia makes your API MORE Flexible
+### Hypermedia makes your API MORE Flexible
 
 Absolutely true.
 
@@ -1159,7 +1154,7 @@ It also gives you the power to change certain aspects of your API (i.e.
 
 changing resources, requiring additional GET parameters) without necessarily breaking backwards compatibility IF implemented correctly by your users.
 
-## Hypermedia prevents APIs from breaking
+### Hypermedia prevents APIs from breaking
 
 Absolutely false.
 
@@ -1172,7 +1167,7 @@ For example, they may access the /users resource directly to get a list of all u
 While this technique does save you (and them) multiple API calls, it does limit your ability to change common or most frequently used resource URIs.
 Hypertext links also do nothing for backwards incompatible changes in data– although you could hypothetically use them as a form of versioning.
 
-## Hypermedia replaces Documentation
+### Hypermedia replaces Documentation
 
 Hypermedia does increase discoverability of your API's resources and methods, however, it does not replace documentation as it doesn't provide method information, schemas, or examples.
 
@@ -1184,7 +1179,7 @@ For this reason, having well written, informative documentation is vital to any 
 
 In fact, many RESTful hypermedia specs including HAL grant you the ability to embed documentation links for quick reference by developers.
 
-## Hypermedia is a Best Practice
+### Hypermedia is a Best Practice
 
 Where hypermedia shines is in its ability to create a flexible API that provides dynamic data for developers based on your architecture and not their own.
 
@@ -1196,7 +1191,7 @@ As Peter Williams explains in his post, hypermedia turned out to be a saving gra
 
 And as a key component of REST as defined by Dr. Roy Fielding, it remains a best practice to implement.
 
-## In Summary
+### In Summary
 
 Hypermedia is often misunderstood in regards to APIs, but essentially it functions exactly like links on a webpage.
 
@@ -1258,7 +1253,7 @@ As such, it's important to understand the different specs that are out there, wh
 
 We may not be able to get it down to one spec, but at least we'll be able to provide our users with a uniform response that they can easily incorporate into their application:
 
-## Collection+JSON
+### Collection+JSON
 
 Collection+JSON is a JSON-based read/write hypermedia-type designed by Mike Amundsen back in 2011 to support the management and querying of simple collections.
 
@@ -1267,7 +1262,7 @@ It's based on the Atom Publication and Syndication specs, defining both in a sin
 While originally widely used among APIs, Collection+JSON has struggled to maintain its popularity against JSON API and HAL.
 Strengths: strong choice for collections, templated queries, early wide adoption, recognized as a standard Weaknesses: JSON only, lack of identifier for documentation, more complex/ difficult to implement
 
-## JSON API
+### JSON API
 
 JSON API is a newer spec created in 2013 by Steve Klabnik and Yahuda Klaz.
 
@@ -1279,7 +1274,7 @@ JSON API currently bares a warning that it is a work in progress, and while wide
 Strengths: simple versatile format, easy to read/ implement, flat link grouping, URL templating, wide adoption, strong community, recognized as a hypermedia standard
 Weaknesses: JSON only, lack of identifier for documentation, still a work in progress
 
-## HAL
+### HAL
 
 HAL is an older spec, created in 2011 by Mike Kelly to be easily consumed across multiple formats including XML and JSON.
 
@@ -1290,7 +1285,7 @@ HAL also incorporates CURIEs, a feature that makes it unique in that it allows f
 HAL is one of the most supported and most widely used hypermedia specs out there today, and is surrounded by a strong and vocal community.
 Strengths: dynamic, nestable, easy to read/ implement, multi-format, URL templating, inclusion of documentation, wide adoption, strong community, recognized as a standard hypermedia spec, RFC proposed Weaknesses: JSON/XML formats architecturally different, CURIEs are tightly coupled
 
-## JSON-LD
+### JSON-LD
 
 JSON-LD is a lightweight spec focused on machine to machine readable data.
 
@@ -1302,7 +1297,7 @@ However, it has built a strong community around it with a fairly active mailing 
 Strengths: strong format for data linking, can be used across multiple data formats (Web API & Databases), strong community, large working group, recognized by W3C as a standard
 Weaknesses: JSON only, more complex to integrate/ interpret, no identifier for documentation
 
-## Siren
+### Siren
 
 Created in 2012 by Kevin Swiber, Siren is a more descriptive spec made up of classes, entities, actions, and links.
 
@@ -1316,7 +1311,7 @@ Siren is still listed as a work in progress.
 Strengths: provides a more verbose spec, query templating, incorporates actions, multi-format
 Weaknesses: poor adoption, lacks documentation, work in progress
 
-## Other Specs
+### Other Specs
 
 Along with some of the leading specs mentioned above, new specs are being created every day including UBER, Mason, Yahapi, and CPHL.
 
@@ -1327,7 +1322,7 @@ You may recognize this issue from the last post, where some specs were modified 
 
 For example, PayPal wanted to include methods in their response, but you'll notice that only Siren of the above include methods in the link definition.
 
-## The Future of Specs
+### The Future of Specs
 
 Given that new specs are being created every day, each with different ideas and in different formats, it's extremely important to keep your system as decoupled and versatile as possible, and it will be very interesting to see what the future of hypermedia specs will look like.
 In the mean-time, it's best to choose the spec that meets your needs, while also being recognized as a standard for easy integration by developers.
@@ -1339,7 +1334,7 @@ For more on the different specs, I highly recommend reading Kevin Sookocheff's r
 
 I'd also love to hear your thoughts in the comments below.
 
-## MUST: Use REST Maturity Level 2
+### MUST: Use REST Maturity Level 2
 
 We strive for a good implementation of REST Maturity Level 2 as it enables us to build resource-oriented APIs that make full use of HTTP verbs and status codes. You can see this expressed by many rules throughout these guidelines, e.g.:
 
@@ -1349,7 +1344,7 @@ Use HTTP Methods Correctly
 Use Meaningful HTTP Status Codes
 Although this is not HATEOAS, it should not prevent you from designing proper link relationships in your APIs as stated in rules below.
 
-## MAY: Use REST Maturity Level 3 - HATEOAS
+### MAY: Use REST Maturity Level 3 - HATEOAS
 
 We do not generally recommend to implement REST Maturity Level 3. HATEOAS comes with additional API complexity without real value in our SOA context where client and server interact via REST APIs and provide complex business functions as part of our e-commerce SaaS platform.
 
@@ -1362,7 +1357,7 @@ Hypermedia make sense for humans, less for SOA machine clients. We would expect 
 Hypermedia does not prevent API clients to implement shortcuts and directly target resources without 'discovering' them
 However, we do not forbid HATEOAS; you could use it, if you checked its limitations and still see clear value for your usage scenario that justifies its additional complexity. If you use HATEOAS please share experience and present your findings in the API Guild [internal link].
 
-## MUST: Use Common Hypertext Controls
+### MUST: Use Common Hypertext Controls
 
 When embedding links to other resources into representations you must use the common hypertext control object. It contains at least one attribute:
 
@@ -1398,17 +1393,16 @@ E.g. a service providing "Person" resources could model a person who is married 
 }
 Hypertext controls are allowed anywhere within a JSON model. While this specification would allow HAL, we actually don't recommend/enforce the usage of HAL anymore as the structural separation of meta-data and data creates more harm than value to the understandability and usability of an API.
 
-## SHOULD: Use Simple Hypertext Controls for Pagination and Self-References
+### SHOULD:: Use Simple Hypertext Controls for Pagination and Self-References
 
 Hypertext controls for pagination inside collections and self-references should use a simple URI value in combination with their corresponding link relations (next, prev, first, last, self) instead of the extensible common hypertext control
 
 See Pagination for information how to best represent paginateable collections.
 
-## MUST: Not Use Link Headers with JSON entities
+### MUST: Not Use Link Headers with JSON entities
 
 We don't allow the use of the Link Header defined by RFC 5988 in conjunction with JSON media types. We prefer links directly embedded in JSON payloads to the uncommon link header syntax.
 
-## MUST: Follow Hypertext Control Conventions
+### MUST: Follow Hypertext Control Conventions
 
 APIs that provide hypertext controls (links) to interconnect API resources must follow the conventions for naming and modeling of hypertext controls as defined in section Hypermedia.
-
