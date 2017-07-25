@@ -1,0 +1,20 @@
+site_name: API Guidelines
+theme: readthedocs
+pages:
+- 'index.md'
+- APIs: 'apis.md'
+- 'uniform_interface.md'
+- 'resource_identifiers.md'
+- 'methods.md'
+- 'resources.md'
+- 'representations.md'
+- 'content_negotiation.md'
+- 'caching.md'
+- 'security.md'
+- 'versioning_and_extensibility.md'
+- 'documentation_and_discovery.md'
+- 'other_topics.md'
+- 'specifications.md'
+- 'mocking.md'
+- 'misc.md'
+- 'references.md'
