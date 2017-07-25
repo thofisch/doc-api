@@ -50,3 +50,17 @@ But before jumping straight into designing an API, here are some key questions t
 - What technologies will the client use to integrate with the API?
 - Which products/services to expose? 
 - What other services should the API interact with?
+
+    ## API Design Principles
+
+    REST is centered around business (data) entities exposed as resources that are identified via URIs and can be manipulated via standardized CRUD-like methods using different representations, self-descriptive messages and hypermedia.
+
+    RESTful APIs tend to be less use-case specific and comes with less rigid client / server coupling and are more suitable as a platform interface being open for diverse client applications.
+
+    - We prefer REST-based APIs with JSON payloads
+    - We prefer systems to be truly RESTful
+    - We apply the RESTful web service principles to all kind of application components, whether they provide functionality via the Internet or via the intranet as larger application elements. We strive to build interoperating distributed systems that different teams can evolve in parallel.
+
+    An important principle for (RESTful) API design and usage is Postel's Law, aka the Robustness Principle (RFC 1122):
+
+    Be liberal in what you accept, be conservative in what you send
