@@ -8,13 +8,24 @@ The motivation behind the *API Guidelines* is to define standards or "best pract
 - facilitate APIs as a Product
 - __*should we talk about microservices/component architecture or overall architectural goals?*__
 
-Before using the more specific advice on how to achieve successful APIs, follow these overall principles:
+## Thinking in Products
 
-- **Be customer-centric**: Do not focus on data rather than customers. Rather focus on target developer's problems, by
- involving customers early in the design process. Make use of reviews and customers feedbacks, and provide service level support. Make APIs irresistible by having a high attention to API quality and client developer experience.
-- **Treat every API as if it was a public API**: Do not skip on usability and security when creating private or partner APIs, as this can make the transition into a public API difficult. Instead actively improve and maintain API consistency over the long term.
+When creating APIs intended for use by someone else, whether it is acutally sold or not, it can be thought of as a product. This can be very easy to lose sight of, so before using the more specific advice on how to achieve successful APIs, keep these overall principles in mind:
 
-![](./imgs/api-as-a-product-750-3-v4.png)
+- **Be customer-centric**
+
+    Do not focus on data rather than customers. Rather focus on target developer's problems, by involving customers early in the design process. Make use of reviews and customers feedbacks, and provide service level support. Make APIs irresistible by having a high attention to API quality and client developer experience.
+
+
+    ![](./imgs/api-as-a-product-750-3-v4.png)
+
+- **Treat every API as if it was a public API**
+
+    Do not skip on usability and security when creating private or partner APIs, as this can make the transition into a public API difficult. Instead actively improve and maintain API consistency over the long term.
+
+- **Componentize your systems**
+
+    Identifying, breaking apart, and isolating small feature sets in big systems: can help innovation by creating platforms to enable other organizations to build new applications that better suit their need; offers a higher degree of composability, which makes it possible to offer products as open systems instead of inflexible off-the-shelf solutions; may help monitize existing assets.
 
 ## About These Guidelines
 
