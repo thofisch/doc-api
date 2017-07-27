@@ -928,7 +928,6 @@ Always return meaningful HTTP Status Codes.
 
 #### Links in JSON Representations
 
-
 - **DO** use a `link` property or a `links` property to include several links as an array whose value is a link object or a link object array.
 - **DO** include `href` and `rel` properties in each link object
 

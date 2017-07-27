@@ -59,7 +59,7 @@
 
     And this can only happen if you go into building your API with a long-term, flexibility, and extensibility focus.
 
-    - 13.1. How to Maintain URI Compatibility
+    - 13.1. How to Maintain URI Compatibility (*url regression*)
     - 13.2. How to Maintain Compatibility of XML and JSON Representations
     - 13.3. How to Extend Atom
     - 13.4. How to Maintain Compatibility of Links

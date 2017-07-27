@@ -4,6 +4,8 @@ A *resource* is an abstract entity that is identified by a URI, and can be data,
 
     ## Resources
 
+    ### MUST: Pluralize Resource Names
+
     ### MUST: Avoid Actions — Think About Resources
 
     REST is all about your resources, so consider the domain entities that take part in web service interaction, and aim to model your API around these using the standard HTTP methods as operation indicators. For instance, if an application has to lock articles explicitly so that only one user may edit them, create an article lock with PUT or POST instead of using a lock action.
@@ -90,6 +92,8 @@ Collection resources can give the ability to refer to a group of a resources as 
 > A collection does not necessarily imply hierarchical containment. A resource may be part of more than one collection resource.
 
 When organizing resources into collections:
+
+    Note: GET requests on collection resources should provide a sufficient filter mechanism as well as pagination.
 
 - **DO** provide a way of searching the collection for it members, if applicable.
 - **DO** provide a filtered view of the collection, if applicable.

@@ -25,7 +25,7 @@ When creating APIs intended for use by someone else, whether it is acutally sold
 
 - **Componentize your systems**
 
-    Identifying, breaking apart, and isolating small feature sets in big systems: can help innovation by creating platforms to enable other organizations to build new applications that better suit their need; offers a higher degree of composability, which makes it possible to offer products as open systems instead of inflexible off-the-shelf solutions; may help monitize existing assets.
+    Identifying, breaking apart, and isolating small feature sets in big systems: can help innovation by creating platforms to enable other organizations to build new applications that better suit their needs; offers a higher degree of composability, which makes it possible to offer products as open systems instead of inflexible off-the-shelf solutions; may help monitize existing assets.
 
 ## About These Guidelines
 
@@ -34,6 +34,8 @@ These guidelines are a work in progress, and is maintained by API Enablement Tea
 __*What should we do when the guideline changes? Do existing APIs have to change?*__
 
 ## Conventions Used in These Guidelines
+
+In these guidelines when referring to an API, we implicitly mean a web API delivered over HTTP. The terms: API, web API, and public API may be used interchangeably throughtout these guidelines.
 
 The following typographical conventions are used in these guidelines:
 
