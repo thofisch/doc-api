@@ -39,13 +39,23 @@ Safety and idempotency are guarantees a server must provide to clients. An opera
 
     HEAD has exactly the same semantics as GET, but returns headers only, no body.
 
+    Clients can use this method to check whether a resource exists or not or to learn its metadata.
+
 ### OPTIONS
 
-    OPTIONS are used to inspect the available operations (HTTP methods) of a given endpoint.
+- **DO** use `OPTIONS` to get a list of available HTTP methods supported by a given resource.
+- **DO** return a comma separated list of methods in the `Allow` header.
+- **DO** use `OPTIONS` to ping the server or find the supported HTTP version `OPTIONS * HTTP/1.1`
 
-    OPTIONS requests usually either return a comma separated list of methods (provided by an Allow:-Header) or as a structured list of link templates
+When a resource supports `PATCH` add an `Accept-Patch` header with the supported media types.
 
-    Note: OPTIONS is rarely implemented, though it could be used to self-describe the full functionality of a resource.
+Optionally add a `Link` header with a link containing the human-reable document that describes the resource. This can be used to develop a browser plug-in to automatically show the documentation when you type the resource URI in the browser.
+
+Although you can use this method at runtime to dicover methods supported by the resource, doing so is expensive. The method is not cacheable.
+
+Instead of using `OPTIONS` at runtime, use development-time knowledge and links to discover URIs and make requests.
+
+> Note: OPTIONS is rarely implemented, though it could be used to self-describe the full functionality of a resource.
 
 ### PUT
 
@@ -63,53 +73,31 @@ Safety and idempotency are guarantees a server must provide to clients. An opera
 
 ### PATCH
 
-    It's also important to understand the difference between PUT and PATCH, as PUT is used to perform a complete override of the record (if fields are not included, they are removed) where-as PATCH is used to update a record based on the information provided (or patch it with what you provide), leaving any fields not passed along intact.
+It is important to understand the difference between `PUT` and `PATCH`.
 
-    According to the HTTP specification, PUT must take the full resource representation in the request.
+`PUT` is designed to update/replace the entire resource. This means that omitted fields will be removed, which is rarely the desired effect.
 
-    Given that PATCH is only a proposed standard there are details around the semantics of the method that are not widely understood. It’s not a simple replacement for POST and PUT where you supply a flat list of values to change. The request should supply a set of instructions for updating an entity and these should be applied atomically.
+`PATCH` is designed to support partial updates. This means the request should supply a *set of changes* (or instructions) for updating a resource and these should be applied atomically, leaving any fields not passed along intact.
 
-    A "set of instructions" is very different from a "set of values" and the specification clearly states that a request should be a different content type to the resource being modified. 
-
-    The point here is that there is a lot more to PATCH than meets the eye. Unless you adopt a complex semantic format for describing change then you are likely to arouse the ire of the "you’re doing it wrong" brigade.
+> Be aware, even though `PATCH` has gain a lot of use, `PATCH` is only a proposed standard, and details around the semantics are not widely understood. It's not an alternative to `POST` or `PUT` where you supply a flat list of values to change. Please see [RFC-5789](https://tools.ietf.org/html/rfc5789) for more information.
 
 - **DO** use `PATCH` for partial updates of a single resources, i.e. where only a specific subset of fields should be replaced.
 - **DO** document the semantic of the `PATCH` changeset, as it is not defined in the HTTP standard.
 - **DO** return `200 Ok` or `204 No Content` for successful `PATCH` requests.
 - **DO** use a comibation of `ETag` and `If-Match` (and/or `If-Unmodified-Since`) header for concurrency. Return `412 Precondition Failed` if the supplied preconditions do not match.
+- **DO** include the `Content-Location` header along with the entire representation of the resource. If not, the client must issue an unconditional `GET` request to fetch the updated representation of the resource, along with fresh `ETag` and/or `If-Unmodified-Since` if applicable.
+- **DO** include the latest `Last-Modified` and/or `ETag` headers to support conditional requests.
+- **DO** return `415 Unsupported Media Type` when the client sends a patch document format that the server does not support. Include the `Accept-Patch` header with the supported media types.
+- **DO** return `422 Unprocessable Entity` when the server cannot honor the request because it might result in a bad state for the resource.
 - **CONSIDER** using suitable media types to describe the changeset.
 - **CONSIDER** using the lightweight JSON merge patch (RFC 7386) to describe changesets in JSON format.
 - **CONSIDER** using the JSON Patch (RFC 6902) to describe changesets in JSON format.
 - **CONSIDER** before using `PATCH` on a collection resources as it implies patching the entire collection.
+- **CONSIDER** overloading `POST`, not `PUT`, when `PATCH` is not an option.
 - **CONSIDER** using `PUT` instead of `PATCH`, if possible, either to update the entire resource, or by designing a new resource to encapsulate the parts of the original resource that can be updated. *Such resources may seem inconsistent (or even polluting), but anything that is appropriate for retrival and updates is a candidate as a resource*.
-
-    - 11.9. How to use the `PATCH` Method
-
-The body of the request is a the representation that describes a set of changes that need to be made to the resource.
-
-Advertise support for the `PATCH` header via the `Allow` header of the `OPTIONS` response, also include an `Accept-Patch` header with the supported media types for the `PATCH` method.
-
-To support `PATCH` the server needs to define a representation format that can express changes.
-
-In the response the server can include a `Content-Location` header along with the latest `Last-Modified` and/or `ETag` headers. If not, the client must issue an unconditional `GET` request to fetch the updated representation of the resource along with fresh `ETag` and/or `If-Unmodified-Since`
-
-Do not repeat `PATCH` requests.
-
-Return `422 Unprocessable Entity` when the server cannot honor the request because it might result in a bad state for the resource.
-
-When `PATCH` is not an option, overload `POST` not `PUT`.
-
-To ensure that `PATCH` request only include valid combinations of changes, design a specific format for each resource:
-
-```json
-{
-    "diffCustomer": {
-        "replaceName": "xxx",
-        "addNickName": "xxx",
-        "removeFaxLine": true,
-    }
-}
-```
+- **CONSIDER** advertising the support for `PATCH` via the `Allow` header of the `OPTIONS`response, also including an `Accept-Patch` header with the supported media types for the `PATCH` method.
+- **CONSIDER** designing a specific format for each resource, to ensure that `PATCH` request only include valid combinations of changes.
+- **DO NOT** repeat `PATCH` requests unless explicitly stated in the documentation.
 
 ### POST
 
