@@ -1,7 +1,7 @@
 site_name: API Guidelines
 theme: readthedocs
 pages:
-- 'index.md'
+- Introduction: 'index.md'
 - APIs: 'apis.md'
 - 'uniform_interface.md'
 - 'resource_identifiers.md'

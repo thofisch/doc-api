@@ -1,4 +1,8 @@
-# Motivation
+# Introduction
+
+__*should we talk about microservices/component architecture or overall architectural goals or just these guidelines?*__
+
+## Motivation
 
 The motivation behind the *API Guidelines* is to define standards or "best practices" in order to:
 
@@ -6,7 +10,6 @@ The motivation behind the *API Guidelines* is to define standards or "best pract
 - design APIs that are easy to understand and use
 - have a consistent API "look and feel" across the board
 - facilitate APIs as a Product
-- __*should we talk about microservices/component architecture or overall architectural goals?*__
 
 ## Thinking in Products
 

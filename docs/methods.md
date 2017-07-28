@@ -76,15 +76,40 @@ Safety and idempotency are guarantees a server must provide to clients. An opera
 - **DO** use `PATCH` for partial updates of a single resources, i.e. where only a specific subset of fields should be replaced.
 - **DO** document the semantic of the `PATCH` changeset, as it is not defined in the HTTP standard.
 - **DO** return `200 Ok` or `204 No Content` for successful `PATCH` requests.
-- **DO** use a comibation of `ETag` and `If-Match` header for concurrency.
+- **DO** use a comibation of `ETag` and `If-Match` (and/or `If-Unmodified-Since`) header for concurrency. Return `412 Precondition Failed` if the supplied preconditions do not match.
 - **CONSIDER** using suitable media types to describe the changeset.
 - **CONSIDER** using the lightweight JSON merge patch (RFC 7386) to describe changesets in JSON format.
 - **CONSIDER** using the JSON Patch (RFC 6902) to describe changesets in JSON format.
 - **CONSIDER** before using `PATCH` on a collection resources as it implies patching the entire collection.
-- **AVOID** using `PATCH` if possible, instead use `PUT` to update the entire resource.
+- **CONSIDER** using `PUT` instead of `PATCH`, if possible, either to update the entire resource, or by designing a new resource to encapsulate the parts of the original resource that can be updated. *Such resources may seem inconsistent (or even polluting), but anything that is appropriate for retrival and updates is a candidate as a resource*.
 
-    - 11.8. How to Refine Resources for Partial Updates
     - 11.9. How to use the `PATCH` Method
+
+The body of the request is a the representation that describes a set of changes that need to be made to the resource.
+
+Advertise support for the `PATCH` header via the `Allow` header of the `OPTIONS` response, also include an `Accept-Patch` header with the supported media types for the `PATCH` method.
+
+To support `PATCH` the server needs to define a representation format that can express changes.
+
+In the response the server can include a `Content-Location` header along with the latest `Last-Modified` and/or `ETag` headers. If not, the client must issue an unconditional `GET` request to fetch the updated representation of the resource along with fresh `ETag` and/or `If-Unmodified-Since`
+
+Do not repeat `PATCH` requests.
+
+Return `422 Unprocessable Entity` when the server cannot honor the request because it might result in a bad state for the resource.
+
+When `PATCH` is not an option, overload `POST` not `PUT`.
+
+To ensure that `PATCH` request only include valid combinations of changes, design a specific format for each resource:
+
+```json
+{
+    "diffCustomer": {
+        "replaceName": "xxx",
+        "addNickName": "xxx",
+        "removeFaxLine": true,
+    }
+}
+```
 
 ### POST
 
