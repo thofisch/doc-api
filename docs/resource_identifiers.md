@@ -1,6 +1,7 @@
 ## Resource Identifiers (URIs)
 
-URIs should be treated as opaque resource identifiers.
+    We all spent a lot of time reading about API design. The main issue we commonly ran into was deciding on a URL when it’s not one of your standard CRUDS (create, retrieve, update, delete and search) operation. What I mean by that, is that the REST basics are easy to follow when you’re exposing these standard operations on a resource. Your URLs are nouns, and you use the standard HTTP verbs to show the action you’re performing on this noun. For example, say we have a resource called foo.
+    URIs should be treated as opaque resource identifiers.
 
 This means that clients should not be concerned with how a server designs its URIs, nor should they try to pick apart URIs in order to work out information from them. Instead URIs should be discovered through links (and the submission of forms).
 
@@ -27,12 +28,12 @@ The opacity of URIs are important and help reduce coupling between servers and c
 - **DO** monitor request traffic for redirection.
 - **DO** maintain redirection services until you are confident the majority of clients have updated their stored links to point to the new URI.
 - **DO** communicate an appropriate end-of-life policy for old URIs, when you cannot monitor the old URIs.
-- **DO** convert `301 Moved Permanently` to `410 Gone` or `404 Not Found` once the traffic has fallen of or the preset time interval has passed. [**Chapter 9**]
+- **DO** convert `301 Moved Permanently` to `410 Gone` or `404 Not Found` once the traffic has fallen of or the preset time interval has passed.
 - **CONSIDER** using `/api` as the first path segment, when the API should also support non-public APIs. E.g. for specific operational support functions. Otherwise, consider forgoing the `/api` prefix.
 - **CONSIDER** that URIs cannot be permanent if the concepts or identifiers used cannot be permanent for business, technical, or security reasons.
 - **CONSIDER** using comma (`,`) and semi-colon (`;`) to indicate nonhierarchical elements in the path segment. The semi-colon (`;`) convention is used to identify matrix parameters. *As not all libraries recognize these as separators and may require custom coding to extract these parameters*.
-- **CONSIDER** using "semi-opaque" URI templates, if it is impractical to supply the client with a list of all the possible URIs in the representation (e.g., ad hoc searching). [**See 5.7**]
-- **CONSIDER** loosen/ignoring opacity to protect against request tampering using digitally signed URIs or encrypt parts of the URI to shield sensitive information. [**See 12.5**]
+- **CONSIDER** using "semi-opaque" URI templates, if it is impractical to supply the client with a list of all the possible URIs in the representation (e.g., ad hoc searching).
+- **CONSIDER** loosen/ignoring opacity to protect against request tampering using digitally signed URIs or encrypt parts of the URI to shield sensitive information. See [Security](/security).
 - **AVOID** including file extensions, instead rely on the media types.
 - **AVOID** using uppercase characters in URIs.
 - **AVOID** using trailing forward slash, as some frameworks may incorrectly remove or add such slashes during URI normalization.

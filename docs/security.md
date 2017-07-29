@@ -50,9 +50,29 @@
 
      However, like an airport, what you don't see is all of the stuff happening in the background, all the things being monitored carefully, security measures implemented by experts with years of experience in risk mitigation.
     For that reason, as tempting as it might be to build one yourself, I would strongly encourage you to take a look at a professional API Management company- such as MuleSoft (of course, I might be a little biased).
-    - 12.1. How to use Basic Authentication to Authenticate Clients
-    - 12.2. How to use Digest Authentication to Authenticate Clients
-    - 12.3. How to use Three-Legged OAuth
-    - 12.4. How to use Two-Legged OAuth
-    - 12.5. How to Deal with Sensitive Information in URIs
-    - 12.6. How to Maintain the Confidentiality and Integrity of Representations
+
+## Security
+
+Securing may require:
+- ensure that only authenticated users access resources
+- ensure the condidentiality and integrity of information right from the moment it is collected until the time it is stored and later presented to authorized entities or users.
+- prevent unauthorized or malicious clients from abusing resources and data.
+- maintain privacy, and follow the laws of the land that govern various security aspects.
+
+How to use Basic Authentication to Authenticate Clients
+
+- return `401 Authorization Required` along with a `WWW-Authenticate: Basic realm="Some name"`.
+
+On the client, concatenate the client identifier (a username if the client is making a request on behalf of a user) and the shared secret (password) as `<identifier>:<secret>` and then compute the Base64 encoding on this text. Include the value in the `Authorization: Basic <Base64 encoded value`. On the server decode the text and verify the values.
+
+Do not use basic authentication unless using TLS to connect to the server.
+
+How to use Three-Legged OAuth
+How to use Two-Legged OAuth
+How to Deal with Sensitive Information in URIs
+
+How to Maintain the Confidentiality and Integrity of Representations
+
+    use TLS and make resource accessible over a server configured to serve request only using HTTPS.
+
+

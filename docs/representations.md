@@ -16,13 +16,13 @@ A *representation* (request/response) is concrete and real.
 
 ### HTTP Headers
 
-    ### MUST: Use Hyphenated HTTP Headers
+    Prefer Hyphenated-Pascal-Case for HTTP header Fields, as this is for consistency in your documentation (most other headers follow this convention). Avoid camelCase (without hyphens). Exceptions are common abbreviations like "ID."
 
-    ### SHOULD:: Prefer Hyphenated-Pascal-Case for HTTP header Fields
+Headers ensure visibility, discoverability, routing by proxies, caching, optimistic concurrency, and correct operation of HTTP as an application protocol.
 
-    This is for consistency in your documentation (most other headers follow this convention). Avoid camelCase (without hyphens). Exceptions are common abbreviations like "ID."
+#### Using Headers to Annotate Representations
 
-    ### May: Use Standardized Headers
+    Use Standardized Headers
 
     # Use the Content-Type Header
 
@@ -47,22 +47,6 @@ A *representation* (request/response) is concrete and real.
 
     In other words, your API's architecture should be versatile enough to do this, but it is probably best just to rely on the content-type instead of mixing data formats based on both the content-type and accept headers.
 
-    # Common Headers
-
-    This section describes a handful of headers, which we found raised the most questions in our daily usage, or which are useful in particular circumstances but not widely known.
-
-    ### MUST: Use Content Headers Correctly
-
-    Content or entity headers are headers with a Content- prefix. They describe the content of the body of the message and they can be used in both, HTTP requests and responses. Commonly used content headers include but are not limited to:
-
-    Content-Disposition can indicate that the representation is supposed to be saved as a file, and the proposed file name.
-    Content-Encoding indicates compression or encryption algorithms applied to the content.
-    Content-Length indicates the length of the content (in bytes).
-    Content-Language indicates that the body is meant for people literate in some human language(s).
-    Content-Location indicates where the body can be found otherwise (see below for more details).
-    Content-Range is used in responses to range requests to indicate which part of the requested resource representation is delivered with the body.
-    Content-Type indicates the media type of the body content.
-
     ### MAY: Use Content-Location Header
 
     The Content-Location header is optional and can be used in successful write operations (PUT, POST or PATCH) or read operations (GET, HEAD) to guide caching and signal a receiver the actual location of the resource transmitted in the response body. This allows clients to identify the resource and to update their local copy when receiving a response with this header.
@@ -80,6 +64,49 @@ A *representation* (request/response) is concrete and real.
     Content-Type: image/png
     Content-Location: /products/123/images?format=raw
 
+Use the following headers to annotate representations that contain message bodies:
+
+- **DO** use `Content-Type`, to describe the type of representation, including a `charset` parameter or other parameters defined for that media type.
+- **DO** use `Content-Length`, to specify the size in bytes of the body. Or specify `Transfer-Encoding: chunked`. Some proxies reject `POST` and `PUT` requests that contain neither of these headers.
+- **DO** use `Content-Language`, two-letter RFC 5646 language tag, optionally followed by a hyphen (-) and any two-letter country code.
+- **DO** use `Content-MD5`, when sending or receiving large representations over potentially unreliable networks to verify the integrity of the message.
+- **DO** set the appropriate expiration caching headers. See [Caching](/caching).
+- **DO NOT** use `Content-MD5` as a measure of security.
+- **DO** use `Content-Encoding`. Clients can indicate their preference for `Content-Encoding` using the `Accept-Encoding` header, however, there is no standard way for the client to learn whether a server can process representations compressed in a given encoding.
+- **DO NOT** use `Content-Encoding` in HTTP requests, unless you know out of band that the target server supports a particular encoding method.
+- **CONSIDER** using `Last-Modified`, this header applies for responses only.
+
+<!-- TODO -->
+
+    # Common Headers
+
+    This section describes a handful of headers, which we found raised the most questions in our daily usage, or which are useful in particular circumstances but not widely known.
+
+    ### MUST: Use Content Headers Correctly
+
+    Content or entity headers are headers with a Content- prefix. They describe the content of the body of the message and they can be used in both, HTTP requests and responses. Commonly used content headers include but are not limited to:
+
+    Content-Disposition can indicate that the representation is supposed to be saved as a file, and the proposed file name.
+    Content-Encoding indicates compression or encryption algorithms applied to the content.
+    Content-Length indicates the length of the content (in bytes).
+    Content-Language indicates that the body is meant for people literate in some human language(s).
+    Content-Location indicates where the body can be found otherwise (see below for more details).
+    Content-Range is used in responses to range requests to indicate which part of the requested resource representation is delivered with the body.
+    Content-Type indicates the media type of the body content.
+
+#### Avoiding Character Encoding Mismatch
+
+- **DO** include the `charset` parameter, if the media type supports it, with a value of the character encoding used to convert characters into bytes.
+- **DO** use the specified encoding, when you receive a representation with a media type that supports the `charset`parameter.
+- **DO** let your parser interpret the character set, if you receive an XML representation with a missing `charset` parameter.
+- **AVOID** using the `text/xml` media type for XML-formatted representations. The default charset for `text/xml` is `us-ascii`, whereas `application/xml` uses `UTF-8`.
+
+> Note that Text and XML media types let you specify the character encoding. The JSON media type `application/json` does not specify a `charset` parameter, but uses `UTF-8` as the default encoding.
+
+<!-- TODO -->
+
+    ### MAY: Consider using ETag together with If-(None-)Match header
+
     ### SHOULD:: Use Location Header instead of Content-Location Header
 
     As the correct usage of Content-Location with respect to semantics and caching is difficult, we discourage the use of Content-Location. In most cases it is sufficient to direct clients to the resource location by using the Location header instead without hitting the Content-Location specific ambiguities and complexities.
@@ -92,57 +119,20 @@ A *representation* (request/response) is concrete and real.
 
     Supporting APIs may return the Preference-Applied header also defined in RFC7240 to indicate whether the preference was applied.
 
-    ### MAY: Consider using ETag together with If-(None-)Match header
+#### Custom HTTP Headers
 
-    When creating or updating resources it may be necessary to expose conflicts and to prevent the lost update problem. This can be best accomplished by using the ETag header together with the If-Match and If-None-Match. The contents of an ETag: <entity-tag> header is either (a) a hash of the response body, (b) a hash of the last modified field of the entity, or (c) a version number or identifier of the entity version.
+Depending on what clients and servers use custom headers for, custom headers may impede interoperability.
 
-    To expose conflicts between concurrent update operations via PUT, POST, or PATCH, the If-Match: <entity-tag> header can be used to force the server to check whether the version of the updated entity is conforming to the requested <entity-tag>. If no matching entity is found, the operation is supposed a to respond with status code 412 - precondition failed.
+- **DO** use custom headers for informational purposes.
+- **CONSIDER** using the convention `X-{company-name}-{header-name}`, when introducing custom headers, as there is no established convention for naming custom headers.
+- **CONSIDER** including the information in a custom HTTP header in the body or the URI, if the information is important for the correct interpretation of the request
+- **DO NOT** implement clients and servers such that they fail when they do not find expected custom headers.
+- **DO NOT** use custom HTTP headers to change behavior of HTTP methods, and limit any behavior-changing headers to `POST`.
+- **DO NOT** use `X-HTTP-Method-Override` to override `POST`, use a distinct resource to process the same request using `POST` without the header. Any HTTP intermediary between the client and the server may omit custom headers.
 
-    Beside other use cases, the If-None-Match: header with parameter * can be used in a similar way to expose conflicts in resource creation. If any matching entity is found, the operation is supposed a to respond with status code 412 - precondition failed.
+<!-- TODO -->
 
-    The ETag, If-Match, and If-None-Match headers can be defined as follows in the API definition:
-
-    Etag:
-        name: Etag
-        description: |
-        The RFC7232 ETag header field in a response provides the current entity-tag for the
-        selected resource. An entity-tag is an opaque identifier for different versions of
-        a resource over time, regardless whether multiple versions are valid at the same time.
-        An entity-tag consists of an opaque quoted string, possibly prefixed by a weakness
-        indicator.
-
-        in: header
-        type: string
-        required: false
-        example: W/"xy", "5", "7da7a728-f910-11e6-942a-68f728c1ba70"
-
-    IfMatch:
-        name: If-Match
-        description: |
-        The RFC7232 If-Match header field in a request requires the server to only operate
-        on the resource that matches at least one of the provided entity-tags. This allows
-        clients express a precondition that prevent the method from being applied, if there
-        have been any changes to the resource.
-
-        in: header
-        type: string
-        required: false
-        example:  "5", "7da7a728-f910-11e6-942a-68f728c1ba70"
-
-    IfNoneMatch:
-        name: If-None-Match
-        description: |
-        The RFC7232 If-None-Match header field in a request requires the server to only
-        operate on the resource if it does not match any of the provided entity-tags. If
-        the provided entity-tag is `*`, it is required that the resource does not exist
-        at all.
-
-        in: header
-        type: string
-        required: false
-        example: "7da7a728-f910-11e6-942a-68f728c1ba70", *
-
-    # Proprietary Headers
+        # Proprietary Headers
 
     This section shares definitions of proprietary headers that should be named consistently because they address overarching service-related concerns. Whether services support these concerns or not is optional; therefore, the OpenAPI API specification is the right place to make this explicitly visible. Use the parameter definitions of the resource HTTP methods.
 
@@ -183,49 +173,12 @@ A *representation* (request/response) is concrete and real.
 
     HTTP/1.1 standard (RFC-7230) defines two types of headers: end-to-end and hop-by-hop headers. End-to-end headers must be transmitted to the ultimate recipient of a request or response. Hop-by-hop headers, on the contrary, are meaningful for a single connection only.
 
-
-Headers ensure visibility, discoverability, routing by proxies, caching, optimistic concurrency, and correct operation of HTTP as an application protocol.
-
-#### Using Headers to Annotate Representations
-
-Use the following headers to annotate representations that contain message bodies:
-
-- **DO** use `Content-Type`, to describe the type of representation, including a `charset` parameter or other parameters defined for that media type.
-- **DO** use `Content-Length`, to specify the size in bytes of the body. Or specify `Transfer-Encoding: chunked`. Some proxies reject `POST` and `PUT` requests that contain neither of these headers.
-- **DO** use `Content-Language`, two-letter RFC 5646 language tag, optionally followed by a hyphen (-) and any two-letter country code.
-- **DO** use `Content-MD5`, when sending or receiving large representations over potentially unreliable networks to verify the integrity of the message.
-- **DO** set the appropriate expiration caching headers [**9.1**]
-- **DO NOT** use `Content-MD5` as a measure of security.
-- **DO** use `Content-Encoding`. Clients can indicate their preference for `Content-Encoding` using the `Accept-Encoding` header, however, there is no standard way for the client to learn whether a server can process representations compressed in a given encoding.
-- **DO NOT** use `Content-Encoding` in HTTP requests, unless you know out of band that the target server supports a particular encoding method.
-- **CONSIDER** using `Last-Modified`, this header applies for responses only. [See **Chapter 9**]
-
-#### Interpreting Entity Headers
+#### Treating HTTP Headers in Clients
 
 - **DO** return `400 Bad Request` on servers, when you receive a representation with no `Content-Type`, avoid guessing the type of the representation.
 - **DO NOT** check for the presence of the `Content-Length` header without first confirming the absence of `Transfer-Encoding: chunked`
 - **DO** let your network library deal with uncompressing compressed representations (`Content-Encoding`)
 - **DO** read and store the value of `Content-Language`
-
-#### Avoiding Character Encoding Mismatch
-
-- **DO** include the `charset` parameter, if the media type supports it, with a value of the character encoding used to convert characters into bytes.
-- **DO** use the specified encoding, when you receive a representation with a media type that supports the `charset`parameter.
-- **DO** let your parser interpret the character set, if you receive an XML representation with a missing `charset` parameter.
-- **AVOID** using the `text/xml` media type for XML-formatted representations. The default charset for `text/xml` is `us-ascii`, whereas `application/xml` uses `UTF-8`.
-
-> Note that Text and XML media types let you specify the character encoding. The JSON media type `application/json` does not specify a `charset` parameter, but uses `UTF-8` as the default encoding.
-
-#### Custom HTTP Headers
-
-Depending on what clients and servers use custom headers for, custom headers may impede interoperability.
-
-- **DO** use custom headers for informational purposes.
-- **CONSIDER** using the convention `X-{company-name}-{header-name}`, when introducing custom headers, as there is no established convention for naming custom headers.
-- **CONSIDER** including the information in a custom HTTP header in the body or the URI, if the information is important for the correct interpretation of the request
-- **DO NOT** implement clients and servers such that they fail when they do not find expected custom headers.
-- **DO NOT** use custom HTTP headers to change behavior of HTTP methods, and limit any behavior-changing headers to `POST`.
-- **DO NOT** use `X-HTTP-Method-Override` to override `POST`, use a distinct resource to process the same request using `POST` without the header. Any HTTP intermediary between the client and the server may omit custom headers.
 
 ### Representation Format and a Media Type
 
@@ -246,97 +199,31 @@ If you choose to create new media types of your own, consider:
 
 > Note that although custom media types improve protocol-level visibility, existing protocol-level tools for monitoring, filtering, or routing HTTP traffic pay little or no attention to media types. Hence, using custom media types only for the sake of protocol-level visibility is not necessary.
 
-    #### *XML Representations*
-
-    *TBD*
-
-    *Suggested topics:*<br/>
-    *Atom resources, AtomPub Service, category documents, AtomPub for feed and entry resources, media resources*
-
 #### JSON Representations
 
-    ### MUST: Use JSON to Encode Structured Data
+    Use JSON (when possible): JSON, or the JavaScript Object Notation format allows for the quick serialization and deserialization of objects. JSON provides a compact format for accessing data, minimalizing the data transfer required while also offering broader language support than XML. These advantages have made it the format of choice for many developers and the leading format for use within REST APIs. Again, you'll want to choose the format that is best for your clients, but in the event that you're encoding objects as XML, I would strongly suggest also offering JSON as an alternative as the serialization is fairly quick and painless. Keep in mind that one of the advantages to REST is that it is not limited to a single content type, and can return multiple formats if desired.
 
-    Use JSON-encoded body payload for transferring structured data. The JSON payload must follow RFC-7159 by having (if possible) a serialized object as the top-level structure, since it would allow for future extension. This also applies for collection resources where one naturally would assume an array. See the pagination section for an example.
+    Use JSON to Encode Structured Data: Use JSON-encoded body payload for transferring structured data. The JSON payload must follow RFC-7159 by having (if possible)a serialized object as the top-level structure, since it would allow for future extension. This also applies for collection resources where one naturally would assume an array.
 
-    ### SHOULD:: Prefer standard Media type name application/json
-
-    Previously, this guideline allowed the use of custom media types like application/x.zalando.article+json. This usage is not recommended anymore and should be avoided, except where it is necessary for cases of media type versioning. Instead, the standard media type name application/json (or application/problem+json for HTTP error details) should be used for JSON-formatted data.
-
-    Custom media types with subtypes beginning with x bring no advantage compared to the standard media type for JSON, and make automated processing more difficult. They are also discouraged by RFC 6838.
-
-
-    ### MAY: Use non JSON Media Types for Binary Data or Alternative Content Representations
-
-    Other media types may be used in following cases:
-
-    Transferring binary data or data whose structure is not relevant. This is the case if payload structure is not interpreted and consumed by clients as is. Example of such use case is downloading images in formats JPG, PNG, GIF.
-    In addition to JSON version alternative data representations (e.g. in formats PDF, DOC, XML) may be made available through content negotiation.
-
-    # Use JSON (when possible)
-
-    JSON, or the JavaScript Object Notation format allows for the quick serialization and deserialization of objects.
-
-    JSON provides a compact format for accessing data, minimalizing the data transfer required while also offering broader language support than XML.
-    These advantages have made it the format of choice for many developers and the leading format for use within REST APIs.
-
-    Again, you'll want to choose the format that is best for your clients, but in the event that you're encoding objects as XML, I would strongly suggest also offering JSON as an alternative as the serialization is fairly quick and painless.
-    Keep in mind that one of the advantages to REST is that it is not limited to a single content type, and can return multiple formats if desired.
+    Prefer standard Media type name application/json: Previously, this guideline allowed the use of custom media types like application/x.zalando.article+json. This usage is not recommended anymore and should be avoided, except where it is necessary for cases of media type versioning. Instead, the standard media type name application/json (or application/problem+json for HTTP error details) should be used for JSON-formatted data.
 
     ## JSON Guidelines
 
-    These guidelines provides recommendations for defining JSON data at Zalando. JSON here refers to RFC 7159 (which updates RFC 4627), the "application/json" media type and custom JSON media types defined for APIs. The guidelines clarifies some specific cases to allow Zalando JSON data to have an idiomatic form across teams and services.
-
-    ### MUST: Use Consistent Property Names
-
-    ### MUST: Property names must be snake_case (and never camelCase).
-
-    No established industry standard exists. It's essential to establish a consistent look and feel such that JSON looks as if it came from the same hand.
-
-    ### MUST: Property names must be an ASCII subset
-
-    Property names are restricted to ASCII encoded strings. The first character must be a letter, an underscore or a dollar sign, and subsequent characters can be a letter, an underscore, a dollar sign, or a number.
-
-    ### SHOULD:: Array names should be pluralized
-
-    To indicate they contain multiple values prefer to pluralize array names. This implies that object names should in turn be singular.
-
-    ### MUST: Use Consistent Property Values
-
-    ### MUST: Boolean property values must not be null
-
-    Schema based JSON properties that are by design booleans must not be presented as nulls. A boolean is essentially a closed enumeration of two values, true and false. If the content has a meaningful null value, strongly prefer to replace the boolean with enumeration of named values or statuses - for example accepted\_terms\_and\_conditions with true or false can be replaced with terms\_and\_conditions with values yes, no and unknown.
-
-    ### SHOULD:: Null values should have their fields removed
-
-    Swagger/OpenAPI, which is in common use, doesn't support null field values (it does allow omitting that field completely if it is not marked as required). However that doesn't prevent clients and servers sending and receiving those fields with null values. Also, in some cases null may be a meaningful value - for example, JSON Merge Patch RFC 7382) using null to indicate property deletion.
-
-    ### SHOULD:: Empty array values should not be null
-
-    Empty array values can unambiguously be represented as the the empty list, [].
-
-    ### SHOULD:: Enumerations should be represented as Strings
-
-    Strings are a reasonable target for values that are by design enumerations.
-
-    ### MUST: Use common field names and semantics
-
-    There exist a variety of field types that are required in multiple places. To achieve consistency across all API implementations, you must use common field names and semantics whenever applicable.
-
-    Generic Fields
-
-    There are some data fields that come up again and again in API data:
-
-    id: the identity of the object. If used, IDs must opaque strings and not numbers. IDs are unique within some documented context, are stable and don't change for a given object once assigned, and are never recycled cross entities.
-
-    xyz_id: an attribute within one object holding the identifier of another object must use a name that corresponds to the type of the referenced object or the relationship to the referenced object followed by _id (e.g. customer_id not customer_number; parent_node_id for the reference to a parent node from a child node, even if both have the type Node)
-
-    created: when the object was created. If used, this must be a date-time construct.
-
-    modified: when the object was updated. If used, this must be a date-time construct.
-
-    type: the kind of thing this object is. If used, the type of this field should be a string. Types allow runtime information on the entity provided that otherwise requires examining the Open API file.
-
+    - Use Consistent Property Names
+    - Property names must be snake_case (and never camelCase). No established industry standard exists. It's essential to establish a consistent look and feel such that JSON looks as if it came from the same hand.
+    - Property names must be an ASCII subset: Property names are restricted to ASCII encoded strings. The first character must be a letter, an underscore or a dollar sign, and subsequent characters can be a letter, an underscore, a dollar sign, or a number.
+    - Array names should be pluralized to indicate they contain multiple values prefer to pluralize array names. This implies that object names should in turn be singular.
+    - Use Consistent Property Values
+    - Boolean property values must not be null. A boolean is essentially a closed enumeration of two values, true and false. If the content has a meaningful null value, strongly prefer to replace the boolean with enumeration of named values or statuses 
+    - Null values should have their fields removed: Swagger/OpenAPI, which is in common use, doesn't support null field values (it does allow omitting that field completely if it is not marked as required). However that doesn't prevent clients and servers sending and receiving those fields with null values. Also, in some cases null may be a meaningful value - for example, JSON Merge Patch RFC 7382) using null to indicate property deletion.
+    - Empty array values should not be null. Empty array values can unambiguously be represented as the the empty list, [].
+    - Enumerations should be represented as Strings. Strings are a reasonable target for values that are by design enumerations.
+    - Use common field names and semantics. There exist a variety of field types that are required in multiple places. To achieve consistency across all API implementations, you must use common field names and semantics whenever applicable. There are some data fields that come up again and again in API data:
+        - id: the identity of the object. If used, IDs must opaque strings and not numbers. IDs are unique within some documented context, are stable and don't change for a given object once assigned, and are never recycled cross entities.
+        - xyz_id: an attribute within one object holding the identifier of another object must use a name that corresponds to the type of the referenced object or the relationship to the referenced object followed by _id (e.g. customer_id not customer_number; parent_node_id for the reference to a parent node from a child node, even if both have the type Node)
+        - created: when the object was created. If used, this must be a date-time construct.
+        - modified: when the object was updated. If used, this must be a date-time construct.
+        - type: the kind of thing this object is. If used, the type of this field should be a string. Types allow runtime information on the entity provided that otherwise requires examining the Open API file.
     These properties are not always strictly necessary, but making them idiomatic allows API client developers to build up a common understanding of Zalando's resources. There is very little utility for API consumers in having different names or value types for these fields across APIs.
 
 - **DO** include a *self* link to the resource in each representation.
@@ -351,8 +238,6 @@ If you choose to create new media types of your own, consider:
     Compress the payload of your API's responses with gzip, unless there's a good reason not to — for example, you are serving so many requests that the time to compress becomes a bottleneck. This helps to transport data faster over the network (fewer bytes) and makes frontends respond faster.
 
     Though gzip compression might be the default choice for server payload, the server should also support payload without compression and its client control via Accept-Encoding request header -- see also RFC 7231 Section 5.3.4. The server should indicate used gzip compression via the Content-Encoding header.
-
-
 
 ```json
 {
@@ -529,6 +414,8 @@ If you choose to create new media types of your own, consider:
 - **DO** use time zone identifiers from the Olson Time Zone Database to convey time zones.
 - **AVOID** using language-, region-, or country-specific formats or format identifiers, except when the text is meant for presentation to end users.
 
+<!-- TODO -->
+
     ### SHOULD:: Date property values should conform to RFC 3399
 
     ### May: Time durations and intervals could conform to ISO 8601
@@ -571,6 +458,13 @@ If you choose to create new media types of your own, consider:
     ### SHOULD:: Use a Decimal for Money/Amount Objects
 
 
+#### _**XML Representations**_
+
+*TBD*
+
+*Suggested topics:*<br/>
+*Atom resources, AtomPub Service, category documents, AtomPub for feed and entry resources, media resources*
+
 #### Binary Data in Representations
 
 - **DO** use multipart media types such as `multipart/mixed`, `multipart/related`, or `multipart/alternative`.
@@ -578,6 +472,13 @@ If you choose to create new media types of your own, consider:
 - **AVOID** encoding binary data within textual formats using Base64 encoding.
 
 #### Error Representations
+
+    The Box API communicates errors through standard HTTP status codes with details supplied in JSON objects. Generally the following pattern applies:
+
+    2xx - Box received, understood, and accepted a request.
+    3xx - The client must take further action in order to complete the request.
+    4xx - An error occurred in handling the request. The most common cause of this error is an invalid parameter.
+    5xx- Box received and accepted the request, but an error occurred while handling it.
 
 - **DO** return a representation with a `4xx` status code, for errors due to client inputs,
 - **DO** return a representation with a `5xx` status code, for errors due to server implementation or its current state.
@@ -819,14 +720,14 @@ Always return meaningful HTTP Status Codes.
 #### Errors due to client inputs: `4xx`
 
 - **DO** return `400 Bad Request` when your server cannot decipher client requests because of syntactical errors.
-- **DO** return `401 Unauthorized` when the client is not authorized to access the resource, but may be able to gain access after authentication. If your server will not let the client access the resource even after authentication return `403 Forbidden` instead. When returning this error code, include a WWW-Authenticate header field with the authentication method to use. [See **Chapter 12**]
+- **DO** return `401 Unauthorized` when the client is not authorized to access the resource, but may be able to gain access after authentication. If your server will not let the client access the resource even after authentication return `403 Forbidden` instead. When returning this error code, include a WWW-Authenticate header field with the authentication method to use.
 - **DO** return `403 Forbidden` when your serer will not let the client gain access (authenticated or not).
 - **DO** return `404 Not Found` when the resource is not found. If possible, return a reason in the message body.
-- **DO** return `405 Not Allowed` when an HTTP method is not allowed. Return an `Allow` header with methods that are valid for the resource. [**See 14.2**]
-- **DO** return `406 Not Acceptable` [**See 7.7**]
+- **DO** return `405 Not Allowed` when an HTTP method is not allowed. Return an `Allow` header with methods that are valid for the resource.
+- **DO** return `406 Not Acceptable`. See [Content Negotiation](/content_negotiation).
 - **DO** return `409 Conflict` when the request conflicts with the current state of the resource. Include a body explaining the reason.
 - **DO** return `410 Gone` when the resource used to exist, but it does not anymore. You may not be able to return this unless you tracked deleted resources, then return `404 Not Found`.
-- **DO** return `412 Precondition Failed` [**See 10.4**]
+- **DO** return `412 Precondition Failed`. See [Caching](/caching).
 - **DO** return `413 Request Entity Too Large` when the body of a `POST` or `PUT` is too large. If possible, specify what is allowed in the body and provide alternatives.
 - **DO** return `415 Unsupported Media Type` when a client sends the message body in a form that the server does not understand.
 
@@ -842,10 +743,10 @@ Always return meaningful HTTP Status Codes.
 - **DO NOT** repeat the request on `403 Forbidden`
 - **DO** clean up client stored data on `404 Not Found`
 - **DO** Look for the `Allow` header for valid methods on `405 Not Allowed`
-- **DO** `406 Not Acceptable` [**See 7.7**]
+- **DO** treat `406 Not Acceptable`. See [Content Negotiation](/content_negotiation).
 - **DO** treat `409 Conflict` by looking for the conflicts listed in the body of the representation of `PUT`
 - **DO** treat `410 Gone` the same as `404 Not Found`.
-- **DO** `412 Precondition Failed` **See 10.4**
+- **DO** treat `412 Precondition Failed`. See [Caching](/caching).
 - **DO** look for hints on valid size in the body of the error on `413 Request Entity Too Large`
 - **DO** see the body of the representation to learn the supported media types for the request on `415 Unsupported Media Type`
 - **DO** log the error, and then notify the server developers of `500 Internal Server Error`
@@ -919,7 +820,7 @@ Always return meaningful HTTP Status Codes.
 
 - **DO** encode application state into URIs, and include those URIs into representations via links.
 - **DO** store the application state in a durable storage, and encode a reference to that state in URIs, if the state is large or cannot be transported to the clients for security or privacy reasons.
-- **DO** make sure to add checks (such as signatures) to detect/prevent tampering of state, when using application state in links. [**Chapter 12**]
+- **DO** make sure to add checks (such as signatures) to detect/prevent tampering of state, when using application state in links.
 
 <!-- TODO -->
     #### *Links in XML Representations*

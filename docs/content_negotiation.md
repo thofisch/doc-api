@@ -9,7 +9,7 @@ There are two types of content negotiation:
 
 - **DO** support multiple variants only when your clients need them.
 - **DO** support multiple variants only when each variant contains the same information
-- **DO NOT** use server-driven negotiation when the information content is different, use [agent-driven negotiation](#agent-driven-negotiation) instead.
+- **DO NOT** use server-driven negotiation when the information content is different, use [Agent-Driven Content Negotiation](#agent-driven-content-negotiation) instead.
 
 #### Indicating Client Preferences
 
@@ -37,8 +37,8 @@ When making a request:
 
 - **DO** return a representation using the default format, if the request has no `Accept` header.
 - **DO** parse the header, sort the values of media types by the `q` parameters in descending order, if the request has an `Accept` header, then select a media type from the list that the server supports.
-- **DO** handle [content negotiation failures](#7.7) to determine an appropriate response
-- **CONSIDER** including a `Vary` (see [Vary](#vary)) response header [**See 7.6**]
+- **DO** handle [content negotiation failures](#negotiation-failures) to determine an appropriate response
+- **CONSIDER** including a `Vary` (see [Vary](#the-vary-header)) response header.
 - **CONSIDER** using [*agent-driven negotiation*](#agent-driven-negotiation), if the server starts out ignoring `Accept`, e.g. by returning `Content-Type: application/xml` for `Accept: application/json` requests, adding content negotiation (here by adding `Content-Type: application/json`) will likely break compatibility for working clients.
 
 #### Language Negotiation
@@ -85,20 +85,18 @@ When a server uses content negotiation to select a representation, the same URI 
 
 ### Agent-Driven Content Negotiation
 
-Although server-driven negotiation is built into HTTP, it has limitations:
+Although server-driven content negotiation is built into HTTP it does not include elements such as currency units, distance units, date formats, and other regional flavors for any human-readable text in representations.
 
-- Content negotiation does not include elements such as currency units, distance units, date formats, and other regional flavors for any human-readable text in representations.
-- In some cases, because of complex localization requirements, the server may decide to maintain different resources for different locales.
+In some cases, because of complex localization requirements, the server may decide to maintain different resources for different locales.
 
 Agent-driven negotiation simply mean providing distinct URIs for each variant and allow the client to use that URI to select the desired representation.
 
-- **CONSIDER** using agent-driven negotiation when the client cannot communicate its preferences using `Accept-*` headers.
-- **CONSIDER** using one or more of these common approaches:
-   - Query parameters, like `http://www.example.org/status?format={format}`
-   - URI extensions, appending a dot (`.`) and a shorthand media type to the base URI. Like `http://www.example.org/status.json`
-   - Subdomains, like `http://dk.example.org/status`
-- **CONSIDER** letting the server advertise alternatives using links with the `alternate` link relation type, when using agent-driven negotiation.
 - **DO** use out-of-band information from the server to determine which URI to use. If the representation exists, the server returns it, if not, it return `404 Not Found`.
+- **CONSIDER** using agent-driven negotiation, when the client cannot communicate its preferences using `Accept-*` headers, using one or more of these common approaches:
+    - Query parameters, like `http://www.example.org/status?format={format}`
+    - URI extensions, appending a dot (`.`) and a shorthand media type to the base URI. Like `http://www.example.org/status.json`
+    - Subdomains, like `http://dk.example.org/status`
+- **CONSIDER** letting the server advertise alternatives using links with the `alternate` link relation type.
 
 Although it is possible to implement agent-driven negotiation for all `Accept-*` headers, in practice it is most commonly used for media types and languages.
 

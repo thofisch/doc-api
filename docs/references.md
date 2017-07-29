@@ -16,6 +16,8 @@
 - <https://blogs.mulesoft.com/dev/api-dev/api-best-practices-series-intro/>
 - <https://apigility.org/documentation/api-primer/what-is-an-api>
 - <http://zalando.github.io/restful-api-guidelines>
+- <https://www.narwhl.com/>
+- <https://pages.apigee.com/rs/apigee/images/api-design-ebook-2012-03.pdf>
 
 ### Citations
 ### Bibliography

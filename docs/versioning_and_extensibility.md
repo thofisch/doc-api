@@ -59,13 +59,82 @@
 
     And this can only happen if you go into building your API with a long-term, flexibility, and extensibility focus.
 
-    - 13.1. How to Maintain URI Compatibility (*url regression*)
-    - 13.2. How to Maintain Compatibility of XML and JSON Representations
-    - 13.3. How to Extend Atom
-    - 13.4. How to Maintain Compatibility of Links
-    - 13.5. How to Implement Clients to Support Extensibility
-    - 13.6. When to Version
-    - 13.7. How to Version RESTful Web Services
+# Extensibility and Versioning
+
+Managing change in any distributed client/server environment can be hard. In these environments, clients count on servers to honor their contracts.
+
+When a change is backward compatible, you need not upgrade clients at the same time as you modify the server.
+
+*Forward compatibility* may be important when you have several clients and servers upgraded at different points in time. In this case, some newer clients may be interacting with older servers. The purpose of forward compatibility is to ensure that newer clients can continue to use the older servers without disruption albeit with reduced functionality.
+
+The characteristic that lets you maintain compatibility is *extensibility*. Extensibility is a design process to account for future changes.
+
+As a transfer protocol, HTTP is extensible, but that does not mean that APIs built over HTTP are automatically extensible.
+
+It takes discipline, careful planning, and defensive coding practices.
+
+A one-time simultaneous upgrade of all server and clients is not a realistic task. You need to plan for a gradual rollout of upgrades to servers and clients to maintain the availability of the overall system.
+
+Note that both clients and server need to take the appropriate steps to operate smoothly under change. For the server, the goal is to keep the clients from breaking. For the clients, the objective is not fail when new unknown data or links appear in representations.
+
+### How to Maintain URI Compatibility (*url regression*)
+
+Keeps URIs permanent.
+
+Treat URIs containing the same query parameters but in a different order as the same
+
+When you add new parameters to URIs, continue to honor existing parameters, and treat new parameters as optional.
+
+When changing data formats for query parameters, continue to honor existing formats. If that is not viable, introduce format changes via new query parameters or new URIs.
+
+Treat query parameters in URIs as optional except when need for concurrency and security.
+
+### How to Maintain Compatibility of XML and JSON Representations
+
+When making changes to JSON preserve the hierarchical structure so that clients can continue to follow the same structure to extract data.
+
+Make new data elements in requests optional to maintain compatibility with existing clients. Clients that do not send new data fields must be able to continue to function.
+
+Do not remove or rename any data fields from representaions in reponse bodies.
+
+Example: Clients that do not understand new fields may not store them locally. If this causes the server to assume the user has no email address, introduce a new version of the resource that contains the email.
+
+### How to Maintain Compatibility of Links
+
+Avoid removing links
+Do not change the value of the `rel` and `href` attributes of links.
+When introducing new resources, use links to provide URIs of those resources to clients.
+
+### How to Implement Clients to Support Extensibility
+
+If the client is capable of storing the complete representation locally, store everything.
+
+Do not assume that the representation is of a fixed media type, character encoding, content language, or content encoding.
+
+### When to Version
+
+Consider versioning when the server cannot maintain compatibility. Also consider versioning if some clients require behavior or functionality different from other clients.
+
+Versioning may introduce new problems:
+
+- Data stored by the clients for one version may not automatically work with the data from a different version. Clients may have to port resource data stored locally before migrating to the new version.
+- Version changes may involve new business rules and new application flow, which requires code changes in clients.
+- Maintaining multiple versions of resources at the same time is not trivial.
+- When you use links to convey URIs to clients, clients may store them locally. When you assign new URIs, clients will have to upgrade those URIs along with other stored data of resources.
+
+### How to Version RESTful Web Services
+
+Add new resources with new URIs when there is a change in the behavior of resource or a change in the information contained in representations.
+
+Use easily detectable patterns such as `v1` or `v2` in subdomain names, path segments, or query parameters to distinguish URIs by their version.
+
+Avoid treating each version as a new representation with a new media type of the same resource.
+
+Versioning involves versioning resources with new URIs. This is because HTTP dictates everything except URIs of resources and their representations. Although you can add custom HTTP methods and headers, such additions may impair interoperability.
+
+Avoid introducing new media types for each version since it leads to media type proliferation, which reduce interoperability.
+
+
 
     # Compatibility
 
@@ -167,3 +236,52 @@
     ### MUST: Do Not Use URI Versioning
 
     With URI versioning a (major) version number is included in the path, e.g. /v1/customers. The consumer has to wait until the provider has been released and deployed. If the consumer also supports hypermedia links — even in their APIs — to drive workflows (HATEOAS), this quickly becomes complex. So does coordinating version upgrades — especially with hyperlinked service dependencies — when using URL versioning. To avoid this tighter coupling and complexer release management we do not use URI versioning, and go instead with media type versioning and content negotiation (see above).
+
+
+
+    The API will inevitably need to be modified in ways that will impact customer client code. Not all customer clients will be able to make the necessary changes in their code right away, so the API should maintain older versions for some time after releasing the new version, usually a minimum of 90 days.
+
+
+
+    In the ‘When to Version’ section should you mention APIs that use enum types? My company’s API reference documentation has attributes with an enum type and we list all values. We ran into a problem when a requirement added an enum value to an existing attribute and it broke a partner app. The partner had coded to the defined enum values in the documentation and their app wasn’t expecting new values with future releases. I corrected the problem by removing the new enum value and I defined any request to add a new enum value to an existing attribute requires a new API version. Last, going forward new attributes with an enum type will be defined as String in the documentation and we will indicate the values are not limited to the ones defined.
+
+
+
+    Versioning Content Types
+
+    The use of content negotiation with custom MIME types allows for finer grained versioning at the resource level without the need to create a plethora of new endpoints. New versions must be communicated to developers through existing channels – email, developer blogs, etc. When a content version is no longer supported, the body of the HTTP error should include a list of supported content types.
+
+    Versioning URIs
+
+    The use of both hyper links and content negotiation should all but eliminate the need to version at the URI level. However, there may be instances where the entire structure of the API must be changed, particularly when moving from one API style to another, such when moving from an RPC-type style to NARWHL. To prepare for these possibilities, it’s recommended that a version be embedded within each API endpoint. The version can either be embedded at the root for all endpoints of a given API, such as:
+
+    http://api.example.com/v1
+
+    Or within the fully qualified domain name for the endpoint:
+
+    http://apiv1.example.com
+
+    The version need not be numeric, nor specified using the “v[x]” syntax. Alternatives include dates, project names, seasons or other identifiers that are meaningful enough to the team producing the APIs and flexible enough to change as the versions change.
+
+
+    Subbu Allamaraju, revisits one of the recurring debates in the REST community; the standard media types vs. custom media types and tries to determine the best practices when using them. He starts with the stating dichotomous views on the use of media types.
+
+    Opinion 1: Web services must use standard media types to be RESTful.
+    Opinion 2: Custom media types are necessary to keep interactions visible, and to serve as contracts.
+    The first opinion which, if adhered to strictly, per Roy Fieldings thesis, “the use of media types such as application/vnd.example.myway+xml is not RESTful”. Subbu believes that understanding the impact of such media type usage in the real world is more important than following the thesis to the letter. There are however comments that suggest that this interpretation of the thesis might be up for debate as well.
+
+    To the contrary, the second opinion, he says, leads to visibility of the messages at the protocol level via the use of custom media types.
+
+    […] For instance, how can anyone know if a representation that uses application/xml media type describes a purchase order, or a photo album? If the web service uses media types likeapplication/vnd.example.po and application/vnd.example.album, then any one can interpret the semantics of the representation without parsing the body of the representation. Per this line of thinking, a media type is an identifier for message semantics, and message recipients use media types to trigger processing code.
+
+    “So what is the right thing to do?”  He asks, as he puts forth his idea, in a effort to democratically determine the best practices
+
+    - If the sender is formatting representations using standard extensible formats such as XML or JSON, use standard media types such as application/xml and application/json.
+    - Mint new media types when you invent new formats.
+    - If you are just looking for a way to communicate application level semantics for XML and JSON messages, use something else (e.g. XML namespaces and conventions).
+    - If the goal is versioning, use version identifiers in URIs.
+    Giving java-like examples, He asserts that though its possible to peek into the messages to see how a request can be processed, it compromises visibility or opacity as the case may be.
+
+    Media types such as application/xml and application/json are good enough for XML and JSON message processing in code. […] URI based approaches are guaranteed to work across the stack. Ignoring real-world interoperability for the sake of "architectual purity" or "RESTful contracts" may eventually back fire.
+
+    Via the post is the solution presented by Subbu found the right balance between architectural purity and interoperable real-world solutions? Be sure to visit the original post to weigh in your opinion.

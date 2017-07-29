@@ -2,6 +2,8 @@
 
 __*should we talk about microservices/component architecture or overall architectural goals or just these guidelines?*__
 
+    When starting to design and build a RESTful API, there are a lot of decisions to be made. How do you handle authentication? Which data transfer formats do you support? How do you document your APIs? How do you handle versioning? When we started our initial design to migrate from version one to version two of our own API, these were a lot of the questions that we had to answer. Some of them were easy and others incited passionate debates (read: “yelling”) amongst our engineering team.
+
 ## Motivation
 
 The motivation behind the *API Guidelines* is to define standards or "best practices" in order to:

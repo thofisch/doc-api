@@ -47,21 +47,22 @@ Safety and idempotency are guarantees a server must provide to clients. An opera
 - **DO** return a comma separated list of methods in the `Allow` header.
 - **DO** use `OPTIONS` to ping the server or find the supported HTTP version `OPTIONS * HTTP/1.1`
 
-When a resource supports `PATCH` add an `Accept-Patch` header with the supported media types.
+    When a resource supports `PATCH` add an `Accept-Patch` header with the supported media types.
 
-Optionally add a `Link` header with a link containing the human-reable document that describes the resource. This can be used to develop a browser plug-in to automatically show the documentation when you type the resource URI in the browser.
+    Optionally add a `Link` header with a link containing the human-reable document that describes the resource. This can be used to develop a browser plug-in to automatically show the documentation when you type the resource URI in the browser.
 
-Although you can use this method at runtime to dicover methods supported by the resource, doing so is expensive. The method is not cacheable.
+    Although you can use this method at runtime to dicover methods supported by the resource, doing so is expensive. The method is not cacheable.
 
-Instead of using `OPTIONS` at runtime, use development-time knowledge and links to discover URIs and make requests.
+    Instead of using `OPTIONS` at runtime, use development-time knowledge and links to discover URIs and make requests.
 
-> Note: OPTIONS is rarely implemented, though it could be used to self-describe the full functionality of a resource.
+    > Note: OPTIONS is rarely implemented, though it could be used to self-describe the full functionality of a resource.
 
 ### PUT
 
 - **DO** use `PUT` to update an entire single resource. The operation implies that the entire resource located at the URI will be replaced with the new representation in the request.
 - **DO** return `200 Ok` or `204 No Content` if the resource was updated.
 - **DO** use a comibation of `ETag` and `If-Match` header for concurrency.
+- **DO** return `404 Not Found` is `PUT` does not support creation.
 - **CONSIDER** before using `PUT` on a collection resources as it implies replacing the entire collection.
 - **CONSIDER** using `PATCH` if making partial updates to entire resources become increasingly cumbersome.
 - **DO NOT** use `PUT` to create new resources unless the clients can decide URIs of resources (e.g., WebDAV), instead use `POST`.
