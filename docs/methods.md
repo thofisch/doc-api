@@ -35,27 +35,19 @@ Safety and idempotency are guarantees a server must provide to clients. An opera
 
 ### HEAD
 
-    HEAD requests are used retrieve to header information of single resources and resource collections.
+HEAD requests are used to retrieve header information of resources, and has the exact same semantics as `GET`, but only returns headers. 
 
-    HEAD has exactly the same semantics as GET, but returns headers only, no body.
-
-    Clients can use this method to check whether a resource exists or not or to learn its metadata.
+- **CONSIDER** using `HEAD` to check whether a resource exists or get its metadata.
 
 ### OPTIONS
 
+`OPTIONS` is rarely implemented. Although `OPTIONS` could be used at runtime to discover methods supported by the resource, doing so is expensive. The method is not cacheable.
+
+- **DO** return a comma separated list of methods in the `Allow` header. When a resource supports `PATCH` add an `Accept-Patch` header with the supported media types.
 - **DO** use `OPTIONS` to get a list of available HTTP methods supported by a given resource.
-- **DO** return a comma separated list of methods in the `Allow` header.
 - **DO** use `OPTIONS` to ping the server or find the supported HTTP version `OPTIONS * HTTP/1.1`
-
-    When a resource supports `PATCH` add an `Accept-Patch` header with the supported media types.
-
-    Optionally add a `Link` header with a link containing the human-reable document that describes the resource. This can be used to develop a browser plug-in to automatically show the documentation when you type the resource URI in the browser.
-
-    Although you can use this method at runtime to dicover methods supported by the resource, doing so is expensive. The method is not cacheable.
-
-    Instead of using `OPTIONS` at runtime, use development-time knowledge and links to discover URIs and make requests.
-
-    > Note: OPTIONS is rarely implemented, though it could be used to self-describe the full functionality of a resource.
+- **CONSIDER** adding a `Link` header containing a link to a human-readble document that describes the resource. This can be used to develop a browser plug-in to automatically show the documentation when you type the resource URI in the browser.
+- **AVOID** relying on `OPTIONS` at runtime for discovery, instead use documentation and links to discover URIs and make requests.
 
 ### PUT
 

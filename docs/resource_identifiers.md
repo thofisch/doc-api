@@ -13,14 +13,11 @@ The opacity of URIs helps reduce coupling between servers and clients. This has 
 
 ### Designing URIs
 
-    The base URI is the most important design affordance of your API. A simple and intuitive base URI design makes using your API easy. Affordance is a design property that communicates how something should be used without requiring documentation. 
-
-When designing URIs:
+When done successfully the result, of a thoughtful URI design, can be the most important design affordance (a design property that communicates how something should be used without requiring documentation) of your API. So when designing URIs:
 
 - **DO** design URIs to last a long time - [Cool URIs don't change](<http://www.w3.org/Provider/Style/URI>).
-- **DO** design URIs based on stable concepts, identifiers, and information.
-- **CONSIDER** that URIs cannot be permanent if the concepts or identifiers used cannot be permanent for business, technical, or security reasons.- 
-- **DO** keep your base URI simple and intuitive.
+- **DO** design URIs based on stable concepts, identifiers, and information. URIs cannot be permanent if the concepts or identifiers used cannot be permanent for business, technical, or security reasons. 
+- **DO** keep your base URIs simple and intuitive.
 - **DO** use lowercase for URIs.
 - **DO** use domains and subdomains to logically group or partition resources for localization, distribution, or to enforce various monitoring or security policies.
 - **DO** use forward-slash (`/`) in the path segment to indicate a hierarchical relationship between resources.
@@ -58,7 +55,7 @@ Queries usually involve filtering, sorting and projections. When providing query
 - **AVOID** ad hoc queries that use general-purpose query languages such as *SQL* or *XPath*.
 - **AVOID** `Range` requests for implementing queries.
 
-    <!-- TODO -->
+<!-- TODO -->
 
     ## PAGINATION
 

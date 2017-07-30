@@ -1,101 +1,18 @@
 ## Representations
 
-A *representation* (request/response) is concrete and real.
-
-    <!-- TODO -->
-    Concerns:
-    - What is good response design
-    - Enveloping response data
-        - Use Envelopes
-        - Don't use an envelope by default, and enveloping only in exceptional cases.
-
-    # Provide Helpful Responses
-
-    Building a solid foundation to ensure the scalability and longevity of your API is crucial, but just as crucial is ensuring that developers can understand your API, and trust it to respond with the appropriate header codes and error messages.
-    In this week's API best practices, we're going to cover how to ensure that developers understand exactly what happened with their API call by using the appropriate HTTP Status Codes (something that is often times missed), as well as by returning descriptive error messages on failure.
+A *representation* (request/response) is concrete and real. Here we will offer guidelines as to what makes a good response design. To ensure scalability and longevity of the API, along with providing helpful responses that developers can understand and trust, we will cover what HTTP headers are appropriate in a response, which HTTP status codes to return, as well as how to include descriptive error representations on failures.
 
 ### HTTP Headers
 
-    Prefer Hyphenated-Pascal-Case for HTTP header Fields, as this is for consistency in your documentation (most other headers follow this convention). Avoid camelCase (without hyphens). Exceptions are common abbreviations like "ID."
-
 Headers ensure visibility, discoverability, routing by proxies, caching, optimistic concurrency, and correct operation of HTTP as an application protocol.
 
-#### Using Headers to Annotate Representations
+Use the following headers to annotate representations that contains a message body.
 
-    Use Standardized Headers
+#### Content-Type
 
-    # Use the Content-Type Header
-
-    In order to truly keep your API flexible and extendable for the future, it's also important to build it not just for today's leading formats, but also for whatever the future may hold.
-
-    Until just recently XML was the format of choice for web services, but then JSON came along.
-
-    Everyday new formats are being created and used, most notably YAML.
-
-    For this reason it is important that your API does not constrain itself to only one format.
-    It's perfectly acceptable to only have one format available if that meets your developer's needs (for example, only taking advantage of JSON), but that doesn't mean you shouldn't be planning ahead.
-
-    By taking advantage of the Content-Type header you can see what format of data your users are sending you, and in return send back that same format.
-
-    For example, if a user sends a request using text/xml, you could send back an XML response while another user could send an application/json request and you could reply with JSON.
-    By building this functionality into your API to begin with, as new formats become available, or as you add high profile clients with special needs, you are now able to adapt to these new format requests without impacting other users, or other aspects of your API.
-
-    This also means that you can stay on top of the technology curve without worrying about having to migrate users from one format to another, or from one API to another.
-    Ideally, your API's architecture should be flexible enough to receive content in one format (as described by the Content-Type header) such as XML and return the response in another format based on the Accept header, such as JSON.
-
-    Doing so is NOT a good practice, but it does reinforce just how decoupled your API should be from the technology stack, as well as how important incorporating view libraries to handle the output are.
-
-    In other words, your API's architecture should be versatile enough to do this, but it is probably best just to rely on the content-type instead of mixing data formats based on both the content-type and accept headers.
-
-    ### MAY: Use Content-Location Header
-
-    The Content-Location header is optional and can be used in successful write operations (PUT, POST or PATCH) or read operations (GET, HEAD) to guide caching and signal a receiver the actual location of the resource transmitted in the response body. This allows clients to identify the resource and to update their local copy when receiving a response with this header.
-
-    The Content-Location header can be used to support the following use cases:
-
-    For reading operations GET and HEAD, a different location than the requested URI can be used to indicate that the returned resource is subject to content negotiations, and that the value provides a more specific identifier of the resource.
-    For writing operations PUT and PATCH, an identical location to the requested URI, can be used to explicitly indicate that the returned resource is the current representation of the newly created or updated resource.
-    For writing operations POST and DELETE, a content location can be used to indicate that the body contains a status report resource in response to the requested action, which is available at provided location.
-    Note: When using the Content-Location header, the Content-Type header has to be set as well. For example:
-
-    GET /products/123/images HTTP/1.1
-
-    HTTP/1.1 200 OK
-    Content-Type: image/png
-    Content-Location: /products/123/images?format=raw
-
-Use the following headers to annotate representations that contain message bodies:
+Even though it is perfectly acceptable to use only a single format, in order to keep the API flexible and extendable, it is also important to build for the future. Until recently XML was the format of choice, but then along came JSON.
 
 - **DO** use `Content-Type`, to describe the type of representation, including a `charset` parameter or other parameters defined for that media type.
-- **DO** use `Content-Length`, to specify the size in bytes of the body. Or specify `Transfer-Encoding: chunked`. Some proxies reject `POST` and `PUT` requests that contain neither of these headers.
-- **DO** use `Content-Language`, two-letter RFC 5646 language tag, optionally followed by a hyphen (-) and any two-letter country code.
-- **DO** use `Content-MD5`, when sending or receiving large representations over potentially unreliable networks to verify the integrity of the message.
-- **DO** set the appropriate expiration caching headers. See [Caching](/caching).
-- **DO NOT** use `Content-MD5` as a measure of security.
-- **DO** use `Content-Encoding`. Clients can indicate their preference for `Content-Encoding` using the `Accept-Encoding` header, however, there is no standard way for the client to learn whether a server can process representations compressed in a given encoding.
-- **DO NOT** use `Content-Encoding` in HTTP requests, unless you know out of band that the target server supports a particular encoding method.
-- **CONSIDER** using `Last-Modified`, this header applies for responses only.
-
-<!-- TODO -->
-
-    # Common Headers
-
-    This section describes a handful of headers, which we found raised the most questions in our daily usage, or which are useful in particular circumstances but not widely known.
-
-    ### MUST: Use Content Headers Correctly
-
-    Content or entity headers are headers with a Content- prefix. They describe the content of the body of the message and they can be used in both, HTTP requests and responses. Commonly used content headers include but are not limited to:
-
-    Content-Disposition can indicate that the representation is supposed to be saved as a file, and the proposed file name.
-    Content-Encoding indicates compression or encryption algorithms applied to the content.
-    Content-Length indicates the length of the content (in bytes).
-    Content-Language indicates that the body is meant for people literate in some human language(s).
-    Content-Location indicates where the body can be found otherwise (see below for more details).
-    Content-Range is used in responses to range requests to indicate which part of the requested resource representation is delivered with the body.
-    Content-Type indicates the media type of the body content.
-
-#### Avoiding Character Encoding Mismatch
-
 - **DO** include the `charset` parameter, if the media type supports it, with a value of the character encoding used to convert characters into bytes.
 - **DO** use the specified encoding, when you receive a representation with a media type that supports the `charset`parameter.
 - **DO** let your parser interpret the character set, if you receive an XML representation with a missing `charset` parameter.
@@ -103,9 +20,27 @@ Use the following headers to annotate representations that contain message bodie
 
 > Note that Text and XML media types let you specify the character encoding. The JSON media type `application/json` does not specify a `charset` parameter, but uses `UTF-8` as the default encoding.
 
-<!-- TODO -->
+#### Content-Length
 
-    ### MAY: Consider using ETag together with If-(None-)Match header
+- **DO** use `Content-Length`, to specify the size in bytes of the body. Or specify `Transfer-Encoding: chunked`. Some proxies reject `POST` and `PUT` requests that contain neither of these headers.
+
+#### Content-Language
+
+- **DO** use `Content-Language`, two-letter RFC 5646 language tag, optionally followed by a hyphen (-) and any two-letter country code.
+
+#### Content-Encoding
+
+- **DO** use `Content-Encoding`. Clients can indicate their preference for `Content-Encoding` using the `Accept-Encoding` header, however, there is no standard way for the client to learn whether a server can process representations compressed in a given encoding.
+- **DO NOT** use `Content-Encoding` in HTTP requests, unless you know out of band that the target server supports a particular encoding method.
+
+#### Other Common Headers
+
+- **DO** set the appropriate expiration caching headers. See [Caching](/caching).
+- **DO** use `Content-MD5`, when sending or receiving large representations over potentially unreliable networks to verify the integrity of the message.
+- **DO NOT** use `Content-MD5` as any measure of security.
+- **CONSIDER** using `ETag` and/or `Last-Modified` for caching and/or concurrency, the latter applies for responses only.
+
+<!-- TODO -->
 
     ### SHOULD:: Use Location Header instead of Content-Location Header
 
@@ -119,12 +54,20 @@ Use the following headers to annotate representations that contain message bodie
 
     Supporting APIs may return the Preference-Applied header also defined in RFC7240 to indicate whether the preference was applied.
 
-#### Custom HTTP Headers
+### Custom HTTP Headers
+
+    As a general rule, proprietary HTTP headers should be avoided.
+
+    Still they can be useful in cases where context needs to be passed through multiple services in an end-to-end fashion
+
+    As such, a valid use-case for a proprietary header is providing context information, which is not a part of the actual API, but is needed by subsequent communication.
 
 Depending on what clients and servers use custom headers for, custom headers may impede interoperability.
 
+    This section shares definitions of proprietary headers that should be named consistently because they address overarching service-related concerns. Whether services support these concerns or not is optional; therefore, the OpenAPI API specification is the right place to make this explicitly visible. Use the parameter definitions of the resource HTTP methods.
+
 - **DO** use custom headers for informational purposes.
-- **CONSIDER** using the convention `X-{company-name}-{header-name}`, when introducing custom headers, as there is no established convention for naming custom headers.
+- **CONSIDER** using the convention `X-{company-name}-{header-name}`, when introducing custom headers, as there is no established convention for naming custom headers. Avoid camelCase (without hyphens). Exceptions are common abbreviations like `ID`. _**the usage of X- headers is deprecated (RFC-6648)**_
 - **CONSIDER** including the information in a custom HTTP header in the body or the URI, if the information is important for the correct interpretation of the request
 - **DO NOT** implement clients and servers such that they fail when they do not find expected custom headers.
 - **DO NOT** use custom HTTP headers to change behavior of HTTP methods, and limit any behavior-changing headers to `POST`.
@@ -132,55 +75,32 @@ Depending on what clients and servers use custom headers for, custom headers may
 
 <!-- TODO -->
 
-        # Proprietary Headers
-
-    This section shares definitions of proprietary headers that should be named consistently because they address overarching service-related concerns. Whether services support these concerns or not is optional; therefore, the OpenAPI API specification is the right place to make this explicitly visible. Use the parameter definitions of the resource HTTP methods.
-
-    ### MUST: Use Only the Specified Proprietary Zalando Headers
-
-    As a general rule, proprietary HTTP headers should be avoided. Still they can be useful in cases where context needs to be passed through multiple services in an end-to-end fashion. As such, a valid use-case for a proprietary header is providing context information, which is not a part of the actual API, but is needed by subsequent communication.
-
-    From a conceptual point of view, the semantics and intent of an operation should always be expressed by URLs path and query parameters, the method, and the content. Headers are more often used to implement functions close to the protocol considerations, such as flow control, content negotiation, and authentication. Thus, headers are reserved for general context information (RFC-7231).
-
-    X- headers were initially reserved for unstandardized parameters, but the usage of X- headers is deprecated (RFC-6648). This complicates the contract definition between consumer and producer of an API following these guidelines, since there is no aligned way of using those headers. Because of this, the guidelines restrict which X- headers can be used and how they are used.
-
-    The Internet Engineering Task Force's states in RFC-6648 that company specific header' names should incorporate the organization's name. We aim for backward compatibility, and therefore keep the X- prefix.
+    ### Use Only the Specified Proprietary Headers
 
     The following proprietary headers have been specified by this guideline for usage so far. Remember that HTTP header field names are not case-sensitive.
 
-    Header field name	Type	Description	Header field value example
-    X-Flow-ID	String	The flow id of the request, which is written into the logs and passed to called services. Helpful for operational troubleshooting and log analysis. It supports traceability of requests and identifying request flows through system of many services. It should be a string consisting of just printable ASCII characters (i.e. without whitespace). Verify in a received request that it fits to a specific format, has a sensible maximum length and possibly throw out or escape characters/bytes which could crash your log parsing (line breaks, tabs, spaces, NULL). If a legacy subsystem can only work with flow IDs of a specific format, it needs to define this in its API, or make its own ones.	GKY7oDhpSiKY_gAAAABZ_A
-    X-UID	String	Generic user id of OpenId account that owns the passed (OAuth2) access token. E.g. additionally provided by OpenIG proxy after access token validation -- may save additional token validation round trips.	w435-dker-jdh357
-    X-Tenant-ID	String	The tenant id for future platform multitenancy support. Should not be used unless new platform multitenancy is truly supported. But should be used by New Platform Prototyping services. Must be validated for external retailer, supplier, etc. tenant users via OAuth2; details in clarification. Currently only used by New Platform Prototyping services.	9f8b3ca3-4be5-436c-a847-9cd55460c495
-    X-Sales-Channel	String	Sales channels are owned by retailers and represent a specific consumer segment being addressed with a specific product assortment that is offered via CFA retailer catalogs to consumers (see platform glossary [internal link])	101
-    X-Frontend-Type	String	Consumer facing applications (CFAs) provide business experience to their customers via different frontend application types, for instance, mobile app or browser. Info should be passed-through as generic aspect -- there are diverse concerns, e.g. pushing mobiles with specific coupons, that make use of it. Current range is mobile-app, browser, facebook-app, chat-app	mobile-app
-    X-Device-Type	String	There are also use cases for steering customer experience (incl. features and content) depending on device type. Via this header info should be passed-through as generic aspect. Current range is smartphone, tablet, desktop, other	tablet
-    X-Device-OS	String	On top of device type above, we even want to differ between device platform, e.g. smartphone Android vs. iOS. Via this header info should be passed-through as generic aspect. Current range is iOS, Android, Windows, Linux, MacOS	Android
-    X-App-Domain	Integer	The app domain (i.e. shop channel context) of the request. Note, app-domain is a legacy concept that will be replaced in new platform by combinations of main CFA concerns like retailer, sales channel, country	16
-    Exception: The only exception to this guideline are the conventional hop-by-hop X-RateLimit- headers which can be used as defined in HTTP/Must-Use-429-with-Headers-For-Rate-Limits.
+    Header	        Description
+    X-Flow-ID	    The flow id of the request, which is written into the logs and passed to called services. 
+    X-UID	        Generic user id that owns the passed (OAuth2) access token. May save additional token validation round trips
+    X-Sales-Channel
+    X-Device-Type
+    X-Device-OS
+    X-App-Domain
+    
+    ### Propagate Proprietary Headers
 
-    ### MUST: Propagate Proprietary Headers
-
-    All Zalando's proprietary headers are end-to-end headers.
-
-    All headers specified above must be propagated to the services down the call chain. The header names and values must remain unchanged.
-
-    For example, the values of the custom headers like X-Device-Type can affect the results of queries by using device type information to influence recommendation results. Besides, the values of the custom headers can influence the results of the queries (e.g. the device type information influences the recommendation results).
-
-    Sometimes the value of a proprietary header will be used as part of the entity in a subsequent request. In such cases, the proprietary headers must still be propagated as headers with the subsequent request, despite the duplication of information.
-
-    Footnote:
+    All proprietary headers are end-to-end headers, and as such must be propagated to the upstream servers. The header names and values must remain unchanged.
 
     HTTP/1.1 standard (RFC-7230) defines two types of headers: end-to-end and hop-by-hop headers. End-to-end headers must be transmitted to the ultimate recipient of a request or response. Hop-by-hop headers, on the contrary, are meaningful for a single connection only.
 
-#### Treating HTTP Headers in Clients
+### HTTP Headers in Clients
 
 - **DO** return `400 Bad Request` on servers, when you receive a representation with no `Content-Type`, avoid guessing the type of the representation.
 - **DO NOT** check for the presence of the `Content-Length` header without first confirming the absence of `Transfer-Encoding: chunked`
 - **DO** let your network library deal with uncompressing compressed representations (`Content-Encoding`)
 - **DO** read and store the value of `Content-Language`
 
-### Representation Format and a Media Type
+### Format and a Media Type
 
 HTTP's message format is designed to allow different media types and formats for requests and responses.
 
@@ -199,7 +119,11 @@ If you choose to create new media types of your own, consider:
 
 > Note that although custom media types improve protocol-level visibility, existing protocol-level tools for monitoring, filtering, or routing HTTP traffic pay little or no attention to media types. Hence, using custom media types only for the sake of protocol-level visibility is not necessary.
 
-#### JSON Representations
+### JSON Representations
+
+    - Enveloping response data
+        - Use Envelopes
+        - Don't use an envelope by default, and enveloping only in exceptional cases.
 
     Use JSON (when possible): JSON, or the JavaScript Object Notation format allows for the quick serialization and deserialization of objects. JSON provides a compact format for accessing data, minimalizing the data transfer required while also offering broader language support than XML. These advantages have made it the format of choice for many developers and the leading format for use within REST APIs. Again, you'll want to choose the format that is best for your clients, but in the event that you're encoding objects as XML, I would strongly suggest also offering JSON as an alternative as the serialization is fairly quick and painless. Keep in mind that one of the advantages to REST is that it is not limited to a single content type, and can return multiple formats if desired.
 
@@ -483,7 +407,7 @@ If you choose to create new media types of your own, consider:
     }
 
 
-#### Use Portable Data Formats in Representations
+### Use Portable Data Formats in Representations
 
 - **DO** use decimal, float and double data types defined in the W3C XML Schema for formatting numbers including currency.
 - **DO** use ISO 3166 codes for countries and dependent territories.
@@ -537,20 +461,20 @@ If you choose to create new media types of your own, consider:
     ### SHOULD:: Use a Decimal for Money/Amount Objects
 
 
-#### _**XML Representations**_
+### _**XML Representations**_
 
 *TBD*
 
 *Suggested topics:*<br/>
 *Atom resources, AtomPub Service, category documents, AtomPub for feed and entry resources, media resources*
 
-#### Binary Data in Representations
+### Binary Data in Representations
 
 - **DO** use multipart media types such as `multipart/mixed`, `multipart/related`, or `multipart/alternative`.
 - **CONSIDER** providing a link to fetch the binary data as a separate resource as an alternative. Creating and parsing multipart messages in some programming languages may be cumbersome and complex.
 - **AVOID** encoding binary data within textual formats using Base64 encoding.
 
-#### Error Representations
+### Error Representations
 
     The Box API communicates errors through standard HTTP status codes with details supplied in JSON objects. Generally the following pattern applies:
 
@@ -913,7 +837,6 @@ If you choose to create new media types of your own, consider:
     X-RateLimit-Remaining: The number of requests allowed in the current window.
     X-RateLimit-Reset: The relative time in seconds when the rate limit window will be reset.
     The reason to allow both approaches is that APIs can have different needs. Retry-After is often sufficient for general load handling and request throttling scenarios and notably, does not strictly require the concept of a calling entity such as a tenant or named account. In turn this allows resource owners to minimise the amount of state they have to carry with respect to client requests. The 'X-RateLimit' headers are suitable for scenarios where clients are associated with pre-existing account or tenancy structures. 'X-RateLimit' headers are generally returned on every request and not just on a 429, which implies the service implementing the API is carrying sufficient state to track the number of requests made within a given window for each named entity.
-
 
 Always return meaningful HTTP Status Codes.
 

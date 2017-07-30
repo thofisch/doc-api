@@ -20,6 +20,7 @@
 - <https://pages.apigee.com/rs/apigee/images/api-design-ebook-2012-03.pdf>
 - <https://www.thoughtworks.com/insights/blog/rest-api-design-resource-modeling>
 - <http://www.restapitutorial.com>
+- <https://www.subbu.org/blog/2008/10/location-vs-content-location>
 
 ### Citations
 ### Bibliography
