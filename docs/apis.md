@@ -1,7 +1,5 @@
 # Application Programming Interfaces
 
-In these guidelines when referring to an API, we are referring to a web API, more specifically one delivered over HTTP.
-
 An API specifies how software should interact. How a client can use a public API exposed by a server. Particularly, what URIs are available, what HTTP methods may be used, what query string parameters it accepts, what data can be sent, and what responses to expect.
 
 Web APIs can typically be broken into two broad categories: *RPC* and *REST*.
@@ -44,10 +42,15 @@ In these guidelines we will offer advise on how to achieve this, when implementi
 - How to document your API
 - **_And more..._**
 
-Before jumping straight into designing an API, it can be helpful to think about:
+Because REST is an architectural style and not a strict standard, it allows for a lot of flexibly. So before jumping straight into designing an API, it can be helpful to think about:
 
-- The target audience of the API (customers, third-party services, or other developers looking to take advantage of your services for their own customers)?
-- The cases for integrating with the API?
-- Technologies used to integrate with the API?
-- Which products/services to expose? 
-- Other services the API should/might interact with?
+- target audience (customers, third-party services, or other developers looking to take advantage of your services for their own customers).
+- ease of life for the consuming developers
+- use cases
+- technologies used
+- products/services to expose
+- other services to interact with
+
+As long as the API only has one consumer, one could argue that it's entire job is to service that consumer. 
+
+**Make it RESTful, but be pragmatic!** Aiming at a level above 2 (according to Richardson's Maturity Model) may simple be impractical.

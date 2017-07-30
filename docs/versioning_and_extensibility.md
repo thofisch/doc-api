@@ -89,6 +89,13 @@ When changing data formats for query parameters, continue to honor existing form
 
 Treat query parameters in URIs as optional except when need for concurrency and security.
 
+- **DO** use rewrite rules on the server to shield clients from implementation-level changes.
+- **DO** use `301 Moved Permanently` with the new URI in the `Location` header, when URIs must change to honor old URIs.
+- **DO** monitor request traffic for redirection.
+- **DO** maintain redirection services until you are confident the majority of clients have updated their stored links to point to the new URI.
+- **DO** communicate an appropriate end-of-life policy for old URIs, when you cannot monitor the old URIs.
+- **DO** convert `301 Moved Permanently` to `410 Gone` or `404 Not Found` once the traffic has fallen of or the preset time interval has passed.
+
 ### How to Maintain Compatibility of XML and JSON Representations
 
 When making changes to JSON preserve the hierarchical structure so that clients can continue to follow the same structure to extract data.

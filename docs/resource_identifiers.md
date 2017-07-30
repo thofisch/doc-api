@@ -1,41 +1,38 @@
 ## Resource Identifiers (URIs)
 
-    We all spent a lot of time reading about API design. The main issue we commonly ran into was deciding on a URL when it’s not one of your standard CRUDS (create, retrieve, update, delete and search) operation. What I mean by that, is that the REST basics are easy to follow when you’re exposing these standard operations on a resource. Your URLs are nouns, and you use the standard HTTP verbs to show the action you’re performing on this noun. For example, say we have a resource called foo.
-    URIs should be treated as opaque resource identifiers.
+An important aspect of API design is to think about how to design unique resource identifiers, and as such, URIs should be treated as opaque resource identifiers.
 
-This means that clients should not be concerned with how a server designs its URIs, nor should they try to pick apart URIs in order to work out information from them. Instead URIs should be discovered through links (and the submission of forms).
+This means that clients should not be concerned with the design of URIs, nor should clients try to pick apart URIs in order to gather information from them. Instead URIs should be discovered through links (and the submission of forms).
 
-For instance, clients must not use the fact that a URI ends with the `.xml` extension to infer that it resolves to an XML representation, but must rely on the `Content-Type` header of the response. 
+> For instance, clients must not use the fact that a URI ends with `.xml` to infer that it resolves to an XML representation, instead it must rely on the `Content-Type` header of the response. 
 
-The opacity of URIs are important and help reduce coupling between servers and clients. This has nothing to do with readability or hackability, both of which are extremely important for human users.
+The opacity of URIs helps reduce coupling between servers and clients. This has nothing to do with readability or hackability, both of which may be extremely important aspects for developers consuming the API, where:
 
-- *Readable URIs* help users understand something about the resource that the URI is pointing to. 
-- *Hackable URIs* (manipulated by altering/removing portions of the path or query) enable human users to locate other resources that they might be interested in.
+- *readable URIs* help developers understand something about the resource.
+- *hackable URIs* are manipulated by altering/removing portions of the path or query, and can help developers locate other resources.
 
 ### Designing URIs
 
+    The base URI is the most important design affordance of your API. A simple and intuitive base URI design makes using your API easy. Affordance is a design property that communicates how something should be used without requiring documentation. 
+
+When designing URIs:
+
 - **DO** design URIs to last a long time - [Cool URIs don't change](<http://www.w3.org/Provider/Style/URI>).
 - **DO** design URIs based on stable concepts, identifiers, and information.
+- **CONSIDER** that URIs cannot be permanent if the concepts or identifiers used cannot be permanent for business, technical, or security reasons.- 
+- **DO** keep your base URI simple and intuitive.
+- **DO** use lowercase for URIs.
 - **DO** use domains and subdomains to logically group or partition resources for localization, distribution, or to enforce various monitoring or security policies.
 - **DO** use forward-slash (`/`) in the path segment to indicate a hierarchical relationship between resources.
-- **DO** use lowercase for URIs.
-- **DO** use the hyphen (`-`) and underscore (`_`) characters to improve the readability of long path segments. Pick one or the other for consistency.
+- **DO** use the hyphen (`-`) or (`_`) characters to improve the readability of long path segments. Pick one or the other for consistency.
 - **DO** use ampersand (`&`) to separate query parameters.
 - **DO** use the URI only to determine which resource should process a request.
-- **DO** provide URIs at runtime using links in the body of representations or headers, whenever possible.
-- **DO** use rewrite rules on the server to shield clients from implementation-level changes.
-- **DO** use `301 Moved Permanently` with the new URI in the `Location` header, when URIs must change to honor old URIs.
-- **DO** monitor request traffic for redirection.
-- **DO** maintain redirection services until you are confident the majority of clients have updated their stored links to point to the new URI.
-- **DO** communicate an appropriate end-of-life policy for old URIs, when you cannot monitor the old URIs.
-- **DO** convert `301 Moved Permanently` to `410 Gone` or `404 Not Found` once the traffic has fallen of or the preset time interval has passed.
-- **CONSIDER** using `/api` as the first path segment, when the API should also support non-public APIs. E.g. for specific operational support functions. Otherwise, consider forgoing the `/api` prefix.
-- **CONSIDER** that URIs cannot be permanent if the concepts or identifiers used cannot be permanent for business, technical, or security reasons.
+- **CONSIDER** provide URIs at runtime using links in the body of representations or headers, whenever appropriate.
+- **CONSIDER** using `/api` as the first path segment, when the API also supports non-public APIs, e.g., for specific operational support functions. Otherwise, consider forgoing the `/api` prefix.
 - **CONSIDER** using comma (`,`) and semi-colon (`;`) to indicate nonhierarchical elements in the path segment. The semi-colon (`;`) convention is used to identify matrix parameters. *As not all libraries recognize these as separators and may require custom coding to extract these parameters*.
-- **CONSIDER** using "semi-opaque" URI templates, if it is impractical to supply the client with a list of all the possible URIs in the representation (e.g., ad hoc searching).
-- **CONSIDER** loosen/ignoring opacity to protect against request tampering using digitally signed URIs or encrypt parts of the URI to shield sensitive information. See [Security](/security).
+- **CONSIDER** using URI templates, if it is impractical to supply all the possible URIs in the representation (e.g., ad hoc searching).
+- **CONSIDER** disregarding opacity to protect against tampering using digitally signed URIs, or to protect sensitive information by encrypting parts of the URI.
 - **AVOID** including file extensions, instead rely on the media types.
-- **AVOID** using uppercase characters in URIs.
 - **AVOID** using trailing forward slash, as some frameworks may incorrectly remove or add such slashes during URI normalization.
 - **AVOID** expecting clients to construct URIs.
 - **AVOID** unnecessary query strings in URIs.
@@ -43,7 +40,7 @@ The opacity of URIs are important and help reduce coupling between servers and c
 - **DO NOT** use an URI as a generic gateway, by tunneling repeated state changes over `POST` using the same URI.
 - **DO NOT** use custom headers to overload URIs.
 
-### URIs For Queries
+### URIs for Queries
 
 Queries usually involve filtering, sorting and projections. When providing query support for these and other actions:
 
@@ -51,44 +48,17 @@ Queries usually involve filtering, sorting and projections. When providing query
 - **DO** use query parameters to let clients specify filter conditions, sort fields, and projections.
 - **DO** treat query parameters as optional with sensible defaults.
 - **DO** document each parameter.
-- **CONSIDER** using `q` as the default query parameter (e.g. used by browser tab completion).
+- **CONSIDER** using `q` (e.g. used by browser tab completion) as the default query parameter.
 - **CONSIDER** using a generic `sort` parameter to describe sorting rules. To accommodate more complex sorting requirements, let the `sort` parameter take a lift of comma-separated fields, each with a possible unary negative to imply descending sort order. Like: `GET /tickets?sort=-priority,created_at`
 - **CONSIDER** using a `fields` query parameter for projections, like `http://www.example.org/customers?fields=name,gender,birthday`. Depending on the use case and payload size, it can reduce network bandwidth and reduce filtering on clients.
 - **CONSIDER** using a `view` query parameter for predefined projections, like `http://www.example.org/customers?view=summary`
 - **CONSIDER** supporting aliases for commonly used queries (it may also improve cacheability). For instance, `GET /tickets/recently_closed`
 - **CONSIDER** using `embed` to allow for resource expansion. Embedding related resources can help reduce the number of requests.
+- **COSIDER** using a `format` query parameter, if standard content negotiation is not possible.
 - **AVOID** ad hoc queries that use general-purpose query languages such as *SQL* or *XPath*.
 - **AVOID** `Range` requests for implementing queries.
 
     <!-- TODO -->
-
-    ## Tips for search
-
-    While a simple search could be modeled as a resourceful API (for example, dogs/?q=red), a more complex search across multiple resources requires a different design.
-
-    This will sound familiar if you've read the topic about using verbs not nouns when results don't return a resource from the database - rather the result is some action or calculation.
-
-    If you want to do a global search across resources, we suggest you follow the Google model:
-
-    Global search
-
-    /search?q=fluffy+fur
-
-    Here, search is the verb; ?q represents the query.
-
-    Scoped search
-
-    To add scope to your search, you can prepend with the scope of the search. For example, search in dogs owned by resource ID 5678
-
-    /owners/5678/dogs?q=fluffy+fur
-
-    Notice that we've dropped the explicit search in the URL and rely on the parameter 'q' to indicate the scoped query. (Big thanks to the contributors on the API Craft Google group for helping refine this approach.)
-
-    Formatted results
-
-    For search or for any of the action oriented (non-resource) responses, you can prepend with the format as follows:
-
-    /search.xml?q=fluffy+fur
 
     ## PAGINATION
 
@@ -98,39 +68,7 @@ Queries usually involve filtering, sorting and projections. When providing query
 
     ### SHOULD:: Support Filtering of Resource Fields
 
-    Unfiltered:
-
-    GET http://api.example.org/resources/123 HTTP/1.1
-
-    HTTP/1.1 200 OK
-    Content-Type: application/json
-
-    {
-        "id": "cddd5e44-dae0-11e5-8c01-63ed66ab2da5",
-        "name": "John Doe",
-        "address": "1600 Pennsylvania Avenue Northwest, Washington, DC, United States",
-        "birthday": "1984-09-13",
-        "partner": {
-            "id": "1fb43648-dae1-11e5-aa01-1fbc3abb1cd0",
-            "name": "Jane Doe",
-            "address": "1600 Pennsylvania Avenue Northwest, Washington, DC, United States",
-            "birthday": "1988-04-07"
-        }
-    }
-
-    Filtered:
-
     GET http://api.example.org/resources/123?fields=(name,partner(name)) HTTP/1.1
-
-    HTTP/1.1 200 OK
-    Content-Type: application/json
-
-    {
-        "name": "John Doe",
-        "partner": {
-            "name": "Jane Doe"
-        }
-    }
 
     As illustrated by this example, field filtering should be done via request parameter "fields" with value range defined by the following BNF grammar.
 

@@ -1,5 +1,25 @@
 ## Spec-Driven Development 
 
+    The overall point of view on API design is to approach API design from the 'outside-in' perspective.
+    
+    The orientation for APIs is to think about design choices from the application developer's point of view. 
+    
+    The goal is to make the developers as successful as possible.
+    
+    The primary design principle when crafting your API should be to maximize developer productivity and success. This is what we call pragmatic REST.
+    
+    You have to get the design right, because design communicates how something will be used.
+    
+    The question becomes - what is the design with optimal benefit for the app developer?
+    
+    The developer point of view is the guiding principle for all the specific tips and best practices we've compiled
+    
+    We call our point of view in API design "pragmatic REST", because it places the success of the developer over and above any other design principle. The developer is the customer for the Web API.
+    
+    The success of an API design is measured by how quickly developers can get up to speed and start enjoying success using your API.
+
+### Feedback
+
 One of the quickest ways to get feedback on your API is to define it using a specification language. An API specification language allows for building APIs in a consistent manner, utilizing pattern design and code reuse to help ensure that the APIs remains uniform across the full interface, keeping resources and methods standardized.
 
 - **DO** define Your API in a flexible, but standard specification language (e.g. RAML, Swagger, JSON-API, etc.).

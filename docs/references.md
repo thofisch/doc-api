@@ -18,6 +18,8 @@
 - <http://zalando.github.io/restful-api-guidelines>
 - <https://www.narwhl.com/>
 - <https://pages.apigee.com/rs/apigee/images/api-design-ebook-2012-03.pdf>
+- <https://www.thoughtworks.com/insights/blog/rest-api-design-resource-modeling>
+- <http://www.restapitutorial.com>
 
 ### Citations
 ### Bibliography
