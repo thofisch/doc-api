@@ -285,3 +285,69 @@ Avoid introducing new media types for each version since it leads to media type 
     Media types such as application/xml and application/json are good enough for XML and JSON message processing in code. […] URI based approaches are guaranteed to work across the stack. Ignoring real-world interoperability for the sake of "architectual purity" or "RESTful contracts" may eventually back fire.
 
     Via the post is the solution presented by Subbu found the right balance between architectural purity and interoperable real-world solutions? Be sure to visit the original post to weigh in your opinion.
+
+    ## Tips for versioning
+
+    Versioning is one of the most important considerations when designing your Web API.
+
+    Never release an API without a version and make the version mandatory.
+
+    Let's see how three top API providers handle versioning.
+
+    Twilio /2010-04-01/Accounts/
+
+    salesforce.com /services/data/v20.0/sobjects/Account
+
+    Facebook ?v=1.0
+
+    Twilio uses a timestamp in the URL (note the European format).
+
+    At compilation time, the developer includes the timestamp of the application when the code was compiled. That timestamp goes in all the HTTP requests.
+
+    When a request arrives, Twilio does a look up. Based on the timestamp they identify the API that was valid when this code was created and route accordingly.
+
+    It's a very clever and interesting approach, although we think it is a bit complex. For example, it can be confusing to understand whether the timestamp is the compilation time or the timestamp when the API was released.
+
+    Salesforce.com uses v20.0, placed somewhere in the middle of the URL.
+
+    We like the use of the v. notation. However, we don't like using the .0 because it implies that the interface might be changing more frequently than it should. The logic behind an interface can change rapidly but the interface itself shouldn't change frequently.
+
+    Facebook also uses the v. notation but makes the version an optional parameter.
+
+    This is problematic because as soon as Facebook forced the API up to the next version, all the apps that didn't include the version number broke and had to be pulled back and version number added.
+
+    ## How to think about version numbers in a pragmatic way with REST?
+
+    Never release an API without a version. Make the version mandatory.
+
+    Specify the version with a 'v' prefix. Move it all the way to the left in the URL so that it has the highest scope (e.g. /v1/dogs).
+
+    Use a simple ordinal number. Don't use the dot notation like v1.2 because it implies a granularity of versioning that doesn't work well with APIs--it's an interface not an implementation. Stick with v1, v2, and so on.
+
+    How many versions should you maintain? Maintain at least one version back.
+
+    For how long should you maintain a version? Give developers at least one cycle to react before obsoleting a version.
+
+    Sometimes that's 6 months; sometimes it's 2 years. It depends on your developers' development platform, application type, and application users. For example, mobile apps take longer to rev' than Web apps.
+
+    Should version and format be in URLs or headers?
+
+    There is a strong school of thought about putting format and version in the header.
+
+    Sometimes people are forced to put the version in the header because they have multiple inter-dependent APIs. That is often a symptom of a bigger problem, namely, they are usually exposing their internal mess instead of creating one, usable API facade on top.
+
+    That's not to say that putting the version in the header is a symptom of a problematic API design. It's not!
+
+    In fact, using headers is more correct for many reasons: it leverages existing HTTP standards, it's intellectually consistent with Fielding's vision, it solves some hard realworld problems related to inter-dependent APIs, and more.
+
+    However, we think the reason most of the popular APIs do not use it is because it's less fun to hack in a browser.
+
+    Simple rules we follow:
+
+    If it changes the logic you write to handle the response, put it in the URL so you can see it easily.
+
+    If it doesn't change the logic for each response, like OAuth information, put it in the header.
+
+    The code we would write to handle the responses would be very different.
+
+    There's no question the header is more correct and it is still a very strong API design.

@@ -17,6 +17,75 @@ Care should be taking when identifying resources and finding the right resource 
 - **DO NOT** bluntly map domain entities into resources, as this may lead to resources that are inefficient and inconvenient to use and also leak irrelevant implementation details out to your public API.
 - **DO NOT** limit yourself to identifying resources based on domain nouns alone, you are likely to find that the fixed set of methods in HTTP is quite a limitation. *Using a root-level "Me" endpoint is perfectly valid.*
 
+<!-- TODO -->
+
+    ## Nouns are good; verbs are bad
+
+    The number one principle in pragmatic RESTful design is: keep simple things simple.
+
+    Keep your base URL simple and intuitive
+
+    The base URL is the most important design affordance of your API. A simple and intuitive base URL design makes using your API easy.
+
+    Affordance is a design property that communicates how something should be used without requiring documentation. A door handle's design should communicate whether you pull or push. Here's an example of a conflict between design affordance and documentation - not an intuitive interface!
+
+    A key litmus test we use for Web API design is that there should be only 2 base URLs per resource. Let's model an API around a simple object or resource, a dog, and create a Web API for it.
+
+    The first URL is for a collection; the second is for a specific element in the collection.
+
+    /dogs /dogs/1234
+
+    Boiling it down to this level will also force the verbs out of your base URLs.
+
+    Keep verbs out of your base URLs
+
+    Many Web APIs start by using a method-driven approach to URL design. These method-based URLs sometimes contain verbs - sometimes at the beginning, sometimes at the end.
+
+    For any resource that you model, like our dog, you can never consider one object in isolation. Rather, there are always related and interacting resources to account for - like owners, veterinarians, leashes, food, squirrels, and so on.
+
+    Think about the method calls required to address all the objects in the dogs' world. The URLs for our resource might end up looking something like this.
+
+    It's a slippery slope - soon you have a long list of URLs and no consistent pattern making it difficult for developers to learn how to use your API.
+
+    Use HTTP verbs to operate on the collections and elements.
+
+    For our dog resources, we have two base URLs that use nouns as labels, and we can operate on them with HTTP verbs. Our HTTP verbs are POST, GET, PUT, and DELETE. (We think of them as mapping to the acronym, CRUD (Create-Read-Update-Delete).)
+
+    With our two resources (/dogs and /dogs/1234) and the four HTTP verbs, we have a rich set of capability that's intuitive to the developer. Here is a chart that shows what we mean for our dogs.
+
+
+    The point is that developers probably don't need the chart to understand how the API behaves. They can experiment with and learn the API without the documentation.
+
+    In summary:
+
+    - Use two base URLs per resource.
+    - Keep verbs out of your base URLs.
+    - Use HTTP verbs to operate on the collections and elements.
+
+    ## Plural nouns and concrete names
+
+    Let's explore how to pick the nouns for your URLs.
+
+    Should you choose singular or plural nouns for your resource names? You'll see popular APIs use both. Let's look at a few examples:
+
+    Foursquare GroupOn Zappos
+
+    /checkins /deals /Product
+
+    Given that the first thing most people probably do with a RESTful API is a GET, we think it reads more easily and is more intuitive to use plural nouns. But above all, avoid a mixed model in which you use singular for some resources, plural for others. Being consistent allows developers to predict and guess the method calls as they learn to work with your API.
+
+    ## Concrete names are better than abstract
+
+    Achieving pure abstraction is sometimes a goal of API architects. However, that abstraction is not always meaningful for developers.
+
+    Take for example an API that accesses content in various forms - blogs, videos, news articles, and so on.
+
+    An API that models everything at the highest level of abstraction - as /items or /assets in our example - loses the opportunity to paint a tangible picture for developers to know what they can do with this API. It is more compelling and useful to see the resources listed as blogs, videos, and news articles.
+
+    The level of abstraction depends on your scenario. You also want to expose a manageable number of resources. Aim for concrete naming and to keep the number of resources between 12 and 24.
+
+    In summary, an intuitive API uses plural rather than singular nouns, and concrete rather than abstract names.
+
     ### SHOULD:: Define useful resources
 
     As a rule of thumb resources should be defined to cover 90% of all its client's use cases. A useful resource should contain as much information as necessary, but as little as possible. A great way to support the last 10% is to allow clients to specify their needs for more/less information by supporting filtering and embedding.
@@ -40,6 +109,35 @@ Care should be taking when identifying resources and finding the right resource 
     An API should contain the complete business processes containing all resources representing the process. This enables clients to understand the business process, foster a consistent design of the business process, allow for synergies from description and implementation perspective, and eliminates implicit invisible dependencies between APIs.
 
     In addition, it prevents services from being designed as thin wrappers around databases, which normally tends to shift business logic to the clients.
+
+    ## Simplify associations - sweep complexity under the '?'
+
+    In this section, we explore API design considerations when handling associations between resources and parameters like states and attributes.
+
+    ### Associations
+
+    Resources almost always have relationships to other resources. What's a simple way to express these relationships in a Web API?
+
+    Let's look again at the API we modeled in nouns are good, verbs are bad - the API that interacts with our dogs resource. Remember, we had two base URLs: /dogs and dogs/1234.
+
+    We're using HTTP verbs to operate on the resources and collections. Our dogs belong to owners. To get all the dogs belonging to a specific owner, or to create a new dog for that owner, do a GET or a POST:
+
+    GET /owners/5678/dogs
+
+    POST /owners/5678/dogs
+
+    Now, the relationships can be complex. Owners have relationships with veterinarians, who have relationships with dogs, who have relationships with food, and so on. It's not uncommon to see people string these together making a URL 5 or 6 levels deep. Remember that once you have the primary key for one level, you usually don't need to include the levels above because you've already got your specific object. In other words, you shouldn't need too many cases where a URL is deeper than what we have above /resource/identifier/resource.
+
+    ### Sweep complexity behind the '?'
+
+    Most APIs have intricacies beyond the base level of a resource. Complexities can include many states that can be updated, changed, queried, as well as the attributes associated with a resource.
+
+    Make it simple for developers to use the base URL by putting optional states and attributes behind the HTTP question mark. To get all red dogs running in the park:
+
+    GET /dogs?color=red&state=running&location=park
+
+    In summary, keep your API intuitive by simplifying the associations between resources, and sweeping parameters and other complexities under the rug of the HTTP question mark.
+
 
 ### Collection Resources
 
@@ -105,6 +203,30 @@ Use processing functions to abstract specific services through the public API th
 - **DO** use `GET` to fetch a representation containing the output of the processing function.
 - **DO** use query parameters to supply inputs to the processing function.
 - **DO** treating the processing function as a resource, as most often it will be difficult to find appropriate nouns. So when validating a vehicle registration number: `http://www.example.org/vehicles/validate?regnum=ZY12345`
+
+    ## What about responses that don't involve resources?
+
+    API calls that send a response that's not a resource per se are not uncommon depending on the domain. We've seen it in financial services, Telco, and the automotive domain to some extent.
+
+    Actions like the following are your clue that you might not be dealing with a "resource" response.
+
+    - Calculate
+    - Translate
+    - Convert
+
+    For example, you want to make a simple algorithmic calculation like how much tax someone should pay, or do a natural language translation (one language in request; another in response), or convert one currency to another. None involve resources returned from a database.
+
+    In these cases:
+
+    Use verbs not nouns
+
+    For example, an API to convert 100 euros to Chinese Yen:
+
+    /convert?from=EUR&to=CNY&amount=100
+
+    Make it clear in your API documentation that these "non-resource" scenarios are different.
+
+    Simply separate out a section of documentation that makes it clear that you use verbs in cases like this – where some action is taken to generate or calculate the response, rather than returning a resource directly.
 
 ### Controller Resources
 

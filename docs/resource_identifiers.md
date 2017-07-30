@@ -61,6 +61,35 @@ Queries usually involve filtering, sorting and projections. When providing query
 - **AVOID** `Range` requests for implementing queries.
 
     <!-- TODO -->
+
+    ## Tips for search
+
+    While a simple search could be modeled as a resourceful API (for example, dogs/?q=red), a more complex search across multiple resources requires a different design.
+
+    This will sound familiar if you've read the topic about using verbs not nouns when results don't return a resource from the database - rather the result is some action or calculation.
+
+    If you want to do a global search across resources, we suggest you follow the Google model:
+
+    Global search
+
+    /search?q=fluffy+fur
+
+    Here, search is the verb; ?q represents the query.
+
+    Scoped search
+
+    To add scope to your search, you can prepend with the scope of the search. For example, search in dogs owned by resource ID 5678
+
+    /owners/5678/dogs?q=fluffy+fur
+
+    Notice that we've dropped the explicit search in the URL and rely on the parameter 'q' to indicate the scoped query. (Big thanks to the contributors on the API Craft Google group for helping refine this approach.)
+
+    Formatted results
+
+    For search or for any of the action oriented (non-resource) responses, you can prepend with the format as follows:
+
+    /search.xml?q=fluffy+fur
+
     ## PAGINATION
 
     limit — to restrict the number of entries. See Pagination section below. Hint: You can use size as an alternate query string.

@@ -4,6 +4,71 @@
 
     dog-food your own API
 
+    ## Chatty APIs
+
+    Let's think about how app developers use that API you're designing and dealing with chatty APIs.
+
+    Imagine how developers will use your API
+
+    When designing your API and resources, try to imagine how developers will use it to say construct a user interface, an iPhone app, or many other apps.
+
+    Some API designs become very chatty - meaning just to build a simple UI or app, you have dozens or hundreds of API calls back to the server.
+
+    The API team can sometimes decide not to deal with creating a nice, resource-oriented RESTful API, and just fall back to a mode where they create the 3 or 4 Java-style getter and setter methods they know they need to power a particular user interface.
+
+    We don't recommend this. You can design a RESTful API and still mitigate the chattiness.
+
+    Be complete and RESTful and provide shortcuts
+
+    First design your API and its resources according to pragmatic RESTful design principles and then provide shortcuts.
+
+    What kind of shortcut? Say you know that 80% of all your apps are going to need some sort of composite response, then build the kind of request that gives them what they need.
+
+    Just don't do the latter instead of the former. First design using good pragmatic RESTful principles!
+
+    Take advantage of the partial response syntax
+
+    The partial response syntax discussed in a previous section can help.
+
+    To avoid creating one-off base URLs, you can use the partial response syntax to drill down to dependent and associated resources.
+
+    In the case of our dogs API, the dogs have association with owners, who in turn have associations with veterinarians, and so on. Keep nesting the partial response syntax using dot notation to get back just the information you need.
+
+    /owners/5678?fields=name,dogs.name
+
+    ## Complement with an SDK
+
+    It's a common question for API providers - do you need to complement your API with code libraries and software development kits (SDKs)?
+
+    If your API follows good design practices, is self consistent, standards-based, and well documented, developers may be able to get rolling without a client SDK. Well-documented code samples are also a critical resource.
+
+    On the other hand, what about the scenario in which building a UI requires a lot of domain knowledge? This can be a challenging problem for developers even when building UI and apps on top of APIs with pretty simple domains – think about the Twitter API with it's primary object of 140 characters of text.
+
+    You shouldn't change your API to try to overcome the domain knowledge hurdle. Instead, you can complement your API with code libraries and a software development kit (SDK).
+
+    In this way, you don't overburden your API design. Often, a lot of what's needed is on the client side and you can push that burden to an SDK.
+
+    The SDK can provide the platform-specific code, which developers use in their apps to invoke API operations - meaning you keep your API clean.
+
+    Other reasons you might consider complementing your API with an SDK include the following:
+
+    Speed adoption on a specific platform. (For example Objective C SDK for iPhone.)
+
+    Many experienced developers are just starting off with objective C+ so an SDK might be helpful.
+
+    Simplify integration effort required to work with your API - If key use cases are complex or need to be complemented by standard on-client processing.
+
+    An SDK can help reduce bad or inefficient code that might slow down service for everyone.
+
+    As a developer resource - good SDKs are a forcing function to create good source code examples and documentation. Yahoo! and Paypal are good examples:
+
+    Yahoo! http://developer.yahoo.com/social/sdk/
+
+    Paypal https://cms.paypal.com/us/cgi-bin/?cmd=_rendercontent&content_ID=developer/library_download_sdks
+
+    To market your API to a specific community - you upload the SDK to a samples or plugin page on a platform's existing developer community.
+
+
     <!--
 
     typical usage (adhere to standard http verbs etc. and how it relates to interacting with various resources)
@@ -121,3 +186,53 @@
     Owners of APIs used in production should monitor API service to get information about its using clients. This information, for instance, is useful to identify potential review partner for API changes.
 
     Hint: A preferred way of client detection implementation is by logging of the client-id retrieved from the OAuth token.
+
+    ## Organizing APIs
+
+    ## Consolidate API requests in one subdomain
+
+    We've talked about things that come after the top-level domain. This time, let's explore stuff on the other side of the URL.
+
+    Here's how Facebook, Foursquare, and Twitter handle this:
+
+    Facebook provides two APIs. They started with api.facebook.com, then modified it to orient around the social graph graph.facebook.com.
+
+    - graph.facebook.com
+    - api.facebook.com
+
+    Foursquare has one API.
+
+    - api.foursquare.com
+
+    Twitter has three APIs; two of them focused on search and streaming.
+
+    - stream.twitter.com
+    - api.twitter.com
+    - search.twitter.com
+
+    It's easy to understand how Facebook and Twitter ended up with more than one API. It has a lot to do with timing and acquisition, and it's easy to reconfigure a CName entry in your DNS to point requests to different clusters.
+
+    But if we're making design decisions about what's in the best interest of app developer, we recommend following Foursquare's lead:
+
+    Consolidate all API requests under one API subdomain.
+
+    It's cleaner, easier and more intuitive for developers who you want to build cool apps using your API.
+
+    Facebook, Foursquare, and Twitter also all have dedicated developer portals.
+
+    - developers.facebook.com
+    - developers.foursquare.com
+    - dev.twitter.com
+
+    ### How to organize all of this?
+
+    Your API gateway should be the top-level domain. For example, api.teachdogrest.com
+
+    In keeping with the spirit of REST, your developer portal should follow this pattern: developers.yourtopleveldomain.
+
+    ### Do Web redirects
+
+    Then optionally, if you can sense from requests coming in from the browser where the developer really needs to go, you can redirect.
+
+    Say a developer types api.teachdogrest.com in the browser but there's no other information for the GET request, you can probably safely redirect to your developer portal and help get the developer where they really need to be.
+

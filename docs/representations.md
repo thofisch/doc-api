@@ -275,6 +275,85 @@ If you choose to create new media types of your own, consider:
 
 #### Pagination
 
+    ## Pagination and partial response
+
+    Partial response allows you to give developers just the information they need.
+
+    Take for example a request for a tweet on the Twitter API. You'll get much more than a typical twitter app often needs - including the name of person, the text of the tweet, a timestamp, how often the message was re-tweeted, and a lot of metadata.
+
+    Let's look at how several leading APIs handle giving developers just what they need in responses, including Google who pioneered the idea of partial response.
+
+    LinkedIn
+
+    /people:(id,first-name,last-name,industry)
+
+    This request on a person returns the ID, first name, last name, and the industry.
+
+    LinkedIn does partial selection using this terse :(...) syntax which isn't self-evident.
+
+    Plus it's difficult for a developer to reverse engineer the meaning using a search engine.
+
+    Facebook
+
+    /joe.smith/friends?fields=id,name,picture
+
+    Google
+
+    ?fields=title,media:group(media:thumbnail)
+
+    Google and Facebook have a similar approach, which works well.
+
+    They each have an optional parameter called fields after which you put the names of fields you want to be returned.
+
+    As you see in this example, you can also put sub-objects in responses to pull in other information from additional resources.
+
+    Add optional fields in a comma-delimited list The Google approach works extremely well.
+
+    Here's how to get just the information we need from our dogs API using this approach:
+
+    /dogs?fields=name,color,location
+
+    It's simple to read; a developer can select just the information an app needs at a given time; it cuts down on bandwidth issues, which is important for mobile apps.
+
+
+    The partial selection syntax can also be used to include associated resources cutting down on the number of requests needed to get the required information.
+
+    Make it easy for developers to paginate objects in a database 
+
+    It's almost always a bad idea to return every resource in a database.
+
+    Let's look at how Facebook, Twitter, and LinkedIn handle pagination. Facebook uses offset and limit. Twitter uses page and rpp (records per page). LinkedIn uses start and count
+
+    Semantically, Facebook and LinkedIn do the same thing. That is, the LinkedIn start & count is used in the same way as the Facebook offset & limit.
+
+    To get records 50 through 75 from each system, you would use:
+
+    * Facebook - offset 50 and limit 25
+    * Twitter - page 3 and rpp 25 (records per page)
+    * LinkedIn - start 50 and count 25
+
+    ## Use limit and offset
+
+    We recommend limit and offset. It is more common, well understood in leading databases, and easy for developers.
+
+    /dogs?limit=25&offset=50
+
+    ## Metadata
+
+    We also suggest including metadata with each response that is paginated that indicated to the developer the total number of records available.
+
+    What about defaults?
+
+    My loose rule of thumb for default pagination is limit=10 with offset=0. (limit=10&offset=0)
+
+    The pagination defaults are of course dependent on your data size. If your resources are large, you probably want to limit it to fewer than 10; if resources are small, it can make sense to choose a larger limit.
+
+    In summary:
+
+    Support partial response by adding optional fields in a comma delimited list.
+
+    Use limit and offset to make it easy for developers to paginate objects
+
     <!-- TODO -->
 
     Pagination: The right way to include pagination details today is using the Link header introduced by RFC 5988. An API that requires sending a count can use a custom HTTP header like X-Total-Count.
@@ -494,6 +573,127 @@ If you choose to create new media types of your own, consider:
 
 <!-- TODO -->
 
+    ## Handling errors
+
+    Many software developers, including myself, don't always like to think about exceptions and error handling but it is a very important piece of the puzzle for any software developer, and especially for API designers.
+
+    Why is good error design especially important for API designers?
+
+    From the perspective of the developer consuming your Web API, everything at the other side of that interface is a black box. Errors therefore become a key tool providing context and visibility into how to use an API.
+
+    First, developers learn to write code through errors. The "test-first" concepts of the extreme programming model and the more recent "test driven development" models represent a body of best practices that have evolved because this is such an important and natural way for developers to work.
+
+    Secondly, in addition to when they're developing their applications, developers depend on well-designed errors at the critical times when they are troubleshooting and resolving issues after the applications they've built using your API are in the hands of their users. 
+
+    How to think about errors in a pragmatic way with REST?
+
+    Let's take a look at how three top APIs approach it.
+
+    Facebook
+
+    HTTP Status Code: 200
+
+    {"type" : "OauthException", "message":"(#803) Some of the aliases you requested do not exist: foo.bar"}
+
+    Twilio
+
+    HTTP Status Code: 401
+
+    {"status" : "401", "message":"Authenticate","code": 20003, "more
+
+    info": "http://www.twilio.com/docs/errors/20003"}
+
+    SimpleGeo
+
+    HTTP Status Code: 401
+
+    {"code" : 401, "message": "Authentication Required"}
+
+    Facebook
+
+    No matter what happens on a Facebook request, you get back the 200-status code - everything is OK. Many error messages also push down into the HTTP response. Here they also throw an #803 error but with no information about what #803 is or how to react to it.
+
+    Twilio
+
+    Twilio does a great job aligning errors with HTTP status codes. Like Facebook, they provide a more granular error message but with a link that takes you to the documentation.
+
+    Community commenting and discussion on the documentation helps to build a body of information and adds context for developers experiencing these errors.
+
+    SimpleGeo
+
+    SimpleGeo provides error codes but with no additional value in the payload.
+
+    A couple of best practices
+
+    Use HTTP status codes
+
+    Use HTTP status codes and try to map them cleanly to relevant standard-based codes.
+
+    There are over 70 HTTP status codes. However, most developers don't have all 70 memorized. So if you choose status codes that are not very common you will force application developers away from building their apps and over to Wikipedia to figure out what you're trying to tell them.
+
+    Therefore, most API providers use a small subset. For example, the Google GData API uses only 10 status codes; Netflix uses 9, and Digg, only 8.
+
+    Google GData
+
+    200 201 304 400 401 403 404 409 410 500
+
+    Netflix
+
+    200 201 304 400 401 403 404 412 500
+
+    Digg
+
+    200 400 401 403 404 410 500 503
+
+    How many status codes should you use for your API?
+
+    When you boil it down, there are really only 3 outcomes in the interaction between an app and an API:
+
+    * Everything worked - success
+    * The application did something wrong – client error
+    * The API did something wrong – server error
+
+    Start by using the following 3 codes. If you need more, add them. But you shouldn't need to go beyond 8.
+
+    * 200 - OK
+    * 400 - Bad Request
+    * 500 - Internal Server Error
+
+    If you're not comfortable reducing all your error conditions to these 3, try picking among these additional 5:
+
+    * 201 - Created
+    * 304 - Not Modified
+    * 404 – Not Found
+    * 401 - Unauthorized
+    * 403 - Forbidden
+
+    (Check out this good Wikipedia entry for all HTTP Status codes.)
+
+    It is important that the code that is returned can be consumed and acted upon by the application's business logic - for example, in an if-then-else, or a case statement.
+
+    Make messages returned in the payload as verbose as possible.
+
+    Code for code
+
+    200 – OK
+
+    401 – Unauthorized
+
+    Message for people
+
+    {"developerMessage" : "Verbose, plain language description of
+
+    the problem for the app developer with hints about how to fix
+
+    it.", "userMessage":"Pass this message on to the app user if
+
+    needed.", "errorCode" : 12345, "more info":
+
+    "http://dev.teachdogrest.com/errors/12345"}
+
+    In summary, be verbose and use plain language descriptions. Add as many hints as your API team can think of about what's causing an error.
+
+    We highly recommend you add a link in your description to more information, like Twilio does.
 
     ### MUST: Do not expose Stack Traces
 
@@ -829,6 +1029,55 @@ Always return meaningful HTTP Status Codes.
 
 #### Links in JSON Representations
 
+    ## What about attribute names?
+
+    In the previous section, we talked about formats - supporting multiple formats and working with JSON as the default.
+
+    This time, let's talk about what happens when a response comes back.
+
+    You have an object with data attributes on it. How should you name the attributes?
+
+    Here are API responses from a few leading APIs:
+
+    Twitter
+
+    "created_at": "Thu Nov 03 05:19;38 +0000 2011"
+
+    Bing
+
+    "DateTime": "2011-10-29T09:35:00Z"
+
+    Foursquare
+
+    "createdAt": 1320296464
+
+    They each use a different code convention. Although the Twitter approach is familiar to me as a Ruby on Rails developer, we think that Foursquare has the best approach.
+
+    How does the API response get back in the code? You parse the response (JSON parser); what comes back populates the Object. It looks like this
+
+    var myObject = JSON.parse(response);
+
+    If you chose the Twitter or Bing approach, your code looks like this. Its not JavaScript convention and looks weird - looks like the name of another object or class in the system, which is not correct.
+
+    timing = myObject.created_at;
+
+    timing - myObject.DateTime;
+
+    Recommendations
+
+    * Use JSON as default
+
+    * Follow JavaScript conventions for naming attributes
+
+    - Use medial capitalization (aka CamelCase)
+
+    - Use uppercase or lowercase depending on type of object
+
+    This results in code that looks like the following, allowing the JavaScript developer to write it in a way that makes sense for JavaScript.
+
+    "createdAt": 1320296464
+
+    timing = myObject.createdAt;
 - **DO** use a `link` property or a `links` property to include several links as an array whose value is a link object or a link object array.
 - **DO** include `href` and `rel` properties in each link object
 

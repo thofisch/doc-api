@@ -51,6 +51,34 @@
      However, like an airport, what you don't see is all of the stuff happening in the background, all the things being monitored carefully, security measures implemented by experts with years of experience in risk mitigation.
     For that reason, as tempting as it might be to build one yourself, I would strongly encourage you to take a look at a professional API Management company- such as MuleSoft (of course, I might be a little biased).
 
+    ## Authentication
+
+    There are many schools of thought. My colleagues at Apigee and I don't always agree on how to handle authentication - but overall here's my take.
+
+    Let's look at these three top services. See how each of these services handles things differently:
+
+    PayPal
+
+    Permissions Service API
+
+    Facebook
+
+    OAuth 2.0
+
+    Twitter
+
+    OAuth 1.0a
+
+    Note that PayPal's proprietary three-legged permissions API was in place long before OAuth was conceived.
+
+    What should you do?
+
+    Use the latest and greatest OAuth - OAuth 2.0 (as of this writing). It means that Web or mobile apps that expose APIs don't have to share passwords. It allows the API provider to revoke tokens for an individual user, for an entire app, without requiring the user to change their original password. This is critical if a mobile device is compromised or if a rogue app is discovered.
+
+    Above all, OAuth 2.0 will mean improved security and better end-user and consumer experiences with Web and mobile apps.
+
+    Don't do something *like* OAuth, but different. It will be frustrating for app developers if they can't use an OAuth library in their language because of your variation.
+
 ## Security
 
 Securing may require:

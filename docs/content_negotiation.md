@@ -1,5 +1,43 @@
 ## Content Negotiation (conneg)
 
+    ## Supporting multiple formats
+
+    We recommend that you support more than one format - that you push things out in one format and accept as many formats as necessary. You can usually automate the mapping from format to format.
+
+    Here's what the syntax looks like for a few key APIs.
+
+    Google Data
+
+    ?alt=json
+
+    Foursquare
+
+    /venue.json
+
+    Digg*
+
+    Accept: application/json
+
+    ?type=json
+
+    * The type argument, if present, overrides the Accept header.
+
+    Digg allows you to specify in two ways: in a pure RESTful way in the Accept header or in  the type parameter in the URL. This can be confusing - at the very least you need to document what to do if there are conflicts.
+
+    We recommend the Foursquare approach.
+
+    To get the JSON format from a collection or specific element:
+
+    dogs.json
+
+    /dogs/1234.json
+
+    Developers and even casual users of any file system are familiar to this dot notation. It also requires just one additional character (the period) to get the point across.
+
+    What about default formats?
+
+    In my opinion, JSON is winning out as the default format. JSON is the closest thing we have to universal language. Even if the back end is built in Ruby on Rails, PHP, Java, Python etc., most projects probably touch JavaScript for the front-end. It also has the advantage of being terse - less verbose than XML.
+
 There are two types of content negotiation:
 
 - *Server-driven* negotiation, uses request headers to select a variant
