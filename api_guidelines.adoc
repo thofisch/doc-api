@@ -1,16 +1,33 @@
+---
+tags: [announcement, website]
+---
 = API Guidelines
 Thomas Fischer
 :toc: left
 :icons: font
+:source-highlighter: highlightjs
 
+[role="red"]
 When we refer to an API, we are referring to a web API, more specifically one delivered over HTTP, and as a term, specifies how software should interact. An API specifies how a client can use a public API exposed by a server. What URIs are available, what HTTP methods may be used, what query string parameters it accepts, what data can be sent, and what responses to expect.
 
 Web APIs can typically be broken into two broad categories: *RPC* and *REST*.
 
+See man:gittutorial[7] to get started.
+
+....
+$ echo "Hello, World!"
+> Hello, World!
+
+$ gem install asciidoctor
+....
+
+.My Gist
+gist::123456[]
+
 [source,xml]
 ----
 <section>
-  <title>Section Title</title> <!--1-->
+  <title class="whatever">Section Title</title> <!--1-->
 </section>
 ----
 <1> The section title is required.
@@ -27,6 +44,7 @@ CAUTION: test
 
 WARNING: do not
 
+[shout]
 This is a test...
 
 Copyright (C)(R) 2017 Trifork(TM)
@@ -40,3 +58,19 @@ CPU::
 test
 JSON::
 representation
+
+content
+
+[subs="attributes,specialcharacters"]
+.Captured front matter
+....
+---
+{front-matter}
+---
+....
+
+.Gemfile
+[source,ruby]
+----
+include::test.rb[]
+----
