@@ -199,6 +199,17 @@ If you choose to create new media types of your own, consider:
 
 #### Pagination
 
+- **DO** add a self link to the collection resource
+- **DO** add link to the next page, if the collection is paginated and has a next page
+- **DO** a link to the previous page, if the collection is paginated and has a previous page
+- **DO** add an indicator of the size of the collection
+- **DO** keep collections homogeneous by include only the homogeneous aspects of its member resources.
+
+> **TIP**
+> Although the size of the collection is useful for building user interfaces, avoid computing the exact size of the collection. It may be expensive to compute, volatile, or even confidential. Providing a hint is usually good enough.
+
+<!-- TODO -->
+
     ## Pagination and partial response
 
     Partial response allows you to give developers just the information they need.
@@ -321,17 +332,6 @@ If you choose to create new media types of your own, consider:
     }
     ```
 
-- **DO** add a self link to the collection resource
-- **DO** add link to the next page, if the collection is paginated and has a next page
-- **DO** a link to the previous page, if the collection is paginated and has a previous page
-- **DO** add an indicator of the size of the collection
-- **DO** keep collections homogeneous by include only the homogeneous aspects of its member resources.
-
-> **TIP**
-> Although the size of the collection is useful for building user interfaces, avoid computing the exact size of the collection. It may be expensive to compute, volatile, or even confidential. Providing a hint is usually good enough.
-
-<!-- TODO -->
-
     # Pagination
 
     ### MUST: Support Pagination
@@ -410,7 +410,7 @@ If you choose to create new media types of your own, consider:
 ### Use Portable Data Formats in Representations
 
 - **DO** use decimal, float and double data types defined in the W3C XML Schema for formatting numbers including currency.
-- **DO** use ISO 3166 codes for countries and dependent territories.
+- **DO** use ISO 3166 (ISO 3166-1-alpha2) codes for countries and dependent territories.
 - **DO** use ISO 4217 alphabetic or numeric codes for denoting currency.
 - **DO** use RFC 3339 for dates, times, and date-time values used in representations.
 - **DO** use BCP 47 language tags for representing the language of text
@@ -419,47 +419,22 @@ If you choose to create new media types of your own, consider:
 
 <!-- TODO -->
 
-    ### SHOULD:: Date property values should conform to RFC 3399
-
-    ### May: Time durations and intervals could conform to ISO 8601
-
-    ### May: Standards could be used for Language, Country and Currency
-
-    - ISO 3166-1-alpha2 country
+    - Time durations and intervals could conform to ISO 8601
     - ISO 639-1 language code
     - BCP-47 (based on ISO 639-1) for language variants
-    - ISO 4217 currency codes
-
-    # Data Formats
-
-
-    ### MUST: Use Standard Date and Time Formats
-
-    Use the HTTP date format defined in RFC 7231.
-
-    ### MAY: Use Standards for Country, Language and Currency Codes
-
-    Use the following standard formats for country, language and currency codes:
-
-    - ISO 3166-1-alpha2 country codes
-    - ISO 639-1 language code
-    - BCP-47 (based on ISO 639-1) for language variants
-    - ISO 4217 currency codes
+    - Use the HTTP date format defined in RFC 7231.
 
     ### MUST: Define Format for Type Number and Integer
 
     Whenever an API defines a property of type number or integer, the precision must be defined by the format as follows to prevent clients from guessing the precision incorrectly, and thereby changing the value unintentionally:
 
     type	format	specified value range
-    integer	int32	integer between -231 and 231-1
-    integer	int64	integer between -263 and 263-1
+    integer	int32	integer between -2^31 and 2^31-1
+    integer	int64	integer between -2^63 and 2^63-1
     integer	bigint	arbitrarily large signed integer number
     number	float	IEEE 754-2008/ISO 60559:2011 binary64 decimal number
     number	double	IEEE 754-2008/ISO 60559:2011 binary128 decimal number
     number	decimal	arbitrarily precise signed decimal number
-
-    ### SHOULD:: Use a Decimal for Money/Amount Objects
-
 
 ### _**XML Representations**_
 

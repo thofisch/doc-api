@@ -53,4 +53,4 @@ Because REST is an architectural style and not a strict standard, it allows for 
 
 As long as the API only has one consumer, one could argue that it's entire job is to service that consumer. 
 
-**Make it RESTful, but be pragmatic!** Aiming at a level above 2 (according to Richardson's Maturity Model) may simple be impractical.
+**Make it RESTful, but be pragmatic!** Aiming at a level above 2 (according to Richardson's Maturity Model) may simply be impractical.

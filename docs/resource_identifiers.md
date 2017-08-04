@@ -51,7 +51,7 @@ Queries usually involve filtering, sorting and projections. When providing query
 - **CONSIDER** using a `view` query parameter for predefined projections, like `http://www.example.org/customers?view=summary`
 - **CONSIDER** supporting aliases for commonly used queries (it may also improve cacheability). For instance, `GET /tickets/recently_closed`
 - **CONSIDER** using `embed` to allow for resource expansion. Embedding related resources can help reduce the number of requests.
-- **COSIDER** using a `format` query parameter, if standard content negotiation is not possible.
+- **CONSIDER** using a `format` query parameter, if standard content negotiation is not possible.
 - **AVOID** ad hoc queries that use general-purpose query languages such as *SQL* or *XPath*.
 - **AVOID** `Range` requests for implementing queries.
 
