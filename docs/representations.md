@@ -31,7 +31,6 @@ Even though it is perfectly acceptable to use only a single format, in order to 
 #### Content-Encoding
 
 - **DO** use `Content-Encoding`. Clients can indicate their preference for `Content-Encoding` using the `Accept-Encoding` header, however, there is no standard way for the client to learn whether a server can process representations compressed in a given encoding.
-- **DO NOT** use `Content-Encoding` in HTTP requests, unless you know out of band that the target server supports a particular encoding method.
 
 #### Other Common Headers
 
@@ -41,7 +40,7 @@ Even though it is perfectly acceptable to use only a single format, in order to 
 
 ### Custom HTTP Headers
 
-Generally custom HTTP headers should be avoided, as they may impede interoperability. We discourage the use of hop-by-hop custom HTTP headers, even though they could be used to inform the client about the total size of a resource collection (e.g., ``X-Total``).
+Generally custom HTTP headers should be avoided, as they may impede interoperability. We discourage the use of hop-by-hop custom HTTP headers.
 
 However, depending on what clients and servers use custom headers for, they can be useful in cases where context information needs to be passed through multiple services in an end-to-end fashion. 
 
@@ -91,22 +90,15 @@ If you choose to create new media types of your own, consider:
 - **DO** use decimal, float and double data types defined in the W3C XML Schema for formatting numbers including currency.
 - **DO** use ISO 3166 (ISO 3166-1-alpha2) codes for countries and dependent territories.
 - **DO** use ISO 4217 alphabetic or numeric codes for denoting currency.
-- **DO** use RFC 3339 for dates, times, and date-time values used in representations.
-- **DO** use ISO 639-1 language tags for representing the language of text
+- **DO** use RFC 3339 for dates, times, and date-time values used in representations. Time durations and intervals could conform to ISO 8601
+- **DO** use ISO 639-1 language tags for representing the language of text. BCP-47 (based on ISO 639-1) for language variants.
 - **DO** use time zone identifiers from the Olson Time Zone Database to convey time zones.
+- **DO** use the HTTP-date format defined in RFC 7231 Section 7.1.1.1. (Date/Time Formats) for `Last-Modified`, `Date`, and `Expires` HTTP headers.
 - **AVOID** using language-, region-, or country-specific formats or format identifiers, except when the text is meant for presentation to end users.
 
 <!-- TODO -->
 
-    - Last-Modified header has datetimes in RFC2616 format.
-    - Time durations and intervals could conform to ISO 8601
-    - ISO 639-1 language code
-    - BCP-47 (based on ISO 639-1) for language variants
-    - Use the HTTP-date format defined in RFC 7231 Section 7.1.1.1. (Date/Time Formats.)
-
-    ### MUST: Define Format for Type Number and Integer
-
-    Whenever an API defines a property of type number or integer, the precision must be defined by the format as follows to prevent clients from guessing the precision incorrectly, and thereby changing the value unintentionally:
+    Define Format for Type Number and Integer whenever an API defines a property of type number or integer, the precision must be defined by the format as follows to prevent clients from guessing the precision:
 
     type	format	specified value range
     integer	int32	integer between -2^31 and 2^31-1
@@ -128,25 +120,26 @@ One of the advantages to REST is that it is not limited to a single format, and 
 - **DO** pretty print the representation by default, as this will help when using a browser to access the public API. Together with compression the additional white-space characters are negligible.
 - **DO** use gzip compression, if applicable.
 - **DO** prefer `application/json` over more specialized and custom media type like `application/example.booking+json`.
-- **CONSIDER** including entity identifiers for each of the application domain entities that make up the resource.
-- **CONSIDER** the use of an envelope by default. Only use envelopes in exceptional cases.
-- **CONSIDER** follow RFC-7159 by having (if possible) a serialized object as the top-level structure, since it would allow for future extension. 
-- **DO NOT** return an array as the top-level structure, as this may expose security vunerabilities. Instead use an envelope, like: `{ list: [...]}`.
-
 - **DO** use consistent property names.
 - **DO** use camelCase for property names.
 - **DO** use a subset of `us-ascii`for property names. The first character must be a letter, an underscore or a dollar sign, and subsequent characters can be a letter, an underscore, a dollar sign, or a number.
 - **DO** pluralize arrays to indicate they contain multiple values prefer to pluralize array names. This implies that object names should in turn be singular.
 - **DO** use consistent property values
-- **DO NOT** use `null` for boolean property values must not be null. A boolean is essentially a closed enumeration of two values, true and false. If the content has a meaningful null value, strongly prefer to replace the boolean with enumeration of named values or statuses.
-- **DO NOT** return `null` for empty array values should not be null. Empty array values can unambiguously be represented as the the empty list, [].
 - **DO** use string to represent enumerations.
-- **DO** use common field names and semantics. There exist a variety of field types that are required in multiple places. To achieve consistency across all API implementations, you must use common field names and semantics whenever applicable. There are some data fields that come up again and again in API data. These properties are not always strictly necessary, but making them idiomatic allows API client developers to build up a common understanding of Zalando's resources. There is very little utility for API consumers in having different names or value types for these fields across APIs.
+- **CONSIDER** use common field names and semantics. There exist a variety of field types that are required in multiple places. To achieve consistency across all API implementations, you must use common field names and semantics whenever applicable. There are some data fields that come up again and again in API data. These properties are not always strictly necessary, but making them idiomatic allows API client developers to build up a common understanding of Zalando's resources. There is very little utility for API consumers in having different names or value types for these fields across APIs.
     - id: the identity of the object. If used, IDs must opaque strings and not numbers. IDs are unique within some documented context, are stable and don't change for a given object once assigned, and are never recycled cross entities.
     - xyz_id: an attribute within one object holding the identifier of another object must use a name that corresponds to the type of the referenced object or the relationship to the referenced object followed by _id (e.g. customer_id not customer_number; parent_node_id for the reference to a parent node from a child node, even if both have the type Node)
     - created: when the object was created. If used, this must be a date-time construct.
     - modified: when the object was updated. If used, this must be a date-time construct.
     - type: the kind of thing this object is. If used, the type of this field should be a string. Types allow runtime information on the entity provided that otherwise requires examining the Open API file.
+- **CONSIDER** including entity identifiers for each of the application domain entities that make up the resource.
+- **CONSIDER** the use of an envelope by default. Only use envelopes in exceptional cases.
+- **CONSIDER** follow RFC-7159 by having (if possible) a serialized object as the top-level structure, since it would allow for future extension. 
+- **DO NOT** return an array as the top-level structure, as this may expose security vunerabilities. Instead use an envelope, like: `{ list: [...]}`.
+- **DO NOT** use `null` for boolean property values must not be null. A boolean is essentially a closed enumeration of two values, true and false. If the content has a meaningful null value, strongly prefer to replace the boolean with enumeration of named values or statuses.
+- **DO NOT** return `null` for empty array values should not be null. Empty array values can unambiguously be represented as the the empty list, [].
+
+Example:
 
 ```json
 {
@@ -639,209 +632,4 @@ Always return meaningful HTTP Status Codes.
 
     > Hint: Usually, random UUID is used - see UUID version 4 in RFC 4122. Though UUID version 1 also contains leading timestamps it is not reflected by its lexicographic sorting. This deficit is addressed by ULID (Universally Unique Lexicographically Sortable Identifier). You may favour ULID instead of UUID, for instance, for pagination use cases ordered along creation time.
 
-### Linking and Application State
-
-<!-- TODO -->
-
-    <!--
-    HATEOS / HAL / JSONAPI etc.
-    -->
-
-    A link provides a mean to navigate from one resource to another.
-
-    Application state is the state the server needs to maintain between each request for each client. Keeping state in clients does not mean serializing session state into URIs or HTML forms.
-
-    If the amount of data is small, the best place to maintain application state is within links in representations of resources, where the server can encode the state within the URI itself. However, the server can stores data in a durable storage and encodes its primary key in the URI. Use a combination of both approaches for managing application state to strike a balance between network performance, scalability and reliability.
-
-    ```
-    HTTP/1.1 200 OK
-    Content-Type: application/xml;charset=UTF-8
-
-    <quote xmlns:atom="http://www.w3.org/2005/Atom">
-        <driver>...</driver>
-        <vehicle>...</vehicle>
-        <offer>
-            <valid-until>2009-10-02</valid-until>
-            <atom:link href="http://www.example.org/quotes/buy?quote=abc1234" rel="http://www.example.org/rels/quotes/buy" />
-        </offer>
-    </quote>
-    ```
-
-- **DO** encode application state into URIs, and include those URIs into representations via links.
-- **DO** store the application state in a durable storage, and encode a reference to that state in URIs, if the state is large or cannot be transported to the clients for security or privacy reasons.
-- **DO** make sure to add checks (such as signatures) to detect/prevent tampering of state, when using application state in links.
-
-<!-- TODO -->
-    #### *Links in XML Representations*
-
-    *[Atom](http://www.w3.org/2005/Atom)*
-
-#### Links in JSON Representations
-
-    ## What about attribute names?
-
-    In the previous section, we talked about formats - supporting multiple formats and working with JSON as the default.
-
-    This time, let's talk about what happens when a response comes back.
-
-    You have an object with data attributes on it. How should you name the attributes?
-
-    Here are API responses from a few leading APIs:
-
-    Twitter
-
-    "created_at": "Thu Nov 03 05:19;38 +0000 2011"
-
-    Bing
-
-    "DateTime": "2011-10-29T09:35:00Z"
-
-    Foursquare
-
-    "createdAt": 1320296464
-
-    They each use a different code convention. Although the Twitter approach is familiar to me as a Ruby on Rails developer, we think that Foursquare has the best approach.
-
-    How does the API response get back in the code? You parse the response (JSON parser); what comes back populates the Object. It looks like this
-
-    var myObject = JSON.parse(response);
-
-    If you chose the Twitter or Bing approach, your code looks like this. Its not JavaScript convention and looks weird - looks like the name of another object or class in the system, which is not correct.
-
-    timing = myObject.created_at;
-
-    timing - myObject.DateTime;
-
-    Recommendations
-
-    * Use JSON as default
-
-    * Follow JavaScript conventions for naming attributes
-
-    - Use medial capitalization (aka CamelCase)
-
-    - Use uppercase or lowercase depending on type of object
-
-    This results in code that looks like the following, allowing the JavaScript developer to write it in a way that makes sense for JavaScript.
-
-    "createdAt": 1320296464
-
-    timing = myObject.createdAt;
-- **DO** use a `link` property or a `links` property to include several links as an array whose value is a link object or a link object array.
-- **DO** include `href` and `rel` properties in each link object
-
-Examples:
-
-```json
-{
-    "link": {
-        "rel": "alternate",
-        "href": "http://www.example.org/customers?format=json"
-    }
-}
-```
-
-```json
-{
-    "link": {
-        "alternate": "http://www.example.org/customers?format=json"
-    }
-}
-```
-
-```json
-{
-    "links": [{
-        "rel": "alternate",
-        "href": "http://www.example.org/customers?format=json"
-    },
-    {
-        "rel": "http://www.example.org/rels/owner",
-        "href": "..."
-    }]
-}
-```
-
-```json
-{
-    "links": {
-        "alternate": "http://www.example.org/customers?format=json"
-        "http://www.example.org/rels/owner": "http://www.example.org/owner"
-    }
-}
-```
-
-#### Link Header
-
-The `Link` header provides a format-independent means to convey links, which is one of the key benefits, along with visibility at the protocol level. Also the need for documentation on how to discover links in XML or JSON representations is lowered.
-
-```
-# Link header format
-Link: <{URI}>;rel="{relation}";type="{media type"};title="{title}"...
-```
-
-- **DO** use link header when you want to convey links in a format-independent manner
-- **DO** use link header when a representation format does not support links. E.g.:
-   - Binary format
-   - Formats that do not allow for easy discovery of links (e.g., plain-text documents)
-   - When your client/server software needs to add links or read links without parsing the body of representations
-
-#### Link Relation Types
-
-- **ALWAYS** supply a link relation to act as an identifier for the semantics associated with the link
-- **ALWAYS** use URIs (such as http://www.example.org/rels/create-po) to express extended link relation types
-- **DO** choose unambiguous value of link relations
-- **DO** use one of the [standard relation types](http://www.iana.org/assignments/link-relations/link-relations.xhtml), when appropriate
-- **DO** use lowercase for all link relation types
-- **DO** use multiple values in link relations, if applicable
-- **CONSIDER** providing an informational resource as an HTML document at that URI, describing the semantics of the link relation type. Include details such as HTTP methods supported, formats supported, and business rules about using the link.
-
-> Link relation types meant for public use should register that link relation per the process outlined in section 6.2 of the Web Linking Internet-Draft.
-
-#### Managing Application Flow with Links
-
-One of the key applications of hypermedia and links is the ability to decouple the client from learning about the rules the server uses to manage its application flow. The server can provide links containing application state, thereby using Hypermedia As The Engine Of Application State.
-
-This prevents clients from having to learn and hard-code application flow, however, the mere presence of a link will not decouple the client from having to know how to prepare the data and make a request for the transition.
-
-- **DO** design representations such that it contain links that help clients transition to all the next possible steps
-- **DO** encode the state that needs to be carried forward in the links
-- **DO** document how to find links and the semantics of all extended link relation types.
-- **DO**, for clients, assume that absent links means the transition is not possible.
-
-#### Ephemeral URIs
-
-A URI may be temporary and valid only for a single use or may expire after a fixed period of time.
-
-- **DO** communicate ephemeral URIs via links.
-- **DO** assign extended relation types for those links and document how long such URIs are valid and what the client should do after expiry.
-- **DO** return appropriate `4xx` code when responding to expired URIs, with an instructions in the body of any actions the client can take.
-
-#### URI Template
-
-When the server does not have all the information necessary to generate a valid and complete URI for each link.
-
-A URI template is a string consisting of token marked off between matching braces (`{` and `}`). Clients substitute these tokens (including matching braces) with URI-safe strings to convert the template into a valid URI.
-
-For simplicity limit the tokens to the following parts of URIs:
-
-- Path segments
-- Values of query parameters
-- Values of matrix parameters
-
-To include URI templates in a representation:
-
-- **DO** use `link-template` or `link-templates` properties to convey URI templates, for JSON representations.
-- **DO** document the tokens used in you URI template, since URI templates are semi-opaque and contain tokens that clients need to substitute, and you need a way to tell clients what values are valid for each token.
-- **CONSIDER** using braces (`{` and `}`) to specify replacement tokens, as this a common standard in a lot of other templating system (e.g., WSDL 2.0 and WADL.
-
-```json
-// JSON representation
-{
-    "link-templates": [{
-        "rel": "http://www.example.org/rels/customer",
-        "href": "http://www.example.org/customer/{customer-id}"
-    }]
-}
-```
 

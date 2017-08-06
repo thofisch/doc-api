@@ -67,6 +67,7 @@ When making a request:
 - **DO** add an `Accept-Charset` header with the preferred character set, if the client can process characters of a specific character set only, if not, avoid adding this header
 - **DO** add an `Accept-Language` header for the preferred language of the representation.
 - **DO** add an `Accept-Encoding` header listing the supported encodings,if the client is able to decompress representations compressed encoding such as `gzip`, `compress`, or `deflate`, add an `Accept-Encoding` header listing the supported encodings, if not, skip this header
+- **CONSIDER** brotli (`br`).
 - **DO NOT** assume that servers support content negotiation, and be prepared to receive a representation that does not meet the `Accept-*` headers.
 
 #### Content Type Negotiation

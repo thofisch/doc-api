@@ -1,4 +1,4 @@
-site_name: API Guidelines
+site_name: API Design Guidelines
 theme: readthedocs
 pages:
 - Introduction: 'index.md'
@@ -8,6 +8,7 @@ pages:
 - Resources: 'resources.md'
 - Methods: 'methods.md'
 - Representations: 'representations.md'
+- Hypermedia: 'hypermedia.md'
 - Content Negotiation: 'content_negotiation.md'
 - Caching: 'caching.md'
 - Security: 'security.md'

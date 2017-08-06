@@ -22,9 +22,10 @@
 ### HTTP Headers in Clients
 
 - **DO** return `400 Bad Request` on servers, when you receive a representation with no `Content-Type`, avoid guessing the type of the representation.
-- **DO NOT** check for the presence of the `Content-Length` header without first confirming the absence of `Transfer-Encoding: chunked`
 - **DO** let your network library deal with uncompressing compressed representations (`Content-Encoding`)
 - **DO** read and store the value of `Content-Language`
+- **DO NOT** use `Content-Encoding` in HTTP requests, unless you know out of band that the target server supports a particular encoding method.
+- **DO NOT** check for the presence of the `Content-Length` header without first confirming the absence of `Transfer-Encoding: chunked`
 
 ### How to Treat Errors in Clients
 
