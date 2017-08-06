@@ -51,3 +51,17 @@ It is important to learn, that API First is not in conflict with the agile devel
 ### MUST: Write APIs in U.S. English
 
 The API Guild drafted and owns this document.
+
+    The list of status code that can be omitted from API specifications includes but is not limited to:
+
+    401 Unauthorized
+    403 Forbidden
+    404 Not Found unless it has some additional semantics
+    405 Method Not Allowed
+    406 Not Acceptable
+    408 Request Timeout
+    413 Payload Too Large
+    414 URI Too Long
+    415 Unsupported Media Type
+    500 Internal Server Error
+    503 Service Unavailable

@@ -29,6 +29,8 @@
 
 ### How to Treat Errors in Clients
 
+    Even though they might not be documented - they may very much occur in production, so clients should be prepared for unexpected response codes, and in case of doubt handle them like they would handle the corresponding x00 code. Adding new response codes (specially error responses) should be considered a compatible API evolution.
+
 - **DO** treat `400 Bad Request` by looking into the body of the error representation for hints for the root cause of the problem.
 - **DO** retry the request on `401 Unauthorized` responses with the `Authorization` header containing the credentials. If the client is user-facing, prompt the user to supply credentials. In other cases, obtain the necessary security credentials.
 - **DO NOT** repeat the request on `403 Forbidden`

@@ -1,5 +1,14 @@
 ## 14. Documentation and Discovery
 
+    ERRORS
+
+    Service providers should differentiate between technical and functional errors.
+
+    In most cases it's not useful to document technical errors that are not in control of the service provider unless the status code convey application-specific semantics.
+
+    Functional errors on the other hand, that convey domain-specific semantics, must be documented and are strongly encouraged to be expressed with Problem types.
+
+
     <!-- TODO -->
 
     ### SHOULD:: Provide User Manual Documentation

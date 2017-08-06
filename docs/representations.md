@@ -2,6 +2,8 @@
 
 A *representation* (request/response) is concrete and real. Here we will offer guidelines as to what makes a good response design. To ensure scalability and longevity of the API, along with providing helpful responses that developers can understand and trust, we will cover what HTTP headers are appropriate in a response, which HTTP status codes to return, as well as how to include descriptive error representations on failures.
 
+    Updates & creation should return a resource representation
+
 ### HTTP Headers
 
 Headers ensure visibility, discoverability, routing by proxies, caching, optimistic concurrency, and correct operation of HTTP as an application protocol.
@@ -96,17 +98,16 @@ If you choose to create new media types of your own, consider:
 - **DO** use the HTTP-date format defined in RFC 7231 Section 7.1.1.1. (Date/Time Formats) for `Last-Modified`, `Date`, and `Expires` HTTP headers.
 - **AVOID** using language-, region-, or country-specific formats or format identifiers, except when the text is meant for presentation to end users.
 
-<!-- TODO -->
+Also, consider defining the format for numbers and integers. The precision could be described as follows, to prevent clients from guessing the precision:
 
-    Define Format for Type Number and Integer whenever an API defines a property of type number or integer, the precision must be defined by the format as follows to prevent clients from guessing the precision:
-
-    type	format	specified value range
-    integer	int32	integer between -2^31 and 2^31-1
-    integer	int64	integer between -2^63 and 2^63-1
-    integer	bigint	arbitrarily large signed integer number
-    number	float	IEEE 754-2008/ISO 60559:2011 binary64 decimal number
-    number	double	IEEE 754-2008/ISO 60559:2011 binary128 decimal number
-    number	decimal	arbitrarily precise signed decimal number
+| Type    | Format  | Specified value range                                 |
+|---------|---------|-------------------------------------------------------|
+| integer | int32   | integer between -2^31 and 2^31-1                      |
+| integer | int64   | integer between -2^63 and 2^63-1                      |
+| integer | bigint  | arbitrarily large signed integer number               |
+| number  | float   | IEEE 754-2008/ISO 60559:2011 binary64 decimal number  |
+| number  | double  | IEEE 754-2008/ISO 60559:2011 binary128 decimal number |
+| number  | decimal | arbitrarily precise signed decimal number             |
 
 ### JSON Representations
 
@@ -126,12 +127,7 @@ One of the advantages to REST is that it is not limited to a single format, and 
 - **DO** pluralize arrays to indicate they contain multiple values prefer to pluralize array names. This implies that object names should in turn be singular.
 - **DO** use consistent property values
 - **DO** use string to represent enumerations.
-- **CONSIDER** use common field names and semantics. There exist a variety of field types that are required in multiple places. To achieve consistency across all API implementations, you must use common field names and semantics whenever applicable. There are some data fields that come up again and again in API data. These properties are not always strictly necessary, but making them idiomatic allows API client developers to build up a common understanding of Zalando's resources. There is very little utility for API consumers in having different names or value types for these fields across APIs.
-    - id: the identity of the object. If used, IDs must opaque strings and not numbers. IDs are unique within some documented context, are stable and don't change for a given object once assigned, and are never recycled cross entities.
-    - xyz_id: an attribute within one object holding the identifier of another object must use a name that corresponds to the type of the referenced object or the relationship to the referenced object followed by _id (e.g. customer_id not customer_number; parent_node_id for the reference to a parent node from a child node, even if both have the type Node)
-    - created: when the object was created. If used, this must be a date-time construct.
-    - modified: when the object was updated. If used, this must be a date-time construct.
-    - type: the kind of thing this object is. If used, the type of this field should be a string. Types allow runtime information on the entity provided that otherwise requires examining the Open API file.
+- **CONSIDER** using common field names and semantics to achieve consistency across the API portfolio, as there is very little utility for clients in having different names or value types for these fields across APIs. Candidates are, but not limited to: *id*, *relation_id*, *type*, *created*, *modified/updated*.
 - **CONSIDER** including entity identifiers for each of the application domain entities that make up the resource.
 - **CONSIDER** the use of an envelope by default. Only use envelopes in exceptional cases.
 - **CONSIDER** follow RFC-7159 by having (if possible) a serialized object as the top-level structure, since it would allow for future extension. 
@@ -405,231 +401,113 @@ Example:
 
 ### Error Representations
 
-Communicate errors through standard HTTP status codes along with details supplied in the response body. Generally the following pattern applies:
+Communicate errors through standard HTTP status codes along with details supplied in the response body. 
 
-- **DO** return `2xx` when the request was received, understood, and accepted.
-- **DO** return `3xx` when the client needs to take further action. Include the necessary information in order for the client to complete the request.
-- **DO** return a representation with a `4xx` status code, for errors due to client inputs,
-- **DO** return a representation with a `5xx` status code, for errors due to server implementation or its current state.
+Errors are a key element for providing context and visibility, and status codes enable clients to quickly ascertain the status of their request. While well-formed and descriptive error details will tell the client what happened, why it happened, and how to fix it.
+
+- **DO** provide error documentation.
 - **DO** include a `Date` header with a value indicating the date-time at which the error occurred.
 - **DO** include a body in the representation formatted and localized using content negotiation or in human-readable HTML or plain text, unless the request method is `HEAD`.
 - **DO** provide an identifier or a link that can be used to refer to that error, if you are logging errors on the server side for later tracking or analysis.
 - **DO** include a brief message describing the error condition
 - **DO** include a longer description with information on how to fix the error condition, if applicable
 - **DO** describe any action that the client can take to correct the error or to help the server debug and fix the error, if appropriate.
-- **CONSIDER** including a link to that document via a `Link` header or a link in the body, if information to correct or debug the error is available as a separate human-readable document.
+- **CONSIDER** Use Problem JSON: RFC 7807 defines the media type application/problem+json. Operations should return that (together with a suitable status code) when any problem occurred during processing and you can give more details than the status code itself can supply, whether it be caused by the client or the server (i.e. both for 4xx or 5xx errors).
+- **CONSIDER** adding a field breakdown, providing detailed errors, along with a fixed top-level error description, for `PUT`, `PATCH` and `POST` requests.
+- **CONSIDER** including a link to that document via a `Link` header or a link in the body, if information to correct or debug the error is available as a separate human-readable document. Also consider tracking the hits to these pages to see what areas tend to be more troublesome for your users – allowing you to provide even better documentation and/or build a better API.
 - **AVOID** including details such as stack traces, errors from database connections failures, etc.
-- **DO NOT** return `2xx` (`OK`), but include a message body that describes an error condition. Doing so prevents HTTP-aware software from detecting errors.
+- **AVOID** using generic or non-descriptive error messages as they are often one of the biggest hinderances to API integration, as developers may struggle for hours trying to figure out why the call is failing, even misinterpreting the intent of the error message altogether.
+- **DO NOT** return `2xx` and include a message body that describes an error condition. Doing so prevents HTTP-aware software from detecting errors.
 
-    Make messages returned in the payload as verbose as possible.
-        {"developerMessage" : "Verbose, plain language description of the problem for the app developer with hints about how to fix  it.", "userMessage":"Pass this message on to the app user if needed.", "errorCode" : 12345, "more info": "http://dev.teachdogrest.com/errors/12345"}
-    In summary, be verbose and use plain language descriptions. Add as many hints as your API team can think of about what's causing an error.
+Error example:
 
-    We highly recommend you add a link in your description to more information, like Twilio does.
-
-    - **CONSIDER** Use Problem JSON: RFC 7807 defines the media type application/problem+json. Operations should return that (together with a suitable status code) when any problem occurred during processing and you can give more details than the status code itself can supply, whether it be caused by the client or the server (i.e. both for 4xx or 5xx errors).
-
-    // Use Descriptive Error Messages
-    Again, status codes help developers quickly identify the result of their call, allowing for quick success and failure checks.
-
-    But in the event of a failure, it's also important to make sure the developer understands WHY the call failed.
-
-    You'll want your error body to be well formed, and descriptive.
-
-    This means telling the developer what happened, why it happened, and most importantly – how to fix it.
-
-    Avoid using generic or non-descriptive error messages such as. Generic error messages are one of the biggest hinderances to API integration as developers may struggle for hours trying to figure out why the call is failing, even misinterpreting the intent of the error message altogether.
-
-   remember- you'll want to tell the developer what happened, why it happened, and how to fix it.
-
-    One of the best ways to do that is by responding with a standardized error format that returns a code (for support reference), the description of what happened, and a link to the appropriate documentation so that they can learn more/ fix it:
-
-    ```json
-    {
-      "error" : {
-        "code" : "e3526",
-        "message" : "Missing UserID",
-        "description" : "A UserID is required to edit a user.",
-        "link" : "http://docs.mysite.com/errors/e3526/"
-      }
+```json
+{
+    "error" : {
+    "code" : "e3526",
+    "message" : "Missing UserID",
+    "description" : "A UserID is required to edit a user.",
+    "link" : "http://docs.mysite.com/errors/e3526/"
     }
-    ```
+}
+```
 
-    On a support and development side, by doing this you can also track the hits to these pages to see what areas tend to be more troublesome for your users – allowing you to provide even better documentation/ build a better API.
+Validation error example:
 
-    Use HTTP Status Codes and Error Responses
-        Field Validation Errors
-        Operational Validation Errors
-
-    Updates & creation should return a resource representation
-
-    Validation errors for PUT, PATCH and POST requests will need a field breakdown. This is best modeled by using a fixed top-level error code for validation failures and providing the detailed errors in an additional errors field, like so:
-
-
+```json
+{
+    "code" : 1024,
+    "message" : "Validation Failed",
+    "errors" : [
     {
-      "code" : 1024,
-      "message" : "Validation Failed",
-      "errors" : [
-        {
-          "code" : 5432,
-          "field" : "first_name",
-          "message" : "First name cannot have fancy characters"
-        },
-        {
-           "code" : 5622,
-           "field" : "password",
-           "message" : "Password cannot be blank"
-        }
-      ]
+        "code" : 5432,
+        "field" : "first_name",
+        "message" : "First name cannot have fancy characters"
+    },
+    {
+        "code" : 5622,
+        "field" : "password",
+        "message" : "Password cannot be blank"
     }
-
-    ### MUST: Provide Error Documentation
-
-    APIs should define the functional, business view and abstract from implementation aspects. Errors become a key element providing context and visibility into how to use an API.
-
-    The error object should be extended by an application-specific error identifier if and only if the HTTP status code is not specific enough to convey the domain-specific error semantic. For this reason, we use a standardized error return object definition — see Use Common Error Return Objects.
-
-    Service providers should differentiate between technical and functional errors. In most cases it's not useful to document technical errors that are not in control of the service provider unless the status code convey application-specific semantics. The list of status code that can be omitted from API specifications includes but is not limited to:
-
-    401 Unauthorized
-    403 Forbidden
-    404 Not Found unless it has some additional semantics
-    405 Method Not Allowed
-    406 Not Acceptable
-    408 Request Timeout
-    413 Payload Too Large
-    414 URI Too Long
-    415 Unsupported Media Type
-    500 Internal Server Error
-    502 Bad Gateway
-    503 Service Unavailable
-    504 Gateway Timeout
-
-    Even though they might not be documented - they may very much occur in production, so clients should be prepared for unexpected response codes, and in case of doubt handle them like they would handle the corresponding x00 code. Adding new response codes (specially error responses) should be considered a compatible API evolution.
-
-    Functional errors on the other hand, that convey domain-specific semantics, must be documented and are strongly encouraged to be expressed with Problem types.
+    ]
+}
+```
 
 ### HTTP Status Codes
 
-    # Use HTTP Status Codes
+**Always return meaningful HTTP Status Codes!**  By using meaningful status codes, developers can quickly see what is happening with the application and do a "quick check" for errors without having to rely on the body's response.
 
-
-     Surprisingly, you'll find that a lot of APIs use 200 when creating an object (status code 201), or even when the response fails:
-
-    In the above case, if the developer is solely relying on the status code to see if the request was successful, the program will continue on not realizing that the request failed, and that it did something wrong.
-
-     This is especially important if there are dependencies within the program on that record existing.
-
-    Instead, the correct status code to use would have been 400 to indicate a "Bad Request."
-    By using the correct status codes, developers can quickly see what is happening with the application and do a "quick check" for errors without having to rely on the body's response.
-    You can find a full list of status codes in the [HTTP/1.1 RFC](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html), but just for a quick reference, here are some of the most commonly used Status Codes for RESTful APIs:
-
-    ### MUST: Use Specific HTTP Status Codes
-
-    This guideline groups the following rules for HTTP status codes usage:
-
-    You must not invent new HTTP status codes; only use standardized HTTP status codes and consistent with its intended semantics.
-    You should use the most specific HTTP status code for your concrete resource request processing status or error situation.
-    You should provide good documentation in the API definition when using HTTP status codes that are less commonly used and not listed below.
-
+- **DO** return `2xx` when the request was received, understood, and accepted.
+- **DO** return `3xx` when the client needs to take further action. Include the necessary information in order for the client to complete the request.
+- **DO** return a representation with a `4xx` status code, for errors due to client inputs,
+- **DO** return a representation with a `5xx` status code, for errors due to server implementation or its current state.
+- **DO** use the most specific HTTP status code for your concrete resource request processing status or error situation.
+- **DO** provide good documentation in the API definition when using HTTP status codes that are less commonly used and not listed below.
+- **DO NOT** invent new HTTP status codes; only use standardized HTTP status codes and consistent with its intended semantics.
  
-#### `2xx`
+#### 2xx Great Success
 
-   Code	Meaning	Methods
-    200	OK - this is the standard success response	All
-    201	Created - Returned on successful entity creation. You are free to return either an empty response or the created resource in conjunction with the Location header. (More details found in the Common Headers section.) Always set the Location header.	POST, PUT
-    202	Accepted - The request was successful and will be processed asynchronously.	POST, PUT, DELETE, PATCH
-    204	No content - There is no response body	PUT, DELETE
-    207	Multi-Status - The response body contains multiple status informations for different parts of a batch/bulk request. See "Use 207 for Batch or Bulk Requests".	POST
-    Redirection Codes
+- **DO** return `200 OK` when the request completed without issues.
+- **DO** return `201 Created` when a resource was successfully created. Always set the `Location` header with the URI of the newly created resource. Return either an empty response or the created resource.
+- **DO** return `202 Accepted` when a request was successful and will be processed asynchronously.
+- **DO** return `204 No content` when there is no response body.
+- **DO** return `207 Multi-Status` when the response body contains multiple status informations for different parts of a batch/bulk request.
 
-#### `3xx`
+#### 3xx Client Action May Be Required
 
-Always return meaningful HTTP Status Codes.
+- **DO** return `301 Moved Permanently` when this and all future requests should be directed to the URI specified in the `Location` header.
+- **DO** return `303 See Other` when the response to the request can be found under the URI specified in the `Location` header using a GET method.
+- **DO** return `304 Not Modified` when the resource has not been modified since the date or version passed via request headers `If-Modified-Since` or `If-None-Match`.
 
-    Code	Meaning	Methods
-    301	Moved Permanently - This and all future requests should be directed to the given URI.	All
-    303	See Other - The response to the request can be found under another URI using a GET method.	PATCH, POST, PUT, DELETE
-    304	Not Modified - resource has not been modified since the date or version passed via request headers If-Modified-Since or If-None-Match.	GET
-    Client Side Error Codes
-
-#### Errors due to client inputs: `4xx`
-
-   Code	Meaning	Methods
-    400	Bad request - generic / unknown error	All
-    401	Unauthorized - the users must log in (this often means "Unauthenticated")	All
-    403	Forbidden - the user is not authorized to use this resource	All
-    404	Not found - the resource is not found	All
-    405	Method Not Allowed - the method is not supported, see OPTIONS	All
-    406	Not Acceptable - resource can only generate content not acceptable according to the Accept headers sent in the request	All
-    408	Request timeout - the server times out waiting for the resource	All
-    409	Conflict - request cannot be completed due to conflict, e.g. when two clients try to create the same resource or if there are concurrent, conflicting updates	PUT, DELETE, PATCH
-    410	Gone - resource does not exist any longer, e.g. when accessing a resource that has intentionally been deleted	All
-    412	Precondition Failed - returned for conditional requests, e.g. If-Match if the condition failed. Used for optimistic locking.	PUT, DELETE, PATCH
-    415	Unsupported Media Type - e.g. clients sends request body without content type	PUT, DELETE, PATCH
-    423	Locked - Pessimistic locking, e.g. processing states	PUT, DELETE, PATCH
-    428	Precondition Required - server requires the request to be conditional (e.g. to make sure that the "lost update problem" is avoided).	All
-    429	Too many requests - the client does not consider rate limiting and sent too many requests. See "Use 429 with Headers for Rate Limits".	All
+#### 4xx Client Errors
 
 - **DO** return `400 Bad Request` when your server cannot decipher client requests because of syntactical errors.
 - **DO** return `401 Unauthorized` when the client is not authorized to access the resource, but may be able to gain access after authentication. If your server will not let the client access the resource even after authentication return `403 Forbidden` instead. When returning this error code, include a WWW-Authenticate header field with the authentication method to use.
 - **DO** return `403 Forbidden` when your serer will not let the client gain access (authenticated or not).
 - **DO** return `404 Not Found` when the resource is not found. If possible, return a reason in the message body.
 - **DO** return `405 Not Allowed` when an HTTP method is not allowed. Return an `Allow` header with methods that are valid for the resource.
-- **DO** return `406 Not Acceptable`. See [Content Negotiation](/content_negotiation).
+- **DO** return `406 Not Acceptable`. when the resource can only generate content not acceptable according to the `Accept` headers sent in the request.
+- **DO** return `408 Request Timeout` when the server times out waiting for the resource.
 - **DO** return `409 Conflict` when the request conflicts with the current state of the resource. Include a body explaining the reason.
 - **DO** return `410 Gone` when the resource used to exist, but it does not anymore. You may not be able to return this unless you tracked deleted resources, then return `404 Not Found`.
-- **DO** return `412 Precondition Failed`. See [Caching](/caching).
+- **DO** return `412 Precondition Failed` for conditional requests, when `If-Match` and/or `ETag` preconditions fail.
 - **DO** return `413 Request Entity Too Large` when the body of a `POST` or `PUT` is too large. If possible, specify what is allowed in the body and provide alternatives.
 - **DO** return `415 Unsupported Media Type` when a client sends the message body in a form that the server does not understand.
+- **DO** return `423 Locked` when using pessimistic locking.
+- **DO** return `428 Precondition Required` when the server requires the request to be conditional (e.g. to make sure that the "lost update problem" is avoided).
+- **DO** return `429 Too Many Requests` when the client does not consider rate limiting and sent too many requests. Include headers to indicate rate limits.
 
-#### Errors due to server errors: `5xx`
-
-  Server Side Error Codes:
-
-    Code	Meaning	Methods
-    500	Internal Server Error - a generic error indication for an unexpected server execution problem (here, client retry may be senseful)	All
-    501	Not Implemented - server cannot fulfill the request (usually implies future availability, e.g. new feature).	All
-    503	Service Unavailable - server is (temporarily) not available (e.g. due to overload) -- client retry may be senseful.	All
+#### 5xx Server Errors
 
 - **DO** return `500 Internal Server Error` when your code on the server side failed due to come implementation bug.
+- **DO** return `501 Not Implemented` to indicate that a future feature may become available.
 - **DO** return `503 Service Unavailable` when the server cannot fulfill the request either for some specific interval or undetermined amount of time. If possible, include a `Retry-After` response header with either a date or a number of seconds as a hint.
 
 ### Entity Identifiers in Representations
 
-<!-- TODO -->
+When an API is part of a larger API portfolio or system, information may cross several system boundaries, and entity identifiers can be used to uniformly identify, cross-reference or transform data. Especially when a lot of different technologies are envolved (RPC, SOAP, asynchronous messaging, stored procedures, etc.) and/or third-party applications, the only common denominator may very well be entity identifiers.
 
-    When a client or a server is part of a larger heterogeneous set of applications, information from resources may cross several system boundaries, and identifiers can be used to cross-reference or transform data.
-
-    For each of the application domain entities included in the representation of a resource, include identifiers formatted as URNs.
-
-    Entity identifiers can come in handy for the following:
-
-    - When your clients and servers are part of a larger environment containing applications using RPC, SOAP, asynchronous messaging, stored procedures, and even third-party applications, entity identifiers may be the only common denominator across all those systems to provide the identity of data uniformly.
-    - Clients and servers can maintain their own stored copies of entities included in a resource without having to decode from resource URIs or having to use URIs as database keys. Although not ideal, URIs may change. Clients can use these identifiers to cross-reference various entities referred to form different representations.
-    - When not all entities in your application domain are mapped to resources.
-
-    To maintain uniqueness of identifiers, consider formatting identifiers as URNs.
-
-    ### SHOULD:: Only Use UUIDs If Necessary
-
-    Generating IDs can be a scaling problem in high frequency and near real time use cases. UUIDs solve this problem, as they can be generated without collisions in a distributed, non-coordinated way and without additional server roundtrips.
-
-    However, they also come with some disadvantages:
-
-    - pure technical key without meaning; not ready for naming or name scope conventions that might be helpful for pragmatic reasons, e.g. we learned to use names for product attributes, instead of UUIDs
-    - less usable, because...
-    - cannot be memorized and easily communicated by humans
-    - harder to use in debugging and logging analysis
-    - less convenient for consumer facing usage
-    - quite long: readable representation requires 36 characters and comes with higher memory and bandwidth consumption
-    - not ordered along their creation history and no indication of used id volume
-    - may be in conflict with additional backward compatibility support of legacy ids
-
-    UUIDs should be avoided were not needed for large scale id generation. Instead, for instance, server side support with id generation can be preferred (POST on id resource, followed by idempotent PUT on entity resource). Usage of UUIDs is especially discouraged as primary keys of master and configuration data, like brand-ids or attribute-ids which have low id volume but widespread steering functionality.
-
-    In any case, we should always use string rather than number type for identifiers. This gives us more flexibility to evolve the identifier naming scheme. Accordingly, if used as identifiers, UUIDs should not be qualified using a format property.
-
-    > Hint: Usually, random UUID is used - see UUID version 4 in RFC 4122. Though UUID version 1 also contains leading timestamps it is not reflected by its lexicographic sorting. This deficit is addressed by ULID (Universally Unique Lexicographically Sortable Identifier). You may favour ULID instead of UUID, for instance, for pagination use cases ordered along creation time.
-
-
+- **CONSIDER** consider formatting identifiers as URNs, for each of the application domain entities included in the representation of a resource, to maintain uniqueness of identifiers.
+- **CONSIDER** using strings rather than number types for identifiers, as this gives more flexibility to evolve the identifier naming scheme. Accordingly, if used as identifiers, UUIDs should not be qualified using a format property.
+- **CONSIDER** using UUIDs as entity identifiers for scaling in high frequency and near real time use cases, as they can be generated without collisions in a distributed, non-coordinated way and without additional server roundtrips.
+- **CONSIDER** limiting the use of UUIDs as entity identifiers when it is not strictly necessary, if it possible to come up with a better naming scheme, if the id volume is low, or if the ids have widespread steering functionality.
