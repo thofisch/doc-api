@@ -112,12 +112,6 @@ Avoid removing links
 Do not change the value of the `rel` and `href` attributes of links.
 When introducing new resources, use links to provide URIs of those resources to clients.
 
-### How to Implement Clients to Support Extensibility
-
-If the client is capable of storing the complete representation locally, store everything.
-
-Do not assume that the representation is of a fixed media type, character encoding, content language, or content encoding.
-
 ### When to Version
 
 Consider versioning when the server cannot maintain compatibility. Also consider versioning if some clients require behavior or functionality different from other clients.

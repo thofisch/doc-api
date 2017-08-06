@@ -35,36 +35,15 @@ Even though it is perfectly acceptable to use only a single format, in order to 
 
 #### Other Common Headers
 
-- **DO** set the appropriate expiration caching headers. See [Caching](/caching).
-- **DO** use `Content-MD5`, when sending or receiving large representations over potentially unreliable networks to verify the integrity of the message.
-- **DO NOT** use `Content-MD5` as any measure of security.
 - **CONSIDER** using `ETag` and/or `Last-Modified` for caching and/or concurrency, the latter applies for responses only.
-
-<!-- TODO -->
-
-    ### SHOULD:: Use Location Header instead of Content-Location Header
-
-    As the correct usage of Content-Location with respect to semantics and caching is difficult, we discourage the use of Content-Location. In most cases it is sufficient to direct clients to the resource location by using the Location header instead without hitting the Content-Location specific ambiguities and complexities.
-
-    More details in RFC 7231 7.1.2 Location, 3.1.4.2 Content-Location
-
-    ### MAY: Use the Prefer header to indicate processing preferences
-
-    The Prefer header defined in RFC7240 allows clients to request processing behaviors from servers. RFC7240 pre-defines a number of preferences and is extensible, to allow others to be defined. Support for the Prefer header is entirely optional and at the discretion of API designers, but as an existing Internet Standard, is recommended over defining proprietary "X-" headers for processing directives.
-
-    Supporting APIs may return the Preference-Applied header also defined in RFC7240 to indicate whether the preference was applied.
+- **CONSIDER** using `Content-MD5`, when sending or receiving large representations over potentially unreliable networks to verify the integrity of the message.
+- **DO NOT** use `Content-MD5` as any measure of security.
 
 ### Custom HTTP Headers
 
-    As a general rule, proprietary HTTP headers should be avoided.
+Generally custom HTTP headers should be avoided, as they may impede interoperability. We discourage the use of hop-by-hop custom HTTP headers, even though they could be used to inform the client about the total size of a resource collection (e.g., ``X-Total``).
 
-    Still they can be useful in cases where context needs to be passed through multiple services in an end-to-end fashion
-
-    As such, a valid use-case for a proprietary header is providing context information, which is not a part of the actual API, but is needed by subsequent communication.
-
-Depending on what clients and servers use custom headers for, custom headers may impede interoperability.
-
-    This section shares definitions of proprietary headers that should be named consistently because they address overarching service-related concerns. Whether services support these concerns or not is optional; therefore, the OpenAPI API specification is the right place to make this explicitly visible. Use the parameter definitions of the resource HTTP methods.
+However, depending on what clients and servers use custom headers for, they can be useful in cases where context information needs to be passed through multiple services in an end-to-end fashion. 
 
 - **DO** use custom headers for informational purposes.
 - **CONSIDER** using the convention `X-{company-name}-{header-name}`, when introducing custom headers, as there is no established convention for naming custom headers. Avoid camelCase (without hyphens). Exceptions are common abbreviations like `ID`. _**the usage of X- headers is deprecated (RFC-6648)**_
@@ -73,32 +52,20 @@ Depending on what clients and servers use custom headers for, custom headers may
 - **DO NOT** use custom HTTP headers to change behavior of HTTP methods, and limit any behavior-changing headers to `POST`.
 - **DO NOT** use `X-HTTP-Method-Override` to override `POST`, use a distinct resource to process the same request using `POST` without the header. Any HTTP intermediary between the client and the server may omit custom headers.
 
-<!-- TODO -->
+### End-To-End HTTP Headers
 
-    ### Use Only the Specified Proprietary Headers
+The following end-to-end HTTP headers have been specified:
 
-    The following proprietary headers have been specified by this guideline for usage so far. Remember that HTTP header field names are not case-sensitive.
+- X-Flow-ID: Correlation ID of the request, which is written into the logs and passed to called services. 
+- X-UID:  Generic user id that owns the passed (OAuth2) access token. May save additional token validation round trips
+- X-Sales-Channel
+- X-Device-Type
+- X-Device-OS
+- X-App-Domain
 
-    Header	        Description
-    X-Flow-ID	    The flow id of the request, which is written into the logs and passed to called services. 
-    X-UID	        Generic user id that owns the passed (OAuth2) access token. May save additional token validation round trips
-    X-Sales-Channel
-    X-Device-Type
-    X-Device-OS
-    X-App-Domain
-    
-    ### Propagate Proprietary Headers
+- **DO** use the specified end-to-end HTTP headers.
+- **DO** propagate the end-to-end HTTP headers to upstream servers. Header names and values must remain intact.
 
-    All proprietary headers are end-to-end headers, and as such must be propagated to the upstream servers. The header names and values must remain unchanged.
-
-    HTTP/1.1 standard (RFC-7230) defines two types of headers: end-to-end and hop-by-hop headers. End-to-end headers must be transmitted to the ultimate recipient of a request or response. Hop-by-hop headers, on the contrary, are meaningful for a single connection only.
-
-### HTTP Headers in Clients
-
-- **DO** return `400 Bad Request` on servers, when you receive a representation with no `Content-Type`, avoid guessing the type of the representation.
-- **DO NOT** check for the presence of the `Content-Length` header without first confirming the absence of `Transfer-Encoding: chunked`
-- **DO** let your network library deal with uncompressing compressed representations (`Content-Encoding`)
-- **DO** read and store the value of `Content-Language`
 
 ### Format and a Media Type
 
@@ -119,49 +86,67 @@ If you choose to create new media types of your own, consider:
 
 > Note that although custom media types improve protocol-level visibility, existing protocol-level tools for monitoring, filtering, or routing HTTP traffic pay little or no attention to media types. Hence, using custom media types only for the sake of protocol-level visibility is not necessary.
 
-### JSON Representations
+### Use Portable Data Formats in Representations
 
-    - Enveloping response data
-        - Use Envelopes
-        - Don't use an envelope by default, and enveloping only in exceptional cases.
-
-    Use JSON (when possible): JSON, or the JavaScript Object Notation format allows for the quick serialization and deserialization of objects. JSON provides a compact format for accessing data, minimalizing the data transfer required while also offering broader language support than XML. These advantages have made it the format of choice for many developers and the leading format for use within REST APIs. Again, you'll want to choose the format that is best for your clients, but in the event that you're encoding objects as XML, I would strongly suggest also offering JSON as an alternative as the serialization is fairly quick and painless. Keep in mind that one of the advantages to REST is that it is not limited to a single content type, and can return multiple formats if desired.
-
-    Use JSON to Encode Structured Data: Use JSON-encoded body payload for transferring structured data. The JSON payload must follow RFC-7159 by having (if possible)a serialized object as the top-level structure, since it would allow for future extension. This also applies for collection resources where one naturally would assume an array.
-
-    Prefer standard Media type name application/json: Previously, this guideline allowed the use of custom media types like application/x.zalando.article+json. This usage is not recommended anymore and should be avoided, except where it is necessary for cases of media type versioning. Instead, the standard media type name application/json (or application/problem+json for HTTP error details) should be used for JSON-formatted data.
-
-    ## JSON Guidelines
-
-    - Use Consistent Property Names
-    - Property names must be snake_case (and never camelCase). No established industry standard exists. It's essential to establish a consistent look and feel such that JSON looks as if it came from the same hand.
-    - Property names must be an ASCII subset: Property names are restricted to ASCII encoded strings. The first character must be a letter, an underscore or a dollar sign, and subsequent characters can be a letter, an underscore, a dollar sign, or a number.
-    - Array names should be pluralized to indicate they contain multiple values prefer to pluralize array names. This implies that object names should in turn be singular.
-    - Use Consistent Property Values
-    - Boolean property values must not be null. A boolean is essentially a closed enumeration of two values, true and false. If the content has a meaningful null value, strongly prefer to replace the boolean with enumeration of named values or statuses 
-    - Null values should have their fields removed: Swagger/OpenAPI, which is in common use, doesn't support null field values (it does allow omitting that field completely if it is not marked as required). However that doesn't prevent clients and servers sending and receiving those fields with null values. Also, in some cases null may be a meaningful value - for example, JSON Merge Patch RFC 7382) using null to indicate property deletion.
-    - Empty array values should not be null. Empty array values can unambiguously be represented as the the empty list, [].
-    - Enumerations should be represented as Strings. Strings are a reasonable target for values that are by design enumerations.
-    - Use common field names and semantics. There exist a variety of field types that are required in multiple places. To achieve consistency across all API implementations, you must use common field names and semantics whenever applicable. There are some data fields that come up again and again in API data:
-        - id: the identity of the object. If used, IDs must opaque strings and not numbers. IDs are unique within some documented context, are stable and don't change for a given object once assigned, and are never recycled cross entities.
-        - xyz_id: an attribute within one object holding the identifier of another object must use a name that corresponds to the type of the referenced object or the relationship to the referenced object followed by _id (e.g. customer_id not customer_number; parent_node_id for the reference to a parent node from a child node, even if both have the type Node)
-        - created: when the object was created. If used, this must be a date-time construct.
-        - modified: when the object was updated. If used, this must be a date-time construct.
-        - type: the kind of thing this object is. If used, the type of this field should be a string. Types allow runtime information on the entity provided that otherwise requires examining the Open API file.
-    These properties are not always strictly necessary, but making them idiomatic allows API client developers to build up a common understanding of Zalando's resources. There is very little utility for API consumers in having different names or value types for these fields across APIs.
-
-- **DO** include a *self* link to the resource in each representation.
-- **DO** add a property to indicate the language, if an object in the representation is localized.
-- **DO** pretty print the representation by default, as this will help when using a browser to access the public API. Together with compression the additional white-space characters are negligible.
-- **CONSIDER** including entity identifiers for each of the application domain entities that make up the resource.
+- **DO** use decimal, float and double data types defined in the W3C XML Schema for formatting numbers including currency.
+- **DO** use ISO 3166 (ISO 3166-1-alpha2) codes for countries and dependent territories.
+- **DO** use ISO 4217 alphabetic or numeric codes for denoting currency.
+- **DO** use RFC 3339 for dates, times, and date-time values used in representations.
+- **DO** use ISO 639-1 language tags for representing the language of text
+- **DO** use time zone identifiers from the Olson Time Zone Database to convey time zones.
+- **AVOID** using language-, region-, or country-specific formats or format identifiers, except when the text is meant for presentation to end users.
 
 <!-- TODO -->
 
-    ### SHOULD:: Use gzip Compression
+    - Last-Modified header has datetimes in RFC2616 format.
+    - Time durations and intervals could conform to ISO 8601
+    - ISO 639-1 language code
+    - BCP-47 (based on ISO 639-1) for language variants
+    - Use the HTTP-date format defined in RFC 7231 Section 7.1.1.1. (Date/Time Formats.)
 
-    Compress the payload of your API's responses with gzip, unless there's a good reason not to — for example, you are serving so many requests that the time to compress becomes a bottleneck. This helps to transport data faster over the network (fewer bytes) and makes frontends respond faster.
+    ### MUST: Define Format for Type Number and Integer
 
-    Though gzip compression might be the default choice for server payload, the server should also support payload without compression and its client control via Accept-Encoding request header -- see also RFC 7231 Section 5.3.4. The server should indicate used gzip compression via the Content-Encoding header.
+    Whenever an API defines a property of type number or integer, the precision must be defined by the format as follows to prevent clients from guessing the precision incorrectly, and thereby changing the value unintentionally:
+
+    type	format	specified value range
+    integer	int32	integer between -2^31 and 2^31-1
+    integer	int64	integer between -2^63 and 2^63-1
+    integer	bigint	arbitrarily large signed integer number
+    number	float	IEEE 754-2008/ISO 60559:2011 binary64 decimal number
+    number	double	IEEE 754-2008/ISO 60559:2011 binary128 decimal number
+    number	decimal	arbitrarily precise signed decimal number
+
+### JSON Representations
+
+JSON has become the de facto format within RESTful APIs, by providing a compact, human-readable format for accessing data, which can help minimalize the bandwidth required.
+
+One of the advantages to REST is that it is not limited to a single format, and the choice of format should be based on what is most suitable for the clients.
+
+- **DO** prefer JSON over XML to encode structured representations, whenever possible.
+- **DO** include a *self* link to the resource in each representation.
+- **DO** add a property to indicate the language, if an object in the representation is localized.
+- **DO** pretty print the representation by default, as this will help when using a browser to access the public API. Together with compression the additional white-space characters are negligible.
+- **DO** use gzip compression, if applicable.
+- **DO** prefer `application/json` over more specialized and custom media type like `application/example.booking+json`.
+- **CONSIDER** including entity identifiers for each of the application domain entities that make up the resource.
+- **CONSIDER** the use of an envelope by default. Only use envelopes in exceptional cases.
+- **CONSIDER** follow RFC-7159 by having (if possible) a serialized object as the top-level structure, since it would allow for future extension. 
+- **DO NOT** return an array as the top-level structure, as this may expose security vunerabilities. Instead use an envelope, like: `{ list: [...]}`.
+
+- **DO** use consistent property names.
+- **DO** use camelCase for property names.
+- **DO** use a subset of `us-ascii`for property names. The first character must be a letter, an underscore or a dollar sign, and subsequent characters can be a letter, an underscore, a dollar sign, or a number.
+- **DO** pluralize arrays to indicate they contain multiple values prefer to pluralize array names. This implies that object names should in turn be singular.
+- **DO** use consistent property values
+- **DO NOT** use `null` for boolean property values must not be null. A boolean is essentially a closed enumeration of two values, true and false. If the content has a meaningful null value, strongly prefer to replace the boolean with enumeration of named values or statuses.
+- **DO NOT** return `null` for empty array values should not be null. Empty array values can unambiguously be represented as the the empty list, [].
+- **DO** use string to represent enumerations.
+- **DO** use common field names and semantics. There exist a variety of field types that are required in multiple places. To achieve consistency across all API implementations, you must use common field names and semantics whenever applicable. There are some data fields that come up again and again in API data. These properties are not always strictly necessary, but making them idiomatic allows API client developers to build up a common understanding of Zalando's resources. There is very little utility for API consumers in having different names or value types for these fields across APIs.
+    - id: the identity of the object. If used, IDs must opaque strings and not numbers. IDs are unique within some documented context, are stable and don't change for a given object once assigned, and are never recycled cross entities.
+    - xyz_id: an attribute within one object holding the identifier of another object must use a name that corresponds to the type of the referenced object or the relationship to the referenced object followed by _id (e.g. customer_id not customer_number; parent_node_id for the reference to a parent node from a child node, even if both have the type Node)
+    - created: when the object was created. If used, this must be a date-time construct.
+    - modified: when the object was updated. If used, this must be a date-time construct.
+    - type: the kind of thing this object is. If used, the type of this field should be a string. Types allow runtime information on the entity provided that otherwise requires examining the Open API file.
 
 ```json
 {
@@ -406,42 +391,18 @@ If you choose to create new media types of your own, consider:
     "last": "https://..."
     }
 
-
-### Use Portable Data Formats in Representations
-
-- **DO** use decimal, float and double data types defined in the W3C XML Schema for formatting numbers including currency.
-- **DO** use ISO 3166 (ISO 3166-1-alpha2) codes for countries and dependent territories.
-- **DO** use ISO 4217 alphabetic or numeric codes for denoting currency.
-- **DO** use RFC 3339 for dates, times, and date-time values used in representations.
-- **DO** use BCP 47 language tags for representing the language of text
-- **DO** use time zone identifiers from the Olson Time Zone Database to convey time zones.
-- **AVOID** using language-, region-, or country-specific formats or format identifiers, except when the text is meant for presentation to end users.
-
-<!-- TODO -->
-
-    - Time durations and intervals could conform to ISO 8601
-    - ISO 639-1 language code
-    - BCP-47 (based on ISO 639-1) for language variants
-    - Use the HTTP date format defined in RFC 7231.
-
-    ### MUST: Define Format for Type Number and Integer
-
-    Whenever an API defines a property of type number or integer, the precision must be defined by the format as follows to prevent clients from guessing the precision incorrectly, and thereby changing the value unintentionally:
-
-    type	format	specified value range
-    integer	int32	integer between -2^31 and 2^31-1
-    integer	int64	integer between -2^63 and 2^63-1
-    integer	bigint	arbitrarily large signed integer number
-    number	float	IEEE 754-2008/ISO 60559:2011 binary64 decimal number
-    number	double	IEEE 754-2008/ISO 60559:2011 binary128 decimal number
-    number	decimal	arbitrarily precise signed decimal number
-
 ### _**XML Representations**_
 
 *TBD*
 
 *Suggested topics:*<br/>
 *Atom resources, AtomPub Service, category documents, AtomPub for feed and entry resources, media resources*
+
+### HTML Representations
+
+- **DO** provide HTML representations, for resources that are expected to be consumed by end users.
+- **CONSIDER**  using microformats or RDFx to annotate data within the markup.
+- **AVOID** avoid designing HTML representations for machine clients.
 
 ### Binary Data in Representations
 
@@ -451,13 +412,10 @@ If you choose to create new media types of your own, consider:
 
 ### Error Representations
 
-    The Box API communicates errors through standard HTTP status codes with details supplied in JSON objects. Generally the following pattern applies:
+Communicate errors through standard HTTP status codes along with details supplied in the response body. Generally the following pattern applies:
 
-    2xx - Box received, understood, and accepted a request.
-    3xx - The client must take further action in order to complete the request.
-    4xx - An error occurred in handling the request. The most common cause of this error is an invalid parameter.
-    5xx- Box received and accepted the request, but an error occurred while handling it.
-
+- **DO** return `2xx` when the request was received, understood, and accepted.
+- **DO** return `3xx` when the client needs to take further action. Include the necessary information in order for the client to complete the request.
 - **DO** return a representation with a `4xx` status code, for errors due to client inputs,
 - **DO** return a representation with a `5xx` status code, for errors due to server implementation or its current state.
 - **DO** include a `Date` header with a value indicating the date-time at which the error occurred.
@@ -470,174 +428,28 @@ If you choose to create new media types of your own, consider:
 - **AVOID** including details such as stack traces, errors from database connections failures, etc.
 - **DO NOT** return `2xx` (`OK`), but include a message body that describes an error condition. Doing so prevents HTTP-aware software from detecting errors.
 
-<!-- TODO -->
-
-    ## Handling errors
-
-    Many software developers, including myself, don't always like to think about exceptions and error handling but it is a very important piece of the puzzle for any software developer, and especially for API designers.
-
-    Why is good error design especially important for API designers?
-
-    From the perspective of the developer consuming your Web API, everything at the other side of that interface is a black box. Errors therefore become a key tool providing context and visibility into how to use an API.
-
-    First, developers learn to write code through errors. The "test-first" concepts of the extreme programming model and the more recent "test driven development" models represent a body of best practices that have evolved because this is such an important and natural way for developers to work.
-
-    Secondly, in addition to when they're developing their applications, developers depend on well-designed errors at the critical times when they are troubleshooting and resolving issues after the applications they've built using your API are in the hands of their users. 
-
-    How to think about errors in a pragmatic way with REST?
-
-    Let's take a look at how three top APIs approach it.
-
-    Facebook
-
-    HTTP Status Code: 200
-
-    {"type" : "OauthException", "message":"(#803) Some of the aliases you requested do not exist: foo.bar"}
-
-    Twilio
-
-    HTTP Status Code: 401
-
-    {"status" : "401", "message":"Authenticate","code": 20003, "more
-
-    info": "http://www.twilio.com/docs/errors/20003"}
-
-    SimpleGeo
-
-    HTTP Status Code: 401
-
-    {"code" : 401, "message": "Authentication Required"}
-
-    Facebook
-
-    No matter what happens on a Facebook request, you get back the 200-status code - everything is OK. Many error messages also push down into the HTTP response. Here they also throw an #803 error but with no information about what #803 is or how to react to it.
-
-    Twilio
-
-    Twilio does a great job aligning errors with HTTP status codes. Like Facebook, they provide a more granular error message but with a link that takes you to the documentation.
-
-    Community commenting and discussion on the documentation helps to build a body of information and adds context for developers experiencing these errors.
-
-    SimpleGeo
-
-    SimpleGeo provides error codes but with no additional value in the payload.
-
-    A couple of best practices
-
-    Use HTTP status codes
-
-    Use HTTP status codes and try to map them cleanly to relevant standard-based codes.
-
-    There are over 70 HTTP status codes. However, most developers don't have all 70 memorized. So if you choose status codes that are not very common you will force application developers away from building their apps and over to Wikipedia to figure out what you're trying to tell them.
-
-    Therefore, most API providers use a small subset. For example, the Google GData API uses only 10 status codes; Netflix uses 9, and Digg, only 8.
-
-    Google GData
-
-    200 201 304 400 401 403 404 409 410 500
-
-    Netflix
-
-    200 201 304 400 401 403 404 412 500
-
-    Digg
-
-    200 400 401 403 404 410 500 503
-
-    How many status codes should you use for your API?
-
-    When you boil it down, there are really only 3 outcomes in the interaction between an app and an API:
-
-    * Everything worked - success
-    * The application did something wrong – client error
-    * The API did something wrong – server error
-
-    Start by using the following 3 codes. If you need more, add them. But you shouldn't need to go beyond 8.
-
-    * 200 - OK
-    * 400 - Bad Request
-    * 500 - Internal Server Error
-
-    If you're not comfortable reducing all your error conditions to these 3, try picking among these additional 5:
-
-    * 201 - Created
-    * 304 - Not Modified
-    * 404 – Not Found
-    * 401 - Unauthorized
-    * 403 - Forbidden
-
-    (Check out this good Wikipedia entry for all HTTP Status codes.)
-
-    It is important that the code that is returned can be consumed and acted upon by the application's business logic - for example, in an if-then-else, or a case statement.
-
     Make messages returned in the payload as verbose as possible.
-
-    Code for code
-
-    200 – OK
-
-    401 – Unauthorized
-
-    Message for people
-
-    {"developerMessage" : "Verbose, plain language description of
-
-    the problem for the app developer with hints about how to fix
-
-    it.", "userMessage":"Pass this message on to the app user if
-
-    needed.", "errorCode" : 12345, "more info":
-
-    "http://dev.teachdogrest.com/errors/12345"}
-
+        {"developerMessage" : "Verbose, plain language description of the problem for the app developer with hints about how to fix  it.", "userMessage":"Pass this message on to the app user if needed.", "errorCode" : 12345, "more info": "http://dev.teachdogrest.com/errors/12345"}
     In summary, be verbose and use plain language descriptions. Add as many hints as your API team can think of about what's causing an error.
 
     We highly recommend you add a link in your description to more information, like Twilio does.
 
-    ### MUST: Do not expose Stack Traces
-
-    Stack traces contain implementation details that are not part of an API, and on which clients should never rely. Moreover, stack traces can leak sensitive information that partners and third parties are not allowed to receive and may disclose insights about vulnerabilities to attackers.
-
-    ### MUST: Use Problem JSON
-
-    RFC 7807 defines the media type application/problem+json. Operations should return that (together with a suitable status code) when any problem occurred during processing and you can give more details than the status code itself can supply, whether it be caused by the client or the server (i.e. both for 4xx or 5xx errors).
-
-    A previous version of this guideline (before the publication of that RFC and the registration of the media type) told to return application/x.problem+json in these cases (with the same contents). Servers for APIs defined before this change should pay attention to the Accept header sent by the client and set the Content-Type header of the problem response correspondingly. Clients of such APIs should accept both media types.
+    - **CONSIDER** Use Problem JSON: RFC 7807 defines the media type application/problem+json. Operations should return that (together with a suitable status code) when any problem occurred during processing and you can give more details than the status code itself can supply, whether it be caused by the client or the server (i.e. both for 4xx or 5xx errors).
 
     // Use Descriptive Error Messages
     Again, status codes help developers quickly identify the result of their call, allowing for quick success and failure checks.
 
-     But in the event of a failure, it's also important to make sure the developer understands WHY the call failed.
+    But in the event of a failure, it's also important to make sure the developer understands WHY the call failed.
 
-     This is especially crucial to the initial integration of your API (remember, the easier your API is to integrate, the more likely people are to use it), as well as general maintenance when bugs or other issues come up.
     You'll want your error body to be well formed, and descriptive.
 
-     This means telling the developer what happened, why it happened, and most importantly – how to fix it.
+    This means telling the developer what happened, why it happened, and most importantly – how to fix it.
 
-     You should avoid using generic or non-descriptive error messages such as:
-    redx   Your request could not be completed
-    redx   An error occurred
-    redx   Invalid request
-    Generic error messages are one of the biggest hinderances to API integration as developers may struggle for hours trying to figure out why the call is failing, even misinterpreting the intent of the error message altogether.
+    Avoid using generic or non-descriptive error messages such as. Generic error messages are one of the biggest hinderances to API integration as developers may struggle for hours trying to figure out why the call is failing, even misinterpreting the intent of the error message altogether.
 
-    And eventually, if they can't figure it out, they may stop trying altogether.
-    For example, I struggled for about 30 minutes with one API trying to figure out why I was getting a "This call is not allowed" error response.
+   remember- you'll want to tell the developer what happened, why it happened, and how to fix it.
 
-    After repeatedly reformatting my request and trying different approaches, I finally called support (in an extremely frustrated mood) only to find out it was referring to my access token, which just so happened to be one letter off due to my inability to copy and paste such things.
-    Just the same, an "Invalid Access Token" response would have saved me a ton of hassle, and from feeling like a complete idiot while on the line with support.
-
-     It would have also saved them valuable time working on real bugs, instead of trying to troubleshoot the most basic of steps (btw – whenever I get an error the key and token are the first things I check now).
-    Here are some more examples of descriptive error messages:
-    greencheckmark   Your API Key is Invalid, Generate a Valid API Key at http://...
-    greencheckmark   A User ID is required for this action.
-
-    Read more at http://...
-    greencheckmark   Your JSON was not properly formed.
-
-    See example JSON here: http://...
-    But you can go even further, remember- you'll want to tell the developer what happened, why it happened, and how to fix it.
-
-     One of the best ways to do that is by responding with a standardized error format that returns a code (for support reference), the description of what happened, and a link to the appropriate documentation so that they can learn more/ fix it:
+    One of the best ways to do that is by responding with a standardized error format that returns a code (for support reference), the description of what happened, and a link to the appropriate documentation so that they can learn more/ fix it:
 
     ```json
     {
@@ -651,6 +463,7 @@ If you choose to create new media types of your own, consider:
     ```
 
     On a support and development side, by doing this you can also track the hits to these pages to see what areas tend to be more troublesome for your users – allowing you to provide even better documentation/ build a better API.
+
     Use HTTP Status Codes and Error Responses
         Field Validation Errors
         Operational Validation Errors
@@ -679,9 +492,9 @@ If you choose to create new media types of your own, consider:
 
     ### MUST: Provide Error Documentation
 
-    APIs should define the functional, business view and abstract from implementation aspects. Errors become a key element providing context and visibility into how to use an API. The error object should be extended by an application-specific error identifier if and only if the HTTP status code is not specific enough to convey the domain-specific error semantic. For this reason, we use a standardized error return object definition — see Use Common Error Return Objects.
+    APIs should define the functional, business view and abstract from implementation aspects. Errors become a key element providing context and visibility into how to use an API.
 
-    The OpenAPI specification shall include definitions for error descriptions that will be returned; they are part of the interface definition and provide important information for service clients to handle exceptional situations and support troubleshooting. You should also think about a troubleshooting board — it is part of the associated online API documentation, provides information and handling guidance on application-specific errors and is referenced via links of the API definition. This can reduce service support tasks and contribute to service client and provider performance.
+    The error object should be extended by an application-specific error identifier if and only if the HTTP status code is not specific enough to convey the domain-specific error semantic. For this reason, we use a standardized error return object definition — see Use Common Error Return Objects.
 
     Service providers should differentiate between technical and functional errors. In most cases it's not useful to document technical errors that are not in control of the service provider unless the status code convey application-specific semantics. The list of status code that can be omitted from API specifications includes but is not limited to:
 
@@ -698,22 +511,15 @@ If you choose to create new media types of your own, consider:
     502 Bad Gateway
     503 Service Unavailable
     504 Gateway Timeout
+
     Even though they might not be documented - they may very much occur in production, so clients should be prepared for unexpected response codes, and in case of doubt handle them like they would handle the corresponding x00 code. Adding new response codes (specially error responses) should be considered a compatible API evolution.
 
     Functional errors on the other hand, that convey domain-specific semantics, must be documented and are strongly encouraged to be expressed with Problem types.
-
-
-### HTML Representations
-
-- **DO** provide HTML representations, for resources that are expected to be consumed by end users.
-- **CONSIDER**  using microformats or RDFx to annotate data within the markup.
-- **AVOID** avoid designing HTML representations for machine clients.
 
 ### HTTP Status Codes
 
     # Use HTTP Status Codes
 
-    One of the most commonly misused HTTP Status Codes is 200 – ok or the request was successful.
 
      Surprisingly, you'll find that a lot of APIs use 200 when creating an object (status code 201), or even when the response fails:
 
@@ -721,22 +527,9 @@ If you choose to create new media types of your own, consider:
 
      This is especially important if there are dependencies within the program on that record existing.
 
-     Instead, the correct status code to use would have been 400 to indicate a "Bad Request."
+    Instead, the correct status code to use would have been 400 to indicate a "Bad Request."
     By using the correct status codes, developers can quickly see what is happening with the application and do a "quick check" for errors without having to rely on the body's response.
     You can find a full list of status codes in the [HTTP/1.1 RFC](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html), but just for a quick reference, here are some of the most commonly used Status Codes for RESTful APIs:
-    200	Ok
-    201	Created
-    304	Not Modified
-    400	Bad Request
-    401	Not Authorized
-    403	Forbidden
-    404	Page/ Resource Not Found
-    405	Method Not Allowed
-    415	Unsupported Media Type
-    500	Internal Server Error
-    Of course, if you feel like being really creative, you can always take advantage of status code:
-    418	I'm a Teapot
-    It's important to note that Twitter's famed 420 status code – Enhance Your Calm, is not really a standardized response, and you should probably just stick to status code 429 for too many requests instead.
 
     ### MUST: Use Specific HTTP Status Codes
 
@@ -745,13 +538,11 @@ If you choose to create new media types of your own, consider:
     You must not invent new HTTP status codes; only use standardized HTTP status codes and consistent with its intended semantics.
     You should use the most specific HTTP status code for your concrete resource request processing status or error situation.
     You should provide good documentation in the API definition when using HTTP status codes that are less commonly used and not listed below.
-    There are ~60 different HTTP status codes with specific semantics defined in the HTTP standards (mainly RFC7231 and RFC-6585) - and there are upcoming new ones, e.g. draft legally-restricted-status (see overview on all error codes on Wikipedia or via https://httpstatuses.com/). And there are unofficial ones, e.g. used by specific web servers like Nginx.
 
-    Our list of most commonly used and best understood HTTP status codes:
+ 
+#### `2xx`
 
-    Success Codes
-
-    Code	Meaning	Methods
+   Code	Meaning	Methods
     200	OK - this is the standard success response	All
     201	Created - Returned on successful entity creation. You are free to return either an empty response or the created resource in conjunction with the Location header. (More details found in the Common Headers section.) Always set the Location header.	POST, PUT
     202	Accepted - The request was successful and will be processed asynchronously.	POST, PUT, DELETE, PATCH
@@ -759,13 +550,19 @@ If you choose to create new media types of your own, consider:
     207	Multi-Status - The response body contains multiple status informations for different parts of a batch/bulk request. See "Use 207 for Batch or Bulk Requests".	POST
     Redirection Codes
 
+#### `3xx`
+
+Always return meaningful HTTP Status Codes.
+
     Code	Meaning	Methods
     301	Moved Permanently - This and all future requests should be directed to the given URI.	All
     303	See Other - The response to the request can be found under another URI using a GET method.	PATCH, POST, PUT, DELETE
     304	Not Modified - resource has not been modified since the date or version passed via request headers If-Modified-Since or If-None-Match.	GET
     Client Side Error Codes
 
-    Code	Meaning	Methods
+#### Errors due to client inputs: `4xx`
+
+   Code	Meaning	Methods
     400	Bad request - generic / unknown error	All
     401	Unauthorized - the users must log in (this often means "Unauthenticated")	All
     403	Forbidden - the user is not authorized to use this resource	All
@@ -780,42 +577,6 @@ If you choose to create new media types of your own, consider:
     423	Locked - Pessimistic locking, e.g. processing states	PUT, DELETE, PATCH
     428	Precondition Required - server requires the request to be conditional (e.g. to make sure that the "lost update problem" is avoided).	All
     429	Too many requests - the client does not consider rate limiting and sent too many requests. See "Use 429 with Headers for Rate Limits".	All
-    Server Side Error Codes:
-
-    Code	Meaning	Methods
-    500	Internal Server Error - a generic error indication for an unexpected server execution problem (here, client retry may be senseful)	All
-    501	Not Implemented - server cannot fulfill the request (usually implies future availability, e.g. new feature).	All
-    503	Service Unavailable - server is (temporarily) not available (e.g. due to overload) -- client retry may be senseful.	All
-
-    ### MUST: Use 207 for Batch or Bulk Requests
-
-    Some APIs are required to provide either batch or bulk requests using POST for performance reasons, i.e. for communication and processing efficiency. In this case services may be in need to signal multiple response codes for each part of an batch or bulk request. As HTTP does not provide proper guidance for handling batch/bulk requests and responses, we herewith define the following approach:
-
-    A batch or bulk request always has to respond with HTTP status code 207, unless it encounters a generic or unexpected failure before looking at individual parts.
-    A batch or bulk response with status code 207 always returns a multi-status object containing sufficient status and/or monitoring information for each part of the batch or bulk request.
-    A batch or bulk request may result in a status code 400/500, only if the service encounters a failure before looking at individual parts or, if an unanticipated failure occurs.
-    The before rules apply even in the case that processing of all individual part fail or each part is executed asynchronously! They are intended to allow clients to act on batch and bulk responses by inspecting the individual results in a consistent way.
-
-    Note: while a batch defines a collection of requests triggering independent processes, a bulk defines a collection of independent resources created or updated together in one request. With respect to response processing this distinction normally does not matter.
-
-    ### MUST: Use 429 with Headers for Rate Limits
-
-    APIs that wish to manage the request rate of clients must use the '429 Too Many Requests' response code if the client exceeded the request rate and therefore the request can't be fulfilled. Such responses must also contain header information providing further details to the client. There are two approaches a service can take for header information:
-
-    Return a 'Retry-After' header indicating how long the client ought to wait before making a follow-up request. The Retry-After header can contain a HTTP date value to retry after or the number of seconds to delay. Either is acceptable but APIs should prefer to use a delay in seconds.
-
-    Return a trio of 'X-RateLimit' headers. These headers (described below) allow a server to express a service level in the form of a number of allowing requests within a given window of time and when the window is reset.
-
-    The 'X-RateLimit' headers are:
-
-    X-RateLimit-Limit: The maximum number of requests that the client is allowed to make in this window.
-    X-RateLimit-Remaining: The number of requests allowed in the current window.
-    X-RateLimit-Reset: The relative time in seconds when the rate limit window will be reset.
-    The reason to allow both approaches is that APIs can have different needs. Retry-After is often sufficient for general load handling and request throttling scenarios and notably, does not strictly require the concept of a calling entity such as a tenant or named account. In turn this allows resource owners to minimise the amount of state they have to carry with respect to client requests. The 'X-RateLimit' headers are suitable for scenarios where clients are associated with pre-existing account or tenancy structures. 'X-RateLimit' headers are generally returned on every request and not just on a 429, which implies the service implementing the API is carrying sufficient state to track the number of requests made within a given window for each named entity.
-
-Always return meaningful HTTP Status Codes.
-
-#### Errors due to client inputs: `4xx`
 
 - **DO** return `400 Bad Request` when your server cannot decipher client requests because of syntactical errors.
 - **DO** return `401 Unauthorized` when the client is not authorized to access the resource, but may be able to gain access after authentication. If your server will not let the client access the resource even after authentication return `403 Forbidden` instead. When returning this error code, include a WWW-Authenticate header field with the authentication method to use.
@@ -831,25 +592,15 @@ Always return meaningful HTTP Status Codes.
 
 #### Errors due to server errors: `5xx`
 
+  Server Side Error Codes:
+
+    Code	Meaning	Methods
+    500	Internal Server Error - a generic error indication for an unexpected server execution problem (here, client retry may be senseful)	All
+    501	Not Implemented - server cannot fulfill the request (usually implies future availability, e.g. new feature).	All
+    503	Service Unavailable - server is (temporarily) not available (e.g. due to overload) -- client retry may be senseful.	All
+
 - **DO** return `500 Internal Server Error` when your code on the server side failed due to come implementation bug.
 - **DO** return `503 Service Unavailable` when the server cannot fulfill the request either for some specific interval or undetermined amount of time. If possible, include a `Retry-After` response header with either a date or a number of seconds as a hint.
-
-### How to Treat Errors in Clients
-
-- **DO** treat `400 Bad Request` by looking into the body of the error representation for hints for the root cause of the problem.
-- **DO** retry the request on `401 Unauthorized` responses with the `Authorization` header containing the credentials. If the client is user-facing, prompt the user to supply credentials. In other cases, obtain the necessary security credentials.
-- **DO NOT** repeat the request on `403 Forbidden`
-- **DO** clean up client stored data on `404 Not Found`
-- **DO** Look for the `Allow` header for valid methods on `405 Not Allowed`
-- **DO** treat `406 Not Acceptable`. See [Content Negotiation](/content_negotiation).
-- **DO** treat `409 Conflict` by looking for the conflicts listed in the body of the representation of `PUT`
-- **DO** treat `410 Gone` the same as `404 Not Found`.
-- **DO** treat `412 Precondition Failed`. See [Caching](/caching).
-- **DO** look for hints on valid size in the body of the error on `413 Request Entity Too Large`
-- **DO** see the body of the representation to learn the supported media types for the request on `415 Unsupported Media Type`
-- **DO** log the error, and then notify the server developers of `500 Internal Server Error`
-- **DO** check the response of `503 Service Unavailable` for a `Retry-After` header, avoid retrying until that period of time (back-off logic).
-- **DO NOT** treat HTTP errors as I/O or network exceptions. Treat them as first-class application objects.
 
 ### Entity Identifiers in Representations
 
@@ -1094,10 +845,3 @@ To include URI templates in a representation:
 }
 ```
 
-#### Using Links in Clients
-
-- **DO** extract URIs and URI templates from links based on known link relation types. These links along with other resource data constitute the current state of the application.
-- **DO** store the URIs and the relation type along with other representation data, if the application is long running.
-- **DO** make flow decisions based on the presence or absence of links.
-- **DO** store the knowledge of whether a representation contains a given link.
-- **DO** check the documentation of the link relation to learn any associated business rules regarding authentication, permanence of the URI, methods, and media types supported, etc.

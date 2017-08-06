@@ -96,9 +96,3 @@ Queries usually involve filtering, sorting and projections. When providing query
     ### SHOULD:: Allow Optional Embedding of Sub-Resources
 
     Please use the BNF grammar, as already defined above for filtering, when it comes to an embedding query syntax.
-
-### Using URIs in Clients
-
-- **DO** update local copies of old URIs when receiving `301 Moved Permanently`.
-- **DO** verify that the `Location` URI maps to a trusted server.
-- **DO NOT** disable support of redirects in client applications. Instead, consider a sensible limit on the number of redirects a client can follow. Disabling redirects altogether will break the client when the server change URIs.

@@ -177,12 +177,3 @@ Content-Location: http://www.example.org/images/task/1
 ### **_Batch Operations_**
 
 **_TBD_**
-
-### Using Methods in Clients
-
-- **DO** treat `GET`, `OPTIONS`, and `HEAD` as safe operations, and send as required. Include `If-Unmodified-Since` and/or `If-Match` conditional headers, if applicable.
-- **DO** resubmit `GET`, `PUT`, and `DELETE` requests, in case of failures, to confirm.
-- **DO** implement retry logic, whenever you encounter a failure for an idempotent method.
-- **DO** submit a `POST` request with a representation of the resource to be created to the factory resource.
-- **DO NOT** repeat `POST` requests unless the documentation states that is idempotent.
-- **DO NOT** treat various HTTP-level errors as failures (network or software) or like exceptions.
