@@ -2,8 +2,6 @@
 
 A *representation* (request/response) is concrete and real. Here we will offer guidelines as to what makes a good response design. To ensure scalability and longevity of the API, along with providing helpful responses that developers can understand and trust, we will cover what HTTP headers are appropriate in a response, which HTTP status codes to return, as well as how to include descriptive error representations on failures.
 
-    Updates & creation should return a resource representation
-
 ### HTTP Headers
 
 Headers ensure visibility, discoverability, routing by proxies, caching, optimistic concurrency, and correct operation of HTTP as an application protocol.
@@ -55,18 +53,18 @@ However, depending on what clients and servers use custom headers for, they can 
 
 ### End-To-End HTTP Headers
 
-The following end-to-end HTTP headers have been specified:
+The following may be candidates for end-to-end HTTP headers:
 
-- X-Flow-ID: Correlation ID of the request, which is written into the logs and passed to called services. 
-- X-UID:  Generic user id that owns the passed (OAuth2) access token. May save additional token validation round trips
-- X-Sales-Channel
-- X-Device-Type
-- X-Device-OS
-- X-App-Domain
+- Correlation ID of the request, which is written into the logs and passed to upstream services. 
+- Generic user id that owns the passed (OAuth2) access token. May save additional token validation round trips
+- Sales channel
+- Device type, OS, and version
+- App version, etc.
+
+<!-- -->
 
 - **DO** use the specified end-to-end HTTP headers.
 - **DO** propagate the end-to-end HTTP headers to upstream servers. Header names and values must remain intact.
-
 
 ### Format and a Media Type
 
@@ -183,6 +181,12 @@ Example:
 > Although the size of the collection is useful for building user interfaces, avoid computing the exact size of the collection. It may be expensive to compute, volatile, or even confidential. Providing a hint is usually good enough.
 
 <!-- TODO -->
+
+    ## PAGINATION
+
+    limit — to restrict the number of entries. See Pagination section below. Hint: You can use size as an alternate query string.
+    offset — numeric offset page start. See Pagination section below. Hint: In combination with limit, you can use page as an alternative to offset.
+    cursor — key-based page start. See Pagination section below.
 
     ## Pagination and partial response
 
@@ -308,7 +312,7 @@ Example:
 
     # Pagination
 
-    ### MUST: Support Pagination
+    ### Support Pagination
 
     Access to lists of data items must support pagination for best client side batch processing and iteration experience. This holds true for all lists that are (potentially) larger than just a few hundred entries.
 
@@ -318,7 +322,7 @@ Example:
     Cursor-based — aka key-based — pagination: a unique key element identifies the first page entry (see also Facebook's guide)
     The technical conception of pagination should also consider user experience related issues. As mentioned in this article, jumping to a specific page is far less used than navigation via next/previous page links. This favours cursor-based over offset-based pagination.
 
-    ### SHOULD:: Prefer Cursor-Based Pagination, Avoid Offset-Based Pagination
+    ### Prefer Cursor-Based Pagination, Avoid Offset-Based Pagination
 
     Cursor-based pagination is usually better and more efficient when compared to offset-based pagination. Especially when it comes to high-data volumes and / or storage in NoSQL databases.
 
@@ -346,7 +350,7 @@ Example:
     Use the Index, Luke
     Paging in PostgreSQL
 
-    ### MAY: Use Pagination Links Where Applicable
+    ### Use Pagination Links Where Applicable
 
     API implementing HATEOS may use simplified hypertext controls for pagination within collections.
     Those collections should then have an items attribute holding the items of the current page. The collection may contain additional metadata about the collection or the current page (e.g. index, page_size) when necessary.

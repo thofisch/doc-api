@@ -57,6 +57,10 @@
 - **DO** check the documentation of the link relation to learn any associated business rules regarding authentication, permanence of the URI, methods, and media types supported, etc.
 
 
+## Content Negotiation
+
+- **DO NOT** assume that servers support content negotiation, and be prepared to receive a representation that does not meet the `Accept-*` headers.
+
 ## Extensibility
 
 ### How to Implement Clients to Support Extensibility

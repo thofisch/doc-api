@@ -4,7 +4,7 @@ Before discussing the individual HTTP methods we will offer some general advise:
 
 - **DO** use HTTP methods correctly.
 - **DO** stay consistent with the HTTP verb definitions.
-- **DO** use CRUD for basic operations, as most developers will be familiar with this way of working with an API. This means using `POST` for **C**reating, `GET` for **R**eading, `PUT` for **U**pdating, and `DELETE` for **D**eleting.
+- **DO** use **CRUD** for basic operations, as most developers will be familiar with this way of working with an API. This means using `POST` for **C**reating, `GET` for **R**eading, `PUT` for **U**pdating, and `DELETE` for **D**eleting.
 
 HTTP supports the following methods:
 
@@ -55,8 +55,8 @@ HEAD requests are used to retrieve header information of resources, and has the 
 - **DO** return `200 Ok` or `204 No Content` if the resource was updated.
 - **DO** use a comibation of `ETag` and `If-Match` header for concurrency.
 - **DO** return `404 Not Found` is `PUT` does not support creation.
-- **CONSIDER** before using `PUT` on a collection resources as it implies replacing the entire collection.
 - **CONSIDER** using `PATCH` if making partial updates to entire resources become increasingly cumbersome.
+- **CONSIDER** before using `PUT` on a collection resources as it implies replacing the entire collection.
 - **DO NOT** use `PUT` to create new resources unless the clients can decide URIs of resources (e.g., WebDAV), instead use `POST`.
 
 ### DELETE
@@ -109,7 +109,8 @@ It is important to understand the difference between `PUT` and `PATCH`.
 While it is valid to use either `PUT` or `POST` to create new resources, the general consensus is that creating a new resource without knowing the final URI is a `POST` operation (each call will yield a new resource). If the URI (or part of it) is known, use `PUT`, because successive calls will not create a new resource, as `PUT` is idempotent.
 
 - **DO** return `201 Created` and a `Location` header containing the URI of the newly created resource.
-- **DO** include a `Content-Location` header containing the URI of the newly created resource, if the response body includes a complete representation of the newly created resource.
+- **CONSIDER** returning the newly created resource representation in the response.
+- **CONSIDER** include a `Content-Location` header containing the URI of the newly created resource, if the response body includes a complete representation of the newly created resource.
 - **CONSIDER** including the `Last-Modified` and `ETag` headers of the newly created resource for optimistic concurrency.
 
 ### Large and Stored Queries

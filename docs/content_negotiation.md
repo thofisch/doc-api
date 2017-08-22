@@ -1,43 +1,5 @@
 ## Content Negotiation (conneg)
 
-    ## Supporting multiple formats
-
-    We recommend that you support more than one format - that you push things out in one format and accept as many formats as necessary. You can usually automate the mapping from format to format.
-
-    Here's what the syntax looks like for a few key APIs.
-
-    Google Data
-
-    ?alt=json
-
-    Foursquare
-
-    /venue.json
-
-    Digg*
-
-    Accept: application/json
-
-    ?type=json
-
-    * The type argument, if present, overrides the Accept header.
-
-    Digg allows you to specify in two ways: in a pure RESTful way in the Accept header or in  the type parameter in the URL. This can be confusing - at the very least you need to document what to do if there are conflicts.
-
-    We recommend the Foursquare approach.
-
-    To get the JSON format from a collection or specific element:
-
-    dogs.json
-
-    /dogs/1234.json
-
-    Developers and even casual users of any file system are familiar to this dot notation. It also requires just one additional character (the period) to get the point across.
-
-    What about default formats?
-
-    In my opinion, JSON is winning out as the default format. JSON is the closest thing we have to universal language. Even if the back end is built in Ruby on Rails, PHP, Java, Python etc., most projects probably touch JavaScript for the front-end. It also has the advantage of being terse - less verbose than XML.
-
 There are two types of content negotiation:
 
 - *Server-driven* negotiation, uses request headers to select a variant
@@ -60,20 +22,12 @@ It is important for the client to indicate its preferences and capabilities to t
 
 Even when you know out of band this information, clearly indicating the client's preferences and capabilities can help the client in the face of change. It is better to ask for a specific representation instead of getting a default one, because the default can change.
 
-When making a request:
-
-- **DO** add an `Accept` header with a comma-separated list of media type preferences. If the client prefers one media type over the other, add a `q` parameter with each media type.
-- **DO** add `*;q=0.0` in the `Accept` header to indicate to the server it cannot process anything other than the media types listed in the `Accept` header, if the client can process only certain formats.
-- **DO** add an `Accept-Charset` header with the preferred character set, if the client can process characters of a specific character set only, if not, avoid adding this header
-- **DO** add an `Accept-Language` header for the preferred language of the representation.
-- **DO** add an `Accept-Encoding` header listing the supported encodings,if the client is able to decompress representations compressed encoding such as `gzip`, `compress`, or `deflate`, add an `Accept-Encoding` header listing the supported encodings, if not, skip this header
-- **CONSIDER** brotli (`br`).
-- **DO NOT** assume that servers support content negotiation, and be prepared to receive a representation that does not meet the `Accept-*` headers.
-
 #### Content Type Negotiation
 
 *content negotiation (include or exclude and force to e.g. json)?*
 
+- **DO** add an `Accept` header with a comma-separated list of media type preferences. If the client prefers one media type over the other, add a `q` parameter with each media type.
+- **DO** add `*;q=0.0` in the `Accept` header to indicate to the server it cannot process anything other than the media types listed in the `Accept` header, if the client can process only certain formats.
 - **DO** return a representation using the default format, if the request has no `Accept` header.
 - **DO** parse the header, sort the values of media types by the `q` parameters in descending order, if the request has an `Accept` header, then select a media type from the list that the server supports.
 - **DO** handle [content negotiation failures](#negotiation-failures) to determine an appropriate response
@@ -82,6 +36,7 @@ When making a request:
 
 #### Language Negotiation
 
+- **DO** add an `Accept-Language` header for the preferred language of the representation.
 - **DO** return a representation with all human-readable text in a default language, if the request has no `Accept-Language` header.
 - **DO** parse the header, sort the languages by the `q` parameters in descending order, and select the first language in the list that the server can support, if the request has an `Accept-Language` header
 - **DO** use a default language for the response, if the server does not support any languages in the list, and the `Accept-Language` header does not contain `*;q=0.0`.
@@ -91,6 +46,7 @@ This approach is best suited when representations in different languages differ 
 
 #### Character Encoding Negotiation
 
+- **DO** add an `Accept-Charset` header with the preferred character set, if the client can process characters of a specific character set only, if not, avoid adding this header
 - **DO** encode the textual representation of the response using the encoding the client ask for via the `Accept-Charset` header. Encoding the response using that encoding promotes interoperability.
 - **DO** return a representation using `UTF-8` encoding, if the request has no `Accept-Charset` header.
 - **DO** parse the header, sort the character set by the `q` parameters in descending order, and select the first character set that the server can support for encoding.
@@ -103,10 +59,12 @@ This approach is best suited when representations in different languages differ 
 
 To support compression or *content encoding*:
 
+- **DO** add an `Accept-Encoding` header listing the supported encodings,if the client is able to decompress representations compressed encoding such as `gzip`, `compress`, or `deflate`, add an `Accept-Encoding` header listing the supported encodings, if not, skip this header
 - **DO** use the compression technique from the `Accept-Encoding` header, if the server is capable of compressing the response body.
 - **DO** parse the header, sort the character set by the `q` parameters in descending order, and select the first content encoding the server supports.
 - **DO** ignore this header, if no encoding in this header matches the server's supported encodings.
 - **CONSIDER** including a `Vary` (see [The Vary Header](#the-vary-header)) response header.
+- **CONSIDER** brotli (`br`).
 - **DO NOT** compress representations, if the request has no `Accept-Encoding` header.
 
 #### The Vary Header

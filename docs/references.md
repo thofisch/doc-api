@@ -25,4 +25,5 @@
 ### Citations
 ### Bibliography
 
-Allamaraju, S. (2010). RESTful web services cookbook: Solutions for improving scalability and simplicity. Yahoo Press.
+- Allamaraju, S. (2010). RESTful web services cookbook: Solutions for improving scalability and simplicity. Yahoo Press.
+- Biehl, M. (2016). RESTful API Design: APIs your customers will love. API-University Press.
