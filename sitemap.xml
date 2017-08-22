@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+    <url>
+     <loc>/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/apis/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/uniform_interface/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/resource_identifiers/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/resources/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/methods/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/representations/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/hypermedia/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/content_negotiation/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/caching/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/security/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/versioning_and_extensibility/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/documentation_and_discovery/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/specifications/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/mocking/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/clients/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/other_topics/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/misc/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/references/</loc>
+     <lastmod>2017-08-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+</urlset>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Security - API Design Guidelines</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Security";
+    var mkdocs_page_input_path = "security.md";
+    var mkdocs_page_url = "/security/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> API Design Guidelines</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Introduction#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../apis/">APIs#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../uniform_interface/">Uniform Interface#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resource_identifiers/">Resource Identifiers#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resources/">Resources#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../methods/">Methods</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../representations/">Representations</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../hypermedia/">Hypermedia</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../content_negotiation/">Content Negotiation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../caching/">Caching</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Security</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#security">Security</a></li>
+    
+
+    <li class="toctree-l2"><a href="#security_1">Security</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../versioning_and_extensibility/">Versioning and Extensibility</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../documentation_and_discovery/">Documentation and Discovery</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../specifications/">Specifications</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mocking/">Mocking</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../clients/">Clients</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../other_topics/">Other topics</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../misc/">Misc</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../references/">References</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">API Design Guidelines</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Security</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="security">Security</h2>
+<pre><code>&lt;!-- TODO --&gt;
+
+## Security
+
+### MUST: Secure Endpoints with OAuth 2.0
+
+&lt;!--
+Out-of-band authentication
+CORS
+
+Use Access and Refresh Tokens
+    Access Tokens
+    Refresh Tokens
+    Logging In
+    Renewing a Token
+    Validating a Token
+    Terminating a Session
+    Keep JWTs Small
+
+Always use SSL. No exceptions. One thing to watch out for is non-SSL access to API URLs. Do not redirect these to their SSL counterparts. Throw a hard error instead!
+
+A RESTful API should be stateless. This means that request authentication should not depend on cookies or sessions. Instead, each request should come with some sort authentication credentials.
+
+--&gt;
+
+# Security.
+
+Security.
+
+Security.
+An API Manager should also be designed to handle security, not just by validating a boarding pass (API key) and directing them to their appropriate gate (permissions, SLA tier), but your API Manager should watch out for other dangerous threats, such as malicious IPs, DDoS, content threats (such as with JSON or XML), and others.
+It should also be designed to work with your current user validation systems such as OAuth2 to help protect your user's sensitive data (such as their username and password) within your API.
+
+ Keep in mind that even the most righteous of applications are still prone to being hacked – and if they have access to your user's sensitive data, that means that hackers might get access to it too.
+
+ It's always better to never have your users expose their credentials through the API (such as with basic auth) but instead rely on your website to handle logins and then return back an access token as OAuth2 does.
+
+## But... Security is Hard
+
+One of my favorite talks, by Anthony Ferrara sums this up very nicely...  Don't do it.
+
+ Leave it for the Experts.
+
+ Granted, his talk was specifically on encryption, but there's a lot of careful thought, planning, and considerations that need to be taken when building an API Management tool.
+
+ You can certainly build it yourself, and handling API keys or doing IP white-listing/ black-listing is fairly easy to do.
+
+ However, like an airport, what you don't see is all of the stuff happening in the background, all the things being monitored carefully, security measures implemented by experts with years of experience in risk mitigation.
+For that reason, as tempting as it might be to build one yourself, I would strongly encourage you to take a look at a professional API Management company- such as MuleSoft (of course, I might be a little biased).
+
+## Authentication
+
+There are many schools of thought. My colleagues at Apigee and I don't always agree on how to handle authentication - but overall here's my take.
+
+Let's look at these three top services. See how each of these services handles things differently:
+
+PayPal
+
+Permissions Service API
+
+Facebook
+
+OAuth 2.0
+
+Twitter
+
+OAuth 1.0a
+
+Note that PayPal's proprietary three-legged permissions API was in place long before OAuth was conceived.
+
+What should you do?
+
+Use the latest and greatest OAuth - OAuth 2.0 (as of this writing). It means that Web or mobile apps that expose APIs don't have to share passwords. It allows the API provider to revoke tokens for an individual user, for an entire app, without requiring the user to change their original password. This is critical if a mobile device is compromised or if a rogue app is discovered.
+
+Above all, OAuth 2.0 will mean improved security and better end-user and consumer experiences with Web and mobile apps.
+
+Don't do something *like* OAuth, but different. It will be frustrating for app developers if they can't use an OAuth library in their language because of your variation.
+</code></pre>
+<h2 id="security_1">Security</h2>
+<p>Securing may require:
+- ensure that only authenticated users access resources
+- ensure the condidentiality and integrity of information right from the moment it is collected until the time it is stored and later presented to authorized entities or users.
+- prevent unauthorized or malicious clients from abusing resources and data.
+- maintain privacy, and follow the laws of the land that govern various security aspects.</p>
+<p>How to use Basic Authentication to Authenticate Clients</p>
+<ul>
+<li>return <code>401 Authorization Required</code> along with a <code>WWW-Authenticate: Basic realm="Some name"</code>.</li>
+</ul>
+<p>On the client, concatenate the client identifier (a username if the client is making a request on behalf of a user) and the shared secret (password) as <code>&lt;identifier&gt;:&lt;secret&gt;</code> and then compute the Base64 encoding on this text. Include the value in the <code>Authorization: Basic &lt;Base64 encoded value</code>. On the server decode the text and verify the values.</p>
+<p>Do not use basic authentication unless using TLS to connect to the server.</p>
+<p>How to use Three-Legged OAuth
+How to use Two-Legged OAuth
+How to Deal with Sensitive Information in URIs</p>
+<p>How to Maintain the Confidentiality and Integrity of Representations</p>
+<pre><code>use TLS and make resource accessible over a server configured to serve request only using HTTPS.
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../versioning_and_extensibility/" class="btn btn-neutral float-right" title="Versioning and Extensibility">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../caching/" class="btn btn-neutral" title="Caching"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../caching/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../versioning_and_extensibility/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

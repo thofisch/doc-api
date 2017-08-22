@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Clients - API Design Guidelines</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Clients";
+    var mkdocs_page_input_path = "clients.md";
+    var mkdocs_page_url = "/clients/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> API Design Guidelines</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Introduction#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../apis/">APIs#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../uniform_interface/">Uniform Interface#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resource_identifiers/">Resource Identifiers#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resources/">Resources#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../methods/">Methods</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../representations/">Representations</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../hypermedia/">Hypermedia</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../content_negotiation/">Content Negotiation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../caching/">Caching</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../security/">Security</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../versioning_and_extensibility/">Versioning and Extensibility</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../documentation_and_discovery/">Documentation and Discovery</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../specifications/">Specifications</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mocking/">Mocking</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Clients</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#resource-identifiers">Resource Identifiers</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#using-uris-in-clients">Using URIs in Clients</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#methods">Methods</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#using-methods-in-clients">Using Methods in Clients</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#representations">Representations</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#http-headers-in-clients">HTTP Headers in Clients</a></li>
+        
+            <li><a class="toctree-l3" href="#how-to-treat-errors-in-clients">How to Treat Errors in Clients</a></li>
+        
+            <li><a class="toctree-l3" href="#hateos">HATEOS</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#content-negotiation">Content Negotiation</a></li>
+    
+
+    <li class="toctree-l2"><a href="#extensibility">Extensibility</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#how-to-implement-clients-to-support-extensibility">How to Implement Clients to Support Extensibility</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../other_topics/">Other topics</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../misc/">Misc</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../references/">References</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">API Design Guidelines</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Clients</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="resource-identifiers">Resource Identifiers</h2>
+<h3 id="using-uris-in-clients">Using URIs in Clients</h3>
+<ul>
+<li><strong>DO</strong> update local copies of old URIs when receiving <code>301 Moved Permanently</code>.</li>
+<li><strong>DO</strong> verify that the <code>Location</code> URI maps to a trusted server.</li>
+<li><strong>DO NOT</strong> disable support of redirects in client applications. Instead, consider a sensible limit on the number of redirects a client can follow. Disabling redirects altogether will break the client when the server change URIs.</li>
+</ul>
+<h2 id="methods">Methods</h2>
+<h3 id="using-methods-in-clients">Using Methods in Clients</h3>
+<ul>
+<li><strong>DO</strong> treat <code>GET</code>, <code>OPTIONS</code>, and <code>HEAD</code> as safe operations, and send as required. Include <code>If-Unmodified-Since</code> and/or <code>If-Match</code> conditional headers, if applicable.</li>
+<li><strong>DO</strong> resubmit <code>GET</code>, <code>PUT</code>, and <code>DELETE</code> requests, in case of failures, to confirm.</li>
+<li><strong>DO</strong> implement retry logic, whenever you encounter a failure for an idempotent method.</li>
+<li><strong>DO</strong> submit a <code>POST</code> request with a representation of the resource to be created to the factory resource.</li>
+<li><strong>DO NOT</strong> repeat <code>POST</code> requests unless the documentation states that is idempotent.</li>
+<li><strong>DO NOT</strong> treat various HTTP-level errors as failures (network or software) or like exceptions.</li>
+</ul>
+<h2 id="representations">Representations</h2>
+<h3 id="http-headers-in-clients">HTTP Headers in Clients</h3>
+<ul>
+<li><strong>DO</strong> return <code>400 Bad Request</code> on servers, when you receive a representation with no <code>Content-Type</code>, avoid guessing the type of the representation.</li>
+<li><strong>DO</strong> let your network library deal with uncompressing compressed representations (<code>Content-Encoding</code>)</li>
+<li><strong>DO</strong> read and store the value of <code>Content-Language</code></li>
+<li><strong>DO NOT</strong> use <code>Content-Encoding</code> in HTTP requests, unless you know out of band that the target server supports a particular encoding method.</li>
+<li><strong>DO NOT</strong> check for the presence of the <code>Content-Length</code> header without first confirming the absence of <code>Transfer-Encoding: chunked</code></li>
+</ul>
+<h3 id="how-to-treat-errors-in-clients">How to Treat Errors in Clients</h3>
+<pre><code>Even though they might not be documented - they may very much occur in production, so clients should be prepared for unexpected response codes, and in case of doubt handle them like they would handle the corresponding x00 code. Adding new response codes (specially error responses) should be considered a compatible API evolution.
+</code></pre>
+<ul>
+<li><strong>DO</strong> treat <code>400 Bad Request</code> by looking into the body of the error representation for hints for the root cause of the problem.</li>
+<li><strong>DO</strong> retry the request on <code>401 Unauthorized</code> responses with the <code>Authorization</code> header containing the credentials. If the client is user-facing, prompt the user to supply credentials. In other cases, obtain the necessary security credentials.</li>
+<li><strong>DO NOT</strong> repeat the request on <code>403 Forbidden</code></li>
+<li><strong>DO</strong> clean up client stored data on <code>404 Not Found</code></li>
+<li><strong>DO</strong> Look for the <code>Allow</code> header for valid methods on <code>405 Not Allowed</code></li>
+<li><strong>DO</strong> treat <code>406 Not Acceptable</code>. See <a href="../content_negotiation">Content Negotiation</a>.</li>
+<li><strong>DO</strong> treat <code>409 Conflict</code> by looking for the conflicts listed in the body of the representation of <code>PUT</code></li>
+<li><strong>DO</strong> treat <code>410 Gone</code> the same as <code>404 Not Found</code>.</li>
+<li><strong>DO</strong> treat <code>412 Precondition Failed</code>. See <a href="../caching">Caching</a>.</li>
+<li><strong>DO</strong> look for hints on valid size in the body of the error on <code>413 Request Entity Too Large</code></li>
+<li><strong>DO</strong> see the body of the representation to learn the supported media types for the request on <code>415 Unsupported Media Type</code></li>
+<li><strong>DO</strong> log the error, and then notify the server developers of <code>500 Internal Server Error</code></li>
+<li><strong>DO</strong> check the response of <code>503 Service Unavailable</code> for a <code>Retry-After</code> header, avoid retrying until that period of time (back-off logic).</li>
+<li><strong>DO NOT</strong> treat HTTP errors as I/O or network exceptions. Treat them as first-class application objects.</li>
+</ul>
+<h3 id="hateos">HATEOS</h3>
+<h4 id="using-links-in-clients">Using Links in Clients</h4>
+<ul>
+<li><strong>DO</strong> extract URIs and URI templates from links based on known link relation types. These links along with other resource data constitute the current state of the application.</li>
+<li><strong>DO</strong> store the URIs and the relation type along with other representation data, if the application is long running.</li>
+<li><strong>DO</strong> make flow decisions based on the presence or absence of links.</li>
+<li><strong>DO</strong> store the knowledge of whether a representation contains a given link.</li>
+<li><strong>DO</strong> check the documentation of the link relation to learn any associated business rules regarding authentication, permanence of the URI, methods, and media types supported, etc.</li>
+</ul>
+<h2 id="content-negotiation">Content Negotiation</h2>
+<ul>
+<li><strong>DO NOT</strong> assume that servers support content negotiation, and be prepared to receive a representation that does not meet the <code>Accept-*</code> headers.</li>
+</ul>
+<h2 id="extensibility">Extensibility</h2>
+<h3 id="how-to-implement-clients-to-support-extensibility">How to Implement Clients to Support Extensibility</h3>
+<p>If the client is capable of storing the complete representation locally, store everything.</p>
+<p>Do not assume that the representation is of a fixed media type, character encoding, content language, or content encoding.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../other_topics/" class="btn btn-neutral float-right" title="Other topics">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../mocking/" class="btn btn-neutral" title="Mocking"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../mocking/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../other_topics/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

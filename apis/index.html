@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>APIs# - API Design Guidelines</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "APIs#";
+    var mkdocs_page_input_path = "apis.md";
+    var mkdocs_page_url = "/apis/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> API Design Guidelines</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Introduction#</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">APIs#</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#application-programming-interfaces">Application Programming Interfaces</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#rest-all-the-way-down">REST All the Way Down</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../uniform_interface/">Uniform Interface#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resource_identifiers/">Resource Identifiers#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resources/">Resources#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../methods/">Methods</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../representations/">Representations</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../hypermedia/">Hypermedia</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../content_negotiation/">Content Negotiation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../caching/">Caching</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../security/">Security</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../versioning_and_extensibility/">Versioning and Extensibility</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../documentation_and_discovery/">Documentation and Discovery</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../specifications/">Specifications</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mocking/">Mocking</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../clients/">Clients</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../other_topics/">Other topics</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../misc/">Misc</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../references/">References</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">API Design Guidelines</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>APIs#</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="application-programming-interfaces">Application Programming Interfaces</h1>
+<p>An API specifies how software should interact. How a client can use a public API exposed by a server. Particularly, what URIs are available, what HTTP methods may be used, what query string parameters it accepts, what data can be sent, and what responses to expect.</p>
+<p>Web APIs can typically be broken into two broad categories: <em>RPC</em> and <em>REST</em>.</p>
+<blockquote>
+<p><strong>RPC (Remote Procedure Call)</strong><br/>
+RPC (e.g., XML-RPC, SOAP, etc.) is generally a poor fit for most web API implementations, as they usually require special purpose libraries or SDKs to work properly. A requirement that a lot of clients cannot meet without a lot of extra work and/or clunky third-party libraries. This, and the fact that most RPC implementations do not use HTTP to its full extend, has led us to <strong>exclude RPC from these guidelines</strong>. However, if all of your clients are using legacy systems that depend on SOAP libraries, it may make more sense in that case to build a SOAP API for them. A lot of documentation, best practices and general advise on how to build RPC APIs can be found throughout the web.</p>
+</blockquote>
+<h2 id="rest-all-the-way-down">REST All the Way Down</h2>
+<p>We will focus our discussion on REST (REpresentational State Transfer). Especially on how to achieve a more RESTful web API, by leveraging the capabilities of HTTP. For more information about REST itself, please refer to the <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">Wikipedia article on REST</a> or <a href="http://whatisrest.com">WhatIsREST</a>.</p>
+<p>Some of the aspects of designing RESTful web APIs include:</p>
+<ul>
+<li><em>Unique identification</em> of resources by using URIs.</li>
+<li>Operation on resources by using the available <em>HTTP methods</em>.</li>
+<li>A choice of <em>media types and formats</em> that allow clients to specify representation formats they can render, and for servers to honor those (or indicate if it cannot).</li>
+<li><em>Linking</em> between resources to indicate relationships (e.g., hypermedia links).</li>
+</ul>
+<p>Today, most web APIs are not truly REST APIs, instead they tend to be of a varying degree of RESTful. Therefore, the <a href="http://martinfowler.com/articles/richardsonMaturityModel.html">Richardson Maturity Model</a> is often used to describe what it takes to make a well-designed REST API:</p>
+<ul>
+<li><strong>Level 0</strong>: Uses HTTP as a transport mechanism for RPC.</li>
+<li><strong>Level 1</strong>: Uses URIs for individual resources, but does not use HTTP methods, media types, or linking between resources.</li>
+<li><strong>Level 2</strong>: Uses HTTP methods and headers for interactions with resources, and returns appropriate HTTP status codes.</li>
+<li><strong>Level 3</strong>: Uses hypermedia controls for discoverability, which also helps making an API more self-documenting.</li>
+</ul>
+<p>So a good REST API should:</p>
+<ul>
+<li>Use unique URIs to expose resources for clients to use.</li>
+<li>Use the full spectrum of HTTP, to perform operations on those resources, and allow different representations of content.</li>
+<li>Provide relational links for resources, to inform the client what can be done next.</li>
+</ul>
+<p>In these guidelines we will offer advise on how to achieve this, when implementing clients as well as servers. Specifically we will focus on:</p>
+<ul>
+<li>How to identify resources by using URIs</li>
+<li>How to use the available HTTP methods</li>
+<li>What representation formats to you expose and what to do when the server cannot fulfill a request for a given representation</li>
+<li>How to report errors, using HTTP status codes and representations</li>
+<li>How to handle security, including HTTP authentication, OAuth2, and API tokens</li>
+<li>How to handle hypermedia linking</li>
+<li>How to document your API</li>
+<li><strong><em>And more...</em></strong></li>
+</ul>
+<p>Because REST is an architectural style and not a strict standard, it allows for a lot of flexibly. So before jumping straight into designing an API, it can be helpful to think about:</p>
+<ul>
+<li>target audience (customers, third-party services, or other developers looking to take advantage of your services for their own customers).</li>
+<li>ease of life for the consuming developers</li>
+<li>use cases</li>
+<li>technologies used</li>
+<li>products/services to expose</li>
+<li>other services to interact with</li>
+</ul>
+<p>As long as the API only has one consumer, one could argue that it's entire job is to service that consumer. </p>
+<p><strong>Make it RESTful, but be pragmatic!</strong> Aiming at a level above 2 (according to Richardson's Maturity Model) may simply be impractical.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../uniform_interface/" class="btn btn-neutral float-right" title="Uniform Interface#">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Introduction#"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../uniform_interface/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

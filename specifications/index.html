@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Specifications - API Design Guidelines</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Specifications";
+    var mkdocs_page_input_path = "specifications.md";
+    var mkdocs_page_url = "/specifications/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> API Design Guidelines</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Introduction#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../apis/">APIs#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../uniform_interface/">Uniform Interface#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resource_identifiers/">Resource Identifiers#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resources/">Resources#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../methods/">Methods</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../representations/">Representations</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../hypermedia/">Hypermedia</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../content_negotiation/">Content Negotiation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../caching/">Caching</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../security/">Security</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../versioning_and_extensibility/">Versioning and Extensibility</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../documentation_and_discovery/">Documentation and Discovery</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Specifications</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#spec-driven-development">Spec-Driven Development</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#feedback">Feedback</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#must-follow-api-first-principle">MUST: Follow API First Principle</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#must-write-apis-in-us-english">MUST: Write APIs in U.S. English</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mocking/">Mocking</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../clients/">Clients</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../other_topics/">Other topics</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../misc/">Misc</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../references/">References</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">API Design Guidelines</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Specifications</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="spec-driven-development">Spec-Driven Development</h2>
+<pre><code>The overall point of view on API design is to approach API design from the 'outside-in' perspective.
+
+The orientation for APIs is to think about design choices from the application developer's point of view.
+
+The goal is to make the developers as successful as possible.
+
+The primary design principle when crafting your API should be to maximize developer productivity and success. This is what we call pragmatic REST.
+
+You have to get the design right, because design communicates how something will be used.
+
+The question becomes - what is the design with optimal benefit for the app developer?
+
+The developer point of view is the guiding principle for all the specific tips and best practices we've compiled
+
+We call our point of view in API design "pragmatic REST", because it places the success of the developer over and above any other design principle. The developer is the customer for the Web API.
+
+The success of an API design is measured by how quickly developers can get up to speed and start enjoying success using your API.
+</code></pre>
+<h3 id="feedback">Feedback</h3>
+<p>One of the quickest ways to get feedback on your API is to define it using a specification language. An API specification language allows for building APIs in a consistent manner, utilizing pattern design and code reuse to help ensure that the APIs remains uniform across the full interface, keeping resources and methods standardized.</p>
+<ul>
+<li><strong>DO</strong> define Your API in a flexible, but standard specification language (e.g. RAML, Swagger, JSON-API, etc.).</li>
+</ul>
+<blockquote>
+<p>Be aware that none of the popular specification frameworks support Hypermedia Links (let alone HATEOS). <!-- TODO: link to Jimmy Bogart blog --></p>
+</blockquote>
+<pre><code>### Code to the Spec... and Don't Deviate
+
+If you have taken advantage of the above steps and carefully laid out your API, carefully designed your spec, user tested, and perfected your API – there is nothing worse than throwing all that work away by deviating from the spec and doing one-off things.
+</code></pre>
+<h2 id="must-follow-api-first-principle">MUST: Follow API First Principle</h2>
+<p>As mentioned in the introduction, API First is one of our engineering and architecture principles. In a nutshell API First requires two aspects:</p>
+<ul>
+<li>define APIs outside the code first using a standard specification language get early review feedback from peers and client developers</li>
+<li>By defining APIs outside the code, we want to facilitate early review feedback and also a development discipline that focus service interface design on...</li>
+<li>profound understanding of the domain and required functionality</li>
+<li>generalized business entities / resources, i.e. avoidance of use case specific APIs</li>
+<li>clear separation of WHAT vs. HOW concerns, i.e. abstraction from implementation aspects — APIs should be stable even if we 
+    replace complete service implementation including its underlying technology stack</li>
+<li>Moreover, API definitions with standardized specification format also facilitate...</li>
+<li>single source of truth for the API specification; it is a crucial part of a contract between service provider and client users</li>
+<li>infrastructure tooling for API discovery, API GUIs, API documents, automated quality checks</li>
+</ul>
+<p>An element of API First are also this API Guidelines and a lightweight API review process [internal link] as to get early review feedback from peers and client developers. Peer review is important for us to get high quality APIs, to enable architectural and design alignment and to supported development of client applications decoupled from service provider engineering life cycle.</p>
+<p>It is important to learn, that API First is not in conflict with the agile development principles that we love. Service applications should evolve incrementally — and so its APIs. Of course, our API specification will and should evolve iteratively in different cycles; however, each starting with draft status and early team and peer review feedback. API may change and profit from implementation concerns and automated testing feedback. API evolution during development life cycle may include breaking changes for not yet productive features and as long as we have aligned the changes with the clients. Hence, API First does not mean that you must have 100% domain and requirement understanding and can never produce code before you have defined the complete API and get it confirmed by peer review. On the other hand, API First obviously is in conflict with the bad practice of publishing API definition and asking for peer review after the service integration or even the service productive operation has started. It is crucial to request and get early feedback — as early as possible, but not before the API changes are comprehensive with focus to the next evolution step and have a certain quality (including API Guideline compliance), already confirmed via team internal reviews.</p>
+<h3 id="must-write-apis-in-us-english">MUST: Write APIs in U.S. English</h3>
+<p>The API Guild drafted and owns this document.</p>
+<pre><code>The list of status code that can be omitted from API specifications includes but is not limited to:
+
+401 Unauthorized
+403 Forbidden
+404 Not Found unless it has some additional semantics
+405 Method Not Allowed
+406 Not Acceptable
+408 Request Timeout
+413 Payload Too Large
+414 URI Too Long
+415 Unsupported Media Type
+500 Internal Server Error
+503 Service Unavailable
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../mocking/" class="btn btn-neutral float-right" title="Mocking">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../documentation_and_discovery/" class="btn btn-neutral" title="Documentation and Discovery"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../documentation_and_discovery/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../mocking/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

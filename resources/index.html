@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Resources# - API Design Guidelines</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Resources#";
+    var mkdocs_page_input_path = "resources.md";
+    var mkdocs_page_url = "/resources/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> API Design Guidelines</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Introduction#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../apis/">APIs#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../uniform_interface/">Uniform Interface#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resource_identifiers/">Resource Identifiers#</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Resources#</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#resources">Resources</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#identifying-and-naming-resources">Identifying and Naming Resources</a></li>
+        
+            <li><a class="toctree-l3" href="#collection-resources">Collection Resources</a></li>
+        
+            <li><a class="toctree-l3" href="#composite-resources">Composite Resources</a></li>
+        
+            <li><a class="toctree-l3" href="#processing-functions">Processing Functions</a></li>
+        
+            <li><a class="toctree-l3" href="#controller-resources">Controller Resources</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../methods/">Methods</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../representations/">Representations</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../hypermedia/">Hypermedia</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../content_negotiation/">Content Negotiation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../caching/">Caching</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../security/">Security</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../versioning_and_extensibility/">Versioning and Extensibility</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../documentation_and_discovery/">Documentation and Discovery</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../specifications/">Specifications</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mocking/">Mocking</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../clients/">Clients</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../other_topics/">Other topics</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../misc/">Misc</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../references/">References</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">API Design Guidelines</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Resources#</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="resources">Resources</h2>
+<p>A <em>resource</em> is an abstract entity that is identified by a URI, and can be data, processing logic, files, or basically anything else that can be named.</p>
+<h3 id="identifying-and-naming-resources">Identifying and Naming Resources</h3>
+<p>Most often when identifying resources, the use of nouns instead of verbs will be obvious, however, sometimes it is necessary to veer from this naming convention, when exposing certain services through the public API.</p>
+<p>There is no single approach that will work for all the situations, so care should be taking when identifying resources and finding the right resource granularity, in order for API consumers to get the desired functionality, the API to behave correctly, and for maintainability.</p>
+<blockquote>
+<p>Taking business needs, maintainability, extensibility, and perhaps some sort of cost-benefit analysis or ROI, into consideration may be pertinent.</p>
+</blockquote>
+<ul>
+<li><strong>DO</strong> analyze use cases to find domain nouns that can be operated using <em>create</em>, <em>read</em>, <em>update</em>, or <em>delete</em> operations. Designate each noun as a resource. Use <code>POST</code>, <code>GET</code>, <code>PUT</code>, or <code>DELETE</code> operations respectively, on each resource.</li>
+<li><strong>DO</strong> design resources to suit client's usage patterns and not design them based on what exists in a database or the object model. (Think from the client's perspective)</li>
+<li><strong>DO</strong> use network efficiency, size of representations, and client convenience to guide resource granularity.</li>
+<li><strong>DO</strong> think about frequency of change and cacheability. Try to separate immutable (less frequently changing) resources from less cacheable resources.</li>
+<li><strong>CONSIDER</strong> keeping verbs out of your URIs, instead HTTP verbs to operate on them.</li>
+<li><strong>CONSIDER</strong> blindly apply the same techniques for identifying resources, as for object-oriented design and database modeling.</li>
+<li><strong>CONSIDER</strong> bluntly map domain entities into resources, as this may lead to resources that are inefficient and inconvenient to use and also leak irrelevant implementation details out to your public API.</li>
+<li><strong>CONSIDER</strong> the level of abstraction, as it is not always meaningful for developers, if the information conveyed in URIs are too abstract. </li>
+<li><strong>CONSIDER</strong> limiting the number of resources to between <em><strong>(4/12)</strong></em> and <em><strong>(8/24)</strong></em> to keep maintenance and service evolution manageable. Avoid mixing different business functionalities in same API.</li>
+<li><strong>DO NOT</strong> limit yourself to identifying resources based on domain nouns alone, you are likely to find that the fixed set of methods in HTTP is quite a limitation. <em>E.g., using a root-level "Me" endpoint is perfectly valid.</em></li>
+</ul>
+<h3 id="collection-resources">Collection Resources</h3>
+<p>Resources almost always have relationships to other resources, and <em>collection resources</em> can give the ability to refer to a group of a resources as one, to perform queries on the collection, or use the collection as a factory to create new resources.</p>
+<blockquote>
+<p>A collection resource does not necessarily imply hierarchical containment. A resource may be part of more than one collection resource.</p>
+</blockquote>
+<p>A collection resources should provide sufficient filter mechanisms, as well as pagination. So when organizing resources into collections:</p>
+<ul>
+<li><strong>DO</strong> pluralizing collection resource names. To keep things simple, pragmatic and consistent always use plural to avoid odd pluralization (person/people). Using a mixed model, in which you use singular for some resources and plural for others will make it harder for developers reason about the API.</li>
+<li><strong>DO</strong> provide a way of searching the collection for it members, if applicable.</li>
+<li><strong>DO</strong> provide a filtered view of the collection, if applicable.</li>
+<li><strong>DO</strong> provide a paginated view of a collection, when appropriate.</li>
+<li><strong>DO</strong> embed commonly requested relations alongside the resource, for client convenience.</li>
+<li><strong>DO</strong> organize resources according to relationship using path segments (<code>/</code>), if a relation can only exist within another resource. Sub-resources should be referenced by their name and identifier in the path segments: <code>/{resource}/{resource_id}/{sub_resource}/{sub_resource_id}</code>.</li>
+<li><strong>CONSIDER</strong> providing a link, if a relation can exist independently of the resource. However, if the relation is commonly requested it might be better to always embed the relation's representation, or perhaps offer a functionality to automatically embed the relation's representation and save the client a second round-trip (<code>GET /bookings?embed=departures,vehicles</code>).</li>
+<li><strong>AVOID</strong> sub-sub-resource levels, etc. Try to simplify the association between resources.</li>
+</ul>
+<h3 id="composite-resources">Composite Resources</h3>
+<p>At times it may prove convenient to identify new composite resources.</p>
+<ul>
+<li><strong>DO</strong> identify new resources that aggregate other resources to reduce the number of client/server round-trips, based on client usage patterns, performance, and latency requirements.</li>
+<li><strong>CONSIDER</strong> a snapshot page to summarize information, using an URI of the form <code>http://www.example.org/customer/1234/snapshot</code>.</li>
+<li><strong>CONSIDER</strong>, if requests for composites are rare, or if network latency is an issue, whether caching may be a better option.</li>
+</ul>
+<h3 id="processing-functions">Processing Functions</h3>
+<p>Having the public API expose means to support business processes, like, calculate, translate, and convert, is not uncommon depending on the domain. These may often not map well to nouns in our domain, but usually are in the form of verbs. By using processing functions to abstract specific services the clients is able to perform tasks such computation or data validation.</p>
+<ul>
+<li><strong>DO</strong> treat the processing function as a resourcee, as most often it will be difficult to find appropriate nouns. So when validating a vehicle registration number: <code>http://www.example.org/vehicles/validate?regnum=ZY12345</code></li>
+<li><strong>DO</strong> use <code>GET</code> to fetch a representation containing the output of the processing function.</li>
+<li><strong>DO</strong> use query parameters to supply inputs to the processing function.</li>
+<li><strong>DO</strong> document these resources, and make use verbs clear.</li>
+</ul>
+<h3 id="controller-resources">Controller Resources</h3>
+<p>A <em>controller</em> is a resource that can atomically make changes to resources. It can help abstract complex business operations, which increase the separation of concerns and reduces coupling between clients and servers, which in turn may improve network efficiency.</p>
+<ul>
+<li><strong>DO</strong> designate a controller resource for each distinct operation.</li>
+<li><strong>DO</strong> use <code>POST</code> to submit a request to trigger the operation.</li>
+<li><strong>DO</strong>, if the output of the operation is the creation of a new resource, return <code>201 Created</code> with a <code>Location</code> header referring to the URI of the newly created resource.</li>
+<li><strong>DO</strong>, if the outcome is the modification of one or more existing resource, return <code>303 See Other</code> with a <code>Location</code> to a URI that clients can use to fetch a representation of those modifications.</li>
+<li><strong>DO</strong>, if the server cannot provide a single URI to all the modified resources, return <code>200 OK</code> with a representation in the body that clients can use to learn about the outcome.</li>
+<li><strong>DO</strong> handle errors as described in <a href="#errors">Errors</a></li>
+<li><strong>AVOID</strong> tunneling at all costs. Instead, use a distinct resource (such as a controller) for each operation. Tunneling occurs whenever the client is using the same method on a single URI for different actions. Tunneling reduces protocol-level visibility, because the visible parts of requests such as the request URI, the HTTP method used, headers, and media types do not unambiguously describe the operation.</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../methods/" class="btn btn-neutral float-right" title="Methods">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../resource_identifiers/" class="btn btn-neutral" title="Resource Identifiers#"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../resource_identifiers/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../methods/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

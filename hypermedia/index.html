@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Hypermedia - API Design Guidelines</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Hypermedia";
+    var mkdocs_page_input_path = "hypermedia.md";
+    var mkdocs_page_url = "/hypermedia/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> API Design Guidelines</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Introduction#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../apis/">APIs#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../uniform_interface/">Uniform Interface#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resource_identifiers/">Resource Identifiers#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resources/">Resources#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../methods/">Methods</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../representations/">Representations</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Hypermedia</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#hypermedia">Hypermedia</a></li>
+    
+
+    <li class="toctree-l2"><a href="#the-hateoas-debate">The HATEOAS Debate</a></li>
+    
+
+    <li class="toctree-l2"><a href="#the-claims-for-and-against-hypermedia">The Claims For and Against Hypermedia</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#hypermedia-creates-more-work">Hypermedia creates more work</a></li>
+        
+            <li><a class="toctree-l3" href="#hypermedia-will-require-more-data-transfer">Hypermedia will require more Data-Transfer</a></li>
+        
+            <li><a class="toctree-l3" href="#you-are-creating-an-api-for-a-client-that-doesnt-exist">You are creating an API for a client that doesn't exist</a></li>
+        
+            <li><a class="toctree-l3" href="#nobody-knows-how-to-use-hypermedia">Nobody knows how to use Hypermedia</a></li>
+        
+            <li><a class="toctree-l3" href="#hypermedia-makes-your-api-more-flexible">Hypermedia makes your API MORE Flexible</a></li>
+        
+            <li><a class="toctree-l3" href="#hypermedia-prevents-apis-from-breaking">Hypermedia prevents APIs from breaking</a></li>
+        
+            <li><a class="toctree-l3" href="#hypermedia-replaces-documentation">Hypermedia replaces Documentation</a></li>
+        
+            <li><a class="toctree-l3" href="#hypermedia-is-a-best-practice">Hypermedia is a Best Practice</a></li>
+        
+            <li><a class="toctree-l3" href="#in-summary">In Summary</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#the-harsh-reality-of-the-state-of-hypermedia-specs">The Harsh Reality of the State of Hypermedia Specs</a></li>
+    
+
+    <li class="toctree-l2"><a href="#specs">Specs</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#collectionjson">Collection+JSON</a></li>
+        
+            <li><a class="toctree-l3" href="#json-api">JSON API</a></li>
+        
+            <li><a class="toctree-l3" href="#hal">HAL</a></li>
+        
+            <li><a class="toctree-l3" href="#json-ld">JSON-LD</a></li>
+        
+            <li><a class="toctree-l3" href="#siren">Siren</a></li>
+        
+            <li><a class="toctree-l3" href="#other-specs">Other Specs</a></li>
+        
+            <li><a class="toctree-l3" href="#the-future-of-specs">The Future of Specs</a></li>
+        
+            <li><a class="toctree-l3" href="#must-use-rest-maturity-level-2">MUST: Use REST Maturity Level 2</a></li>
+        
+            <li><a class="toctree-l3" href="#may-use-rest-maturity-level-3-hateoas">MAY: Use REST Maturity Level 3 - HATEOAS</a></li>
+        
+            <li><a class="toctree-l3" href="#must-use-common-hypertext-controls">MUST: Use Common Hypertext Controls</a></li>
+        
+            <li><a class="toctree-l3" href="#should-use-simple-hypertext-controls-for-pagination-and-self-references">SHOULD:: Use Simple Hypertext Controls for Pagination and Self-References</a></li>
+        
+            <li><a class="toctree-l3" href="#must-not-use-link-headers-with-json-entities">MUST: Not Use Link Headers with JSON entities</a></li>
+        
+            <li><a class="toctree-l3" href="#must-follow-hypertext-control-conventions">MUST: Follow Hypertext Control Conventions</a></li>
+        
+            <li><a class="toctree-l3" href="#linking-and-application-state">Linking and Application State</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../content_negotiation/">Content Negotiation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../caching/">Caching</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../security/">Security</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../versioning_and_extensibility/">Versioning and Extensibility</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../documentation_and_discovery/">Documentation and Discovery</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../specifications/">Specifications</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mocking/">Mocking</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../clients/">Clients</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../other_topics/">Other topics</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../misc/">Misc</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../references/">References</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">API Design Guidelines</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Hypermedia</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="hypermedia">Hypermedia</h1>
+<p>One of the challenges to implementing and correctly using hypermedia in your REST API is first understanding what hypermedia is, and what it means to use hypermedia as the engine of application state (HATEOAS).
+The term "hypermedia" was coined back in 1965 by Ted Nelson, and over the years has dominated the technology industry.</p>
+<p>Hypermedia, in its most basic sense is an extension of hypertext – something you may recognize from HTML.</p>
+<p>Hypertext is essentially text that is written in a structured format and contains relationships to other objects via links.</p>
+<p>If you think of a webpage, using HTML – the Hypertext Markup Language – text is then interpreted by a browser to become a webpage, or an interactive environment capable of doing more than just providing a blob of text.</p>
+<p>However, to be truly interactive and guide the user, the crucial component of all of this is links, something we use everyday when surfing the web.
+Enter hypermedia, again just an extension of the term hypertext, hypermedia includes images, video, audio, text, and links.</p>
+<p>In a REST API, this means that your API is able to function similarly to a webpage, providing the user with guidance on what type of content they can retrieve, or what actions they can perform, as well as the appropriate links to do so.
+Essentially, the easiest way to take advantage of hypermedia in your API is to provide valuable information to direct the user or client to the next possible actions they can take based on the object (whether it be a collection, or item within the resource) or "page" they are on via links.
+Another way to think of it is to bring back the Hypercard application from the early Apple days (we're talking Macintosh Classic).</p>
+<p>With this application you could create "cards" or slides with links that performed different functions.</p>
+<p>Clicking on link might play a sound, another a video, or another would take you to a different card.</p>
+<p>On each card you were presented with certain links (whether in the form of a button or text) for the available actions to you on this card.</p>
+<p>This is exactly how hypertext links work within RESTful APIs– they are designed to take you to the other components of the API, your other "cards."
+By adding these links, because REST is stateless, we are providing the client with a method for determining the state of the current item/ collection that they are on, as well as giving them the roadmap or engine for what they can do with it.</p>
+<p>In other words, we are using Hypermedia as the Engine of the Application's State, or implementing HATEOAS.</p>
+<h1 id="the-hateoas-debate">The HATEOAS Debate</h1>
+<p>Currently, there is a lot of disagreement around hypermedia's place in RESTful APIs– with Dr. Roy Fielding saying it is critical to REST, and without it your API cannot be RESTful; and hypermedia skeptics arguing that you are doing nothing more than bloating your API and making it more difficult to use under the guise of usability.
+This means you will find many different stances on the web today, ranging from Peter Williams explanation of how hypermedia has helped him, Jeff Krupp's rant against hypermedia, and even Kin Lane's summary of the whole debate.
+But what it really comes down to isn't what do others think about hypermedia, as most major frameworks for building APIs now include hypermedia specs such as HAL, JSON-LD, JSON API, Siren, or Collection+JSON, but rather what benefit does hypermedia offer- and is that benefit enough to outweigh the cost/ disadvantages of incorporating hypermedia.</p>
+<h1 id="the-claims-for-and-against-hypermedia">The Claims For and Against Hypermedia</h1>
+<p>Some of the most common arguments for and against hypermedia include:</p>
+<h3 id="hypermedia-creates-more-work">Hypermedia creates more work</h3>
+<p>This is absolutely true.</p>
+<p>Adding hypermedia or hypertext links to your API output does require more work – and more thought to go into your API.</p>
+<p>Going back to the Planning Your API post in this series, hypermedia explains how your API works together, what resources work with which, and what you can do with a collection, or specific items in that collection.</p>
+<p>This will add to both the workload and the time it takes to build your API.</p>
+<p>However, by having these relationships already drawn out as suggested, the additional time required will be minimal.</p>
+<h3 id="hypermedia-will-require-more-data-transfer">Hypermedia will require more Data-Transfer</h3>
+<p>Again, absolutely true.</p>
+<p>By adding the links to your response you are increasing the amount of data that needs to be sent back, and slowly down the responses ever so slightly.</p>
+<p>However, for MOST APIs the amount of data being added will be minimal and the data/ time difference result will realistically be unnoticeable.</p>
+<p>What you will do, however, is help avoid unnecessary calls that are not accessible to a particular item, but may be available to other items.</p>
+<p>See the next section for more on this.</p>
+<h3 id="you-are-creating-an-api-for-a-client-that-doesnt-exist">You are creating an API for a client that doesn't exist</h3>
+<p>Another argument against APIs is that unlike web browsers, there are no browsers for APIs.</p>
+<p>Likewise a valid argument, however, one I personally believe falls short as like the web we are seeing advances in APIs and recently an explosion of API exploration tools ranging from API Consoles to the API Notebook.</p>
+<p>As more and more APIs are developed there will be more and more emphasis on being able to explore them pragmatically.
+Another reason I believe this argument falls short is that by utilizing hypermedia you allow the developers USING your API to build their systems around the information you provide them, creating a more dynamic application that relies on the available actions YOU return to them instead of creating rigidity by hardcoding what actions the user can take from their application in relation to your API and returning errors when those actions fail because they simply were not available to begin with.
+For example, for one user you may be able to:
+Edit
+Suspend
+Delete
+But for another user who has been suspended, maybe you can only:
+Restore
+Delete
+Because this is dynamic data the developer has no way to determine what actions are available and which ones are not, unless they dig through and try to decipher the user's data which has been returned- making assumptions about your architectures rules which may or may not be correct, and may change with future development.</p>
+<p>Hypertext links in this case allow the developer to rely on YOUR rules and architecture, rather than trying to mimic it with their own.</p>
+<h3 id="nobody-knows-how-to-use-hypermedia">Nobody knows how to use Hypermedia</h3>
+<p>There is some truth into this.</p>
+<p>Despite existing since 1965, many developers are flustered when first running into hypermedia, choosing to ignore it or misunderstanding how to use it (i.e.</p>
+<p>hard-coding the links).</p>
+<p>What can help with this, however, is more APIs taking advantage of hypermedia (as being encouraged in the most popular development frameworks), and simple explanations within documentation explaining how the hypertext links work (just as we had to explain how to do a GET, POST, PUT, PATCH, and DELETE when REST first came out).</p>
+<p>However, unlike many specs and challenges out there, utilizing hypermedia from a client has a very fast learning curve, and most developers are able to implement it quickly and without any real issue once they understand what it is designed to do.</p>
+<p>And once implemented correctly, many developers appreciate knowing that as resource URIs change or additional query parameters are required of them, that their application will be able to "automatically upgrade" to these new requirements without any work or concern on their part.</p>
+<h3 id="hypermedia-makes-your-api-more-flexible">Hypermedia makes your API MORE Flexible</h3>
+<p>Absolutely true.</p>
+<p>By adding Hypermedia you are able to add new features more seamlessly- making them immediately available to your users.</p>
+<p>It also gives you the power to change certain aspects of your API (i.e.</p>
+<p>changing resources, requiring additional GET parameters) without necessarily breaking backwards compatibility IF implemented correctly by your users.</p>
+<h3 id="hypermedia-prevents-apis-from-breaking">Hypermedia prevents APIs from breaking</h3>
+<p>Absolutely false.</p>
+<p>As mentioned above, Hypermedia does make your API more flexible, but does not excuse poor design or allow you to break backwards compatibility.</p>
+<p>One of the reasons for this, is even if you have a purely hypermedia driven API, such as Stormpath's, developers will still hardcode certain URLs to avoid having to make multiple calls.</p>
+<p>For example, they may access the /users resource directly to get a list of all users instead of starting from the gateway or entry point of your API and working up to that point through multiple calls.</p>
+<p>While this technique does save you (and them) multiple API calls, it does limit your ability to change common or most frequently used resource URIs.
+Hypertext links also do nothing for backwards incompatible changes in data– although you could hypothetically use them as a form of versioning.</p>
+<h3 id="hypermedia-replaces-documentation">Hypermedia replaces Documentation</h3>
+<p>Hypermedia does increase discoverability of your API's resources and methods, however, it does not replace documentation as it doesn't provide method information, schemas, or examples.</p>
+<p>Documentation also serves as a preview to your API, letting developers understand how it works, and potentially make sample calls using an API Console before implementing it into their application.</p>
+<p>Hypermedia also does not play a solid role in debugging the implementation of the API when things go wrong.</p>
+<p>For this reason, having well written, informative documentation is vital to any API.</p>
+<p>In fact, many RESTful hypermedia specs including HAL grant you the ability to embed documentation links for quick reference by developers.</p>
+<h3 id="hypermedia-is-a-best-practice">Hypermedia is a Best Practice</h3>
+<p>Where hypermedia shines is in its ability to create a flexible API that provides dynamic data for developers based on your architecture and not their own.</p>
+<p>In essence, it provides a shortcut for developers that allows them to utilize your API to its fullest without having to rely solely on documentation and writing rules that may or may not not be consistent with those in your application.</p>
+<p>Like when building a simple website, one may not see the advantage of Hypermedia right away, but as your API grows and becomes more complex you will find that it becomes a powerful convenience layer, one that will help developers better understand and navigate your API, and one that may prevent you from having to version your API for certain changes that would otherwise be backwards incompatible — if implemented correctly by your users.</p>
+<p>As Peter Williams explains in his post, hypermedia turned out to be a saving grace.</p>
+<p>And as a key component of REST as defined by Dr. Roy Fielding, it remains a best practice to implement.</p>
+<h3 id="in-summary">In Summary</h3>
+<p>Hypermedia is often misunderstood in regards to APIs, but essentially it functions exactly like links on a webpage.</p>
+<p>And while the technology is both praised and criticized, it does provide an array of short and long-term gains.</p>
+<p>These gains, I believe, become more and more noticeable the larger and more complex your API becomes.</p>
+<p>However, the best features of utilizing HATEOAS, in my opinion, are yet to be seen as technology and API exploration tools continue to advance.
+Be sure to join us next week as we take a look at implementing hypermedia into your API and the current specs out there to help you do so.</p>
+<h1 id="the-harsh-reality-of-the-state-of-hypermedia-specs">The Harsh Reality of the State of Hypermedia Specs</h1>
+<p>Hypermedia sounds great in theory, but theory only goes so far.</p>
+<p>Where hypermedia really shines, or completely fails, is in implementation.</p>
+<p>Unfortunately, as hypermedia is still a relatively new aspect of web based APIs, there isn't one specified way of doing things.</p>
+<p>In fact, you'll find that even some of the most popular APIs operate completely differently from each other.
+After all, there are several different hypermedia formats available for API providers to choose from.</p>
+<p>Just for starters there is HAL, Collection+JSON, JSON-LD, JSON API, and Siren! But the list doesn't stop there, as some popular APIs have even elected to create their own format.
+For example, while PayPal's API closely mimics the JSON API format, it goes a step further and adds a method property (not part of the JSON API spec), creating a more flexible spec and transforming it from being resource driven to being action driven:
+This has the potential to let developers create a more agile client based on the actions (and methods) available to them.</p>
+<p>However, for developers not familiar with PayPal's format, but familiar with JSON API this may cause slight confusion (although it should be quickly remedied by reading their docs).
+VerticalResponse, on the other hand, has taken a different, albeit interesting approach.</p>
+<p>For their API they likewise start with the basic JSON API format, but for some reason decided against the universally accepted "href" or Hypertext Reference property, instead opting to use "url" or the uniform resource locator as the link URI identifier:
+Personally, I would recommend staying with the uniform "href" attribute as it denotes a reference to a hypertext link and is not as exclusive as an URL- which is not (although it commonly is) to be confused with URI.</p>
+<p>But you can read more on that here.
+On the other hand, Amazon's AppStream API, Clarify, Microsoft's Lync, and FoxyCart all prefer to follow HAL or the Hypertext Application Language format.</p>
+<p>HAL provides a simple format for nest-able links, but like other specs omits the methods property as included by PayPal, making theirs truly unique in that sense:
+However FoxyCart takes it one step further, not only taking advantage of hypermedia, but offering multiple formats for their clients to choose from, including HAL+JSON, HAL+XML, and Siren.
+This, however, highlights once again one of the biggest challenges with hypermedia driven APIs, the abundance of ideas and specs available for execution.</p>
+<p>While on one-hand I believe that by supporting both XML and JSON, as well as having multiple JSON formats FoxyCart is by far the most flexible (format wise) of the APIs, not having a singular standard for each language does present the challenge of forcing developers (and hypermedia clients) to support multiple formats (as they integrate more and more hypermedia APIs), while also having the understanding that not one format meets every API's needs.
+The good news, is that despite these growing pains, we are starting to see companies adopting certain specs over others, while also identifying areas for improvement (such as with PayPal's adding of methods to JSON API).</p>
+<p>Next week we'll take a look at some of the most popular formats out there in-depth, keying in on the strengths and weaknesses of each.
+But it's important that as you build your API, you understand WHY you are building it the way you are.</p>
+<p>And this extends into how you build your hypermedia links, and whether or not you choose to take advantage of a standardized format (recommended), or venture off on your own to meet your developers' needs.</p>
+<p>One of the best ways to do this is to explore what others have done with their APIs, and learn from their successes, and their mistakes.
+It's also important to consider where technology is going.</p>
+<p>And as more and more formats become available and change in popularity, it may be smart to follow FoxyCart's lead – taking advantage of the spec that best meets your developers' needs, but also keeping the link format decoupled enough from your data that you are able to return multiple formats based on the content-type received.</p>
+<p>Something that will allow you to take advantage of this best practice, while also being prepared for whatever the future may hold.</p>
+<h1 id="specs">Specs</h1>
+<p>What essentially every hypertext linking spec does provide is a name for the link and a hypertext reference, but outside of that, it's a crapshoot.</p>
+<p>As such, it's important to understand the different specs that are out there, which ones are leading the industry, and which ones meet your needs.</p>
+<p>We may not be able to get it down to one spec, but at least we'll be able to provide our users with a uniform response that they can easily incorporate into their application:</p>
+<h3 id="collectionjson">Collection+JSON</h3>
+<p>Collection+JSON is a JSON-based read/write hypermedia-type designed by Mike Amundsen back in 2011 to support the management and querying of simple collections.</p>
+<p>It's based on the Atom Publication and Syndication specs, defining both in a single spec and supporting simple queries through the use of templates.</p>
+<p>While originally widely used among APIs, Collection+JSON has struggled to maintain its popularity against JSON API and HAL.
+Strengths: strong choice for collections, templated queries, early wide adoption, recognized as a standard Weaknesses: JSON only, lack of identifier for documentation, more complex/ difficult to implement</p>
+<h3 id="json-api">JSON API</h3>
+<p>JSON API is a newer spec created in 2013 by Steve Klabnik and Yahuda Klaz.</p>
+<p>It was designed to ensure separation between clients and servers (an important aspect of REST) while also minimizing the number of requests without compromising readability, flexibility, or discovery.</p>
+<p>JSON API has quickly become a favorite receiving wide adoption and is arguably one of the leading specs for JSON based RESTful APIs.</p>
+<p>JSON API currently bares a warning that it is a work in progress, and while widely adopted not necessarily stable.
+Strengths: simple versatile format, easy to read/ implement, flat link grouping, URL templating, wide adoption, strong community, recognized as a hypermedia standard
+Weaknesses: JSON only, lack of identifier for documentation, still a work in progress</p>
+<h3 id="hal">HAL</h3>
+<p>HAL is an older spec, created in 2011 by Mike Kelly to be easily consumed across multiple formats including XML and JSON.</p>
+<p>One of the key strengths of HAL is that it is nestable, meaning that _links can be incorporated within each item of a collection.</p>
+<p>HAL also incorporates CURIEs, a feature that makes it unique in that it allows for inclusion of documentation links in the response – albeit they are tightly coupled to the link name.</p>
+<p>HAL is one of the most supported and most widely used hypermedia specs out there today, and is surrounded by a strong and vocal community.
+Strengths: dynamic, nestable, easy to read/ implement, multi-format, URL templating, inclusion of documentation, wide adoption, strong community, recognized as a standard hypermedia spec, RFC proposed Weaknesses: JSON/XML formats architecturally different, CURIEs are tightly coupled</p>
+<h3 id="json-ld">JSON-LD</h3>
+<p>JSON-LD is a lightweight spec focused on machine to machine readable data.</p>
+<p>Beyond just RESTful APIs, JSON-LD was also designed to be utilized within non-structured or NoSQL databases such as MongoDB or CouchDB.</p>
+<p>Developed by the W3C JSON-LD Community group, and formally recommended by W3C as a JSON data linking spec in early 2014, the spec has struggled to keep pace with JSON API and HAL.</p>
+<p>However, it has built a strong community around it with a fairly active mailing list, weekly meetings, and an active IRC channel.
+Strengths: strong format for data linking, can be used across multiple data formats (Web API &amp; Databases), strong community, large working group, recognized by W3C as a standard
+Weaknesses: JSON only, more complex to integrate/ interpret, no identifier for documentation</p>
+<h3 id="siren">Siren</h3>
+<p>Created in 2012 by Kevin Swiber, Siren is a more descriptive spec made up of classes, entities, actions, and links.</p>
+<p>It was designed specifically for Web API clients in order to communicate entity information, actions for executing state transitions, and client navigation/ discoverability within the API.</p>
+<p>Siren was also designed to allow for sub-entities or nesting, as well as multiple formats including XML – although no example or documentation regarding XML usage is provided.</p>
+<p>Despite being well intentioned and versatile, Siren has struggled to gain the same level of attention as JSON API and HAL.</p>
+<p>Siren is still listed as a work in progress.
+Strengths: provides a more verbose spec, query templating, incorporates actions, multi-format
+Weaknesses: poor adoption, lacks documentation, work in progress</p>
+<h3 id="other-specs">Other Specs</h3>
+<p>Along with some of the leading specs mentioned above, new specs are being created every day including UBER, Mason, Yahapi, and CPHL.</p>
+<p>This presents a very interesting question, and that is are we reinventing the wheel, or is there something missing in the above specs.</p>
+<p>I believe the answer is a combination of both, with developers being notorious for reinventing the wheel, but also because each developer looks at the strengths and weaknesses of other specs and envisions a better way of doing things.
+You may recognize this issue from the last post, where some specs were modified by the companies using them to meet their individual needs.</p>
+<p>For example, PayPal wanted to include methods in their response, but you'll notice that only Siren of the above include methods in the link definition.</p>
+<h3 id="the-future-of-specs">The Future of Specs</h3>
+<p>Given that new specs are being created every day, each with different ideas and in different formats, it's extremely important to keep your system as decoupled and versatile as possible, and it will be very interesting to see what the future of hypermedia specs will look like.
+In the mean-time, it's best to choose the spec that meets your needs, while also being recognized as a standard for easy integration by developers.</p>
+<p>Of the specs above, I would personally recommend sticking with HAL or JSON API, although each has its own strengths and weaknesses, and I believe that universal spec of the future has yet to be created.</p>
+<p>But by adhering to these common specs while the new specs battle things out, I think we will finally find that standard method of road signs, detours, and a single solution to provide API clients with a standardized GPS system.
+For more on the different specs, I highly recommend reading Kevin Sookocheff's review.</p>
+<p>I'd also love to hear your thoughts in the comments below.</p>
+<h3 id="must-use-rest-maturity-level-2">MUST: Use REST Maturity Level 2</h3>
+<p>We strive for a good implementation of REST Maturity Level 2 as it enables us to build resource-oriented APIs that make full use of HTTP verbs and status codes. You can see this expressed by many rules throughout these guidelines, e.g.:</p>
+<p>Avoid Actions — Think About Resources
+Keep URLs Verb-Free
+Use HTTP Methods Correctly
+Use Meaningful HTTP Status Codes
+Although this is not HATEOAS, it should not prevent you from designing proper link relationships in your APIs as stated in rules below.</p>
+<h3 id="may-use-rest-maturity-level-3-hateoas">MAY: Use REST Maturity Level 3 - HATEOAS</h3>
+<p>We do not generally recommend to implement REST Maturity Level 3. HATEOAS comes with additional API complexity without real value in our SOA context where client and server interact via REST APIs and provide complex business functions as part of our e-commerce SaaS platform.</p>
+<p>Our major concerns regarding the promised advantages of HATEOAS (see also RESTistential Crisis over Hypermedia APIs, Why I Hate HATEOAS and others):</p>
+<p>We follow the API First principle with APIs explicitly defined outside the code with standard specification language. HATEOAS does not really add value for SOA client engineers in terms of API self-descriptiveness: a client engineer finds necessary links and usage description (depending on resource state) in the API reference definition anyway.
+Generic HATEOAS clients which need no prior knowledge about APIs and explore API capabilities based on hypermedia information provided, is a theoretical concept that we haven't seen working in practise and does not fit to our SOA set-up. The OpenAPI description format (and tooling based on OpenAPI) doesn't provide sufficient support for HATEOAS either.
+In practice relevant HATEOAS approximations (e.g. following specifications like HAL or JSON API) support API navigation by abstracting from URL endpoint and HTTP method aspects via link types. So, Hypermedia does not prevent clients from required manual changes when domain model changes over time.
+Hypermedia make sense for humans, less for SOA machine clients. We would expect use cases where it may provide value more likely in the frontend and human facing service domain.
+Hypermedia does not prevent API clients to implement shortcuts and directly target resources without 'discovering' them
+However, we do not forbid HATEOAS; you could use it, if you checked its limitations and still see clear value for your usage scenario that justifies its additional complexity. If you use HATEOAS please share experience and present your findings in the API Guild [internal link].</p>
+<h3 id="must-use-common-hypertext-controls">MUST: Use Common Hypertext Controls</h3>
+<p>When embedding links to other resources into representations you must use the common hypertext control object. It contains at least one attribute:</p>
+<p>href: The URI of the resource the hypertext control is linking to. All our API are using HTTP(s) as URI scheme.
+In API that contain any hypertext controls, the attribute name href is reserved for usage within hypertext controls.</p>
+<p>The schema for hypertext controls can be derived from this model:</p>
+<p>HttpLink:
+  description: A base type of objects representing links to resources.
+  type: object
+  properties:
+    href:
+      description: Any URI that is using http or https protocol
+      type: string
+      format: uri
+  required: [ "href" ]
+The name of an attribute holding such a HttpLink object specifies the relation between the object that contains the link and the linked resource. Implementations should use names from the IANA Link Relation Registry whenever appropriate. As IANA link relation names use hyphen-case notation, while this guide enforces snake_case notation for attribute names, hyphens in IANA names have to be replaced with underscores (e.g. the IANA link relation type version-history would become the attribute version_history)</p>
+<p>Specific link objects may extend the basic link type with additional attributes, to give additional information related to the linked resource or the relationship between the source resource and the linked one.</p>
+<p>E.g. a service providing "Person" resources could model a person who is married with some other person with a hypertext control that contains attributes which describe the other person (id, name) but also the relationship "spouse" between between the two persons (since):</p>
+<p>{
+  "id": "446f9876-e89b-12d3-a456-426655440000",
+  "name": "Peter Mustermann",
+  "spouse": {
+    "href": "https://...",
+    "since": "1996-12-19",
+    "id": "123e4567-e89b-12d3-a456-426655440000",
+    "name": "Linda Mustermann"
+  }
+}
+Hypertext controls are allowed anywhere within a JSON model. While this specification would allow HAL, we actually don't recommend/enforce the usage of HAL anymore as the structural separation of meta-data and data creates more harm than value to the understandability and usability of an API.</p>
+<h3 id="should-use-simple-hypertext-controls-for-pagination-and-self-references">SHOULD:: Use Simple Hypertext Controls for Pagination and Self-References</h3>
+<p>Hypertext controls for pagination inside collections and self-references should use a simple URI value in combination with their corresponding link relations (next, prev, first, last, self) instead of the extensible common hypertext control</p>
+<p>See Pagination for information how to best represent paginateable collections.</p>
+<h3 id="must-not-use-link-headers-with-json-entities">MUST: Not Use Link Headers with JSON entities</h3>
+<p>We don't allow the use of the Link Header defined by RFC 5988 in conjunction with JSON media types. We prefer links directly embedded in JSON payloads to the uncommon link header syntax.</p>
+<h3 id="must-follow-hypertext-control-conventions">MUST: Follow Hypertext Control Conventions</h3>
+<p>APIs that provide hypertext controls (links) to interconnect API resources must follow the conventions for naming and modeling of hypertext controls as defined in section Hypermedia.</p>
+<h3 id="linking-and-application-state">Linking and Application State</h3>
+<!-- TODO -->
+
+<pre><code>&lt;!--
+HATEOS / HAL / JSONAPI etc.
+--&gt;
+
+A link provides a mean to navigate from one resource to another.
+
+Application state is the state the server needs to maintain between each request for each client. Keeping state in clients does not mean serializing session state into URIs or HTML forms.
+
+If the amount of data is small, the best place to maintain application state is within links in representations of resources, where the server can encode the state within the URI itself. However, the server can stores data in a durable storage and encodes its primary key in the URI. Use a combination of both approaches for managing application state to strike a balance between network performance, scalability and reliability.
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/xml;charset=UTF-8
+
+&lt;quote xmlns:atom="http://www.w3.org/2005/Atom"&gt;
+    &lt;driver&gt;...&lt;/driver&gt;
+    &lt;vehicle&gt;...&lt;/vehicle&gt;
+    &lt;offer&gt;
+        &lt;valid-until&gt;2009-10-02&lt;/valid-until&gt;
+        &lt;atom:link href="http://www.example.org/quotes/buy?quote=abc1234" rel="http://www.example.org/rels/quotes/buy" /&gt;
+    &lt;/offer&gt;
+&lt;/quote&gt;
+```
+</code></pre>
+<ul>
+<li><strong>DO</strong> encode application state into URIs, and include those URIs into representations via links.</li>
+<li><strong>DO</strong> store the application state in a durable storage, and encode a reference to that state in URIs, if the state is large or cannot be transported to the clients for security or privacy reasons.</li>
+<li><strong>DO</strong> make sure to add checks (such as signatures) to detect/prevent tampering of state, when using application state in links.</li>
+</ul>
+<!-- TODO -->
+
+<pre><code>#### *Links in XML Representations*
+
+*[Atom](http://www.w3.org/2005/Atom)*
+</code></pre>
+<h4 id="links-in-json-representations">Links in JSON Representations</h4>
+<pre><code>## What about attribute names?
+
+In the previous section, we talked about formats - supporting multiple formats and working with JSON as the default.
+
+This time, let's talk about what happens when a response comes back.
+
+You have an object with data attributes on it. How should you name the attributes?
+
+Here are API responses from a few leading APIs:
+
+Twitter
+
+"created_at": "Thu Nov 03 05:19;38 +0000 2011"
+
+Bing
+
+"DateTime": "2011-10-29T09:35:00Z"
+
+Foursquare
+
+"createdAt": 1320296464
+
+They each use a different code convention. Although the Twitter approach is familiar to me as a Ruby on Rails developer, we think that Foursquare has the best approach.
+
+How does the API response get back in the code? You parse the response (JSON parser); what comes back populates the Object. It looks like this
+
+var myObject = JSON.parse(response);
+
+If you chose the Twitter or Bing approach, your code looks like this. Its not JavaScript convention and looks weird - looks like the name of another object or class in the system, which is not correct.
+
+timing = myObject.created_at;
+
+timing - myObject.DateTime;
+
+Recommendations
+
+* Use JSON as default
+
+* Follow JavaScript conventions for naming attributes
+
+- Use medial capitalization (aka CamelCase)
+
+- Use uppercase or lowercase depending on type of object
+
+This results in code that looks like the following, allowing the JavaScript developer to write it in a way that makes sense for JavaScript.
+
+"createdAt": 1320296464
+
+timing = myObject.createdAt;
+</code></pre>
+<ul>
+<li><strong>DO</strong> use a <code>link</code> property or a <code>links</code> property to include several links as an array whose value is a link object or a link object array.</li>
+<li><strong>DO</strong> include <code>href</code> and <code>rel</code> properties in each link object</li>
+</ul>
+<p>Examples:</p>
+<pre><code class="json">{
+    &quot;link&quot;: {
+        &quot;rel&quot;: &quot;alternate&quot;,
+        &quot;href&quot;: &quot;http://www.example.org/customers?format=json&quot;
+    }
+}
+</code></pre>
+
+<pre><code class="json">{
+    &quot;link&quot;: {
+        &quot;alternate&quot;: &quot;http://www.example.org/customers?format=json&quot;
+    }
+}
+</code></pre>
+
+<pre><code class="json">{
+    &quot;links&quot;: [{
+        &quot;rel&quot;: &quot;alternate&quot;,
+        &quot;href&quot;: &quot;http://www.example.org/customers?format=json&quot;
+    },
+    {
+        &quot;rel&quot;: &quot;http://www.example.org/rels/owner&quot;,
+        &quot;href&quot;: &quot;...&quot;
+    }]
+}
+</code></pre>
+
+<pre><code class="json">{
+    &quot;links&quot;: {
+        &quot;alternate&quot;: &quot;http://www.example.org/customers?format=json&quot;
+        &quot;http://www.example.org/rels/owner&quot;: &quot;http://www.example.org/owner&quot;
+    }
+}
+</code></pre>
+
+<h4 id="link-header">Link Header</h4>
+<p>The <code>Link</code> header provides a format-independent means to convey links, which is one of the key benefits, along with visibility at the protocol level. Also the need for documentation on how to discover links in XML or JSON representations is lowered.</p>
+<pre><code># Link header format
+Link: &lt;{URI}&gt;;rel=&quot;{relation}&quot;;type=&quot;{media type&quot;};title=&quot;{title}&quot;...
+</code></pre>
+
+<ul>
+<li><strong>DO</strong> use link header when you want to convey links in a format-independent manner</li>
+<li><strong>DO</strong> use link header when a representation format does not support links. E.g.:</li>
+<li>Binary format</li>
+<li>Formats that do not allow for easy discovery of links (e.g., plain-text documents)</li>
+<li>When your client/server software needs to add links or read links without parsing the body of representations</li>
+</ul>
+<h4 id="link-relation-types">Link Relation Types</h4>
+<ul>
+<li><strong>ALWAYS</strong> supply a link relation to act as an identifier for the semantics associated with the link</li>
+<li><strong>ALWAYS</strong> use URIs (such as http://www.example.org/rels/create-po) to express extended link relation types</li>
+<li><strong>DO</strong> choose unambiguous value of link relations</li>
+<li><strong>DO</strong> use one of the <a href="http://www.iana.org/assignments/link-relations/link-relations.xhtml">standard relation types</a>, when appropriate</li>
+<li><strong>DO</strong> use lowercase for all link relation types</li>
+<li><strong>DO</strong> use multiple values in link relations, if applicable</li>
+<li><strong>CONSIDER</strong> providing an informational resource as an HTML document at that URI, describing the semantics of the link relation type. Include details such as HTTP methods supported, formats supported, and business rules about using the link.</li>
+</ul>
+<blockquote>
+<p>Link relation types meant for public use should register that link relation per the process outlined in section 6.2 of the Web Linking Internet-Draft.</p>
+</blockquote>
+<h4 id="managing-application-flow-with-links">Managing Application Flow with Links</h4>
+<p>One of the key applications of hypermedia and links is the ability to decouple the client from learning about the rules the server uses to manage its application flow. The server can provide links containing application state, thereby using Hypermedia As The Engine Of Application State.</p>
+<p>This prevents clients from having to learn and hard-code application flow, however, the mere presence of a link will not decouple the client from having to know how to prepare the data and make a request for the transition.</p>
+<ul>
+<li><strong>DO</strong> design representations such that it contain links that help clients transition to all the next possible steps</li>
+<li><strong>DO</strong> encode the state that needs to be carried forward in the links</li>
+<li><strong>DO</strong> document how to find links and the semantics of all extended link relation types.</li>
+<li><strong>DO</strong>, for clients, assume that absent links means the transition is not possible.</li>
+</ul>
+<h4 id="ephemeral-uris">Ephemeral URIs</h4>
+<p>A URI may be temporary and valid only for a single use or may expire after a fixed period of time.</p>
+<ul>
+<li><strong>DO</strong> communicate ephemeral URIs via links.</li>
+<li><strong>DO</strong> assign extended relation types for those links and document how long such URIs are valid and what the client should do after expiry.</li>
+<li><strong>DO</strong> return appropriate <code>4xx</code> code when responding to expired URIs, with an instructions in the body of any actions the client can take.</li>
+</ul>
+<h4 id="uri-template">URI Template</h4>
+<p>When the server does not have all the information necessary to generate a valid and complete URI for each link.</p>
+<p>A URI template is a string consisting of token marked off between matching braces (<code>{</code> and <code>}</code>). Clients substitute these tokens (including matching braces) with URI-safe strings to convert the template into a valid URI.</p>
+<p>For simplicity limit the tokens to the following parts of URIs:</p>
+<ul>
+<li>Path segments</li>
+<li>Values of query parameters</li>
+<li>Values of matrix parameters</li>
+</ul>
+<p>To include URI templates in a representation:</p>
+<ul>
+<li><strong>DO</strong> use <code>link-template</code> or <code>link-templates</code> properties to convey URI templates, for JSON representations.</li>
+<li><strong>DO</strong> document the tokens used in you URI template, since URI templates are semi-opaque and contain tokens that clients need to substitute, and you need a way to tell clients what values are valid for each token.</li>
+<li><strong>CONSIDER</strong> using braces (<code>{</code> and <code>}</code>) to specify replacement tokens, as this a common standard in a lot of other templating system (e.g., WSDL 2.0 and WADL.</li>
+</ul>
+<pre><code class="json">// JSON representation
+{
+    &quot;link-templates&quot;: [{
+        &quot;rel&quot;: &quot;http://www.example.org/rels/customer&quot;,
+        &quot;href&quot;: &quot;http://www.example.org/customer/{customer-id}&quot;
+    }]
+}
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../content_negotiation/" class="btn btn-neutral float-right" title="Content Negotiation">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../representations/" class="btn btn-neutral" title="Representations"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../representations/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../content_negotiation/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Representations - API Design Guidelines</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Representations";
+    var mkdocs_page_input_path = "representations.md";
+    var mkdocs_page_url = "/representations/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> API Design Guidelines</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Introduction#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../apis/">APIs#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../uniform_interface/">Uniform Interface#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resource_identifiers/">Resource Identifiers#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resources/">Resources#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../methods/">Methods</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Representations</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#representations">Representations</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#http-headers">HTTP Headers</a></li>
+        
+            <li><a class="toctree-l3" href="#custom-http-headers">Custom HTTP Headers</a></li>
+        
+            <li><a class="toctree-l3" href="#end-to-end-http-headers">End-To-End HTTP Headers</a></li>
+        
+            <li><a class="toctree-l3" href="#format-and-a-media-type">Format and a Media Type</a></li>
+        
+            <li><a class="toctree-l3" href="#use-portable-data-formats-in-representations">Use Portable Data Formats in Representations</a></li>
+        
+            <li><a class="toctree-l3" href="#json-representations">JSON Representations</a></li>
+        
+            <li><a class="toctree-l3" href="#xml-representations">XML Representations</a></li>
+        
+            <li><a class="toctree-l3" href="#html-representations">HTML Representations</a></li>
+        
+            <li><a class="toctree-l3" href="#binary-data-in-representations">Binary Data in Representations</a></li>
+        
+            <li><a class="toctree-l3" href="#error-representations">Error Representations</a></li>
+        
+            <li><a class="toctree-l3" href="#http-status-codes">HTTP Status Codes</a></li>
+        
+            <li><a class="toctree-l3" href="#entity-identifiers-in-representations">Entity Identifiers in Representations</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../hypermedia/">Hypermedia</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../content_negotiation/">Content Negotiation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../caching/">Caching</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../security/">Security</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../versioning_and_extensibility/">Versioning and Extensibility</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../documentation_and_discovery/">Documentation and Discovery</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../specifications/">Specifications</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mocking/">Mocking</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../clients/">Clients</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../other_topics/">Other topics</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../misc/">Misc</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../references/">References</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">API Design Guidelines</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Representations</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="representations">Representations</h2>
+<p>A <em>representation</em> (request/response) is concrete and real. Here we will offer guidelines as to what makes a good response design. To ensure scalability and longevity of the API, along with providing helpful responses that developers can understand and trust, we will cover what HTTP headers are appropriate in a response, which HTTP status codes to return, as well as how to include descriptive error representations on failures.</p>
+<h3 id="http-headers">HTTP Headers</h3>
+<p>Headers ensure visibility, discoverability, routing by proxies, caching, optimistic concurrency, and correct operation of HTTP as an application protocol.</p>
+<p>Use the following headers to annotate representations that contains a message body.</p>
+<h4 id="content-type">Content-Type</h4>
+<p>Even though it is perfectly acceptable to use only a single format, in order to keep the API flexible and extendable, it is also important to build for the future. Until recently XML was the format of choice, but then along came JSON.</p>
+<ul>
+<li><strong>DO</strong> use <code>Content-Type</code>, to describe the type of representation, including a <code>charset</code> parameter or other parameters defined for that media type.</li>
+<li><strong>DO</strong> include the <code>charset</code> parameter, if the media type supports it, with a value of the character encoding used to convert characters into bytes.</li>
+<li><strong>DO</strong> use the specified encoding, when you receive a representation with a media type that supports the <code>charset</code>parameter.</li>
+<li><strong>DO</strong> let your parser interpret the character set, if you receive an XML representation with a missing <code>charset</code> parameter.</li>
+<li><strong>AVOID</strong> using the <code>text/xml</code> media type for XML-formatted representations. The default charset for <code>text/xml</code> is <code>us-ascii</code>, whereas <code>application/xml</code> uses <code>UTF-8</code>.</li>
+</ul>
+<blockquote>
+<p>Note that Text and XML media types let you specify the character encoding. The JSON media type <code>application/json</code> does not specify a <code>charset</code> parameter, but uses <code>UTF-8</code> as the default encoding.</p>
+</blockquote>
+<h4 id="content-length">Content-Length</h4>
+<ul>
+<li><strong>DO</strong> use <code>Content-Length</code>, to specify the size in bytes of the body. Or specify <code>Transfer-Encoding: chunked</code>. Some proxies reject <code>POST</code> and <code>PUT</code> requests that contain neither of these headers.</li>
+</ul>
+<h4 id="content-language">Content-Language</h4>
+<ul>
+<li><strong>DO</strong> use <code>Content-Language</code>, two-letter RFC 5646 language tag, optionally followed by a hyphen (-) and any two-letter country code.</li>
+</ul>
+<h4 id="content-encoding">Content-Encoding</h4>
+<ul>
+<li><strong>DO</strong> use <code>Content-Encoding</code>. Clients can indicate their preference for <code>Content-Encoding</code> using the <code>Accept-Encoding</code> header, however, there is no standard way for the client to learn whether a server can process representations compressed in a given encoding.</li>
+</ul>
+<h4 id="other-common-headers">Other Common Headers</h4>
+<ul>
+<li><strong>CONSIDER</strong> using <code>ETag</code> and/or <code>Last-Modified</code> for caching and/or concurrency, the latter applies for responses only.</li>
+<li><strong>CONSIDER</strong> using <code>Content-MD5</code>, when sending or receiving large representations over potentially unreliable networks to verify the integrity of the message.</li>
+<li><strong>DO NOT</strong> use <code>Content-MD5</code> as any measure of security.</li>
+</ul>
+<h3 id="custom-http-headers">Custom HTTP Headers</h3>
+<p>Generally custom HTTP headers should be avoided, as they may impede interoperability. We discourage the use of hop-by-hop custom HTTP headers.</p>
+<p>However, depending on what clients and servers use custom headers for, they can be useful in cases where context information needs to be passed through multiple services in an end-to-end fashion. </p>
+<ul>
+<li><strong>DO</strong> use custom headers for informational purposes.</li>
+<li><strong>CONSIDER</strong> using the convention <code>X-{company-name}-{header-name}</code>, when introducing custom headers, as there is no established convention for naming custom headers. Avoid camelCase (without hyphens). Exceptions are common abbreviations like <code>ID</code>. <em><strong>the usage of X- headers is deprecated (RFC-6648)</strong></em></li>
+<li><strong>CONSIDER</strong> including the information in a custom HTTP header in the body or the URI, if the information is important for the correct interpretation of the request</li>
+<li><strong>DO NOT</strong> implement clients and servers such that they fail when they do not find expected custom headers.</li>
+<li><strong>DO NOT</strong> use custom HTTP headers to change behavior of HTTP methods, and limit any behavior-changing headers to <code>POST</code>.</li>
+<li><strong>DO NOT</strong> use <code>X-HTTP-Method-Override</code> to override <code>POST</code>, use a distinct resource to process the same request using <code>POST</code> without the header. Any HTTP intermediary between the client and the server may omit custom headers.</li>
+</ul>
+<h3 id="end-to-end-http-headers">End-To-End HTTP Headers</h3>
+<p>The following may be candidates for end-to-end HTTP headers:</p>
+<ul>
+<li>Correlation ID of the request, which is written into the logs and passed to upstream services. </li>
+<li>Generic user id that owns the passed (OAuth2) access token. May save additional token validation round trips</li>
+<li>Sales channel</li>
+<li>Device type, OS, and version</li>
+<li>App version, etc.</li>
+</ul>
+<!-- -->
+
+<ul>
+<li><strong>DO</strong> use the specified end-to-end HTTP headers.</li>
+<li><strong>DO</strong> propagate the end-to-end HTTP headers to upstream servers. Header names and values must remain intact.</li>
+</ul>
+<h3 id="format-and-a-media-type">Format and a Media Type</h3>
+<p>HTTP's message format is designed to allow different media types and formats for requests and responses.</p>
+<p>When it comes to format and media type selection, the rule of thumb is to let the use cases and the types of clients dictate the choice. For this reason, it is important not to pick up a development framework that rigidly enforces one or two formats for all resource with no flexibility to use other formats.</p>
+<ul>
+<li><strong>DO</strong> determine whether there is a standard format and media type that matches your use cases. Check the Internet Assigned Number Authority (IANA, http://www.iana.org/assignments/media-types/) media type registry.</li>
+<li><strong>DO</strong> use extensible formats such as XML, Atom Syndication Format, or JSON, if there is no standard media type and format.</li>
+<li><strong>CONSIDER</strong> adding a <code>Content-Disposition: attachment; filename=&lt;status.xls&gt;</code> to give a hint of the filename, when using image formats like <code>image/png</code> or rich document formats like <code>application/vnd.ms-excel</code> or <code>application/pdf</code> to provide alternative representations of data.</li>
+</ul>
+<p>If you choose to create new media types of your own, consider:</p>
+<ul>
+<li><strong>DO</strong> use a sub-type that ends with <code>+xml</code> in the <code>Content-Type</code> header, when using XML</li>
+<li><strong>DO</strong> use a sub-type starting with <code>vnd</code> (<code>application/vnd.example.org.user+xml</code>), when the media type is for private use,</li>
+<li><strong>DO</strong> register your media type with IANA as per RFC 4288, if the media type is for public use,</li>
+<li><strong>AVOID</strong> introducing new application-specific media types unless they are expected to be broadly used, as this may impede interoperability.</li>
+</ul>
+<blockquote>
+<p>Note that although custom media types improve protocol-level visibility, existing protocol-level tools for monitoring, filtering, or routing HTTP traffic pay little or no attention to media types. Hence, using custom media types only for the sake of protocol-level visibility is not necessary.</p>
+</blockquote>
+<h3 id="use-portable-data-formats-in-representations">Use Portable Data Formats in Representations</h3>
+<ul>
+<li><strong>DO</strong> use decimal, float and double data types defined in the W3C XML Schema for formatting numbers including currency.</li>
+<li><strong>DO</strong> use ISO 3166 (ISO 3166-1-alpha2) codes for countries and dependent territories.</li>
+<li><strong>DO</strong> use ISO 4217 alphabetic or numeric codes for denoting currency.</li>
+<li><strong>DO</strong> use RFC 3339 for dates, times, and date-time values used in representations. Time durations and intervals could conform to ISO 8601</li>
+<li><strong>DO</strong> use ISO 639-1 language tags for representing the language of text. BCP-47 (based on ISO 639-1) for language variants.</li>
+<li><strong>DO</strong> use time zone identifiers from the Olson Time Zone Database to convey time zones.</li>
+<li><strong>DO</strong> use the HTTP-date format defined in RFC 7231 Section 7.1.1.1. (Date/Time Formats) for <code>Last-Modified</code>, <code>Date</code>, and <code>Expires</code> HTTP headers.</li>
+<li><strong>AVOID</strong> using language-, region-, or country-specific formats or format identifiers, except when the text is meant for presentation to end users.</li>
+</ul>
+<p>Also, consider defining the format for numbers and integers. The precision could be described as follows, to prevent clients from guessing the precision:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Format</th>
+<th>Specified value range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>integer</td>
+<td>int32</td>
+<td>integer between -2^31 and 2^31-1</td>
+</tr>
+<tr>
+<td>integer</td>
+<td>int64</td>
+<td>integer between -2^63 and 2^63-1</td>
+</tr>
+<tr>
+<td>integer</td>
+<td>bigint</td>
+<td>arbitrarily large signed integer number</td>
+</tr>
+<tr>
+<td>number</td>
+<td>float</td>
+<td>IEEE 754-2008/ISO 60559:2011 binary64 decimal number</td>
+</tr>
+<tr>
+<td>number</td>
+<td>double</td>
+<td>IEEE 754-2008/ISO 60559:2011 binary128 decimal number</td>
+</tr>
+<tr>
+<td>number</td>
+<td>decimal</td>
+<td>arbitrarily precise signed decimal number</td>
+</tr>
+</tbody>
+</table>
+<h3 id="json-representations">JSON Representations</h3>
+<p>JSON has become the de facto format within RESTful APIs, by providing a compact, human-readable format for accessing data, which can help minimalize the bandwidth required.</p>
+<p>One of the advantages to REST is that it is not limited to a single format, and the choice of format should be based on what is most suitable for the clients.</p>
+<ul>
+<li><strong>DO</strong> prefer JSON over XML to encode structured representations, whenever possible.</li>
+<li><strong>DO</strong> include a <em>self</em> link to the resource in each representation.</li>
+<li><strong>DO</strong> add a property to indicate the language, if an object in the representation is localized.</li>
+<li><strong>DO</strong> pretty print the representation by default, as this will help when using a browser to access the public API. Together with compression the additional white-space characters are negligible.</li>
+<li><strong>DO</strong> use gzip compression, if applicable.</li>
+<li><strong>DO</strong> prefer <code>application/json</code> over more specialized and custom media type like <code>application/example.booking+json</code>.</li>
+<li><strong>DO</strong> use consistent property names.</li>
+<li><strong>DO</strong> use camelCase for property names.</li>
+<li><strong>DO</strong> use a subset of <code>us-ascii</code>for property names. The first character must be a letter, an underscore or a dollar sign, and subsequent characters can be a letter, an underscore, a dollar sign, or a number.</li>
+<li><strong>DO</strong> pluralize arrays to indicate they contain multiple values prefer to pluralize array names. This implies that object names should in turn be singular.</li>
+<li><strong>DO</strong> use consistent property values</li>
+<li><strong>DO</strong> use string to represent enumerations.</li>
+<li><strong>CONSIDER</strong> using common field names and semantics to achieve consistency across the API portfolio, as there is very little utility for clients in having different names or value types for these fields across APIs. Candidates are, but not limited to: <em>id</em>, <em>relation_id</em>, <em>type</em>, <em>created</em>, <em>modified/updated</em>.</li>
+<li><strong>CONSIDER</strong> including entity identifiers for each of the application domain entities that make up the resource.</li>
+<li><strong>CONSIDER</strong> the use of an envelope by default. Only use envelopes in exceptional cases.</li>
+<li><strong>CONSIDER</strong> follow RFC-7159 by having (if possible) a serialized object as the top-level structure, since it would allow for future extension. </li>
+<li><strong>DO NOT</strong> return an array as the top-level structure, as this may expose security vunerabilities. Instead use an envelope, like: <code>{ list: [...]}</code>.</li>
+<li><strong>DO NOT</strong> use <code>null</code> for boolean property values must not be null. A boolean is essentially a closed enumeration of two values, true and false. If the content has a meaningful null value, strongly prefer to replace the boolean with enumeration of named values or statuses.</li>
+<li><strong>DO NOT</strong> return <code>null</code> for empty array values should not be null. Empty array values can unambiguously be represented as the the empty list, [].</li>
+</ul>
+<p>Example:</p>
+<pre><code class="json">{
+    &quot;name&quot;: &quot;John&quot;,
+    &quot;id&quot;: &quot;urn:example:user:1234&quot;,
+    &quot;link&quot;: {
+        &quot;rel&quot;: &quot;self&quot;,
+        &quot;href&quot;: &quot;http://www.example.org/person/john&quot;
+    },
+    &quot;address&quot;: {
+        &quot;id&quot;: &quot;urn:example:address:4567&quot;,
+        &quot;link&quot;: {
+            &quot;rel&quot;: &quot;self&quot;,
+            &quot;href&quot;: &quot;http://www.example.org/person/john/address&quot;
+        }
+    },
+    &quot;content&quot;: {
+        &quot;text&quot;: [{
+          &quot;value&quot;: &quot;...&quot;
+        }, {
+            &quot;lang&quot;: &quot;en-GB&quot;,
+            &quot;value&quot;: &quot;...&quot;
+        }, {
+            &quot;lang&quot;: &quot;en-US&quot;,
+            &quot;value&quot;: &quot;...&quot;
+        }]
+    }
+}
+</code></pre>
+
+<h4 id="representations-of-collections">Representations of Collections</h4>
+<ul>
+<li><strong>DO</strong> return an empty collection, if the query does not match any resources.</li>
+<li><strong>DO</strong> include pagination links.</li>
+</ul>
+<h4 id="pagination">Pagination</h4>
+<ul>
+<li><strong>DO</strong> add a self link to the collection resource</li>
+<li><strong>DO</strong> add link to the next page, if the collection is paginated and has a next page</li>
+<li><strong>DO</strong> a link to the previous page, if the collection is paginated and has a previous page</li>
+<li><strong>DO</strong> add an indicator of the size of the collection</li>
+<li><strong>DO</strong> keep collections homogeneous by include only the homogeneous aspects of its member resources.</li>
+</ul>
+<blockquote>
+<p><strong>TIP</strong>
+Although the size of the collection is useful for building user interfaces, avoid computing the exact size of the collection. It may be expensive to compute, volatile, or even confidential. Providing a hint is usually good enough.</p>
+</blockquote>
+<!-- TODO -->
+
+<pre><code>## PAGINATION
+
+limit — to restrict the number of entries. See Pagination section below. Hint: You can use size as an alternate query string.
+offset — numeric offset page start. See Pagination section below. Hint: In combination with limit, you can use page as an alternative to offset.
+cursor — key-based page start. See Pagination section below.
+
+## Pagination and partial response
+
+Partial response allows you to give developers just the information they need.
+
+Take for example a request for a tweet on the Twitter API. You'll get much more than a typical twitter app often needs - including the name of person, the text of the tweet, a timestamp, how often the message was re-tweeted, and a lot of metadata.
+
+Let's look at how several leading APIs handle giving developers just what they need in responses, including Google who pioneered the idea of partial response.
+
+LinkedIn
+
+/people:(id,first-name,last-name,industry)
+
+This request on a person returns the ID, first name, last name, and the industry.
+
+LinkedIn does partial selection using this terse :(...) syntax which isn't self-evident.
+
+Plus it's difficult for a developer to reverse engineer the meaning using a search engine.
+
+Facebook
+
+/joe.smith/friends?fields=id,name,picture
+
+Google
+
+?fields=title,media:group(media:thumbnail)
+
+Google and Facebook have a similar approach, which works well.
+
+They each have an optional parameter called fields after which you put the names of fields you want to be returned.
+
+As you see in this example, you can also put sub-objects in responses to pull in other information from additional resources.
+
+Add optional fields in a comma-delimited list The Google approach works extremely well.
+
+Here's how to get just the information we need from our dogs API using this approach:
+
+/dogs?fields=name,color,location
+
+It's simple to read; a developer can select just the information an app needs at a given time; it cuts down on bandwidth issues, which is important for mobile apps.
+
+
+The partial selection syntax can also be used to include associated resources cutting down on the number of requests needed to get the required information.
+
+Make it easy for developers to paginate objects in a database
+
+It's almost always a bad idea to return every resource in a database.
+
+Let's look at how Facebook, Twitter, and LinkedIn handle pagination. Facebook uses offset and limit. Twitter uses page and rpp (records per page). LinkedIn uses start and count
+
+Semantically, Facebook and LinkedIn do the same thing. That is, the LinkedIn start &amp; count is used in the same way as the Facebook offset &amp; limit.
+
+To get records 50 through 75 from each system, you would use:
+
+* Facebook - offset 50 and limit 25
+* Twitter - page 3 and rpp 25 (records per page)
+* LinkedIn - start 50 and count 25
+
+## Use limit and offset
+
+We recommend limit and offset. It is more common, well understood in leading databases, and easy for developers.
+
+/dogs?limit=25&amp;offset=50
+
+## Metadata
+
+We also suggest including metadata with each response that is paginated that indicated to the developer the total number of records available.
+
+What about defaults?
+
+My loose rule of thumb for default pagination is limit=10 with offset=0. (limit=10&amp;offset=0)
+
+The pagination defaults are of course dependent on your data size. If your resources are large, you probably want to limit it to fewer than 10; if resources are small, it can make sense to choose a larger limit.
+
+In summary:
+
+Support partial response by adding optional fields in a comma delimited list.
+
+Use limit and offset to make it easy for developers to paginate objects
+
+&lt;!-- TODO --&gt;
+
+Pagination: The right way to include pagination details today is using the Link header introduced by RFC 5988. An API that requires sending a count can use a custom HTTP header like X-Total-Count.
+
+- OData
+- The GitHub way:
+```
+# Request
+GET /user/repos?page=4&amp;per_page=2
+
+# Response
+Link: &lt;https://api.github.com/user/repos?page=5&amp;per_page=2&gt;; rel="next",
+      &lt;https://api.github.com/user/repos?page=8&amp;per_page=2&gt;; rel="last",
+      &lt;https://api.github.com/user/repos?page=1&amp;per_page=2&gt;; rel="first",
+      &lt;https://api.github.com/user/repos?page=3&amp;per_page=2&gt;; rel="prev"
+```
+- Pivotal Tracker
+```
+# Request
+GET projects/1/stories?offset=1300&amp;limit=300
+
+# Response
+X-Tracker-Pagination-Total: 1543
+X-Tracker-Pagination-Limit: 300
+X-Tracker-Pagination-Offset: 1300
+X-Tracker-Pagination-Returned: 243
+```
+```
+# Request
+GET projects/1/stories?offset=1300&amp;limit=300&amp;envelope=true
+
+# Response
+{
+   "data": { /* ... */ },
+   "pagination": {
+       "total": 1543,
+       "limit": 300,
+       "offset": 1300,
+       "returned": 243
+   }
+}
+```
+
+# Pagination
+
+### Support Pagination
+
+Access to lists of data items must support pagination for best client side batch processing and iteration experience. This holds true for all lists that are (potentially) larger than just a few hundred entries.
+
+There are two page iteration techniques:
+
+Offset/Limit-based pagination: numeric offset identifies the first page entry
+Cursor-based — aka key-based — pagination: a unique key element identifies the first page entry (see also Facebook's guide)
+The technical conception of pagination should also consider user experience related issues. As mentioned in this article, jumping to a specific page is far less used than navigation via next/previous page links. This favours cursor-based over offset-based pagination.
+
+### Prefer Cursor-Based Pagination, Avoid Offset-Based Pagination
+
+Cursor-based pagination is usually better and more efficient when compared to offset-based pagination. Especially when it comes to high-data volumes and / or storage in NoSQL databases.
+
+Before choosing cursor-based pagination, consider the following trade-offs:
+
+Usability/framework support:
+
+Offset / limit based pagination is more known than cursor-based pagination, so it has more framework support and is easier to use for API clients
+Use case: Jump to a certain page
+
+If jumping to a particular page in a range (e.g., 51 of 100) is really a required use case, cursor-based navigation is not feasible
+Variability of data may lead to anomalies in result pages
+
+Offset-based pagination may create duplicates or lead to missing entries if rows are inserted or deleted between two subsequent paging requests.
+When using cursor-based pagination, paging cannot continue when the cursor entry has been deleted while fetching two pages
+Performance considerations - efficient server-side processing using offset-based pagination is hardly feasible for:
+
+Higher data list volumes, especially if they do not reside in the database's main memory
+Sharded or NoSQL databases
+Cursor-based navigation may not work if you need the total count of results and / or backward iteration support
+
+Further reading:
+
+Twitter
+Use the Index, Luke
+Paging in PostgreSQL
+
+### Use Pagination Links Where Applicable
+
+API implementing HATEOS may use simplified hypertext controls for pagination within collections.
+Those collections should then have an items attribute holding the items of the current page. The collection may contain additional metadata about the collection or the current page (e.g. index, page_size) when necessary.
+
+You should avoid providing a total count in your API unless there's a clear need to do so. Very often, there are systems and performance implications to supporting full counts, especially as datasets grow and requests become complex queries or filters that drive full scans (e.g., your database might need to look at all candidate items to count them). While this is an implementation detail relative to the API, it's important to consider your ability to support serving counts over the life of a service.
+
+If the collection consists of links to other resources, the collection name should use IANA registered link relations as names whenever appropriate, but use plural form.
+
+E.g. a service for articles could represent the collection of hyperlinks to an article's authors like that:
+
+{
+"self": "https://.../articles/xyz/authors/",
+"index": 0,
+"page_size": 5,
+"items": [
+    {  
+    "href": "https://...",
+    "id": "123e4567-e89b-12d3-a456-426655440000",
+    "name": "Kent Beck"
+    },
+    {  
+    "href": "https://...",
+    "id": "987e2343-e89b-12d3-a456-426655440000",
+    "name": "Mike Beedle"
+    },
+    ...
+],
+"first": "https://...",
+"next": "https://...",
+"prev": "https://...",
+"last": "https://..."
+}
+</code></pre>
+<h3 id="xml-representations"><em><strong>XML Representations</strong></em></h3>
+<p><em>TBD</em></p>
+<p><em>Suggested topics:</em><br/>
+<em>Atom resources, AtomPub Service, category documents, AtomPub for feed and entry resources, media resources</em></p>
+<h3 id="html-representations">HTML Representations</h3>
+<ul>
+<li><strong>DO</strong> provide HTML representations, for resources that are expected to be consumed by end users.</li>
+<li><strong>CONSIDER</strong>  using microformats or RDFx to annotate data within the markup.</li>
+<li><strong>AVOID</strong> avoid designing HTML representations for machine clients.</li>
+</ul>
+<h3 id="binary-data-in-representations">Binary Data in Representations</h3>
+<ul>
+<li><strong>DO</strong> use multipart media types such as <code>multipart/mixed</code>, <code>multipart/related</code>, or <code>multipart/alternative</code>.</li>
+<li><strong>CONSIDER</strong> providing a link to fetch the binary data as a separate resource as an alternative. Creating and parsing multipart messages in some programming languages may be cumbersome and complex.</li>
+<li><strong>AVOID</strong> encoding binary data within textual formats using Base64 encoding.</li>
+</ul>
+<h3 id="error-representations">Error Representations</h3>
+<p>Communicate errors through standard HTTP status codes along with details supplied in the response body. </p>
+<p>Errors are a key element for providing context and visibility, and status codes enable clients to quickly ascertain the status of their request. While well-formed and descriptive error details will tell the client what happened, why it happened, and how to fix it.</p>
+<ul>
+<li><strong>DO</strong> provide error documentation.</li>
+<li><strong>DO</strong> include a <code>Date</code> header with a value indicating the date-time at which the error occurred.</li>
+<li><strong>DO</strong> include a body in the representation formatted and localized using content negotiation or in human-readable HTML or plain text, unless the request method is <code>HEAD</code>.</li>
+<li><strong>DO</strong> provide an identifier or a link that can be used to refer to that error, if you are logging errors on the server side for later tracking or analysis.</li>
+<li><strong>DO</strong> include a brief message describing the error condition</li>
+<li><strong>DO</strong> include a longer description with information on how to fix the error condition, if applicable</li>
+<li><strong>DO</strong> describe any action that the client can take to correct the error or to help the server debug and fix the error, if appropriate.</li>
+<li><strong>CONSIDER</strong> Use Problem JSON: RFC 7807 defines the media type application/problem+json. Operations should return that (together with a suitable status code) when any problem occurred during processing and you can give more details than the status code itself can supply, whether it be caused by the client or the server (i.e. both for 4xx or 5xx errors).</li>
+<li><strong>CONSIDER</strong> adding a field breakdown, providing detailed errors, along with a fixed top-level error description, for <code>PUT</code>, <code>PATCH</code> and <code>POST</code> requests.</li>
+<li><strong>CONSIDER</strong> including a link to that document via a <code>Link</code> header or a link in the body, if information to correct or debug the error is available as a separate human-readable document. Also consider tracking the hits to these pages to see what areas tend to be more troublesome for your users – allowing you to provide even better documentation and/or build a better API.</li>
+<li><strong>AVOID</strong> including details such as stack traces, errors from database connections failures, etc.</li>
+<li><strong>AVOID</strong> using generic or non-descriptive error messages as they are often one of the biggest hinderances to API integration, as developers may struggle for hours trying to figure out why the call is failing, even misinterpreting the intent of the error message altogether.</li>
+<li><strong>DO NOT</strong> return <code>2xx</code> and include a message body that describes an error condition. Doing so prevents HTTP-aware software from detecting errors.</li>
+</ul>
+<p>Error example:</p>
+<pre><code class="json">{
+    &quot;error&quot; : {
+    &quot;code&quot; : &quot;e3526&quot;,
+    &quot;message&quot; : &quot;Missing UserID&quot;,
+    &quot;description&quot; : &quot;A UserID is required to edit a user.&quot;,
+    &quot;link&quot; : &quot;http://docs.mysite.com/errors/e3526/&quot;
+    }
+}
+</code></pre>
+
+<p>Validation error example:</p>
+<pre><code class="json">{
+    &quot;code&quot; : 1024,
+    &quot;message&quot; : &quot;Validation Failed&quot;,
+    &quot;errors&quot; : [
+    {
+        &quot;code&quot; : 5432,
+        &quot;field&quot; : &quot;first_name&quot;,
+        &quot;message&quot; : &quot;First name cannot have fancy characters&quot;
+    },
+    {
+        &quot;code&quot; : 5622,
+        &quot;field&quot; : &quot;password&quot;,
+        &quot;message&quot; : &quot;Password cannot be blank&quot;
+    }
+    ]
+}
+</code></pre>
+
+<h3 id="http-status-codes">HTTP Status Codes</h3>
+<p><strong>Always return meaningful HTTP Status Codes!</strong>  By using meaningful status codes, developers can quickly see what is happening with the application and do a "quick check" for errors without having to rely on the body's response.</p>
+<ul>
+<li><strong>DO</strong> return <code>2xx</code> when the request was received, understood, and accepted.</li>
+<li><strong>DO</strong> return <code>3xx</code> when the client needs to take further action. Include the necessary information in order for the client to complete the request.</li>
+<li><strong>DO</strong> return a representation with a <code>4xx</code> status code, for errors due to client inputs,</li>
+<li><strong>DO</strong> return a representation with a <code>5xx</code> status code, for errors due to server implementation or its current state.</li>
+<li><strong>DO</strong> use the most specific HTTP status code for your concrete resource request processing status or error situation.</li>
+<li><strong>DO</strong> provide good documentation in the API definition when using HTTP status codes that are less commonly used and not listed below.</li>
+<li><strong>DO NOT</strong> invent new HTTP status codes; only use standardized HTTP status codes and consistent with its intended semantics.</li>
+</ul>
+<h4 id="2xx-great-success">2xx Great Success</h4>
+<ul>
+<li><strong>DO</strong> return <code>200 OK</code> when the request completed without issues.</li>
+<li><strong>DO</strong> return <code>201 Created</code> when a resource was successfully created. Always set the <code>Location</code> header with the URI of the newly created resource. Return either an empty response or the created resource.</li>
+<li><strong>DO</strong> return <code>202 Accepted</code> when a request was successful and will be processed asynchronously.</li>
+<li><strong>DO</strong> return <code>204 No content</code> when there is no response body.</li>
+<li><strong>DO</strong> return <code>207 Multi-Status</code> when the response body contains multiple status informations for different parts of a batch/bulk request.</li>
+</ul>
+<h4 id="3xx-client-action-may-be-required">3xx Client Action May Be Required</h4>
+<ul>
+<li><strong>DO</strong> return <code>301 Moved Permanently</code> when this and all future requests should be directed to the URI specified in the <code>Location</code> header.</li>
+<li><strong>DO</strong> return <code>303 See Other</code> when the response to the request can be found under the URI specified in the <code>Location</code> header using a GET method.</li>
+<li><strong>DO</strong> return <code>304 Not Modified</code> when the resource has not been modified since the date or version passed via request headers <code>If-Modified-Since</code> or <code>If-None-Match</code>.</li>
+</ul>
+<h4 id="4xx-client-errors">4xx Client Errors</h4>
+<ul>
+<li><strong>DO</strong> return <code>400 Bad Request</code> when your server cannot decipher client requests because of syntactical errors.</li>
+<li><strong>DO</strong> return <code>401 Unauthorized</code> when the client is not authorized to access the resource, but may be able to gain access after authentication. If your server will not let the client access the resource even after authentication return <code>403 Forbidden</code> instead. When returning this error code, include a WWW-Authenticate header field with the authentication method to use.</li>
+<li><strong>DO</strong> return <code>403 Forbidden</code> when your serer will not let the client gain access (authenticated or not).</li>
+<li><strong>DO</strong> return <code>404 Not Found</code> when the resource is not found. If possible, return a reason in the message body.</li>
+<li><strong>DO</strong> return <code>405 Not Allowed</code> when an HTTP method is not allowed. Return an <code>Allow</code> header with methods that are valid for the resource.</li>
+<li><strong>DO</strong> return <code>406 Not Acceptable</code>. when the resource can only generate content not acceptable according to the <code>Accept</code> headers sent in the request.</li>
+<li><strong>DO</strong> return <code>408 Request Timeout</code> when the server times out waiting for the resource.</li>
+<li><strong>DO</strong> return <code>409 Conflict</code> when the request conflicts with the current state of the resource. Include a body explaining the reason.</li>
+<li><strong>DO</strong> return <code>410 Gone</code> when the resource used to exist, but it does not anymore. You may not be able to return this unless you tracked deleted resources, then return <code>404 Not Found</code>.</li>
+<li><strong>DO</strong> return <code>412 Precondition Failed</code> for conditional requests, when <code>If-Match</code> and/or <code>ETag</code> preconditions fail.</li>
+<li><strong>DO</strong> return <code>413 Request Entity Too Large</code> when the body of a <code>POST</code> or <code>PUT</code> is too large. If possible, specify what is allowed in the body and provide alternatives.</li>
+<li><strong>DO</strong> return <code>415 Unsupported Media Type</code> when a client sends the message body in a form that the server does not understand.</li>
+<li><strong>DO</strong> return <code>423 Locked</code> when using pessimistic locking.</li>
+<li><strong>DO</strong> return <code>428 Precondition Required</code> when the server requires the request to be conditional (e.g. to make sure that the "lost update problem" is avoided).</li>
+<li><strong>DO</strong> return <code>429 Too Many Requests</code> when the client does not consider rate limiting and sent too many requests. Include headers to indicate rate limits.</li>
+</ul>
+<h4 id="5xx-server-errors">5xx Server Errors</h4>
+<ul>
+<li><strong>DO</strong> return <code>500 Internal Server Error</code> when your code on the server side failed due to come implementation bug.</li>
+<li><strong>DO</strong> return <code>501 Not Implemented</code> to indicate that a future feature may become available.</li>
+<li><strong>DO</strong> return <code>503 Service Unavailable</code> when the server cannot fulfill the request either for some specific interval or undetermined amount of time. If possible, include a <code>Retry-After</code> response header with either a date or a number of seconds as a hint.</li>
+</ul>
+<h3 id="entity-identifiers-in-representations">Entity Identifiers in Representations</h3>
+<p>When an API is part of a larger API portfolio or system, information may cross several system boundaries, and entity identifiers can be used to uniformly identify, cross-reference or transform data. Especially when a lot of different technologies are envolved (RPC, SOAP, asynchronous messaging, stored procedures, etc.) and/or third-party applications, the only common denominator may very well be entity identifiers.</p>
+<ul>
+<li><strong>CONSIDER</strong> consider formatting identifiers as URNs, for each of the application domain entities included in the representation of a resource, to maintain uniqueness of identifiers.</li>
+<li><strong>CONSIDER</strong> using strings rather than number types for identifiers, as this gives more flexibility to evolve the identifier naming scheme. Accordingly, if used as identifiers, UUIDs should not be qualified using a format property.</li>
+<li><strong>CONSIDER</strong> using UUIDs as entity identifiers for scaling in high frequency and near real time use cases, as they can be generated without collisions in a distributed, non-coordinated way and without additional server roundtrips.</li>
+<li><strong>CONSIDER</strong> limiting the use of UUIDs as entity identifiers when it is not strictly necessary, if it possible to come up with a better naming scheme, if the id volume is low, or if the ids have widespread steering functionality.</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../hypermedia/" class="btn btn-neutral float-right" title="Hypermedia">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../methods/" class="btn btn-neutral" title="Methods"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../methods/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../hypermedia/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

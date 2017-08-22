@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Resource Identifiers# - API Design Guidelines</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Resource Identifiers#";
+    var mkdocs_page_input_path = "resource_identifiers.md";
+    var mkdocs_page_url = "/resource_identifiers/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> API Design Guidelines</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Introduction#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../apis/">APIs#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../uniform_interface/">Uniform Interface#</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Resource Identifiers#</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#resource-identifiers-uris">Resource Identifiers (URIs)</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#designing-uris">Designing URIs</a></li>
+        
+            <li><a class="toctree-l3" href="#uris-for-queries">URIs for Queries</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resources/">Resources#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../methods/">Methods</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../representations/">Representations</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../hypermedia/">Hypermedia</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../content_negotiation/">Content Negotiation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../caching/">Caching</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../security/">Security</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../versioning_and_extensibility/">Versioning and Extensibility</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../documentation_and_discovery/">Documentation and Discovery</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../specifications/">Specifications</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mocking/">Mocking</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../clients/">Clients</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../other_topics/">Other topics</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../misc/">Misc</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../references/">References</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">API Design Guidelines</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Resource Identifiers#</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="resource-identifiers-uris">Resource Identifiers (URIs)</h2>
+<p>An important aspect of API design is to think about how to design unique resource identifiers, and as such, URIs should be treated as opaque resource identifiers.</p>
+<p>This means that clients should not be concerned with the design of URIs, nor should clients try to pick apart URIs in order to gather information from them. Instead URIs should be discovered through links (and the submission of forms).</p>
+<blockquote>
+<p>For instance, clients must not use the fact that a URI ends with <code>.xml</code> to infer that it resolves to an XML representation, instead it must rely on the <code>Content-Type</code> header of the response. </p>
+</blockquote>
+<p>The opacity of URIs helps reduce coupling between servers and clients. This has nothing to do with readability or hackability, both of which may be extremely important aspects for developers consuming the API, where:</p>
+<ul>
+<li><em>readable URIs</em> help developers understand something about the resource.</li>
+<li><em>hackable URIs</em> are manipulated by altering/removing portions of the path or query, and can help developers locate other resources.</li>
+</ul>
+<h3 id="designing-uris">Designing URIs</h3>
+<p>When done successfully the result, of a thoughtful URI design, can be the most important design affordance (a design property that communicates how something should be used without requiring documentation) of your API. So when designing URIs:</p>
+<ul>
+<li><strong>DO</strong> design URIs to last a long time - <a href="http://www.w3.org/Provider/Style/URI">Cool URIs don't change</a>.</li>
+<li><strong>DO</strong> design URIs based on stable concepts, identifiers, and information. URIs cannot be permanent if the concepts or identifiers used cannot be permanent for business, technical, or security reasons. </li>
+<li><strong>DO</strong> keep your base URIs simple and intuitive.</li>
+<li><strong>DO</strong> use lowercase for URIs.</li>
+<li><strong>DO</strong> use domains and subdomains to logically group or partition resources for localization, distribution, or to enforce various monitoring or security policies.</li>
+<li><strong>DO</strong> use forward-slash (<code>/</code>) in the path segment to indicate a hierarchical relationship between resources.</li>
+<li><strong>DO</strong> use the hyphen (<code>-</code>) or (<code>_</code>) characters to improve the readability of long path segments. Pick one or the other for consistency.</li>
+<li><strong>DO</strong> use ampersand (<code>&amp;</code>) to separate query parameters.</li>
+<li><strong>DO</strong> use the URI only to determine which resource should process a request.</li>
+<li><strong>CONSIDER</strong> provide URIs at runtime using links in the body of representations or headers, whenever appropriate.</li>
+<li><strong>CONSIDER</strong> using <code>/api</code> as the first path segment, when the API also supports non-public APIs, e.g., for specific operational support functions. Otherwise, consider forgoing the <code>/api</code> prefix.</li>
+<li><strong>CONSIDER</strong> using comma (<code>,</code>) and semi-colon (<code>;</code>) to indicate nonhierarchical elements in the path segment. The semi-colon (<code>;</code>) convention is used to identify matrix parameters. <em>As not all libraries recognize these as separators and may require custom coding to extract these parameters</em>.</li>
+<li><strong>CONSIDER</strong> using URI templates, if it is impractical to supply all the possible URIs in the representation (e.g., ad hoc searching).</li>
+<li><strong>CONSIDER</strong> disregarding opacity to protect against tampering using digitally signed URIs, or to protect sensitive information by encrypting parts of the URI.</li>
+<li><strong>AVOID</strong> including file extensions, instead rely on the media types.</li>
+<li><strong>AVOID</strong> using trailing forward slash, as some frameworks may incorrectly remove or add such slashes during URI normalization.</li>
+<li><strong>AVOID</strong> expecting clients to construct URIs.</li>
+<li><strong>AVOID</strong> unnecessary query strings in URIs.</li>
+<li><strong>AVOID</strong> leaking implementation details to clients, by keeping the creating of URIs on the server, as those details will become part of the public interface.</li>
+<li><strong>DO NOT</strong> use an URI as a generic gateway, by tunneling repeated state changes over <code>POST</code> using the same URI.</li>
+<li><strong>DO NOT</strong> use custom headers to overload URIs.</li>
+</ul>
+<h3 id="uris-for-queries">URIs for Queries</h3>
+<p>Queries usually involve filtering, sorting and projections. When providing query support for these and other actions:</p>
+<ul>
+<li><strong>DO</strong> use snake_case (never camelCase) for Query Parameters.</li>
+<li><strong>DO</strong> use query parameters to let clients specify filter conditions, sort fields, and projections.</li>
+<li><strong>DO</strong> treat query parameters as optional with sensible defaults.</li>
+<li><strong>DO</strong> document each parameter.</li>
+<li><strong>CONSIDER</strong> using <code>q</code> (e.g. used by browser tab completion) as the default query parameter.</li>
+<li><strong>CONSIDER</strong> using a generic <code>sort</code> parameter to describe sorting rules. To accommodate more complex sorting requirements, let the <code>sort</code> parameter take a lift of comma-separated fields, each with a possible unary negative to imply descending sort order. Like: <code>GET /tickets?sort=-priority,created_at</code></li>
+<li><strong>CONSIDER</strong> using a <code>fields</code> query parameter for projections, like <code>http://www.example.org/customers?fields=name,gender,birthday</code> or <code>http://example.org/customer?fields=(firstName,user(email))</code> and <code>!</code> to negate field selection. Depending on the use case and payload size, it can reduce network bandwidth and reduce filtering on clients.</li>
+<li><strong>CONSIDER</strong> using a <code>view</code> query parameter for predefined projections, like <code>http://www.example.org/customers?view=summary</code></li>
+<li><strong>CONSIDER</strong> supporting aliases for commonly used queries (it may also improve cacheability). For instance, <code>GET /tickets/recently_closed</code></li>
+<li><strong>CONSIDER</strong> using <code>embed</code> to allow for resource expansion. Embedding related resources can help reduce the number of requests.</li>
+<li><strong>CONSIDER</strong> using a <code>format</code> query parameter, if standard content negotiation is not possible.</li>
+<li><strong>CONSIDER</strong> using <code>limit</code> and <code>offset</code> when resource collections are backed by traditional relation databases, as these ties into the general implementation on the data store. Opt for <code>cursor</code> and a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database.</li>
+<li><strong>AVOID</strong> ad hoc queries that use general-purpose query languages such as <em>SQL</em> or <em>XPath</em>.</li>
+<li><strong>AVOID</strong> <code>Range</code> requests for implementing queries.</li>
+<li></li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../resources/" class="btn btn-neutral float-right" title="Resources#">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../uniform_interface/" class="btn btn-neutral" title="Uniform Interface#"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../uniform_interface/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../resources/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

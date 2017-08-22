@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Caching - API Design Guidelines</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Caching";
+    var mkdocs_page_input_path = "caching.md";
+    var mkdocs_page_url = "/caching/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> API Design Guidelines</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Introduction#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../apis/">APIs#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../uniform_interface/">Uniform Interface#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resource_identifiers/">Resource Identifiers#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../resources/">Resources#</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../methods/">Methods</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../representations/">Representations</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../hypermedia/">Hypermedia</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../content_negotiation/">Content Negotiation</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Caching</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#caching-and-conditional-requests">Caching and Conditional Requests</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#conditional-request">Conditional Request</a></li>
+        
+            <li><a class="toctree-l3" href="#may-consider-using-etag-together-with-if-none-match-header">MAY: Consider using ETag together with If-(None-)Match header</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../security/">Security</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../versioning_and_extensibility/">Versioning and Extensibility</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../documentation_and_discovery/">Documentation and Discovery</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../specifications/">Specifications</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mocking/">Mocking</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../clients/">Clients</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../other_topics/">Other topics</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../misc/">Misc</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../references/">References</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">API Design Guidelines</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Caching</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="caching-and-conditional-requests">Caching and Conditional Requests</h2>
+<p>Caching is one of the most useful features built on top of HTTP's uniform interface. You can take advantage of caching to reduce end user perceived latency, to increase reliasbility, to reduce bandwidth usage and cost, and to reduce server load. They can be in server network, content delivery networks (CDNs), or in the client network (forward proxies).</p>
+<p>It is common to use the word <em>cache</em> to refer to either an object cache (memcached) or HTTP caches. Both of these caches improve performacne and have key roles to play in the overall web service deployment architecture. But there is an important difference between the two. HTTP caches do not require clients and servers to call any special programming API to manage data in the cache, as long as you are using HTTP as defined.</p>
+<p><em>origin server</em></p>
+<pre><code>They are slightly different - the ETag does not have any information that the client can use to determine whether or not to make a request for that file again in the future. If ETag is all it has, it will always have to make a request. However, when the server reads the ETag from the client request, the server can then determine whether to send the file (HTTP 200) or tell the client to just use their local copy (HTTP 304). An ETag is basically just a checksum for a file that semantically changes when the content of the file changes.
+
+The Expires header is used by the client (and proxies/caches) to determine whether or not it even needs to make a request to the server at all. The closer you are to the Expires date, the more likely it is the client (or proxy) will make an HTTP request for that file from the server.
+
+So really what you want to do is use BOTH headers - set the Expires header to a reasonable value based on how often the content changes. Then configure ETags to be sent so that when clients DO send a request to the server, it can more easily determine whether or not to send the file back.
+
+One last note about ETag - if you are using a load-balanced server setup with multiple machines running Apache you will probably want to turn off ETag generation. This is because inodes are used as part of the ETag hash algorithm which will be different between the servers. You can configure Apache to not use inodes as part of the calculation but then you'd want to make sure the timestamps on the files are exactly the same, to ensure the same ETag gets generated for all servers.
+</code></pre>
+<ul>
+<li>How to set Expiration Caching Headers</li>
+</ul>
+<p>Expiration caching is based on the <code>Cache-Control</code> and <code>Expires</code> headers. These headers instruct clients and caches to keep a copy of the representation returned by the server for a specific length of time.</p>
+<p>Based on the frequency of updates, determine a time period (the <em>freshness lifetime</em>) during which caches can serve a representation. After this time, caches will consider cached representations stale.</p>
+<p>When serving a representation, include a <code>Cache-Control</code> header with a <code>max-age</code> value (in seconds) equal to the freshness lifetime. The <code>Cache-Control</code> header is a HTTP 1.1 header. To support legacy HTTP 1.0 caches, include a <code>Expires</code> header with the expiration date-time. The expiration date-time is a time at which the server generated the representation plus the freshness lifetime. Also include a <code>Date</code> header with a date-time at which the server returned the response. Including this header helps clients compute the freshness lifetime as the difference between the values of the <code>Expires</code> and <code>Date</code> headers.</p>
+<p>If the caches must not serve cached copies, add <code>Cache-Control: no-cache</code> to the HTTP headers. Also add a <code>Pragma: no-cache</code> to support HTTP 1.0 caches.</p>
+<p>List of <code>Cache-Control</code> directives:</p>
+<ul>
+<li><em>public</em> (default): when the request is authenticated, but you still want to allow shared caches to serve cached responses.</li>
+<li><em>private</em>: when the response is preivate to the client or user. Any client-side caches (browsers/forward proxies) can cache the representation, but sharede caches along the network must not cache it.</li>
+<li><em>no-cache</em> and <em>no-store</em>: prevents any cache from storing or serving a cached response.</li>
+<li><em>max-age</em>: the freshness lifetime in seconds.</li>
+<li><em>s-maxage</em>: life <em>max-age</em>, but is meant only for shared caches. Just use <em>max-age</em>.</li>
+<li><em>must-revalidate</em>: caches must check the origin server before serving stale representations.</li>
+<li><em>proxy-revalidate</em>: same as <em>must-revalidate</em> but only for shared caches.</li>
+</ul>
+<p>The <code>Age</code> header is added by the cache. It indicates how long ago the cache retrieved the representation from the origin server.</p>
+<p>The key to optimal expiration caching is calculating a resonable freshness lifetime value for the resource representation. If you gave historical information such as update logs for the representations, use them to establish a base lifetime. </p>
+<p>When to set Expiration Caching Headers</p>
+<ul>
+<li>Set expiration caching headers for responses of <code>GET</code> and <code>HEAD</code> request for all successful response codes.</li>
+<li>
+<p>Consider adding caching headers to:</p>
+<ul>
+<li><code>300 Multiple Choices</code>: The representation with this status may not change often.</li>
+<li><code>301 Moved Permanently</code></li>
+<li><code>404 Not Found</code></li>
+<li><code>405 Method Not Allowed</code></li>
+<li><code>410 Gone</code></li>
+</ul>
+</li>
+<li>
+<p>When and how to use Expiration Headers in Clients</p>
+</li>
+</ul>
+<p>Avoid implementing support for expiration caching within clients, instead deploy a forward proxy in the client network, and avoid implementing you own caching layer in the client code.</p>
+<h3 id="conditional-request">Conditional Request</h3>
+<p>Conditional request address two programs. For <code>GET</code> request conditional request help clients and caches validate that a cached representation can still be considered fresh. For unsafe request such as <code>PUT</code>, <code>POST</code> and <code>DELETE</code> conditional requests provide concurrency control.</p>
+<p>Not supporting conditional <code>GET</code> request reduces performance.</p>
+<p>Not makeing unsafe requests conditional, when facing concurrency, ay affect the integrity of the application. In absence of adequate concurrency control checks, the server is susceptible to "lost updates" and "stale deletes".</p>
+<p>Perssimistic concurrency control, the client gets a lock, obtain the current state of a resource, makes modifications, and then releases the lock. During this process the server present other clients from aquiring a lock to the same resource.</p>
+<p>Optimistic concurrency control, the client gets a token, and attempts a write operation with the token. The operation success if the token is still valid or fails otherwise.</p>
+<p>HTTP, being stateless, is designed for optimistic concurrency control.</p>
+<p>Conditional <code>GET</code> request can extend the life of stale representations.</p>
+<ul>
+<li>How to Generate <code>Last-Modified</code> and <code>ETag</code> Headers</li>
+</ul>
+<p>Use <code>Last-Modified</code> and <code>ETag</code> response headers to drive conditional requests. Clients use the following:</p>
+<pre><code>- `If-Modified-Since` and `If-None-Match` for validating cached representations
+- `If-Unmodified-Since` and `If-Match` as preconditions for concurrency control
+</code></pre>
+<p>a timestamp for the modifed date-time and/or a sequence number of keep track of a version.</p>
+<p>use an MD5 hash of the representation body, or of some field of the data that changes every time the resource ip updated</p>
+<p>make sure to use a different <code>ETag</code> value of each representation of the resource (this include different media types, etc.).</p>
+<p><code>Last-Modified</code> has a 1 second resolution is considered a "weak" validator.
+<code>ETag</code> is a strong validator since its value can change every time the entity is modified.
+Entity tag is an object hash code</p>
+<p>You do not need to use both <code>Last-Modified</code> and <code>ETag</code> headers to support conditional requests. Use either or both consistently to support conditional requests.</p>
+<ul>
+<li>How to Implement Conditional <code>GET</code> Requests in Servers</li>
+</ul>
+<p>Send <code>If-Modified-Since</code> and <code>If-None-Match</code> headers based <code>Last-Modified</code> and <code>ETag</code> headers from a previous request.</p>
+<p>Conditional requests do not cut down on the number of requests from the client, but they can reduce the number of times a server needs to send a fresh representation.</p>
+<p>Check <code>If-None-Match</code> against <code>ETag</code>, and check <code>If-Modified-Since</code> against <code>Last-Modified</code>, if either checks are false or missing return the latest copy of the representation including new <code>ETag</code> and/or <code>Last-Modified</code>, else return <code>304 Not Modified</code>. To support validation to extend the life of a cached copy the server must return expiration headers as well.</p>
+<p>The values of <code>ETag</code>, <code>If-Match</code>, and <code>If-None-Match</code> are quoted strings.</p>
+<ul>
+<li>How to Submit Conditional <code>GET</code> and <code>HEAD</code> Requests from Clients</li>
+</ul>
+<p>Store <code>ETag</code> and/or <code>Last-Modified</code> along with the representation data.
+and reply them on future requests.</p>
+<p>Include <code>If-Modified-Since</code> with the value from <code>Last-Modified</code>
+Include <code>If-None-Match</code> with the value from <code>ETag</code></p>
+<p>Do not send conditional requests unless you have a copy of the representaton stored locally on the client.</p>
+<ul>
+<li>How to Implement Conditional <code>PUT</code> Requests in Servers</li>
+</ul>
+<p>If the resource exists:</p>
+<ul>
+<li>If the client does not include <code>If-Unmodified-Since</code> and/or <code>If-Match</code> header return <code>403 Forbidden</code>. Explain why in the body.</li>
+<li>If the suppiled <code>If-Unmodified-Since</code> or <code>If-Match</code> do not match the server values return <code>412 Precondition Failed</code>. Explain why in the body.</li>
+<li>
+<p>If the conditions match return <code>200 OK</code> or <code>204 No Content</code> and update the resource. Optionally include <code>Last-Modified</code> and/or <code>ETag</code> headers provided the response also include a <code>Content-Location</code> header with the URI of the updated resource.</p>
+</li>
+<li>
+<p>How to Implement Conditional <code>DELETE</code> Requests in Servers</p>
+</li>
+<li>
+<p>If the client does not include <code>If-Unmodified-Since</code> and/or <code>If-Match</code> header return <code>403 Forbidden</code>. Explain why in the body.</p>
+</li>
+<li>If the suppiled <code>If-Unmodified-Since</code> or <code>If-Match</code> do not match the server values return <code>412 Precondition Failed</code>. Explain why in the body.</li>
+<li>
+<p>If the conditions match return <code>200 OK</code> or <code>204 No Content</code> and delete the resource.</p>
+</li>
+<li>
+<p>How to Make Unconditional <code>GET</code> Requests from Clients</p>
+</li>
+</ul>
+<p>HTTP 1.1 allows clients to modify expiration caching and ash for fresh representations. To get a fresh represention after you receive <code>412 Precondition Failed</code> or even after a successful <code>PUT</code> or <code>PATCH</code> to get the latest representation.</p>
+<p>Include <code>Cache-Control: no-cache</code> and <code>Pragma: no-cache</code> in the <code>GET</code> request.</p>
+<p>Do not make unconditional <code>GET</code> request unless necessary as the downgrade performacne and increase latency.</p>
+<ul>
+<li>How to Submit Conditional <code>PUT</code> and <code>DELETE</code> Requests from Clients</li>
+</ul>
+<p>Include <code>If-Unmodified-Since</code> with the stored value of <code>Last-Modified</code>
+Include <code>If-Match</code> with the stored value of <code>ETag</code>
+If the server return <code>412 Precondition Failed</code> submit an unconditional request to ontain a fresh <code>Last-Modified</code> and <code>ETag</code>, verify the decision to update or delete the resource is still valid per the fresh representation, and then repeat the <code>PUT</code> or <code>DELETE</code> with the new header values.</p>
+<p>Do not use <code>HEAD</code> to obtain fresh <code>Last-Modified</code> and <code>ETag</code> you will also new the current satet of the resource to determine if you can go ahead with the operation.</p>
+<ul>
+<li>How to Make <code>POST</code> Requests Conditional</li>
+<li>
+<p>How to Generate One-Time URIs</p>
+<!-- TODO -->
+
+<p>Common methods of ETag generation include using a collision-resistant hash function of the resource's content, a hash of the last modification timestamp, or even just a revision number.</p>
+<h3 id="may-consider-using-etag-together-with-if-none-match-header">MAY: Consider using ETag together with If-(None-)Match header</h3>
+<p>When creating or updating resources it may be necessary to expose conflicts and to prevent the lost update problem. This can be best accomplished by using the ETag header together with the If-Match and If-None-Match. The contents of an ETag: <entity-tag> header is either (a) a hash of the response body, (b) a hash of the last modified field of the entity, or (c) a version number or identifier of the entity version.</p>
+<p>To expose conflicts between concurrent update operations via PUT, POST, or PATCH, the If-Match: <entity-tag> header can be used to force the server to check whether the version of the updated entity is conforming to the requested <entity-tag>. If no matching entity is found, the operation is supposed a to respond with status code 412 - precondition failed.</p>
+<p>Beside other use cases, the If-None-Match: header with parameter * can be used in a similar way to expose conflicts in resource creation. If any matching entity is found, the operation is supposed a to respond with status code 412 - precondition failed.</p>
+<p>The ETag, If-Match, and If-None-Match headers can be defined as follows in the API definition:</p>
+<p>Etag:
+    name: Etag
+    description: |
+    The RFC7232 ETag header field in a response provides the current entity-tag for the
+    selected resource. An entity-tag is an opaque identifier for different versions of
+    a resource over time, regardless whether multiple versions are valid at the same time.
+    An entity-tag consists of an opaque quoted string, possibly prefixed by a weakness
+    indicator.</p>
+<pre><code>in: header
+type: string
+required: false
+example: W/"xy", "5", "7da7a728-f910-11e6-942a-68f728c1ba70"
+</code></pre>
+<p>IfMatch:
+    name: If-Match
+    description: |
+    The RFC7232 If-Match header field in a request requires the server to only operate
+    on the resource that matches at least one of the provided entity-tags. This allows
+    clients express a precondition that prevent the method from being applied, if there
+    have been any changes to the resource.</p>
+<pre><code>in: header
+type: string
+required: false
+example:  "5", "7da7a728-f910-11e6-942a-68f728c1ba70"
+</code></pre>
+<p>IfNoneMatch:
+    name: If-None-Match
+    description: |
+    The RFC7232 If-None-Match header field in a request requires the server to only
+    operate on the resource if it does not match any of the provided entity-tags. If
+    the provided entity-tag is <code>*</code>, it is required that the resource does not exist
+    at all.</p>
+<pre><code>in: header
+type: string
+required: false
+example: "7da7a728-f910-11e6-942a-68f728c1ba70", *
+</code></pre>
+</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../security/" class="btn btn-neutral float-right" title="Security">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../content_negotiation/" class="btn btn-neutral" title="Content Negotiation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../content_negotiation/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../security/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>
