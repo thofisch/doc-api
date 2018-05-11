@@ -1,5 +1,5 @@
 site_name: API Design Guidelines
-theme: readthedocs
+theme: material
 pages:
 - Introduction: 'index.md'
 - -APIs: 'apis.md'
