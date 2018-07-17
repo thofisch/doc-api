@@ -36,7 +36,7 @@
     
     
       
-        <title>---Representations - API Design Guidelines</title>
+        <title>-Representations - API Design Guidelines</title>
       
     
     
@@ -62,7 +62,7 @@
   
     
     
-    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     <svg class="md-svg">
       <defs>
@@ -85,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon">cloud</i>
+            <i class="md-icon">code</i>
           
         </a>
       </div>
@@ -100,7 +100,7 @@
                 API Design Guidelines
               </span>
               <span class="md-header-nav__topic">
-                ---Representations
+                -Representations
               </span>
             
           
@@ -146,66 +146,6 @@
         
       
       
-        
-
-<nav class="md-tabs" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  <li class="md-tabs__item">
-    
-      <a href=".." title="Introduction" class="md-tabs__link md-tabs__link--active">
-        Introduction
-      </a>
-    
-  </li>
-
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    </ul>
-  </div>
-</nav>
-      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -217,7 +157,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon">cloud</i>
+        <i class="md-icon">code</i>
       
     </span>
     API Design Guidelines
@@ -243,8 +183,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../apis/" title="-APIs" class="md-nav__link">
-      -APIs
+    <a href="../apis/" title="APIs" class="md-nav__link">
+      APIs
     </a>
   </li>
 
@@ -255,8 +195,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../rest/" title="-REST" class="md-nav__link">
-      -REST
+    <a href="../rest/" title="REST" class="md-nav__link">
+      REST
     </a>
   </li>
 
@@ -267,8 +207,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../http/" title="-HTTP" class="md-nav__link">
-      -HTTP
+    <a href="../http/" title="HTTP" class="md-nav__link">
+      HTTP
     </a>
   </li>
 
@@ -279,8 +219,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../resource_identifiers/" title="-Resource Identifiers" class="md-nav__link">
-      -Resource Identifiers
+    <a href="../resource_identifiers/" title="Resource Identifiers" class="md-nav__link">
+      Resource Identifiers
     </a>
   </li>
 
@@ -291,8 +231,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../resources/" title="-Resources" class="md-nav__link">
-      -Resources
+    <a href="../resources/" title="Resources" class="md-nav__link">
+      Resources
     </a>
   </li>
 
@@ -303,8 +243,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../methods/" title="-Methods" class="md-nav__link">
-      -Methods
+    <a href="../methods/" title="Methods" class="md-nav__link">
+      Methods
     </a>
   </li>
 
@@ -320,32 +260,28 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        ---Representations
+        -Representations
       </label>
     
-    <a href="./" title="---Representations" class="md-nav__link md-nav__link--active">
-      ---Representations
+    <a href="./" title="-Representations" class="md-nav__link md-nav__link--active">
+      -Representations
     </a>
     
       
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#representations" title="Representations" class="md-nav__link">
-    Representations
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#http-headers" title="HTTP Headers" class="md-nav__link">
     HTTP Headers
   </a>
@@ -392,13 +328,14 @@
     </nav>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#custom-http-headers" title="Custom HTTP Headers" class="md-nav__link">
     Custom HTTP Headers
   </a>
   
-</li>
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#end-to-end-http-headers" title="End-To-End HTTP Headers" class="md-nav__link">
@@ -407,21 +344,26 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#format-and-a-media-type" title="Format and a Media Type" class="md-nav__link">
     Format and a Media Type
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#use-portable-data-formats-in-representations" title="Use Portable Data Formats in Representations" class="md-nav__link">
     Use Portable Data Formats in Representations
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#json-representations" title="JSON Representations" class="md-nav__link">
     JSON Representations
   </a>
@@ -447,36 +389,36 @@
     </nav>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#xml-representations" title="XML Representations" class="md-nav__link">
     XML Representations
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#html-representations" title="HTML Representations" class="md-nav__link">
     HTML Representations
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#binary-data-in-representations" title="Binary Data in Representations" class="md-nav__link">
     Binary Data in Representations
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#error-representations" title="Error Representations" class="md-nav__link">
     Error Representations
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#http-status-codes" title="HTTP Status Codes" class="md-nav__link">
     HTTP Status Codes
   </a>
@@ -485,8 +427,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#2xx-great-success" title="2xx Great Success" class="md-nav__link">
-    2xx Great Success
+  <a href="#2xx-success" title="2xx Success" class="md-nav__link">
+    2xx Success
   </a>
   
 </li>
@@ -516,16 +458,11 @@
     </nav>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#entity-identifiers-in-representations" title="Entity Identifiers in Representations" class="md-nav__link">
     Entity Identifiers in Representations
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -546,8 +483,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../hypermedia/" title="---Hypermedia" class="md-nav__link">
-      ---Hypermedia
+    <a href="../hypermedia/" title="-Hypermedia" class="md-nav__link">
+      -Hypermedia
     </a>
   </li>
 
@@ -558,8 +495,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../content_negotiation/" title="-Content Negotiation" class="md-nav__link">
-      -Content Negotiation
+    <a href="../content_negotiation/" title="Content Negotiation" class="md-nav__link">
+      Content Negotiation
     </a>
   </li>
 
@@ -570,8 +507,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../caching/" title="---Caching" class="md-nav__link">
-      ---Caching
+    <a href="../caching/" title="-Caching" class="md-nav__link">
+      -Caching
     </a>
   </li>
 
@@ -582,8 +519,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../security/" title="---Security" class="md-nav__link">
-      ---Security
+    <a href="../security/" title="-Security" class="md-nav__link">
+      -Security
     </a>
   </li>
 
@@ -594,8 +531,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../versioning_and_extensibility/" title="---Versioning and Extensibility" class="md-nav__link">
-      ---Versioning and Extensibility
+    <a href="../versioning_and_extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
+      -Versioning and Extensibility
     </a>
   </li>
 
@@ -606,8 +543,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../documentation_and_discovery/" title="---Documentation and Discovery" class="md-nav__link">
-      ---Documentation and Discovery
+    <a href="../documentation_and_discovery/" title="-Documentation and Discovery" class="md-nav__link">
+      -Documentation and Discovery
     </a>
   </li>
 
@@ -618,8 +555,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../specifications/" title="---Specifications" class="md-nav__link">
-      ---Specifications
+    <a href="../specifications/" title="-Specifications" class="md-nav__link">
+      -Specifications
     </a>
   </li>
 
@@ -630,8 +567,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../mocking/" title="---Mocking" class="md-nav__link">
-      ---Mocking
+    <a href="../mocking/" title="-Mocking" class="md-nav__link">
+      -Mocking
     </a>
   </li>
 
@@ -642,8 +579,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../clients/" title="---Clients" class="md-nav__link">
-      ---Clients
+    <a href="../clients/" title="Clients" class="md-nav__link">
+      Clients
     </a>
   </li>
 
@@ -654,8 +591,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../other_topics/" title="---Other topics" class="md-nav__link">
-      ---Other topics
+    <a href="../other_topics/" title="-Other topics" class="md-nav__link">
+      -Other topics
     </a>
   </li>
 
@@ -666,8 +603,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../misc/" title="---Misc" class="md-nav__link">
-      ---Misc
+    <a href="../references/" title="References" class="md-nav__link">
+      References
     </a>
   </li>
 
@@ -678,20 +615,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../references/" title="-References" class="md-nav__link">
-      -References
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../examples/" title="Exampls" class="md-nav__link">
-      Exampls
+    <a href="../examples/" title="Examples" class="md-nav__link">
+      Examples
     </a>
   </li>
 
@@ -710,19 +635,13 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#representations" title="Representations" class="md-nav__link">
-    Representations
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#http-headers" title="HTTP Headers" class="md-nav__link">
     HTTP Headers
   </a>
@@ -769,13 +688,14 @@
     </nav>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#custom-http-headers" title="Custom HTTP Headers" class="md-nav__link">
     Custom HTTP Headers
   </a>
   
-</li>
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#end-to-end-http-headers" title="End-To-End HTTP Headers" class="md-nav__link">
@@ -784,21 +704,26 @@
   
 </li>
         
-          <li class="md-nav__item">
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#format-and-a-media-type" title="Format and a Media Type" class="md-nav__link">
     Format and a Media Type
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#use-portable-data-formats-in-representations" title="Use Portable Data Formats in Representations" class="md-nav__link">
     Use Portable Data Formats in Representations
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#json-representations" title="JSON Representations" class="md-nav__link">
     JSON Representations
   </a>
@@ -824,36 +749,36 @@
     </nav>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#xml-representations" title="XML Representations" class="md-nav__link">
     XML Representations
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#html-representations" title="HTML Representations" class="md-nav__link">
     HTML Representations
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#binary-data-in-representations" title="Binary Data in Representations" class="md-nav__link">
     Binary Data in Representations
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#error-representations" title="Error Representations" class="md-nav__link">
     Error Representations
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#http-status-codes" title="HTTP Status Codes" class="md-nav__link">
     HTTP Status Codes
   </a>
@@ -862,8 +787,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#2xx-great-success" title="2xx Great Success" class="md-nav__link">
-    2xx Great Success
+  <a href="#2xx-success" title="2xx Success" class="md-nav__link">
+    2xx Success
   </a>
   
 </li>
@@ -893,16 +818,11 @@
     </nav>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#entity-identifiers-in-representations" title="Entity Identifiers in Representations" class="md-nav__link">
     Entity Identifiers in Representations
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -923,14 +843,12 @@
               
                 
                 
-                  <h1>---Representations</h1>
-                
-                <h2 id="representations">Representations<a class="headerlink" href="#representations" title="Permanent link">&para;</a></h2>
+                <h1 id="representations">Representations<a class="headerlink" href="#representations" title="Permanent link">&para;</a></h1>
 <p>A <em>representation</em> (request/response) is concrete and real. Here we will offer guidelines as to what makes a good response design. To ensure scalability and longevity of the API, along with providing helpful responses that developers can understand and trust, we will cover what HTTP headers are appropriate in a response, which HTTP status codes to return, as well as how to include descriptive error representations on failures.</p>
-<h3 id="http-headers">HTTP Headers<a class="headerlink" href="#http-headers" title="Permanent link">&para;</a></h3>
+<h2 id="http-headers">HTTP Headers<a class="headerlink" href="#http-headers" title="Permanent link">&para;</a></h2>
 <p>Headers ensure visibility, discoverability, routing by proxies, caching, optimistic concurrency, and correct operation of HTTP as an application protocol.</p>
 <p>Use the following headers to annotate representations that contains a message body.</p>
-<h4 id="content-type">Content-Type<a class="headerlink" href="#content-type" title="Permanent link">&para;</a></h4>
+<h3 id="content-type">Content-Type<a class="headerlink" href="#content-type" title="Permanent link">&para;</a></h3>
 <p>Even though it is perfectly acceptable to use only a single format, in order to keep the API flexible and extendable, it is also important to build for the future. Until recently XML was the format of choice, but then along came JSON.</p>
 <ul>
 <li><strong>DO</strong> use <code>Content-Type</code>, to describe the type of representation, including a <code>charset</code> parameter or other parameters defined for that media type.</li>
@@ -942,26 +860,29 @@
 <blockquote>
 <p>Note that Text and XML media types let you specify the character encoding. The JSON media type <code>application/json</code> does not specify a <code>charset</code> parameter, but uses <code>UTF-8</code> as the default encoding.</p>
 </blockquote>
-<h4 id="content-length">Content-Length<a class="headerlink" href="#content-length" title="Permanent link">&para;</a></h4>
+<h3 id="content-length">Content-Length<a class="headerlink" href="#content-length" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> use <code>Content-Length</code>, to specify the size in bytes of the body. Or specify <code>Transfer-Encoding: chunked</code>. Some proxies reject <code>POST</code> and <code>PUT</code> requests that contain neither of these headers.</li>
 </ul>
-<h4 id="content-language">Content-Language<a class="headerlink" href="#content-language" title="Permanent link">&para;</a></h4>
+<h3 id="content-language">Content-Language<a class="headerlink" href="#content-language" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> use <code>Content-Language</code>, two-letter RFC 5646 language tag, optionally followed by a hyphen (-) and any two-letter country code.</li>
 </ul>
-<h4 id="content-encoding">Content-Encoding<a class="headerlink" href="#content-encoding" title="Permanent link">&para;</a></h4>
+<h3 id="content-encoding">Content-Encoding<a class="headerlink" href="#content-encoding" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> use <code>Content-Encoding</code>. Clients can indicate their preference for <code>Content-Encoding</code> using the <code>Accept-Encoding</code> header, however, there is no standard way for the client to learn whether a server can process representations compressed in a given encoding.</li>
 </ul>
-<h4 id="other-common-headers">Other Common Headers<a class="headerlink" href="#other-common-headers" title="Permanent link">&para;</a></h4>
+<h3 id="other-common-headers">Other Common Headers<a class="headerlink" href="#other-common-headers" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>CONSIDER</strong> using <code>ETag</code> and/or <code>Last-Modified</code> for caching and/or concurrency, the latter applies for responses only.</li>
 <li><strong>CONSIDER</strong> using <code>Content-MD5</code>, when sending or receiving large representations over potentially unreliable networks to verify the integrity of the message.</li>
 <li><strong>DO NOT</strong> use <code>Content-MD5</code> as any measure of security.</li>
 </ul>
-<h3 id="custom-http-headers">Custom HTTP Headers<a class="headerlink" href="#custom-http-headers" title="Permanent link">&para;</a></h3>
+<h2 id="custom-http-headers">Custom HTTP Headers<a class="headerlink" href="#custom-http-headers" title="Permanent link">&para;</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>Generally custom HTTP headers should be avoided, as they may impede interoperability. We discourage the use of hop-by-hop custom HTTP headers.</p>
+</div>
 <p>However, depending on what clients and servers use custom headers for, they can be useful in cases where context information needs to be passed through multiple services in an end-to-end fashion. </p>
 <ul>
 <li><strong>DO</strong> use custom headers for informational purposes.</li>
@@ -972,25 +893,25 @@
 <li><strong>DO NOT</strong> use <code>X-HTTP-Method-Override</code> to override <code>POST</code>, use a distinct resource to process the same request using <code>POST</code> without the header. Any HTTP intermediary between the client and the server may omit custom headers.</li>
 </ul>
 <h3 id="end-to-end-http-headers">End-To-End HTTP Headers<a class="headerlink" href="#end-to-end-http-headers" title="Permanent link">&para;</a></h3>
-<p>The following may be candidates for end-to-end HTTP headers:</p>
 <ul>
+<li><strong>DO</strong> use the specified end-to-end HTTP headers.</li>
+<li><strong>DO</strong> propagate the end-to-end HTTP headers to upstream servers. Header names and values must remain intact.</li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">The following may be candidates for end-to-end HTTP headers</p>
+<ol>
 <li>Correlation ID of the request, which is written into the logs and passed to upstream services. </li>
 <li>Generic user id that owns the passed (OAuth2) access token. May save additional token validation round trips</li>
 <li>Sales channel</li>
 <li>Device type, OS, and version</li>
 <li>App version, etc.</li>
-</ul>
-<!-- -->
-
-<ul>
-<li><strong>DO</strong> use the specified end-to-end HTTP headers.</li>
-<li><strong>DO</strong> propagate the end-to-end HTTP headers to upstream servers. Header names and values must remain intact.</li>
-</ul>
-<h3 id="format-and-a-media-type">Format and a Media Type<a class="headerlink" href="#format-and-a-media-type" title="Permanent link">&para;</a></h3>
+</ol>
+</div>
+<h2 id="format-and-a-media-type">Format and a Media Type<a class="headerlink" href="#format-and-a-media-type" title="Permanent link">&para;</a></h2>
 <p>HTTP's message format is designed to allow different media types and formats for requests and responses.</p>
 <p>When it comes to format and media type selection, the rule of thumb is to let the use cases and the types of clients dictate the choice. For this reason, it is important not to pick up a development framework that rigidly enforces one or two formats for all resource with no flexibility to use other formats.</p>
 <ul>
-<li><strong>DO</strong> determine whether there is a standard format and media type that matches your use cases. Check the Internet Assigned Number Authority (IANA, <a href="http://www.iana.org/assignments/media-types/">http://www.iana.org/assignments/media-types/</a>) media type registry.</li>
+<li><strong>DO</strong> determine whether there is a standard format and media type that matches your use cases. Check IANA <sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>.</li>
 <li><strong>DO</strong> use extensible formats such as XML, Atom Syndication Format, or JSON, if there is no standard media type and format.</li>
 <li><strong>CONSIDER</strong> adding a <code>Content-Disposition: attachment; filename=&lt;status.xls&gt;</code> to give a hint of the filename, when using image formats like <code>image/png</code> or rich document formats like <code>application/vnd.ms-excel</code> or <code>application/pdf</code> to provide alternative representations of data.</li>
 </ul>
@@ -1001,10 +922,11 @@
 <li><strong>DO</strong> register your media type with IANA as per RFC 4288, if the media type is for public use,</li>
 <li><strong>AVOID</strong> introducing new application-specific media types unless they are expected to be broadly used, as this may impede interoperability.</li>
 </ul>
-<blockquote>
-<p>Note that although custom media types improve protocol-level visibility, existing protocol-level tools for monitoring, filtering, or routing HTTP traffic pay little or no attention to media types. Hence, using custom media types only for the sake of protocol-level visibility is not necessary.</p>
-</blockquote>
-<h3 id="use-portable-data-formats-in-representations">Use Portable Data Formats in Representations<a class="headerlink" href="#use-portable-data-formats-in-representations" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Although custom media types improve protocol-level visibility, existing protocol-level tools for monitoring, filtering, or routing HTTP traffic pay little or no attention to media types. Hence, using custom media types only for the sake of protocol-level visibility is not necessary.</p>
+</div>
+<h2 id="use-portable-data-formats-in-representations">Use Portable Data Formats in Representations<a class="headerlink" href="#use-portable-data-formats-in-representations" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>DO</strong> use decimal, float and double data types defined in the W3C XML Schema for formatting numbers including currency.</li>
 <li><strong>DO</strong> use ISO 3166 (ISO 3166-1-alpha2) codes for countries and dependent territories.</li>
@@ -1057,7 +979,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="json-representations">JSON Representations<a class="headerlink" href="#json-representations" title="Permanent link">&para;</a></h3>
+<h2 id="json-representations">JSON Representations<a class="headerlink" href="#json-representations" title="Permanent link">&para;</a></h2>
 <p>JSON has become the de facto format within RESTful APIs, by providing a compact, human-readable format for accessing data, which can help minimalize the bandwidth required.</p>
 <p>One of the advantages to REST is that it is not limited to a single format, and the choice of format should be based on what is most suitable for the clients.</p>
 <ul>
@@ -1081,33 +1003,7 @@
 <li><strong>DO NOT</strong> use <code>null</code> for boolean property values must not be null. A boolean is essentially a closed enumeration of two values, true and false. If the content has a meaningful null value, strongly prefer to replace the boolean with enumeration of named values or statuses.</li>
 <li><strong>DO NOT</strong> return <code>null</code> for empty array values should not be null. Empty array values can unambiguously be represented as the the empty list, [].</li>
 </ul>
-<p>Example:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="p">{</span>
+<details class="example"><summary>Example</summary><div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;John&quot;</span><span class="p">,</span>
     <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;urn:example:user:1234&quot;</span><span class="p">,</span>
     <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -1123,7 +1019,7 @@
     <span class="p">},</span>
     <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&quot;text&quot;</span><span class="p">:</span> <span class="p">[{</span>
-          <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span>
+        <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span>
         <span class="p">},</span> <span class="p">{</span>
             <span class="nt">&quot;lang&quot;</span><span class="p">:</span> <span class="s2">&quot;en-GB&quot;</span><span class="p">,</span>
             <span class="nt">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;...&quot;</span>
@@ -1134,14 +1030,12 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-</td></tr></table>
-
-<h4 id="representations-of-collections">Representations of Collections<a class="headerlink" href="#representations-of-collections" title="Permanent link">&para;</a></h4>
+</details><h3 id="representations-of-collections">Representations of Collections<a class="headerlink" href="#representations-of-collections" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> return an empty collection, if the query does not match any resources.</li>
 <li><strong>DO</strong> include pagination links.</li>
 </ul>
-<h4 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">&para;</a></h4>
+<h3 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> add a self link to the collection resource</li>
 <li><strong>DO</strong> add link to the next page, if the collection is paginated and has a next page</li>
@@ -1149,213 +1043,13 @@
 <li><strong>DO</strong> add an indicator of the size of the collection</li>
 <li><strong>DO</strong> keep collections homogeneous by include only the homogeneous aspects of its member resources.</li>
 </ul>
-<blockquote>
-<p><strong>TIP</strong>
-Although the size of the collection is useful for building user interfaces, avoid computing the exact size of the collection. It may be expensive to compute, volatile, or even confidential. Providing a hint is usually good enough.</p>
-</blockquote>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Although the size of the collection is useful for building user interfaces, avoid computing the exact size of the collection. It may be expensive to compute, volatile, or even confidential. Providing a hint is usually good enough.</p>
+</div>
 <!-- TODO -->
 
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
-  2
-  3
-  4
-  5
-  6
-  7
-  8
-  9
- 10
- 11
- 12
- 13
- 14
- 15
- 16
- 17
- 18
- 19
- 20
- 21
- 22
- 23
- 24
- 25
- 26
- 27
- 28
- 29
- 30
- 31
- 32
- 33
- 34
- 35
- 36
- 37
- 38
- 39
- 40
- 41
- 42
- 43
- 44
- 45
- 46
- 47
- 48
- 49
- 50
- 51
- 52
- 53
- 54
- 55
- 56
- 57
- 58
- 59
- 60
- 61
- 62
- 63
- 64
- 65
- 66
- 67
- 68
- 69
- 70
- 71
- 72
- 73
- 74
- 75
- 76
- 77
- 78
- 79
- 80
- 81
- 82
- 83
- 84
- 85
- 86
- 87
- 88
- 89
- 90
- 91
- 92
- 93
- 94
- 95
- 96
- 97
- 98
- 99
-100
-101
-102
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181
-182
-183
-184
-185
-186
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>## PAGINATION
+<div class="codehilite"><pre><span></span>## PAGINATION
 
 limit — to restrict the number of entries. See Pagination section below. Hint: You can use size as an alternate query string.
 offset — numeric offset page start. See Pagination section below. Hint: In combination with limit, you can use page as an alternative to offset.
@@ -1557,25 +1251,25 @@ E.g. a service for articles could represent the collection of hyperlinks to an a
 &quot;last&quot;: &quot;https://...&quot;
 }
 </pre></div>
-</td></tr></table>
 
-<h3 id="xml-representations"><em><strong>XML Representations</strong></em><a class="headerlink" href="#xml-representations" title="Permanent link">&para;</a></h3>
+
+<h2 id="xml-representations"><em><strong>XML Representations</strong></em><a class="headerlink" href="#xml-representations" title="Permanent link">&para;</a></h2>
 <p><em>TBD</em></p>
 <p><em>Suggested topics:</em><br/>
 <em>Atom resources, AtomPub Service, category documents, AtomPub for feed and entry resources, media resources</em></p>
-<h3 id="html-representations">HTML Representations<a class="headerlink" href="#html-representations" title="Permanent link">&para;</a></h3>
+<h2 id="html-representations">HTML Representations<a class="headerlink" href="#html-representations" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>DO</strong> provide HTML representations, for resources that are expected to be consumed by end users.</li>
 <li><strong>CONSIDER</strong>  using microformats or RDFx to annotate data within the markup.</li>
 <li><strong>AVOID</strong> avoid designing HTML representations for machine clients.</li>
 </ul>
-<h3 id="binary-data-in-representations">Binary Data in Representations<a class="headerlink" href="#binary-data-in-representations" title="Permanent link">&para;</a></h3>
+<h2 id="binary-data-in-representations">Binary Data in Representations<a class="headerlink" href="#binary-data-in-representations" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>DO</strong> use multipart media types such as <code>multipart/mixed</code>, <code>multipart/related</code>, or <code>multipart/alternative</code>.</li>
 <li><strong>CONSIDER</strong> providing a link to fetch the binary data as a separate resource as an alternative. Creating and parsing multipart messages in some programming languages may be cumbersome and complex.</li>
 <li><strong>AVOID</strong> encoding binary data within textual formats using Base64 encoding.</li>
 </ul>
-<h3 id="error-representations">Error Representations<a class="headerlink" href="#error-representations" title="Permanent link">&para;</a></h3>
+<h2 id="error-representations">Error Representations<a class="headerlink" href="#error-representations" title="Permanent link">&para;</a></h2>
 <p>Communicate errors through standard HTTP status codes along with details supplied in the response body. </p>
 <p>Errors are a key element for providing context and visibility, and status codes enable clients to quickly ascertain the status of their request. While well-formed and descriptive error details will tell the client what happened, why it happened, and how to fix it.</p>
 <ul>
@@ -1593,15 +1287,7 @@ E.g. a service for articles could represent the collection of hyperlinks to an a
 <li><strong>AVOID</strong> using generic or non-descriptive error messages as they are often one of the biggest hinderances to API integration, as developers may struggle for hours trying to figure out why the call is failing, even misinterpreting the intent of the error message altogether.</li>
 <li><strong>DO NOT</strong> return <code>2xx</code> and include a message body that describes an error condition. Doing so prevents HTTP-aware software from detecting errors.</li>
 </ul>
-<p>Error example:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="p">{</span>
+<details class="example"><summary>Error example</summary><div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;error&quot;</span> <span class="p">:</span> <span class="p">{</span>
     <span class="nt">&quot;code&quot;</span> <span class="p">:</span> <span class="s2">&quot;e3526&quot;</span><span class="p">,</span>
     <span class="nt">&quot;message&quot;</span> <span class="p">:</span> <span class="s2">&quot;Missing UserID&quot;</span><span class="p">,</span>
@@ -1610,25 +1296,7 @@ E.g. a service for articles could represent the collection of hyperlinks to an a
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-</td></tr></table>
-
-<p>Validation error example:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="p">{</span>
+</details><details class="example"><summary>Validation error example</summary><div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nt">&quot;code&quot;</span> <span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
     <span class="nt">&quot;message&quot;</span> <span class="p">:</span> <span class="s2">&quot;Validation Failed&quot;</span><span class="p">,</span>
     <span class="nt">&quot;errors&quot;</span> <span class="p">:</span> <span class="p">[</span>
@@ -1645,20 +1313,21 @@ E.g. a service for articles could represent the collection of hyperlinks to an a
     <span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
-</td></tr></table>
-
-<h3 id="http-status-codes">HTTP Status Codes<a class="headerlink" href="#http-status-codes" title="Permanent link">&para;</a></h3>
-<p><strong>Always return meaningful HTTP Status Codes!</strong>  By using meaningful status codes, developers can quickly see what is happening with the application and do a "quick check" for errors without having to rely on the body's response.</p>
+</details><h2 id="http-status-codes">HTTP Status Codes<a class="headerlink" href="#http-status-codes" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title"><strong>Always return meaningful HTTP Status Codes!</strong></p>
+</div>
+<p>By using meaningful status codes, developers can quickly see what is happening with the application and do a "quick check" for errors without having to rely on the body's response.</p>
 <ul>
 <li><strong>DO</strong> return <code>2xx</code> when the request was received, understood, and accepted.</li>
 <li><strong>DO</strong> return <code>3xx</code> when the client needs to take further action. Include the necessary information in order for the client to complete the request.</li>
-<li><strong>DO</strong> return a representation with a <code>4xx</code> status code, for errors due to client inputs,</li>
+<li><strong>DO</strong> return a representation with a <code>4xx</code> status code, for errors due to client inputs.</li>
 <li><strong>DO</strong> return a representation with a <code>5xx</code> status code, for errors due to server implementation or its current state.</li>
 <li><strong>DO</strong> use the most specific HTTP status code for your concrete resource request processing status or error situation.</li>
 <li><strong>DO</strong> provide good documentation in the API definition when using HTTP status codes that are less commonly used and not listed below.</li>
 <li><strong>DO NOT</strong> invent new HTTP status codes; only use standardized HTTP status codes and consistent with its intended semantics.</li>
 </ul>
-<h4 id="2xx-great-success">2xx Great Success<a class="headerlink" href="#2xx-great-success" title="Permanent link">&para;</a></h4>
+<h3 id="2xx-success"><code>2xx</code> Success<a class="headerlink" href="#2xx-success" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> return <code>200 OK</code> when the request completed without issues.</li>
 <li><strong>DO</strong> return <code>201 Created</code> when a resource was successfully created. Always set the <code>Location</code> header with the URI of the newly created resource. Return either an empty response or the created resource.</li>
@@ -1666,13 +1335,13 @@ E.g. a service for articles could represent the collection of hyperlinks to an a
 <li><strong>DO</strong> return <code>204 No content</code> when there is no response body.</li>
 <li><strong>DO</strong> return <code>207 Multi-Status</code> when the response body contains multiple status informations for different parts of a batch/bulk request.</li>
 </ul>
-<h4 id="3xx-client-action-may-be-required">3xx Client Action May Be Required<a class="headerlink" href="#3xx-client-action-may-be-required" title="Permanent link">&para;</a></h4>
+<h3 id="3xx-client-action-may-be-required"><code>3xx</code> Client Action May Be Required<a class="headerlink" href="#3xx-client-action-may-be-required" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> return <code>301 Moved Permanently</code> when this and all future requests should be directed to the URI specified in the <code>Location</code> header.</li>
 <li><strong>DO</strong> return <code>303 See Other</code> when the response to the request can be found under the URI specified in the <code>Location</code> header using a GET method.</li>
 <li><strong>DO</strong> return <code>304 Not Modified</code> when the resource has not been modified since the date or version passed via request headers <code>If-Modified-Since</code> or <code>If-None-Match</code>.</li>
 </ul>
-<h4 id="4xx-client-errors">4xx Client Errors<a class="headerlink" href="#4xx-client-errors" title="Permanent link">&para;</a></h4>
+<h3 id="4xx-client-errors"><code>4xx</code> Client Errors<a class="headerlink" href="#4xx-client-errors" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> return <code>400 Bad Request</code> when your server cannot decipher client requests because of syntactical errors.</li>
 <li><strong>DO</strong> return <code>401 Unauthorized</code> when the client is not authorized to access the resource, but may be able to gain access after authentication. If your server will not let the client access the resource even after authentication return <code>403 Forbidden</code> instead. When returning this error code, include a WWW-Authenticate header field with the authentication method to use.</li>
@@ -1690,13 +1359,13 @@ E.g. a service for articles could represent the collection of hyperlinks to an a
 <li><strong>DO</strong> return <code>428 Precondition Required</code> when the server requires the request to be conditional (e.g. to make sure that the "lost update problem" is avoided).</li>
 <li><strong>DO</strong> return <code>429 Too Many Requests</code> when the client does not consider rate limiting and sent too many requests. Include headers to indicate rate limits.</li>
 </ul>
-<h4 id="5xx-server-errors">5xx Server Errors<a class="headerlink" href="#5xx-server-errors" title="Permanent link">&para;</a></h4>
+<h3 id="5xx-server-errors"><code>5xx</code> Server Errors<a class="headerlink" href="#5xx-server-errors" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> return <code>500 Internal Server Error</code> when your code on the server side failed due to come implementation bug.</li>
 <li><strong>DO</strong> return <code>501 Not Implemented</code> to indicate that a future feature may become available.</li>
 <li><strong>DO</strong> return <code>503 Service Unavailable</code> when the server cannot fulfill the request either for some specific interval or undetermined amount of time. If possible, include a <code>Retry-After</code> response header with either a date or a number of seconds as a hint.</li>
 </ul>
-<h3 id="entity-identifiers-in-representations">Entity Identifiers in Representations<a class="headerlink" href="#entity-identifiers-in-representations" title="Permanent link">&para;</a></h3>
+<h2 id="entity-identifiers-in-representations">Entity Identifiers in Representations<a class="headerlink" href="#entity-identifiers-in-representations" title="Permanent link">&para;</a></h2>
 <p>When an API is part of a larger API portfolio or system, information may cross several system boundaries, and entity identifiers can be used to uniformly identify, cross-reference or transform data. Especially when a lot of different technologies are envolved (RPC, SOAP, asynchronous messaging, stored procedures, etc.) and/or third-party applications, the only common denominator may very well be entity identifiers.</p>
 <ul>
 <li><strong>CONSIDER</strong> consider formatting identifiers as URNs, for each of the application domain entities included in the representation of a resource, to maintain uniqueness of identifiers.</li>
@@ -1704,6 +1373,14 @@ E.g. a service for articles could represent the collection of hyperlinks to an a
 <li><strong>CONSIDER</strong> using UUIDs as entity identifiers for scaling in high frequency and near real time use cases, as they can be generated without collisions in a distributed, non-coordinated way and without additional server roundtrips.</li>
 <li><strong>CONSIDER</strong> limiting the use of UUIDs as entity identifiers when it is not strictly necessary, if it possible to come up with a better naming scheme, if the id volume is low, or if the ids have widespread steering functionality.</li>
 </ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>The Internet Assigned Number Authority (<a href="http://www.iana.org/assignments/media-types/">IANA</a>) media type registry.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
                 
                   
                 
@@ -1724,7 +1401,7 @@ E.g. a service for articles could represent the collection of hyperlinks to an a
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../methods/" title="-Methods" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../methods/" title="Methods" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1733,19 +1410,19 @@ E.g. a service for articles could represent the collection of hyperlinks to an a
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                -Methods
+                Methods
               </span>
             </div>
           </a>
         
         
-          <a href="../hypermedia/" title="---Hypermedia" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../hypermedia/" title="-Hypermedia" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                ---Hypermedia
+                -Hypermedia
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

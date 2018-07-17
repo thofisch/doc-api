@@ -36,7 +36,7 @@
     
     
       
-        <title>-HTTP - API Design Guidelines</title>
+        <title>HTTP - API Design Guidelines</title>
       
     
     
@@ -62,7 +62,7 @@
   
     
     
-    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     <svg class="md-svg">
       <defs>
@@ -85,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon">cloud</i>
+            <i class="md-icon">code</i>
           
         </a>
       </div>
@@ -100,7 +100,7 @@
                 API Design Guidelines
               </span>
               <span class="md-header-nav__topic">
-                -HTTP
+                HTTP
               </span>
             
           
@@ -146,66 +146,6 @@
         
       
       
-        
-
-<nav class="md-tabs" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  <li class="md-tabs__item">
-    
-      <a href=".." title="Introduction" class="md-tabs__link md-tabs__link--active">
-        Introduction
-      </a>
-    
-  </li>
-
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    </ul>
-  </div>
-</nav>
-      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -217,7 +157,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon">cloud</i>
+        <i class="md-icon">code</i>
       
     </span>
     API Design Guidelines
@@ -243,8 +183,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../apis/" title="-APIs" class="md-nav__link">
-      -APIs
+    <a href="../apis/" title="APIs" class="md-nav__link">
+      APIs
     </a>
   </li>
 
@@ -255,8 +195,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../rest/" title="-REST" class="md-nav__link">
-      -REST
+    <a href="../rest/" title="REST" class="md-nav__link">
+      REST
     </a>
   </li>
 
@@ -274,11 +214,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        -HTTP
+        HTTP
       </label>
     
-    <a href="./" title="-HTTP" class="md-nav__link md-nav__link--active">
-      -HTTP
+    <a href="./" title="HTTP" class="md-nav__link md-nav__link--active">
+      HTTP
     </a>
     
       
@@ -292,6 +232,13 @@
         <li class="md-nav__item">
   <a href="#http-as-the-uniform-interface" title="HTTP as the Uniform Interface" class="md-nav__link">
     HTTP as the Uniform Interface
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visibility" title="Visibility" class="md-nav__link">
+    Visibility
   </a>
   
 </li>
@@ -313,8 +260,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../resource_identifiers/" title="-Resource Identifiers" class="md-nav__link">
-      -Resource Identifiers
+    <a href="../resource_identifiers/" title="Resource Identifiers" class="md-nav__link">
+      Resource Identifiers
     </a>
   </li>
 
@@ -325,8 +272,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../resources/" title="-Resources" class="md-nav__link">
-      -Resources
+    <a href="../resources/" title="Resources" class="md-nav__link">
+      Resources
     </a>
   </li>
 
@@ -337,8 +284,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../methods/" title="-Methods" class="md-nav__link">
-      -Methods
+    <a href="../methods/" title="Methods" class="md-nav__link">
+      Methods
     </a>
   </li>
 
@@ -349,8 +296,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../representations/" title="---Representations" class="md-nav__link">
-      ---Representations
+    <a href="../representations/" title="-Representations" class="md-nav__link">
+      -Representations
     </a>
   </li>
 
@@ -361,8 +308,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../hypermedia/" title="---Hypermedia" class="md-nav__link">
-      ---Hypermedia
+    <a href="../hypermedia/" title="-Hypermedia" class="md-nav__link">
+      -Hypermedia
     </a>
   </li>
 
@@ -373,8 +320,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../content_negotiation/" title="-Content Negotiation" class="md-nav__link">
-      -Content Negotiation
+    <a href="../content_negotiation/" title="Content Negotiation" class="md-nav__link">
+      Content Negotiation
     </a>
   </li>
 
@@ -385,8 +332,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../caching/" title="---Caching" class="md-nav__link">
-      ---Caching
+    <a href="../caching/" title="-Caching" class="md-nav__link">
+      -Caching
     </a>
   </li>
 
@@ -397,8 +344,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../security/" title="---Security" class="md-nav__link">
-      ---Security
+    <a href="../security/" title="-Security" class="md-nav__link">
+      -Security
     </a>
   </li>
 
@@ -409,8 +356,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../versioning_and_extensibility/" title="---Versioning and Extensibility" class="md-nav__link">
-      ---Versioning and Extensibility
+    <a href="../versioning_and_extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
+      -Versioning and Extensibility
     </a>
   </li>
 
@@ -421,8 +368,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../documentation_and_discovery/" title="---Documentation and Discovery" class="md-nav__link">
-      ---Documentation and Discovery
+    <a href="../documentation_and_discovery/" title="-Documentation and Discovery" class="md-nav__link">
+      -Documentation and Discovery
     </a>
   </li>
 
@@ -433,8 +380,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../specifications/" title="---Specifications" class="md-nav__link">
-      ---Specifications
+    <a href="../specifications/" title="-Specifications" class="md-nav__link">
+      -Specifications
     </a>
   </li>
 
@@ -445,8 +392,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../mocking/" title="---Mocking" class="md-nav__link">
-      ---Mocking
+    <a href="../mocking/" title="-Mocking" class="md-nav__link">
+      -Mocking
     </a>
   </li>
 
@@ -457,8 +404,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../clients/" title="---Clients" class="md-nav__link">
-      ---Clients
+    <a href="../clients/" title="Clients" class="md-nav__link">
+      Clients
     </a>
   </li>
 
@@ -469,8 +416,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../other_topics/" title="---Other topics" class="md-nav__link">
-      ---Other topics
+    <a href="../other_topics/" title="-Other topics" class="md-nav__link">
+      -Other topics
     </a>
   </li>
 
@@ -481,8 +428,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../misc/" title="---Misc" class="md-nav__link">
-      ---Misc
+    <a href="../references/" title="References" class="md-nav__link">
+      References
     </a>
   </li>
 
@@ -493,20 +440,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../references/" title="-References" class="md-nav__link">
-      -References
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../examples/" title="Exampls" class="md-nav__link">
-      Exampls
+    <a href="../examples/" title="Examples" class="md-nav__link">
+      Examples
     </a>
   </li>
 
@@ -536,6 +471,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#visibility" title="Visibility" class="md-nav__link">
+    Visibility
+  </a>
+  
+</li>
+      
       
       
       
@@ -553,15 +495,21 @@
               
                 
                 
-                  <h1>-HTTP</h1>
+                  <h1>HTTP</h1>
                 
                 <h2 id="http-as-the-uniform-interface">HTTP as the Uniform Interface<a class="headerlink" href="#http-as-the-uniform-interface" title="Permanent link">&para;</a></h2>
 <p>When designing a RESTful API delivered over HTTP, it is important to maintain a high degree of visibility. This will let the API benefit from existing software and infrastructure for features that you would otherwise have to build yourself.</p>
-<blockquote>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>Visibility means that one component of an architecture can monitor (and even participate in) the interaction between other components of the same architecture</p>
-</blockquote>
+</div>
 <p>Luckily HTTP is an application-level protocol designed to keep communication between clients and servers visible.</p>
-<p>HTTP defines operations for transferring representations between clients and servers, eliminating the need for application-specific operations (e.g. <em>createBooking</em>, <em>changeBooking</em>, etc.). Using the capabilities of HTTP means that caches, proxies, firewalls, etc., can monitor and participate in the protocol.</p>
+<p>HTTP defines operations for transferring representations between clients and servers, eliminating the need for application-specific operations (e.g. <em>createBooking</em>, <em>changeBooking</em>, etc.).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Using the capabilities of HTTP means that caches, proxies, firewalls, etc., can monitor and participate in the protocol.</p>
+</div>
+<h2 id="visibility">Visibility<a class="headerlink" href="#visibility" title="Permanent link">&para;</a></h2>
 <p>For better visibility:</p>
 <ul>
 <li><strong>DO</strong> make interactions stateless.</li>
@@ -570,7 +518,10 @@
 <li><strong>DO</strong> use appropriate status codes and messages.</li>
 <li><strong>DO NOT</strong> change syntax and meaning, specified by HTTP, from application to application nor from resource to resource.</li>
 </ul>
-<p>Keep in mind that focusing solely on visibility may create too fine-grained resources and poor separation of concern between clients and servers. Trading visibility for other benefits is not necessarily bad.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Keep in mind that focusing solely on visibility may create too fine-grained resources, and poor separation of concern between clients and servers. Trading visibility for other benefits is not necessarily bad.</p>
+</div>
 <p>Consider trading visibility:</p>
 <ul>
 <li>when multiple resources share data</li>
@@ -600,7 +551,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../rest/" title="-REST" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../rest/" title="REST" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -609,19 +560,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                -REST
+                REST
               </span>
             </div>
           </a>
         
         
-          <a href="../resource_identifiers/" title="-Resource Identifiers" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../resource_identifiers/" title="Resource Identifiers" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                -Resource Identifiers
+                Resource Identifiers
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

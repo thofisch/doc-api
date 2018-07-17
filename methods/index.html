@@ -36,7 +36,7 @@
     
     
       
-        <title>-Methods - API Design Guidelines</title>
+        <title>Methods - API Design Guidelines</title>
       
     
     
@@ -62,7 +62,7 @@
   
     
     
-    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     <svg class="md-svg">
       <defs>
@@ -85,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon">cloud</i>
+            <i class="md-icon">code</i>
           
         </a>
       </div>
@@ -100,7 +100,7 @@
                 API Design Guidelines
               </span>
               <span class="md-header-nav__topic">
-                -Methods
+                Methods
               </span>
             
           
@@ -146,66 +146,6 @@
         
       
       
-        
-
-<nav class="md-tabs" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  <li class="md-tabs__item">
-    
-      <a href=".." title="Introduction" class="md-tabs__link md-tabs__link--active">
-        Introduction
-      </a>
-    
-  </li>
-
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    </ul>
-  </div>
-</nav>
-      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -217,7 +157,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon">cloud</i>
+        <i class="md-icon">code</i>
       
     </span>
     API Design Guidelines
@@ -243,8 +183,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../apis/" title="-APIs" class="md-nav__link">
-      -APIs
+    <a href="../apis/" title="APIs" class="md-nav__link">
+      APIs
     </a>
   </li>
 
@@ -255,8 +195,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../rest/" title="-REST" class="md-nav__link">
-      -REST
+    <a href="../rest/" title="REST" class="md-nav__link">
+      REST
     </a>
   </li>
 
@@ -267,8 +207,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../http/" title="-HTTP" class="md-nav__link">
-      -HTTP
+    <a href="../http/" title="HTTP" class="md-nav__link">
+      HTTP
     </a>
   </li>
 
@@ -279,8 +219,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../resource_identifiers/" title="-Resource Identifiers" class="md-nav__link">
-      -Resource Identifiers
+    <a href="../resource_identifiers/" title="Resource Identifiers" class="md-nav__link">
+      Resource Identifiers
     </a>
   </li>
 
@@ -291,8 +231,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../resources/" title="-Resources" class="md-nav__link">
-      -Resources
+    <a href="../resources/" title="Resources" class="md-nav__link">
+      Resources
     </a>
   </li>
 
@@ -308,73 +248,82 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
-      
-    
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        -Methods
+        Methods
       </label>
     
-    <a href="./" title="-Methods" class="md-nav__link md-nav__link--active">
-      -Methods
+    <a href="./" title="Methods" class="md-nav__link md-nav__link--active">
+      Methods
     </a>
     
       
 <nav class="md-nav md-nav--secondary">
   
   
-    
-  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#methods" title="Methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#get" title="GET" class="md-nav__link">
     GET
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#head" title="HEAD" class="md-nav__link">
     HEAD
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#options" title="OPTIONS" class="md-nav__link">
     OPTIONS
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#put" title="PUT" class="md-nav__link">
     PUT
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#delete" title="DELETE" class="md-nav__link">
     DELETE
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#patch" title="PATCH" class="md-nav__link">
     PATCH
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#post" title="POST" class="md-nav__link">
     POST
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -400,8 +349,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#batch-operations" title="Batch Operations" class="md-nav__link">
-    Batch Operations
+  <a href="#batch-operations-tbd" title="Batch Operations (TBD)" class="md-nav__link">
+    Batch Operations (TBD)
   </a>
   
 </li>
@@ -423,8 +372,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../representations/" title="---Representations" class="md-nav__link">
-      ---Representations
+    <a href="../representations/" title="-Representations" class="md-nav__link">
+      -Representations
     </a>
   </li>
 
@@ -435,8 +384,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../hypermedia/" title="---Hypermedia" class="md-nav__link">
-      ---Hypermedia
+    <a href="../hypermedia/" title="-Hypermedia" class="md-nav__link">
+      -Hypermedia
     </a>
   </li>
 
@@ -447,8 +396,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../content_negotiation/" title="-Content Negotiation" class="md-nav__link">
-      -Content Negotiation
+    <a href="../content_negotiation/" title="Content Negotiation" class="md-nav__link">
+      Content Negotiation
     </a>
   </li>
 
@@ -459,8 +408,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../caching/" title="---Caching" class="md-nav__link">
-      ---Caching
+    <a href="../caching/" title="-Caching" class="md-nav__link">
+      -Caching
     </a>
   </li>
 
@@ -471,8 +420,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../security/" title="---Security" class="md-nav__link">
-      ---Security
+    <a href="../security/" title="-Security" class="md-nav__link">
+      -Security
     </a>
   </li>
 
@@ -483,8 +432,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../versioning_and_extensibility/" title="---Versioning and Extensibility" class="md-nav__link">
-      ---Versioning and Extensibility
+    <a href="../versioning_and_extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
+      -Versioning and Extensibility
     </a>
   </li>
 
@@ -495,8 +444,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../documentation_and_discovery/" title="---Documentation and Discovery" class="md-nav__link">
-      ---Documentation and Discovery
+    <a href="../documentation_and_discovery/" title="-Documentation and Discovery" class="md-nav__link">
+      -Documentation and Discovery
     </a>
   </li>
 
@@ -507,8 +456,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../specifications/" title="---Specifications" class="md-nav__link">
-      ---Specifications
+    <a href="../specifications/" title="-Specifications" class="md-nav__link">
+      -Specifications
     </a>
   </li>
 
@@ -519,8 +468,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../mocking/" title="---Mocking" class="md-nav__link">
-      ---Mocking
+    <a href="../mocking/" title="-Mocking" class="md-nav__link">
+      -Mocking
     </a>
   </li>
 
@@ -531,8 +480,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../clients/" title="---Clients" class="md-nav__link">
-      ---Clients
+    <a href="../clients/" title="Clients" class="md-nav__link">
+      Clients
     </a>
   </li>
 
@@ -543,8 +492,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../other_topics/" title="---Other topics" class="md-nav__link">
-      ---Other topics
+    <a href="../other_topics/" title="-Other topics" class="md-nav__link">
+      -Other topics
     </a>
   </li>
 
@@ -555,8 +504,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../misc/" title="---Misc" class="md-nav__link">
-      ---Misc
+    <a href="../references/" title="References" class="md-nav__link">
+      References
     </a>
   </li>
 
@@ -567,20 +516,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../references/" title="-References" class="md-nav__link">
-      -References
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../examples/" title="Exampls" class="md-nav__link">
-      Exampls
+    <a href="../examples/" title="Examples" class="md-nav__link">
+      Examples
     </a>
   </li>
 
@@ -599,58 +536,69 @@
 <nav class="md-nav md-nav--secondary">
   
   
-    
-  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#methods" title="Methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#get" title="GET" class="md-nav__link">
     GET
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#head" title="HEAD" class="md-nav__link">
     HEAD
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#options" title="OPTIONS" class="md-nav__link">
     OPTIONS
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#put" title="PUT" class="md-nav__link">
     PUT
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#delete" title="DELETE" class="md-nav__link">
     DELETE
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#patch" title="PATCH" class="md-nav__link">
     PATCH
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#post" title="POST" class="md-nav__link">
     POST
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -676,8 +624,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#batch-operations" title="Batch Operations" class="md-nav__link">
-    Batch Operations
+  <a href="#batch-operations-tbd" title="Batch Operations (TBD)" class="md-nav__link">
+    Batch Operations (TBD)
   </a>
   
 </li>
@@ -699,13 +647,19 @@
               
                 
                 
-                <h1 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h1>
+                  <h1>Methods</h1>
+                
+                <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
 <p>Before discussing the individual HTTP methods we will offer some general advise:</p>
 <ul>
 <li><strong>DO</strong> use HTTP methods correctly.</li>
 <li><strong>DO</strong> stay consistent with the HTTP verb definitions.</li>
-<li><strong>DO</strong> use <strong>CRUD</strong> for basic operations, as most developers will be familiar with this way of working with an API. This means using <code>POST</code> for <strong>C</strong>reating, <code>GET</code> for <strong>R</strong>eading, <code>PUT</code> for <strong>U</strong>pdating, and <code>DELETE</code> for <strong>D</strong>eleting.</li>
+<li><strong>DO</strong> use <strong>CRUD</strong> for basic operations, as most developers will be familiar with this way of working with an API.</li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">CRUD</p>
+<p><code>POST</code> for <strong>C</strong>reating, <code>GET</code> for <strong>R</strong>eading, <code>PUT</code> for <strong>U</strong>pdating, and <code>DELETE</code> for <strong>D</strong>eleting.</p>
+</div>
 <p>HTTP supports the following methods:</p>
 <table>
 <thead>
@@ -753,11 +707,15 @@
 </tr>
 </tbody>
 </table>
-<p>Safety and idempotency are guarantees a server must provide to clients. An operation can be:</p>
-<ul>
-<li><em>Safe methods</em> (or read-only operations) are expected not to cause side-effects, however, it does not mean the server must return the same response every time.</li>
-<li><em>Idempotent methods</em> must guarantee that every request has the same effect, however, this does not necessarily mean returning the same status code. This is highly important in case of failures.</li>
-</ul>
+<p><em>Safety and idempotency are guarantees a server must provide to clients.</em></p>
+<div class="admonition tip">
+<p class="admonition-title">Safe methods (or read-only operations)</p>
+<p>are expected not to cause side-effects, however, it does not mean the server must return the same response every time.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Idempotent methods</p>
+<p>must guarantee that every request has the same effect, however, this does not necessarily mean returning the same status code. This is highly important in case of failures.</p>
+</div>
 <h3 id="get">GET<a class="headerlink" href="#get" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> use <code>GET</code> to get a <em>safe</em> and <em>idempotent</em> representation of a resource.</li>
@@ -799,11 +757,14 @@
 </ul>
 <h3 id="patch">PATCH<a class="headerlink" href="#patch" title="Permanent link">&para;</a></h3>
 <p>It is important to understand the difference between <code>PUT</code> and <code>PATCH</code>.</p>
-<p><code>PUT</code> is designed to update/replace the entire resource. This means that omitted fields will be removed, which is rarely the desired effect.</p>
-<p><code>PATCH</code> is designed to support partial updates. This means the request should supply a <em>set of changes</em> (or instructions) for updating a resource and these should be applied atomically, leaving any fields not passed along intact.</p>
-<blockquote>
+<ul>
+<li><code>PUT</code> is designed to update/replace the entire resource. This means that omitted fields will be removed, which is rarely the desired effect.</li>
+<li><code>PATCH</code> is designed to support partial updates. This means the request should supply a <em>set of changes</em> (or instructions) for updating a resource and these should be applied atomically, leaving any fields not passed along intact.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>Be aware, even though <code>PATCH</code> has gain a lot of use, <code>PATCH</code> is only a proposed standard, and details around the semantics are not widely understood. It's not an alternative to <code>POST</code> or <code>PUT</code> where you supply a flat list of values to change. Please see <a href="https://tools.ietf.org/html/rfc5789">RFC-5789</a> for more information.</p>
-</blockquote>
+</div>
 <ul>
 <li><strong>DO</strong> use <code>PATCH</code> for partial updates of a single resources, i.e. where only a specific subset of fields should be replaced.</li>
 <li><strong>DO</strong> document the semantic of the <code>PATCH</code> changeset, as it is not defined in the HTTP standard.</li>
@@ -834,7 +795,7 @@
 <li><strong>AVOID</strong> using <code>POST</code>for tunneling, like SOAP.</li>
 <li><strong>DO NOT</strong> use nonstandard custom HTTP methods. Instead, design a controller resource that can abstract such operations, and <code>POST</code>.</li>
 </ul>
-<h3 id="creating-resources">Creating Resources<a class="headerlink" href="#creating-resources" title="Permanent link">&para;</a></h3>
+<h2 id="creating-resources">Creating Resources<a class="headerlink" href="#creating-resources" title="Permanent link">&para;</a></h2>
 <p>While it is valid to use either <code>PUT</code> or <code>POST</code> to create new resources, the general consensus is that creating a new resource without knowing the final URI is a <code>POST</code> operation (each call will yield a new resource). If the URI (or part of it) is known, use <code>PUT</code>, because successive calls will not create a new resource, as <code>PUT</code> is idempotent.</p>
 <ul>
 <li><strong>DO</strong> return <code>201 Created</code> and a <code>Location</code> header containing the URI of the newly created resource.</li>
@@ -842,7 +803,7 @@
 <li><strong>CONSIDER</strong> include a <code>Content-Location</code> header containing the URI of the newly created resource, if the response body includes a complete representation of the newly created resource.</li>
 <li><strong>CONSIDER</strong> including the <code>Last-Modified</code> and <code>ETag</code> headers of the newly created resource for optimistic concurrency.</li>
 </ul>
-<h3 id="large-and-stored-queries">Large and Stored Queries<a class="headerlink" href="#large-and-stored-queries" title="Permanent link">&para;</a></h3>
+<h2 id="large-and-stored-queries">Large and Stored Queries<a class="headerlink" href="#large-and-stored-queries" title="Permanent link">&para;</a></h2>
 <p>Sometimes it may be necessary to support queries with large inputs, and the query string may no longer be an option. For those cases:</p>
 <ul>
 <li><strong>DO</strong> use <code>POST</code> to support large queries, as a necessary trade-off to address a practical limitation, even though this is a misuse of the uniform interface, and a consequence is a loss of cacheability</li>
@@ -854,7 +815,7 @@
 <li><strong>DO</strong> support pagination via <code>GET</code> instead of <code>POST</code>.</li>
 <li><strong>CONSIDER</strong> the number of different queries and evaluate cache hit ratio, and whether named queries are a better option.</li>
 </ul>
-<h3 id="asynchronous-tasks">Asynchronous Tasks<a class="headerlink" href="#asynchronous-tasks" title="Permanent link">&para;</a></h3>
+<h2 id="asynchronous-tasks">Asynchronous Tasks<a class="headerlink" href="#asynchronous-tasks" title="Permanent link">&para;</a></h2>
 <p>To enable asynchronous processing of request, follow these guidelines (these step are also valid for <code>DELETE</code>):</p>
 <ul>
 <li><strong>DO</strong> use <code>POST</code> to create and return a representation of a new <em>task</em> resource, and return status code <code>202 Accepted</code>. The purpose of this resource is to let a client track the status of the asynchronous task. Design this resource such that its representation includes the current status of the request and related information such as a time estimate.</li>
@@ -863,20 +824,7 @@
 <li><strong>DO</strong> return <code>303 See Other</code> and a <code>Location</code> header containing a URI of a resource that shows the outcome of the task, once the task has <em>successfully completed</em>.</li>
 <li><strong>DO</strong> return <code>200 Ok</code> with a representation of the task resource informing that the resource creation has <em>failed</em>. Clients will need to read the body of the representation to find the reason for failure.</li>
 </ul>
-<p>Example of <em>pending</em>:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
+<details class="example"><summary>Example of <em>pending</em></summary><div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 <span class="na">Content-Location</span><span class="o">:</span> <span class="l">http://www.example.org/images/task/1</span>
 
@@ -890,22 +838,7 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-</td></tr></table>
-
-<p>Example of <em>done</em>:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">303</span> <span class="ne">See Other</span>
+</details><details class="example"><summary>Example of <em>done</em></summary><div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">303</span> <span class="ne">See Other</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
 <span class="na">Location</span><span class="o">:</span> <span class="l">http://www.example.org/images/1</span>
 <span class="na">Content-Location</span><span class="o">:</span> <span class="l">http://www.example.org/images/task/1</span>
@@ -919,12 +852,11 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-</td></tr></table>
-
-<blockquote>
-<p>Note that the <code>303 See Other</code> does not mean that the resource at the request URI has moved to a new location. It merely states that the result exists at the URI indicated in the <code>Location</code> header.</p>
-</blockquote>
-<h3 id="batch-operations"><strong><em>Batch Operations</em></strong><a class="headerlink" href="#batch-operations" title="Permanent link">&para;</a></h3>
+</details><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>303 See Other</code> does not mean that the resource at the request URI has moved to a new location. It merely states that the result exists at the URI indicated in the <code>Location</code> header.</p>
+</div>
+<h2 id="batch-operations-tbd">Batch Operations (TBD)<a class="headerlink" href="#batch-operations-tbd" title="Permanent link">&para;</a></h2>
 <p><strong><em>TBD</em></strong></p>
                 
                   
@@ -946,7 +878,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../resources/" title="-Resources" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../resources/" title="Resources" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -955,19 +887,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                -Resources
+                Resources
               </span>
             </div>
           </a>
         
         
-          <a href="../representations/" title="---Representations" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../representations/" title="-Representations" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                ---Representations
+                -Representations
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

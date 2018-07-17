@@ -36,7 +36,7 @@
     
     
       
-        <title>-Content Negotiation - API Design Guidelines</title>
+        <title>Content Negotiation - API Design Guidelines</title>
       
     
     
@@ -62,7 +62,7 @@
   
     
     
-    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     <svg class="md-svg">
       <defs>
@@ -85,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon">cloud</i>
+            <i class="md-icon">code</i>
           
         </a>
       </div>
@@ -100,7 +100,7 @@
                 API Design Guidelines
               </span>
               <span class="md-header-nav__topic">
-                -Content Negotiation
+                Content Negotiation
               </span>
             
           
@@ -146,66 +146,6 @@
         
       
       
-        
-
-<nav class="md-tabs" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  <li class="md-tabs__item">
-    
-      <a href=".." title="Introduction" class="md-tabs__link md-tabs__link--active">
-        Introduction
-      </a>
-    
-  </li>
-
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    </ul>
-  </div>
-</nav>
-      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -217,7 +157,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon">cloud</i>
+        <i class="md-icon">code</i>
       
     </span>
     API Design Guidelines
@@ -243,8 +183,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../apis/" title="-APIs" class="md-nav__link">
-      -APIs
+    <a href="../apis/" title="APIs" class="md-nav__link">
+      APIs
     </a>
   </li>
 
@@ -255,8 +195,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../rest/" title="-REST" class="md-nav__link">
-      -REST
+    <a href="../rest/" title="REST" class="md-nav__link">
+      REST
     </a>
   </li>
 
@@ -267,8 +207,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../http/" title="-HTTP" class="md-nav__link">
-      -HTTP
+    <a href="../http/" title="HTTP" class="md-nav__link">
+      HTTP
     </a>
   </li>
 
@@ -279,8 +219,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../resource_identifiers/" title="-Resource Identifiers" class="md-nav__link">
-      -Resource Identifiers
+    <a href="../resource_identifiers/" title="Resource Identifiers" class="md-nav__link">
+      Resource Identifiers
     </a>
   </li>
 
@@ -291,8 +231,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../resources/" title="-Resources" class="md-nav__link">
-      -Resources
+    <a href="../resources/" title="Resources" class="md-nav__link">
+      Resources
     </a>
   </li>
 
@@ -303,8 +243,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../methods/" title="-Methods" class="md-nav__link">
-      -Methods
+    <a href="../methods/" title="Methods" class="md-nav__link">
+      Methods
     </a>
   </li>
 
@@ -315,8 +255,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../representations/" title="---Representations" class="md-nav__link">
-      ---Representations
+    <a href="../representations/" title="-Representations" class="md-nav__link">
+      -Representations
     </a>
   </li>
 
@@ -327,8 +267,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../hypermedia/" title="---Hypermedia" class="md-nav__link">
-      ---Hypermedia
+    <a href="../hypermedia/" title="-Hypermedia" class="md-nav__link">
+      -Hypermedia
     </a>
   </li>
 
@@ -344,32 +284,28 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        -Content Negotiation
+        Content Negotiation
       </label>
     
-    <a href="./" title="-Content Negotiation" class="md-nav__link md-nav__link--active">
-      -Content Negotiation
+    <a href="./" title="Content Negotiation" class="md-nav__link md-nav__link--active">
+      Content Negotiation
     </a>
     
       
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#content-negotiation-conneg" title="Content Negotiation (conneg)" class="md-nav__link">
-    Content Negotiation (conneg)
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#server-driven-negotiation" title="Server-Driven Negotiation" class="md-nav__link">
     Server-Driven Negotiation
   </a>
@@ -430,16 +366,11 @@
     </nav>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#agent-driven-content-negotiation" title="Agent-Driven Content Negotiation" class="md-nav__link">
     Agent-Driven Content Negotiation
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -460,8 +391,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../caching/" title="---Caching" class="md-nav__link">
-      ---Caching
+    <a href="../caching/" title="-Caching" class="md-nav__link">
+      -Caching
     </a>
   </li>
 
@@ -472,8 +403,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../security/" title="---Security" class="md-nav__link">
-      ---Security
+    <a href="../security/" title="-Security" class="md-nav__link">
+      -Security
     </a>
   </li>
 
@@ -484,8 +415,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../versioning_and_extensibility/" title="---Versioning and Extensibility" class="md-nav__link">
-      ---Versioning and Extensibility
+    <a href="../versioning_and_extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
+      -Versioning and Extensibility
     </a>
   </li>
 
@@ -496,8 +427,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../documentation_and_discovery/" title="---Documentation and Discovery" class="md-nav__link">
-      ---Documentation and Discovery
+    <a href="../documentation_and_discovery/" title="-Documentation and Discovery" class="md-nav__link">
+      -Documentation and Discovery
     </a>
   </li>
 
@@ -508,8 +439,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../specifications/" title="---Specifications" class="md-nav__link">
-      ---Specifications
+    <a href="../specifications/" title="-Specifications" class="md-nav__link">
+      -Specifications
     </a>
   </li>
 
@@ -520,8 +451,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../mocking/" title="---Mocking" class="md-nav__link">
-      ---Mocking
+    <a href="../mocking/" title="-Mocking" class="md-nav__link">
+      -Mocking
     </a>
   </li>
 
@@ -532,8 +463,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../clients/" title="---Clients" class="md-nav__link">
-      ---Clients
+    <a href="../clients/" title="Clients" class="md-nav__link">
+      Clients
     </a>
   </li>
 
@@ -544,8 +475,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../other_topics/" title="---Other topics" class="md-nav__link">
-      ---Other topics
+    <a href="../other_topics/" title="-Other topics" class="md-nav__link">
+      -Other topics
     </a>
   </li>
 
@@ -556,8 +487,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../misc/" title="---Misc" class="md-nav__link">
-      ---Misc
+    <a href="../references/" title="References" class="md-nav__link">
+      References
     </a>
   </li>
 
@@ -568,20 +499,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../references/" title="-References" class="md-nav__link">
-      -References
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../examples/" title="Exampls" class="md-nav__link">
-      Exampls
+    <a href="../examples/" title="Examples" class="md-nav__link">
+      Examples
     </a>
   </li>
 
@@ -600,19 +519,13 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#content-negotiation-conneg" title="Content Negotiation (conneg)" class="md-nav__link">
-    Content Negotiation (conneg)
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#server-driven-negotiation" title="Server-Driven Negotiation" class="md-nav__link">
     Server-Driven Negotiation
   </a>
@@ -673,16 +586,11 @@
     </nav>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#agent-driven-content-negotiation" title="Agent-Driven Content Negotiation" class="md-nav__link">
     Agent-Driven Content Negotiation
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -703,21 +611,19 @@
               
                 
                 
-                  <h1>-Content Negotiation</h1>
-                
-                <h2 id="content-negotiation-conneg">Content Negotiation (conneg)<a class="headerlink" href="#content-negotiation-conneg" title="Permanent link">&para;</a></h2>
+                <h1 id="content-negotiation-conneg">Content Negotiation (conneg)<a class="headerlink" href="#content-negotiation-conneg" title="Permanent link">&para;</a></h1>
 <p>There are two types of content negotiation:</p>
 <ul>
 <li><em>Server-driven</em> negotiation, uses request headers to select a variant</li>
 <li><em>Agent-driven</em> negotiation, uses a distinct URI for each variant</li>
 </ul>
-<h3 id="server-driven-negotiation">Server-Driven Negotiation<a class="headerlink" href="#server-driven-negotiation" title="Permanent link">&para;</a></h3>
+<h2 id="server-driven-negotiation">Server-Driven Negotiation<a class="headerlink" href="#server-driven-negotiation" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>DO</strong> support multiple variants only when your clients need them.</li>
 <li><strong>DO</strong> support multiple variants only when each variant contains the same information</li>
 <li><strong>DO NOT</strong> use server-driven negotiation when the information content is different, use <a href="#agent-driven-content-negotiation">Agent-Driven Content Negotiation</a> instead.</li>
 </ul>
-<h4 id="indicating-client-preferences">Indicating Client Preferences<a class="headerlink" href="#indicating-client-preferences" title="Permanent link">&para;</a></h4>
+<h3 id="indicating-client-preferences">Indicating Client Preferences<a class="headerlink" href="#indicating-client-preferences" title="Permanent link">&para;</a></h3>
 <p>It is important for the client to indicate its preferences and capabilities to the server, including:</p>
 <ul>
 <li>representation formats</li>
@@ -726,7 +632,7 @@
 <li>support for compression.</li>
 </ul>
 <p>Even when you know out of band this information, clearly indicating the client's preferences and capabilities can help the client in the face of change. It is better to ask for a specific representation instead of getting a default one, because the default can change.</p>
-<h4 id="content-type-negotiation">Content Type Negotiation<a class="headerlink" href="#content-type-negotiation" title="Permanent link">&para;</a></h4>
+<h3 id="content-type-negotiation">Content Type Negotiation<a class="headerlink" href="#content-type-negotiation" title="Permanent link">&para;</a></h3>
 <p><em>content negotiation (include or exclude and force to e.g. json)?</em></p>
 <ul>
 <li><strong>DO</strong> add an <code>Accept</code> header with a comma-separated list of media type preferences. If the client prefers one media type over the other, add a <code>q</code> parameter with each media type.</li>
@@ -737,7 +643,7 @@
 <li><strong>CONSIDER</strong> including a <code>Vary</code> (see <a href="#the-vary-header">Vary</a>) response header.</li>
 <li><strong>CONSIDER</strong> using <a href="#agent-driven-negotiation"><em>agent-driven negotiation</em></a>, if the server starts out ignoring <code>Accept</code>, e.g. by returning <code>Content-Type: application/xml</code> for <code>Accept: application/json</code> requests, adding content negotiation (here by adding <code>Content-Type: application/json</code>) will likely break compatibility for working clients.</li>
 </ul>
-<h4 id="language-negotiation">Language Negotiation<a class="headerlink" href="#language-negotiation" title="Permanent link">&para;</a></h4>
+<h3 id="language-negotiation">Language Negotiation<a class="headerlink" href="#language-negotiation" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> add an <code>Accept-Language</code> header for the preferred language of the representation.</li>
 <li><strong>DO</strong> return a representation with all human-readable text in a default language, if the request has no <code>Accept-Language</code> header.</li>
@@ -746,7 +652,7 @@
 <li><strong>CONSIDER</strong> including a <code>Vary</code> (see <a href="#the-vary-header">The Vary Header</a>) response header.</li>
 </ul>
 <p>This approach is best suited when representations in different languages differ only in terms of the language used for any human-readable text. If the differences between representations are more significant, use other means of localization such as the client's IP address or region/language-specific URIs.</p>
-<h4 id="character-encoding-negotiation">Character Encoding Negotiation<a class="headerlink" href="#character-encoding-negotiation" title="Permanent link">&para;</a></h4>
+<h3 id="character-encoding-negotiation">Character Encoding Negotiation<a class="headerlink" href="#character-encoding-negotiation" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> add an <code>Accept-Charset</code> header with the preferred character set, if the client can process characters of a specific character set only, if not, avoid adding this header</li>
 <li><strong>DO</strong> encode the textual representation of the response using the encoding the client ask for via the <code>Accept-Charset</code> header. Encoding the response using that encoding promotes interoperability.</li>
@@ -757,7 +663,7 @@
 <li><strong>CONSIDER</strong> including a <code>Vary</code> (see <a href="#the-vary-header">The Vary Header</a>) response header.</li>
 <li><strong>AVOID</strong> using <code>text/xml</code> since its default encoidng is <code>us-ascii</code>.</li>
 </ul>
-<h4 id="supporting-compression">Supporting Compression<a class="headerlink" href="#supporting-compression" title="Permanent link">&para;</a></h4>
+<h3 id="supporting-compression">Supporting Compression<a class="headerlink" href="#supporting-compression" title="Permanent link">&para;</a></h3>
 <p>To support compression or <em>content encoding</em>:</p>
 <ul>
 <li><strong>DO</strong> add an <code>Accept-Encoding</code> header listing the supported encodings,if the client is able to decompress representations compressed encoding such as <code>gzip</code>, <code>compress</code>, or <code>deflate</code>, add an <code>Accept-Encoding</code> header listing the supported encodings, if not, skip this header</li>
@@ -768,19 +674,19 @@
 <li><strong>CONSIDER</strong> brotli (<code>br</code>).</li>
 <li><strong>DO NOT</strong> compress representations, if the request has no <code>Accept-Encoding</code> header.</li>
 </ul>
-<h4 id="the-vary-header">The Vary Header<a class="headerlink" href="#the-vary-header" title="Permanent link">&para;</a></h4>
+<h3 id="the-vary-header">The <code>Vary</code> Header<a class="headerlink" href="#the-vary-header" title="Permanent link">&para;</a></h3>
 <p>When a server uses content negotiation to select a representation, the same URI can yield different representations based on <code>Accept-*</code> headers. The <code>Vary</code> header tells clients which request headers the server used when selecting a representation. Caches may use the <code>Vary</code> header as part of cache keys to maintain variants of a resource.</p>
 <ul>
 <li><strong>CONSIDER</strong> including a <code>Vary</code> header whenever multiple representations are available for a resource. The value of this header is a comma-separated list of <em>request headers</em> the server uses when choosing representation.</li>
 <li><strong>CONSIDER</strong> including a <code>Vary</code> header with a value of <code>*</code>, if the server uses information other then the headers in the request, such as a client's IP address, time of day, user personalization, etc.</li>
 </ul>
-<h4 id="negotiation-failures">Negotiation Failures<a class="headerlink" href="#negotiation-failures" title="Permanent link">&para;</a></h4>
+<h3 id="negotiation-failures">Negotiation Failures<a class="headerlink" href="#negotiation-failures" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>CONSIDER</strong> that servers are free to serve any available representation for a given resource. However, clients may not be able to handle arbitrary media types.</li>
 <li><strong>DO</strong> return <code>406 Not Acceptable</code> with either the body of the representation containing the list of representations, or a <code>Link</code> in the header, when the server cannot serve a representation that meets the client's preferences and if the client explicitly included a <code>*;q=0.0</code>.</li>
 <li><strong>DO</strong> serve the representation without applying any content encoding, if the server is unable to support the requested <code>Accept-Encoding</code> value.</li>
 </ul>
-<h3 id="agent-driven-content-negotiation">Agent-Driven Content Negotiation<a class="headerlink" href="#agent-driven-content-negotiation" title="Permanent link">&para;</a></h3>
+<h2 id="agent-driven-content-negotiation">Agent-Driven Content Negotiation<a class="headerlink" href="#agent-driven-content-negotiation" title="Permanent link">&para;</a></h2>
 <p>Although server-driven content negotiation is built into HTTP it does not include elements such as currency units, distance units, date formats, and other regional flavors for any human-readable text in representations.</p>
 <p>In some cases, because of complex localization requirements, the server may decide to maintain different resources for different locales.</p>
 <p>Agent-driven negotiation simply mean providing distinct URIs for each variant and allow the client to use that URI to select the desired representation.</p>
@@ -815,7 +721,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../hypermedia/" title="---Hypermedia" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../hypermedia/" title="-Hypermedia" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -824,19 +730,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                ---Hypermedia
+                -Hypermedia
               </span>
             </div>
           </a>
         
         
-          <a href="../caching/" title="---Caching" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../caching/" title="-Caching" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                ---Caching
+                -Caching
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
