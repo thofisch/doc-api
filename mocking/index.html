@@ -42,6 +42,8 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
     
     
       <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
@@ -58,7 +60,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
   
     <svg class="md-svg">
       <defs>
@@ -81,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <i class="md-icon">cloud</i>
           
         </a>
       </div>
@@ -142,6 +146,66 @@
         
       
       
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="Introduction" class="md-tabs__link md-tabs__link--active">
+        Introduction
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -153,7 +217,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <i class="md-icon">cloud</i>
       
     </span>
     API Design Guidelines
@@ -435,6 +499,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../examples/" title="Exampls" class="md-nav__link">
+      Exampls
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -479,27 +555,46 @@
                 
                   <h1>---Mocking</h1>
                 
-                <h2 id="mocking">Mocking</h2>
-<pre><code>Mock Your API and get User Feedback
+                <h2 id="mocking">Mocking<a class="headerlink" href="#mocking" title="Permanent link">&para;</a></h2>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Mock Your API and get User Feedback
 
 Another huge advantage of tools like RAML or Swagger is that they allow you to mock your API.
 
  This means that you can not only build your API in a visual interface and take advantage of the very same best practices we utilize in development, but you can also share a mock version of your API with potential clients.
-Using MuleSoft's API Designer you can easily turn on a mocking service that gives you a URL that can be shared with other developers.
+Using MuleSoft&#39;s API Designer you can easily turn on a mocking service that gives you a URL that can be shared with other developers.
 
- This allows your clients to "test out" your API by making real calls as if they would from their application.
+ This allows your clients to &quot;test out&quot; your API by making real calls as if they would from their application.
 
  By utilizing the example responses defined in the RAML file developers can quickly identify issues and inconsistencies, helping you eliminate the majority of design related issues before development even starts.
 
  And by passing along tools like the API Notebook, developers can interact with your Mock API through JavaScript without having to code any calls themselves, and also having the ability to send you the specific use case back giving you true examples of what your developers are trying to accomplish.
 
-This process can be repeated as necessary, as modifying the spec and creating a new mock only takes minutes, empowering you to perfect the design of your API and ensure that it not only meets your developers' needs, but also provides a solid, strong foundation for the future of your API.
+This process can be repeated as necessary, as modifying the spec and creating a new mock only takes minutes, empowering you to perfect the design of your API and ensure that it not only meets your developers&#39; needs, but also provides a solid, strong foundation for the future of your API.
 After all, the nemesis of a long-lived API is not the code, nor the system architecture, but the API design itself.
 
  No matter how careful you are with your API, without a solid foundation it will crumble quickly, costing you thousands to hundreds of thousands of dollars down the road.
 
- It's better to take the time now, up front and ensure that your API is well designed.
-</code></pre>
+ It&#39;s better to take the time now, up front and ensure that your API is well designed.
+</pre></div>
+</td></tr></table>
                 
                   
                 

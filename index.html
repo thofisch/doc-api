@@ -42,6 +42,8 @@
     
       <link rel="stylesheet" href="./assets/stylesheets/application.8d40d89b.css">
       
+        <link rel="stylesheet" href="./assets/stylesheets/application-palette.6079476c.css">
+      
     
     
       <script src="./assets/javascripts/modernizr.1aa3b519.js"></script>
@@ -58,7 +60,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
   
     <svg class="md-svg">
       <defs>
@@ -81,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href="." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <i class="md-icon">cloud</i>
           
         </a>
       </div>
@@ -142,6 +146,66 @@
         
       
       
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="." title="Introduction" class="md-tabs__link md-tabs__link--active">
+        Introduction
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -153,7 +217,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <i class="md-icon">cloud</i>
       
     </span>
     API Design Guidelines
@@ -453,6 +517,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="examples/" title="Exampls" class="md-nav__link">
+      Exampls
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -511,9 +587,9 @@
               
                 
                 
-                <h1 id="introduction">Introduction</h1>
+                <h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h1>
 <p>When designing and building APIs, there are a lot of things to consider. Among these are security, media types, documentation, and versioning. These, and a lot of other concerns, are what we address here, in order to offer comprehensible guidelines on how to design APIs.</p>
-<h2 id="motivation">Motivation</h2>
+<h2 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">&para;</a></h2>
 <p>The motivation behind the <em>API Guidelines</em> is to define standards or "best practices" in order to:</p>
 <ul>
 <li>design robust and long-lasting APIs of high quality</li>
@@ -521,10 +597,10 @@
 <li>have a consistent API "look and feel" across the board</li>
 <li>facilitate APIs as a Product</li>
 </ul>
-<h2 id="about-these-guidelines">About These Guidelines</h2>
+<h2 id="about-these-guidelines">About These Guidelines<a class="headerlink" href="#about-these-guidelines" title="Permanent link">&para;</a></h2>
 <p>These guidelines are a work in progress, and is maintained by the <strong>API Enablement Team</strong> during their initial work. Later teams are responsible for adhering to these guidelines during API design and development, and to continue to evolve these guidelines.</p>
 <p><strong><em>What should we do when the guideline changes? Do existing APIs have to be changed as well?</em></strong></p>
-<h2 id="conventions-used-in-these-guidelines">Conventions Used in These Guidelines</h2>
+<h2 id="conventions-used-in-these-guidelines">Conventions Used in These Guidelines<a class="headerlink" href="#conventions-used-in-these-guidelines" title="Permanent link">&para;</a></h2>
 <p>In these guidelines when referring to an API, we implicitly mean a web API delivered over HTTP. The terms: API, web API, and public API may be used interchangeably throughout these guidelines.</p>
 <p>The following typographical conventions are used in these guidelines:</p>
 <p><code>Constant width</code> program listings, as well as within paragraphs to refer to URLs, mime types, HTTP methods, HTTP headers, and HTTP status codes.</p>

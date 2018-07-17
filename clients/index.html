@@ -42,6 +42,8 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
     
     
       <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
@@ -58,7 +60,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
   
     <svg class="md-svg">
       <defs>
@@ -81,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <i class="md-icon">cloud</i>
           
         </a>
       </div>
@@ -142,6 +146,66 @@
         
       
       
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="Introduction" class="md-tabs__link md-tabs__link--active">
+        Introduction
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -153,7 +217,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <i class="md-icon">cloud</i>
       
     </span>
     API Design Guidelines
@@ -542,6 +606,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../examples/" title="Exampls" class="md-nav__link">
+      Exampls
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -693,15 +769,15 @@
                 
                   <h1>---Clients</h1>
                 
-                <h2 id="resource-identifiers">Resource Identifiers</h2>
-<h3 id="using-uris-in-clients">Using URIs in Clients</h3>
+                <h2 id="resource-identifiers">Resource Identifiers<a class="headerlink" href="#resource-identifiers" title="Permanent link">&para;</a></h2>
+<h3 id="using-uris-in-clients">Using URIs in Clients<a class="headerlink" href="#using-uris-in-clients" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> update local copies of old URIs when receiving <code>301 Moved Permanently</code>.</li>
 <li><strong>DO</strong> verify that the <code>Location</code> URI maps to a trusted server.</li>
 <li><strong>DO NOT</strong> disable support of redirects in client applications. Instead, consider a sensible limit on the number of redirects a client can follow. Disabling redirects altogether will break the client when the server change URIs.</li>
 </ul>
-<h2 id="methods">Methods</h2>
-<h3 id="using-methods-in-clients">Using Methods in Clients</h3>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h3 id="using-methods-in-clients">Using Methods in Clients<a class="headerlink" href="#using-methods-in-clients" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> treat <code>GET</code>, <code>OPTIONS</code>, and <code>HEAD</code> as safe operations, and send as required. Include <code>If-Unmodified-Since</code> and/or <code>If-Match</code> conditional headers, if applicable.</li>
 <li><strong>DO</strong> resubmit <code>GET</code>, <code>PUT</code>, and <code>DELETE</code> requests, in case of failures, to confirm.</li>
@@ -710,8 +786,8 @@
 <li><strong>DO NOT</strong> repeat <code>POST</code> requests unless the documentation states that is idempotent.</li>
 <li><strong>DO NOT</strong> treat various HTTP-level errors as failures (network or software) or like exceptions.</li>
 </ul>
-<h2 id="representations">Representations</h2>
-<h3 id="http-headers-in-clients">HTTP Headers in Clients</h3>
+<h2 id="representations">Representations<a class="headerlink" href="#representations" title="Permanent link">&para;</a></h2>
+<h3 id="http-headers-in-clients">HTTP Headers in Clients<a class="headerlink" href="#http-headers-in-clients" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> return <code>400 Bad Request</code> on servers, when you receive a representation with no <code>Content-Type</code>, avoid guessing the type of the representation.</li>
 <li><strong>DO</strong> let your network library deal with uncompressing compressed representations (<code>Content-Encoding</code>)</li>
@@ -719,9 +795,11 @@
 <li><strong>DO NOT</strong> use <code>Content-Encoding</code> in HTTP requests, unless you know out of band that the target server supports a particular encoding method.</li>
 <li><strong>DO NOT</strong> check for the presence of the <code>Content-Length</code> header without first confirming the absence of <code>Transfer-Encoding: chunked</code></li>
 </ul>
-<h3 id="how-to-treat-errors-in-clients">How to Treat Errors in Clients</h3>
-<pre><code>Even though they might not be documented - they may very much occur in production, so clients should be prepared for unexpected response codes, and in case of doubt handle them like they would handle the corresponding x00 code. Adding new response codes (specially error responses) should be considered a compatible API evolution.
-</code></pre>
+<h3 id="how-to-treat-errors-in-clients">How to Treat Errors in Clients<a class="headerlink" href="#how-to-treat-errors-in-clients" title="Permanent link">&para;</a></h3>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Even though they might not be documented - they may very much occur in production, so clients should be prepared for unexpected response codes, and in case of doubt handle them like they would handle the corresponding x00 code. Adding new response codes (specially error responses) should be considered a compatible API evolution.
+</pre></div>
+</td></tr></table>
+
 <ul>
 <li><strong>DO</strong> treat <code>400 Bad Request</code> by looking into the body of the error representation for hints for the root cause of the problem.</li>
 <li><strong>DO</strong> retry the request on <code>401 Unauthorized</code> responses with the <code>Authorization</code> header containing the credentials. If the client is user-facing, prompt the user to supply credentials. In other cases, obtain the necessary security credentials.</li>
@@ -738,8 +816,8 @@
 <li><strong>DO</strong> check the response of <code>503 Service Unavailable</code> for a <code>Retry-After</code> header, avoid retrying until that period of time (back-off logic).</li>
 <li><strong>DO NOT</strong> treat HTTP errors as I/O or network exceptions. Treat them as first-class application objects.</li>
 </ul>
-<h3 id="hateos">HATEOS</h3>
-<h4 id="using-links-in-clients">Using Links in Clients</h4>
+<h3 id="hateos">HATEOS<a class="headerlink" href="#hateos" title="Permanent link">&para;</a></h3>
+<h4 id="using-links-in-clients">Using Links in Clients<a class="headerlink" href="#using-links-in-clients" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>DO</strong> extract URIs and URI templates from links based on known link relation types. These links along with other resource data constitute the current state of the application.</li>
 <li><strong>DO</strong> store the URIs and the relation type along with other representation data, if the application is long running.</li>
@@ -747,12 +825,12 @@
 <li><strong>DO</strong> store the knowledge of whether a representation contains a given link.</li>
 <li><strong>DO</strong> check the documentation of the link relation to learn any associated business rules regarding authentication, permanence of the URI, methods, and media types supported, etc.</li>
 </ul>
-<h2 id="content-negotiation">Content Negotiation</h2>
+<h2 id="content-negotiation">Content Negotiation<a class="headerlink" href="#content-negotiation" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>DO NOT</strong> assume that servers support content negotiation, and be prepared to receive a representation that does not meet the <code>Accept-*</code> headers.</li>
 </ul>
-<h2 id="extensibility">Extensibility</h2>
-<h3 id="how-to-implement-clients-to-support-extensibility">How to Implement Clients to Support Extensibility</h3>
+<h2 id="extensibility">Extensibility<a class="headerlink" href="#extensibility" title="Permanent link">&para;</a></h2>
+<h3 id="how-to-implement-clients-to-support-extensibility">How to Implement Clients to Support Extensibility<a class="headerlink" href="#how-to-implement-clients-to-support-extensibility" title="Permanent link">&para;</a></h3>
 <p>If the client is capable of storing the complete representation locally, store everything.</p>
 <p>Do not assume that the representation is of a fixed media type, character encoding, content language, or content encoding.</p>
                 

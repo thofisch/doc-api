@@ -42,6 +42,8 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
     
     
       <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
@@ -58,7 +60,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
   
     <svg class="md-svg">
       <defs>
@@ -81,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <i class="md-icon">cloud</i>
           
         </a>
       </div>
@@ -142,6 +146,66 @@
         
       
       
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="Introduction" class="md-tabs__link md-tabs__link--active">
+        Introduction
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -153,7 +217,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <i class="md-icon">cloud</i>
       
     </span>
     API Design Guidelines
@@ -509,6 +573,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../examples/" title="Exampls" class="md-nav__link">
+      Exampls
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -623,7 +699,7 @@
               
                 
                 
-                <h1 id="methods">Methods</h1>
+                <h1 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h1>
 <p>Before discussing the individual HTTP methods we will offer some general advise:</p>
 <ul>
 <li><strong>DO</strong> use HTTP methods correctly.</li>
@@ -682,7 +758,7 @@
 <li><em>Safe methods</em> (or read-only operations) are expected not to cause side-effects, however, it does not mean the server must return the same response every time.</li>
 <li><em>Idempotent methods</em> must guarantee that every request has the same effect, however, this does not necessarily mean returning the same status code. This is highly important in case of failures.</li>
 </ul>
-<h3 id="get">GET</h3>
+<h3 id="get">GET<a class="headerlink" href="#get" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> use <code>GET</code> to get a <em>safe</em> and <em>idempotent</em> representation of a resource.</li>
 <li><strong>DO</strong> use <code>GET</code> as the preferred method of requesting resources using URL encoded query parameter. When these become too extensive use <code>POST</code> instead.</li>
@@ -692,12 +768,12 @@
 <li><strong>DO NOT</strong> add request body payload as these will be ignored, use <code>POST</code> instead.</li>
 <li><strong>DO NOT</strong> use <code>GET</code> for unsafe and nonidempotent operations, use <code>POST</code> instead.</li>
 </ul>
-<h3 id="head">HEAD</h3>
+<h3 id="head">HEAD<a class="headerlink" href="#head" title="Permanent link">&para;</a></h3>
 <p>HEAD requests are used to retrieve header information of resources, and has the exact same semantics as <code>GET</code>, but only returns headers. </p>
 <ul>
 <li><strong>CONSIDER</strong> using <code>HEAD</code> to check whether a resource exists or get its metadata.</li>
 </ul>
-<h3 id="options">OPTIONS</h3>
+<h3 id="options">OPTIONS<a class="headerlink" href="#options" title="Permanent link">&para;</a></h3>
 <p><code>OPTIONS</code> is rarely implemented. Although <code>OPTIONS</code> could be used at runtime to discover methods supported by the resource, doing so is expensive. The method is not cacheable.</p>
 <ul>
 <li><strong>DO</strong> return a comma separated list of methods in the <code>Allow</code> header. When a resource supports <code>PATCH</code> add an <code>Accept-Patch</code> header with the supported media types.</li>
@@ -706,7 +782,7 @@
 <li><strong>CONSIDER</strong> adding a <code>Link</code> header containing a link to a human-readble document that describes the resource. This can be used to develop a browser plug-in to automatically show the documentation when you type the resource URI in the browser.</li>
 <li><strong>AVOID</strong> relying on <code>OPTIONS</code> at runtime for discovery, instead use documentation and links to discover URIs and make requests.</li>
 </ul>
-<h3 id="put">PUT</h3>
+<h3 id="put">PUT<a class="headerlink" href="#put" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> use <code>PUT</code> to update an entire single resource. The operation implies that the entire resource located at the URI will be replaced with the new representation in the request.</li>
 <li><strong>DO</strong> return <code>200 Ok</code> or <code>204 No Content</code> if the resource was updated.</li>
@@ -716,12 +792,12 @@
 <li><strong>CONSIDER</strong> before using <code>PUT</code> on a collection resources as it implies replacing the entire collection.</li>
 <li><strong>DO NOT</strong> use <code>PUT</code> to create new resources unless the clients can decide URIs of resources (e.g., WebDAV), instead use <code>POST</code>.</li>
 </ul>
-<h3 id="delete">DELETE</h3>
+<h3 id="delete">DELETE<a class="headerlink" href="#delete" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> use <code>DELETE</code> to delete a resource. Always return <code>200 OK</code>, however, it is impractical to keep track of all deleted resource, so a <code>404 Not Found</code> may be a viable alternative. Security policies may also require the server to return <code>404 Not Found</code> for any resource that does not currently exist.</li>
 <li><strong>CONSIDER</strong> before using <code>DELETE</code> on a collection resources as it implies deleting the entire collection.</li>
 </ul>
-<h3 id="patch">PATCH</h3>
+<h3 id="patch">PATCH<a class="headerlink" href="#patch" title="Permanent link">&para;</a></h3>
 <p>It is important to understand the difference between <code>PUT</code> and <code>PATCH</code>.</p>
 <p><code>PUT</code> is designed to update/replace the entire resource. This means that omitted fields will be removed, which is rarely the desired effect.</p>
 <p><code>PATCH</code> is designed to support partial updates. This means the request should supply a <em>set of changes</em> (or instructions) for updating a resource and these should be applied atomically, leaving any fields not passed along intact.</p>
@@ -747,7 +823,7 @@
 <li><strong>CONSIDER</strong> designing a specific format for each resource, to ensure that <code>PATCH</code> request only include valid combinations of changes.</li>
 <li><strong>DO NOT</strong> repeat <code>PATCH</code> requests unless explicitly stated in the documentation.</li>
 </ul>
-<h3 id="post">POST</h3>
+<h3 id="post">POST<a class="headerlink" href="#post" title="Permanent link">&para;</a></h3>
 <p><code>POST</code> requests are most often used to create resources, by using a collection resource as a factory. However, <code>POST</code> may also be used for other operations that fall outside the scope of the other methods. </p>
 <ul>
 <li><strong>DO</strong> use <code>POST</code> to create resources.</li>
@@ -758,7 +834,7 @@
 <li><strong>AVOID</strong> using <code>POST</code>for tunneling, like SOAP.</li>
 <li><strong>DO NOT</strong> use nonstandard custom HTTP methods. Instead, design a controller resource that can abstract such operations, and <code>POST</code>.</li>
 </ul>
-<h3 id="creating-resources">Creating Resources</h3>
+<h3 id="creating-resources">Creating Resources<a class="headerlink" href="#creating-resources" title="Permanent link">&para;</a></h3>
 <p>While it is valid to use either <code>PUT</code> or <code>POST</code> to create new resources, the general consensus is that creating a new resource without knowing the final URI is a <code>POST</code> operation (each call will yield a new resource). If the URI (or part of it) is known, use <code>PUT</code>, because successive calls will not create a new resource, as <code>PUT</code> is idempotent.</p>
 <ul>
 <li><strong>DO</strong> return <code>201 Created</code> and a <code>Location</code> header containing the URI of the newly created resource.</li>
@@ -766,7 +842,7 @@
 <li><strong>CONSIDER</strong> include a <code>Content-Location</code> header containing the URI of the newly created resource, if the response body includes a complete representation of the newly created resource.</li>
 <li><strong>CONSIDER</strong> including the <code>Last-Modified</code> and <code>ETag</code> headers of the newly created resource for optimistic concurrency.</li>
 </ul>
-<h3 id="large-and-stored-queries">Large and Stored Queries</h3>
+<h3 id="large-and-stored-queries">Large and Stored Queries<a class="headerlink" href="#large-and-stored-queries" title="Permanent link">&para;</a></h3>
 <p>Sometimes it may be necessary to support queries with large inputs, and the query string may no longer be an option. For those cases:</p>
 <ul>
 <li><strong>DO</strong> use <code>POST</code> to support large queries, as a necessary trade-off to address a practical limitation, even though this is a misuse of the uniform interface, and a consequence is a loss of cacheability</li>
@@ -778,7 +854,7 @@
 <li><strong>DO</strong> support pagination via <code>GET</code> instead of <code>POST</code>.</li>
 <li><strong>CONSIDER</strong> the number of different queries and evaluate cache hit ratio, and whether named queries are a better option.</li>
 </ul>
-<h3 id="asynchronous-tasks">Asynchronous Tasks</h3>
+<h3 id="asynchronous-tasks">Asynchronous Tasks<a class="headerlink" href="#asynchronous-tasks" title="Permanent link">&para;</a></h3>
 <p>To enable asynchronous processing of request, follow these guidelines (these step are also valid for <code>DELETE</code>):</p>
 <ul>
 <li><strong>DO</strong> use <code>POST</code> to create and return a representation of a new <em>task</em> resource, and return status code <code>202 Accepted</code>. The purpose of this resource is to let a client track the status of the asynchronous task. Design this resource such that its representation includes the current status of the request and related information such as a time estimate.</li>
@@ -788,42 +864,67 @@
 <li><strong>DO</strong> return <code>200 Ok</code> with a representation of the task resource informing that the resource creation has <em>failed</em>. Clients will need to read the body of the representation to find the reason for failure.</li>
 </ul>
 <p>Example of <em>pending</em>:</p>
-<pre><code class="http">HTTP/1.1 202 Accepted
-Content-Type: application/json
-Content-Location: http://www.example.org/images/task/1
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Content-Location</span><span class="o">:</span> <span class="l">http://www.example.org/images/task/1</span>
 
-{
-    &quot;state&quot;: &quot;pending&quot;,
-    &quot;message&quot;: &quot;Your request is being processed shortly.&quot;,
-    &quot;pingAfter&quot;: &quot;2009-09-13T01:59:27Z&quot;,
-    &quot;link&quot;: {
-        &quot;href&quot;: &quot;http://www.example.org/images/task/1&quot;,
-        &quot;rel&quot;: &quot;self&quot;
-    }
-}
-
-</code></pre>
+<span class="p">{</span>
+    <span class="nt">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;pending&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Your request is being processed shortly.&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;pingAfter&quot;</span><span class="p">:</span> <span class="s2">&quot;2009-09-13T01:59:27Z&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.example.org/images/task/1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;self&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
 
 <p>Example of <em>done</em>:</p>
-<pre><code class="http">HTTP/1.1 303 See Other
-Content-Type: application/json
-Location: http://www.example.org/images/1
-Content-Location: http://www.example.org/images/task/1
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">303</span> <span class="ne">See Other</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+<span class="na">Location</span><span class="o">:</span> <span class="l">http://www.example.org/images/1</span>
+<span class="na">Content-Location</span><span class="o">:</span> <span class="l">http://www.example.org/images/task/1</span>
 
-{
-    &quot;state&quot;: &quot;done&quot;,
-    &quot;message&quot;: &quot;Your request has been processed.&quot;,
-    &quot;link&quot;: {
-        &quot;href&quot;: &quot;http://www.example.org/images/task/1&quot;,
-        &quot;rel&quot;: &quot;self&quot;
-    }
-}
-</code></pre>
+<span class="p">{</span>
+    <span class="nt">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;done&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Your request has been processed.&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.example.org/images/task/1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;self&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
 
 <blockquote>
 <p>Note that the <code>303 See Other</code> does not mean that the resource at the request URI has moved to a new location. It merely states that the result exists at the URI indicated in the <code>Location</code> header.</p>
 </blockquote>
-<h3 id="batch-operations"><strong><em>Batch Operations</em></strong></h3>
+<h3 id="batch-operations"><strong><em>Batch Operations</em></strong><a class="headerlink" href="#batch-operations" title="Permanent link">&para;</a></h3>
 <p><strong><em>TBD</em></strong></p>
                 
                   

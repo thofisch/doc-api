@@ -42,6 +42,8 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
     
     
       <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
@@ -58,7 +60,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
   
     <svg class="md-svg">
       <defs>
@@ -81,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <i class="md-icon">cloud</i>
           
         </a>
       </div>
@@ -142,6 +146,66 @@
         
       
       
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="Introduction" class="md-tabs__link md-tabs__link--active">
+        Introduction
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -153,7 +217,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <i class="md-icon">cloud</i>
       
     </span>
     API Design Guidelines
@@ -435,6 +499,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../examples/" title="Exampls" class="md-nav__link">
+      Exampls
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -479,12 +555,82 @@
                 
                   <h1>---Documentation and Discovery</h1>
                 
-                <h2 id="14-documentation-and-discovery">14. Documentation and Discovery</h2>
-<pre><code>ERRORS
+                <h2 id="14-documentation-and-discovery">14. Documentation and Discovery<a class="headerlink" href="#14-documentation-and-discovery" title="Permanent link">&para;</a></h2>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>ERRORS
 
 Service providers should differentiate between technical and functional errors.
 
-In most cases it's not useful to document technical errors that are not in control of the service provider unless the status code convey application-specific semantics.
+In most cases it&#39;s not useful to document technical errors that are not in control of the service provider unless the status code convey application-specific semantics.
 
 Functional errors on the other hand, that convey domain-specific semantics, must be documented and are strongly encouraged to be expressed with Problem types.
 
@@ -493,9 +639,9 @@ Functional errors on the other hand, that convey domain-specific semantics, must
 
 ### SHOULD:: Provide User Manual Documentation
 
-In addition to the API as OpenAPI Reference Definition, it's good practice to provide an API User Manual documentation to improve client developer experience, especially of engineers that are less experienced in using this API. A helpful API User Manual typically describes the following API aspects:
+In addition to the API as OpenAPI Reference Definition, it&#39;s good practice to provide an API User Manual documentation to improve client developer experience, especially of engineers that are less experienced in using this API. A helpful API User Manual typically describes the following API aspects:
 
-- API's scope, purpose and use cases
+- API&#39;s scope, purpose and use cases
 - concrete examples of API usage
 - edge cases, error situation details and repair hints
 - architecture context and major dependencies - including figures and sequence flows
@@ -545,13 +691,15 @@ Documentation and its subjects are analyzed to check that they are consistent wi
 
 - An API is only as good as its documentation.
 - The docs should be easy to find and publically accessible.
-- When the docs are hidden inside a PDF file or require signing in, they're not only difficult to find but also not easy to search.
+- When the docs are hidden inside a PDF file or require signing in, they&#39;re not only difficult to find but also not easy to search.
 The docs should show examples of complete request/response cycles. (Pastable examples)
 - The documentation must include any deprecation schedules and details surrounding externally visible API updates. Updates should be delivered via a blog (i.e. a changelog) or a mailing list (preferably both!).
 
 
 --&gt;
-</code></pre>
+</pre></div>
+</td></tr></table>
+
 <p>When building RESTful web services, you need to address two kinds of discoverability. These are design-time dicoverability and runtime discoverability.
 Design-time discoverability helps others design and build clients. It describes all the essentials that client developer teams and administrators need to know in order to build and launch clients.
 Runtime discoverability helps maintain loose coupling between clients and severs and enables plung-and-play style automation. Runtime discovery invlolves HTTP's uniforma interface, mean types, links, and link relations. This chapter is about design-time discoverability.</p>

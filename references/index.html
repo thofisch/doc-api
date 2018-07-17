@@ -42,6 +42,8 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
     
     
       <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
@@ -58,7 +60,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
   
     <svg class="md-svg">
       <defs>
@@ -81,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <i class="md-icon">cloud</i>
           
         </a>
       </div>
@@ -142,6 +146,66 @@
         
       
       
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="Introduction" class="md-tabs__link md-tabs__link--active">
+        Introduction
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -153,7 +217,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <i class="md-icon">cloud</i>
       
     </span>
     API Design Guidelines
@@ -400,6 +464,8 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="toc">
         -References
@@ -413,117 +479,100 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#references" title="References" class="md-nav__link">
-    References
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#citations" title="Citations" class="md-nav__link">
-    Citations
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#bibliography" title="Bibliography" class="md-nav__link">
     Bibliography
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#uncitet-api-references" title="Uncitet API References" class="md-nav__link">
-    Uncitet API References
+      
+        <li class="md-nav__item">
+  <a href="#api-design" title="API Design" class="md-nav__link">
+    API Design
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#api-first" title="API First" class="md-nav__link">
     API First
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#documentation" title="Documentation" class="md-nav__link">
     Documentation
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#error" title="Error" class="md-nav__link">
     Error
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#queries" title="Queries" class="md-nav__link">
-    Queries
+      
+        <li class="md-nav__item">
+  <a href="#graphql-and-queries" title="GraphQL and Queries" class="md-nav__link">
+    GraphQL and Queries
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#resources" title="Resources" class="md-nav__link">
-    Resources
+      
+        <li class="md-nav__item">
+  <a href="#http" title="HTTP" class="md-nav__link">
+    HTTP
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
+  <a href="#hypermedia" title="Hypermedia" class="md-nav__link">
+    Hypermedia
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#rest" title="REST" class="md-nav__link">
     REST
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#security" title="Security" class="md-nav__link">
     Security
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#tracing" title="Tracing" class="md-nav__link">
     Tracing
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
+  <a href="#uri" title="URI" class="md-nav__link">
+    URI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#versioning" title="Versioning" class="md-nav__link">
     Versioning
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#uncategorized" title="Uncategorized" class="md-nav__link">
-    Uncategorized
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -535,6 +584,18 @@
   
 </nav>
     
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../examples/" title="Exampls" class="md-nav__link">
+      Exampls
+    </a>
   </li>
 
     
@@ -552,117 +613,100 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#references" title="References" class="md-nav__link">
-    References
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#citations" title="Citations" class="md-nav__link">
-    Citations
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#bibliography" title="Bibliography" class="md-nav__link">
     Bibliography
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#uncitet-api-references" title="Uncitet API References" class="md-nav__link">
-    Uncitet API References
+      
+        <li class="md-nav__item">
+  <a href="#api-design" title="API Design" class="md-nav__link">
+    API Design
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#api-first" title="API First" class="md-nav__link">
     API First
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#documentation" title="Documentation" class="md-nav__link">
     Documentation
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#error" title="Error" class="md-nav__link">
     Error
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#queries" title="Queries" class="md-nav__link">
-    Queries
+      
+        <li class="md-nav__item">
+  <a href="#graphql-and-queries" title="GraphQL and Queries" class="md-nav__link">
+    GraphQL and Queries
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#resources" title="Resources" class="md-nav__link">
-    Resources
+      
+        <li class="md-nav__item">
+  <a href="#http" title="HTTP" class="md-nav__link">
+    HTTP
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
+  <a href="#hypermedia" title="Hypermedia" class="md-nav__link">
+    Hypermedia
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#rest" title="REST" class="md-nav__link">
     REST
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#security" title="Security" class="md-nav__link">
     Security
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#tracing" title="Tracing" class="md-nav__link">
     Tracing
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
+  <a href="#uri" title="URI" class="md-nav__link">
+    URI
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#versioning" title="Versioning" class="md-nav__link">
     Versioning
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#uncategorized" title="Uncategorized" class="md-nav__link">
-    Uncategorized
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -683,178 +727,136 @@
               
                 
                 
-                  <h1>-References</h1>
-                
-                <h2 id="references">References</h2>
-<ul>
-<li>
-<p>Boyer, P. (2017, May 31). "RESTful API Design Tips from Experience". Medium. .  https://medium.com/studioarmix/learn-restful-api-design-ideals-c5ec915a430f</p>
-</li>
-<li>
-<p><a href="http://whatisrest.com">http://whatisrest.com</a></p>
-</li>
-<li><a href="https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints">https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints</a></li>
-<li><a href="http://apistylebook.com/">http://apistylebook.com/</a></li>
-<li><a href="https://apihandyman.io/api-design-tips-and-tricks-getting-creating-updating-or-deleting-multiple-resources-in-one-api-call/">https://apihandyman.io/api-design-tips-and-tricks-getting-creating-updating-or-deleting-multiple-resources-in-one-api-call/</a></li>
-<li><a href="http://www.ben-morris.com/the-restafarian-flame-wars-common-points-of-disagreement-over-rest-api-design/">http://www.ben-morris.com/the-restafarian-flame-wars-common-points-of-disagreement-over-rest-api-design/</a></li>
-<li><a href="http://www.jenitennison.com/2009/07/25/opaque-uris-unreadable-uris.html">http://www.jenitennison.com/2009/07/25/opaque-uris-unreadable-uris.html</a></li>
-<li><a href="https://www.w3.org/DesignIssues/Axioms.html#opaque">https://www.w3.org/DesignIssues/Axioms.html#opaque</a></li>
-<li><a href="http://www.jenitennison.com/2009/07/25/opaque-uris-unreadable-uris.html">http://www.jenitennison.com/2009/07/25/opaque-uris-unreadable-uris.html</a></li>
-<li><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api">http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api</a></li>
-<li><a href="https://medium.com/studioarmix/learn-restful-api-design-ideals-c5ec915a430f">https://medium.com/studioarmix/learn-restful-api-design-ideals-c5ec915a430f</a></li>
-<li><a href="http://www.jerriepelser.com/blog/paging-in-aspnet-webapi-introduction/?mb=0">http://www.jerriepelser.com/blog/paging-in-aspnet-webapi-introduction/?mb=0</a></li>
-<li><a href="https://blogs.mulesoft.com/dev/api-dev/api-best-practices-series-intro/">https://blogs.mulesoft.com/dev/api-dev/api-best-practices-series-intro/</a></li>
-<li><a href="https://apigility.org/documentation/api-primer/what-is-an-api">https://apigility.org/documentation/api-primer/what-is-an-api</a></li>
-<li><a href="http://zalando.github.io/restful-api-guidelines">http://zalando.github.io/restful-api-guidelines</a></li>
-<li><a href="https://www.narwhl.com/">https://www.narwhl.com/</a></li>
-<li><a href="https://pages.apigee.com/rs/apigee/images/api-design-ebook-2012-03.pdf">https://pages.apigee.com/rs/apigee/images/api-design-ebook-2012-03.pdf</a></li>
-<li><a href="https://www.thoughtworks.com/insights/blog/rest-api-design-resource-modeling">https://www.thoughtworks.com/insights/blog/rest-api-design-resource-modeling</a></li>
-<li><a href="http://www.restapitutorial.com">http://www.restapitutorial.com</a></li>
-<li><a href="https://www.subbu.org/blog/2008/10/location-vs-content-location">https://www.subbu.org/blog/2008/10/location-vs-content-location</a></li>
-</ul>
-<h3 id="citations">Citations</h3>
-<h3 id="bibliography">Bibliography</h3>
+                <h1 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h1>
+<h2 id="bibliography">Bibliography<a class="headerlink" href="#bibliography" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Allamaraju, S. (2010). RESTful web services cookbook: Solutions for improving scalability and simplicity. Yahoo Press.</li>
 <li>Biehl, M. (2016). RESTful API Design: APIs your customers will love. API-University Press.</li>
+<li>Sturgeon, P. (2016). Build APIs You Wont Hate. Leanpub</li>
+<li>Webber J., Parastatidis S., Robinson I. (2010). REST in Practice: Hypermedia and Systems Architecture. O'Reilly Media</li>
 </ul>
-<h3 id="uncitet-api-references">Uncitet API References</h3>
-<ol>
-<li><a href="https://apihandyman.io/api-design-tips-and-tricks-getting-creating-updating-or-deleting-multiple-resources-in-one-api-call/">API Design Tips And Tricks - Getting, creating, updating or deleting multiple resources in one API call | API Handyman</a></li>
-<li><a href="http://www.apiacademy.co/resources/api-strategy-lesson-301-api-as-a-product/">API Strategy | API as a Product | API Design and Strategy</a></li>
-<li><a href="https://www.thoughtworks.com/radar/techniques/apis-as-a-product">APIs as a product | Technology Radar | ThoughtWorks</a></li>
-<li><a href="http://www.daedtech.com/characteristics-good-apis/">Characteristics of Good APIs - DaedTech</a></li>
-<li><a href="http://richarddingwall.name/2012/08/15/dogfooding-how-to-build-a-great-api/">Dogfooding: how to build a great API | Richard Dingwall</a></li>
+<h2 id="api-design">API Design<a class="headerlink" href="#api-design" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://apiguide.readthedocs.io/en/latest/index.html">API Design Guide</a></li>
+<li><a href="http://www.apiacademy.co/resources/api-strategy-lesson-301-api-as-a-product/">API Strategy 301: API-as-a-Product</a></li>
+<li><a href="https://www.thoughtworks.com/radar/techniques/apis-as-a-product">APIs as a product</a></li>
+<li><a href="http://www.daedtech.com/characteristics-good-apis/">Characteristics of Good APIs</a></li>
+<li><a href="http://richarddingwall.name/2012/08/15/dogfooding-how-to-build-a-great-api/">Dogfooding: how to build a great API</a></li>
 <li><a href="https://www.infoq.com/articles/driving-architectural-simplicity">Driving Architectural Simplicity - The Value, Challenge, and Practice of Simple Solutions</a></li>
-<li><a href="https://medium.com/@tyteen4a03/how-apis-work-an-analogy-for-dummies-ac6ee1d1671b">How APIs work — An Analogy For Dummies – Timothy Choi – Medium</a></li>
-<li><a href="http://zalando.github.io/restful-api-guidelines/">Introduction | Introduction</a></li>
-<li><a href="https://blogs.mulesoft.com/dev/api-dev/api-best-practices-series-intro/">New Series: API Design Best Practices | MuleSoft Blog</a></li>
-<li><a href="http://blog.apiaxle.com/post/signs-youre-veering-from-good-api-design/">Signs you&#39;re veering from good API design</a></li>
-<li><a href="https://8thlight.com/blog/jason-desrosiers/2018/03/21/turning-up-the-good-on-rest-apis.html">Turning Up The Good On REST APIs | 8th Light</a></li>
-</ol>
-<h4 id="api-first">API First</h4>
-<ol>
+<li><a href="https://blogs.mulesoft.com/dev/api-dev/api-best-practices-series-intro/">New Series: API Design Best Practices</a></li>
+<li><a href="http://blog.apiaxle.com/post/signs-youre-veering-from-good-api-design/">Signs you're veering from good API design</a></li>
+<li><a href="http://apiux.com/2013/03/20/5-laws-api-dates-and-times/">The 5 laws of API dates and times</a></li>
+<li><a href="https://pages.apigee.com/rs/apigee/images/api-design-ebook-2012-03.pdf">Web API Design - Crafting Interfaces that Developers Love</a></li>
+<li><a href="https://apigility.org/documentation/api-primer/what-is-an-api">What Is an API?</a></li>
+</ul>
+<h2 id="api-first">API First<a class="headerlink" href="#api-first" title="Permanent link">&para;</a></h2>
+<ul>
 <li><a href="https://martinfowler.com/articles/consumerDrivenContracts.html">Consumer-Driven Contracts: A Service Evolution Pattern</a></li>
-<li><a href="https://swagger.io/blog/api-design-with-openapi/">How to Scale Your API Design Process with OpenAPI - Swagger</a></li>
-<li><a href="http://www.baeldung.com/raml-restful-api-modeling-language-tutorial">Intro to RAML - The RESTful API Modeling Language | Baeldung</a></li>
-<li><a href="https://blogs.mulesoft.com/dev/api-dev/open-api-raml-better-together/">Open API and RAML: Better Together | MuleSoft Blog</a></li>
-<li><a href="https://blogs.endjin.com/2018/04/openapi-code-generators-for-visual-studio/">OpenAPI code generators for Visual Studio | endjin blog</a></li>
-<li><a href="https://swagger.io/blog/api-tools-and-resources/">Planning Your API Strategy for 2018: Tools and Resources to Set Your Team Up for Success - Swagger</a></li>
-<li><a href="http://www.baeldung.com/simple-raml-with-resource-types-and-traits">Simplify RAML with Resource Types and Traits | Baeldung</a></li>
-<li><a href="https://buildazure.com/2017/10/20/swagger-is-now-the-openapi-specification/">Swagger is now the OpenAPI Specification – Build Azure</a></li>
-<li><a href="https://swagger.io/difference-between-swagger-and-openapi/">What Is the Difference Between Swagger and OpenAPI? - Swagger</a></li>
-<li><a href="https://apihandyman.io/writing-openapi-swagger-specification-tutorial-part-8-splitting-specification-file/">Writing OpenAPI (Swagger) Specification Tutorial - Part 8 - Splitting specification file | API Handyman</a></li>
-</ol>
-<h4 id="documentation">Documentation</h4>
-<ol>
+<li><a href="https://swagger.io/blog/api-design-with-openapi/">How to Scale Your API Design Process with OpenAPI</a></li>
+<li><a href="http://www.baeldung.com/raml-restful-api-modeling-language-tutorial">Intro to RAML - The RESTful API Modeling Language</a></li>
+<li><a href="https://blogs.mulesoft.com/dev/api-dev/open-api-raml-better-together/">Open API and RAML: Better Together</a></li>
+<li><a href="https://blogs.endjin.com/2018/04/openapi-code-generators-for-visual-studio/">OpenAPI code generators for Visual Studio</a></li>
+<li><a href="https://swagger.io/blog/api-tools-and-resources/">Planning Your API Strategy for 2018: Tools and Resources to Set Your Team Up for Success</a></li>
+<li><a href="http://www.baeldung.com/simple-raml-with-resource-types-and-traits">Simplify RAML with Resource Types and Traits</a></li>
+<li><a href="https://buildazure.com/2017/10/20/swagger-is-now-the-openapi-specification/">Swagger is now the OpenAPI Specification</a></li>
+<li><a href="https://swagger.io/difference-between-swagger-and-openapi/">What Is the Difference Between Swagger and OpenAPI?</a></li>
+<li><a href="https://apihandyman.io/writing-openapi-swagger-specification-tutorial-part-8-splitting-specification-file/">Writing OpenAPI (Swagger) Specification Tutorial - Part 8 - Splitting specification fileß</a></li>
+</ul>
+<h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h2>
+<ul>
 <li><a href="https://hackernoon.com/generate-beautiful-swagger-api-documentation-from-insomnia-ffaa2b77828e">Generate beautiful Swagger API documentation from Insomnia</a></li>
-<li><a href="https://codeopinion.com/generating-c-api-documentation-with-wyam/">Generate C# API Documentation with Wyam - CodeOpinion</a></li>
+<li><a href="https://codeopinion.com/generating-c-api-documentation-with-wyam/">Generate C# API Documentation with Wyam</a></li>
 <li><a href="https://github.com/lord/slate">GitHub - lord/slate: Beautiful static documentation for your API</a></li>
-<li><a href="https://alistapart.com/article/ten-extras-for-great-api-documentation">Ten Extras for Great API Documentation · An A List Apart Article</a></li>
-<li><a href="https://apihandyman.io/the-data-the-hypermedia-and-the-documentation/">The data, the hypermedia and the documentation | API Handyman</a></li>
-<li><a href="https://nordicapis.com/the-easiest-ways-to-generate-api-documentation/">The Easiest Ways to Generate API Documentation | Nordic APIs |</a></li>
-<li><a href="https://alistapart.com/article/the-ten-essentials-for-good-api-documentation">The Ten Essentials for Good API Documentation · An A List Apart Article</a></li>
+<li><a href="https://alistapart.com/article/ten-extras-for-great-api-documentation">Ten Extras for Great API Documentation</a></li>
+<li><a href="https://apihandyman.io/the-data-the-hypermedia-and-the-documentation/">The data, the hypermedia and the documentation</a></li>
+<li><a href="https://nordicapis.com/the-easiest-ways-to-generate-api-documentation/">The Easiest Ways to Generate API Documentation</a></li>
+<li><a href="https://alistapart.com/article/the-ten-essentials-for-good-api-documentation">The Ten Essentials for Good API Documentation</a></li>
 <li><a href="https://blog.smartbear.com/documentation/the-utopia-of-api-documentation/">The Utopia of API Documentation</a></li>
 <li><a href="https://nordicapis.com/ultimate-guide-to-30-api-documentation-solutions/">Ultimate Guide to 30+ API Documentation Solutions</a></li>
-<li><a href="https://www.divio.com/en/blog/documentation/?utm_source=programmingdigest&amp;utm_medium=web&amp;utm_campaign=featured">What nobody tells you about documentation - Blog - Divio</a></li>
-<li><a href="http://idratherbewriting.com/learnapidoc/pubapis_which_tool_to_choose.html">Which tool to choose for API docs — my recommendations | Document REST APIs</a></li>
-</ol>
-<h4 id="error">Error</h4>
-<ol>
+<li><a href="https://www.divio.com/en/blog/documentation/?utm_source=programmingdigest&amp;utm_medium=web&amp;utm_campaign=featured">What nobody tells you about documentation</a></li>
+<li><a href="http://idratherbewriting.com/learnapidoc/pubapis_which_tool_to_choose.html">Which tool to choose for API docs</a></li>
+</ul>
+<h2 id="error">Error<a class="headerlink" href="#error" title="Permanent link">&para;</a></h2>
+<ul>
 <li><a href="https://apigility.org/documentation/api-primer/error-reporting">Apigility</a></li>
 <li><a href="https://github.com/zalando/problem/tree/master/problem/src/main/java/org/zalando/problem">problem/problem/src/main/java/org/zalando/problem at master · zalando/problem</a></li>
-</ol>
-<h4 id="queries">Queries</h4>
-<ol>
+</ul>
+<h2 id="graphql-and-queries">GraphQL and Queries<a class="headerlink" href="#graphql-and-queries" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://apihandyman.io/and-graphql-for-all-a-few-things-to-think-about-before-blindly-dumping-rest-for-graphql/">...And GraphQL for all? A few things to think about before blindly dumping REST for GraphQL</a></li>
 <li><a href="https://www.thoughtworks.com/radar/techniques/client-directed-query">Client-directed query</a></li>
-<li><a href="https://roysvork.wordpress.com/2013/06/24/is-using-odataiqueryable-in-your-web-api-an-inherently-bad-thing/">Is using OData\IQueryable in your Web API an inherently bad thing? | roysvork</a></li>
-<li><a href="https://medium.freecodecamp.org/so-whats-this-graphql-thing-i-keep-hearing-about-baf4d36c20cf">So what’s this GraphQL thing I keep hearing about? – freeCodeCamp</a></li>
-<li><a href="https://blog.runscope.com/posts/you-might-not-need-graphql">You Might Not Need GraphQL — Runscope Blog</a></li>
-</ol>
-<h4 id="resources">Resources</h4>
-<ol>
-<li><a href="https://www.amazon.com/gp/product/1484201108/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=whatpixel-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=1484201108&amp;linkId=2341c15f3ac445201dd4dadf0a6d2d6d">ASP.NET Web API 2: Building a REST Service from Start to Finish: Jamie Kurtz, Brian Wortman: 9781484201107: Amazon.com: Books</a></li>
-<li><a href="http://whatpixel.com/best-rest-restful-api-books/">Best Books for Learning RESTful Web Services &amp; Custom REST APIs</a></li>
-<li><a href="https://leanpub.com/build-apis-you-wont-hate">Build APIs You Wont Hate</a></li>
-<li><a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">Fielding Dissertation: CHAPTER 5: Representational State Transfer (REST)</a></li>
-<li><a href="https://www.amazon.com/REST-Practice-Hypermedia-Systems-Architecture-ebook/dp/B0046RERXY/ref=mt_kindle?_encoding=UTF8&amp;me=">REST Practice Hypermedia Systems Architecture</a></li>
-<li><a href="https://www.amazon.com/gp/product/0596805829/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;tag=whatpixel-20&amp;camp=1789&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=0596805829&amp;linkId=fb4fd2be03fd235c9698be3bb234cc2e">REST in Practice: Hypermedia and Systems Architecture: Jim Webber, Savas Parastatidis, Ian Robinson: 9780596805821: Amazon.com: Books</a></li>
-</ol>
-<h4 id="rest">REST</h4>
-<ol>
-<li><a href="https://apihandyman.io/and-graphql-for-all-a-few-things-to-think-about-before-blindly-dumping-rest-for-graphql/">...And GraphQL for all? A few things to think about before blindly dumping REST for GraphQL | API Handyman</a></li>
-<li><a href="https://www.thoughtworks.com/radar/techniques/anemic-rest">Anemic REST</a></li>
-<li><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api">Best Practices for Designing a Pragmatic RESTful API | Vinay Sahni</a></li>
-<li><a href="http://racksburg.com/choosing-an-http-status-code/">Choosing an HTTP Status Code — Stop Making It Hard | Racksburg</a></li>
-<li><a href="https://www.youtube.com/watch?v=NdZqeAAIHzc">DDD &amp; REST - Domain Driven APIs for the web - Oliver Gierke - YouTube</a></li>
-<li><a href="https://slack.engineering/evolving-api-pagination-at-slack-1c1f644f8e12">Evolving API Pagination at Slack – Several People Are Coding</a></li>
-<li><a href="https://blog.jeremylikness.com/5-rest-api-designs-in-dot-net-core-1-29a8527e999c">Five RESTFul Web Design Patterns Implemented in ASP.NET Core 2.0 Part 1: Content Negotiation</a></li>
+<li><a href="https://roysvork.wordpress.com/2013/06/24/is-using-odataiqueryable-in-your-web-api-an-inherently-bad-thing/">Is using OData\IQueryable in your Web API an inherently bad thing?</a></li>
+<li><a href="https://medium.freecodecamp.org/so-whats-this-graphql-thing-i-keep-hearing-about-baf4d36c20cf">So what’s this GraphQL thing I keep hearing about?</a></li>
+<li><a href="https://blog.runscope.com/posts/you-might-not-need-graphql">You Might Not Need GraphQL</a></li>
+</ul>
+<h2 id="http">HTTP<a class="headerlink" href="#http" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP headers</a></li>
+</ul>
+<h2 id="hypermedia">Hypermedia<a class="headerlink" href="#hypermedia" title="Permanent link">&para;</a></h2>
+<ul>
 <li><a href="http://www.ben-morris.com/hackable-uris-may-look-nice-but-they-dont-have-much-to-do-with-rest-and-hateoas/">Hackable URIs may look nice, but they don’t have much to do with REST and HATEOAS</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">HTTP headers - HTTP | MDN</a></li>
-<li><a href="https://8thlight.com/blog/tags/hypermedia.html">Hypermedia | 8th Light</a></li>
-<li><a href="https://www.infoq.com/news/2010/01/subbu-custom-media-types">Is Proliferation Of Custom Media Types RESTFul?</a></li>
+<li><a href="https://8thlight.com/blog/tags/hypermedia.html">Hypermedia</a></li>
 <li><a href="https://github.com/kevinswiber/siren">kevinswiber/siren: Structured Interface for Representing Entities, super-rad hypermedia</a></li>
-<li><a href="http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http">Nobody Understands REST or HTTP - Literate Programming</a></li>
-<li><a href="http://www.jenitennison.com/2009/07/25/opaque-uris-unreadable-uris.html">Opaque URIs != Unreadable URIs</a></li>
-<li><a href="http://jcalcote.wordpress.com/2008/10/16/put-or-post-the-rest-of-the-story/">PUT or POST: The REST of the Story</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints">Representational state transfer</a></li>
-<li><a href="https://www.thoughtworks.com/insights/blog/rest-api-design-resource-modeling">REST API Design - Resource Modeling | ThoughtWorks</a></li>
-<li><a href="https://speakerdeck.com/olivergierke/rest-beyond-the-obvious-api-design-for-ever-evolving-systems">REST Beyond the Obvious – API design for ever evolving systems // Speaker Deck</a></li>
-<li><a href="http://blog.ploeh.dk/2014/01/20/rest-efficiency/">REST efficiency</a></li>
 <li><a href="http://www.slideshare.net/josdirksen/rest-from-get-to-hateoas">REST: From GET to HATEOAS</a></li>
-<li><a href="https://medium.com/studioarmix/learn-restful-api-design-ideals-c5ec915a430f">RESTful API Design Tips from Experience – studioarmix – Medium</a></li>
-<li><a href="http://blog.restcase.com/restful-api-versioning-insights/">RESTFul API Versioning Insights</a></li>
-<li><a href="https://johnothecoder.uk/integration-devleopment/restful-apis-an-accurate-description/?utm_source=programmingdigest&amp;utm_medium=web&amp;utm_campaign=featured">RESTful APIs - An accurate description - Johno the Coder</a></li>
+<li><a href="https://codeopinion.com/self-descriptive-http-api-in-asp-net-core-hateoas/">Self Descriptive HTTP API in ASP.NET Core: HATEOAS</a></li>
+<li><a href="https://codeopinion.com/self-descriptive-http-api-in-asp-net-core-hypermedia/">Self Descriptive HTTP API in ASP.NET Core: Hypermedia</a></li>
+<li><a href="https://codeopinion.com/self-descriptive-http-api-in-asp-net-core-siren/">Self Descriptive HTTP API in ASP.NET Core: Siren</a></li>
+<li><a href="https://www.narwhl.com/">What is the RESTed NARWHL?</a></li>
+</ul>
+<h2 id="rest">REST<a class="headerlink" href="#rest" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://www.thoughtworks.com/radar/techniques/anemic-rest">Anemic REST</a></li>
+<li><a href="https://apihandyman.io/api-design-tips-and-tricks-getting-creating-updating-or-deleting-multiple-resources-in-one-api-call/">API Design Tips And Tricks - Getting, creating, updating or deleting multiple resources in one API call</a></li>
+<li><a href="http://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api">Best Practices for Designing a Pragmatic RESTful API</a></li>
+<li><a href="http://racksburg.com/choosing-an-http-status-code/">Choosing an HTTP Status Code — Stop Making It Hard</a></li>
+<li><a href="https://www.youtube.com/watch?v=NdZqeAAIHzc">DDD &amp; REST - Domain Driven APIs for the web</a></li>
+<li><a href="https://slack.engineering/evolving-api-pagination-at-slack-1c1f644f8e12">Evolving API Pagination at Slack</a></li>
+<li><a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm">Fielding Dissertation: CHAPTER 5: Representational State Transfer (REST)</a></li>
+<li><a href="https://blog.jeremylikness.com/5-rest-api-designs-in-dot-net-core-1-29a8527e999c">Five RESTFul Web Design Patterns Implemented in ASP.NET Core 2.0 Part 1: Content Negotiation</a></li>
+<li><a href="https://www.infoq.com/news/2010/01/subbu-custom-media-types">Is Proliferation Of Custom Media Types RESTFul?</a></li>
+<li><a href="http://blog.steveklabnik.com/posts/2011-07-03-nobody-understands-rest-or-http">Nobody Understands REST or HTTP</a></li>
+<li><a href="http://jcalcote.wordpress.com/2008/10/16/put-or-post-the-rest-of-the-story/">PUT or POST: The REST of the Story</a></li>
+<li><a href="https://www.thoughtworks.com/insights/blog/rest-api-design-resource-modeling">REST API Design - Resource Modeling</a></li>
+<li><a href="http://www.restapitutorial.com">REST API Tutorial</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints">REST Architectural constraints</a></li>
+<li><a href="https://speakerdeck.com/olivergierke/rest-beyond-the-obvious-api-design-for-ever-evolving-systems">REST Beyond the Obvious – API design for ever evolving systems</a></li>
+<li><a href="http://blog.ploeh.dk/2014/01/20/rest-efficiency/">REST efficiency</a></li>
+<li><a href="https://medium.com/studioarmix/learn-restful-api-design-ideals-c5ec915a430f">RESTful API Design Tips from Experience</a></li>
+<li><a href="https://johnothecoder.uk/integration-devleopment/restful-apis-an-accurate-description/">RESTful APIs - An accurate description</a></li>
 <li><a href="http://www.restapitutorial.com/lessons/restfulresourcenaming.html">RESTful Resource Naming</a></li>
-<li><a href="https://codeopinion.com/self-descriptive-http-api-in-asp-net-core-hateoas/">Self Descriptive HTTP API in ASP.NET Core: HATEOAS - CodeOpinion</a></li>
-<li><a href="https://codeopinion.com/self-descriptive-http-api-in-asp-net-core-hypermedia/">Self Descriptive HTTP API in ASP.NET Core: Hypermedia - CodeOpinion</a></li>
-<li><a href="https://codeopinion.com/self-descriptive-http-api-in-asp-net-core-siren/">Self Descriptive HTTP API in ASP.NET Core: Siren - CodeOpinion</a></li>
 <li><a href="http://www.ben-morris.com/the-restafarian-flame-wars-common-points-of-disagreement-over-rest-api-design/">The RESTafarian flame wars – common disagreements over REST API design</a></li>
 <li><a href="http://restful-api-design.readthedocs.io/en/latest/">Thoughts on RESTful API Design</a></li>
-<li><a href="https://code-maze.com/top-rest-api-best-practices/">Top REST API best practices - Code Maze</a></li>
-<li><a href="http://whatisrest.com/">What is REST? | Home</a></li>
+<li><a href="https://code-maze.com/top-rest-api-best-practices/">Top REST API best practices</a></li>
+<li><a href="https://8thlight.com/blog/jason-desrosiers/2018/03/21/turning-up-the-good-on-rest-apis.html">Turning Up The Good On REST APIs</a></li>
+<li><a href="http://whatisrest.com/">What is REST?</a></li>
 <li><a href="http://www.ben-morris.com/why-rest-is-not-a-silver-bullet-for-soa-and-microservice-integration/">Why REST is not a silver bullet for service integration</a></li>
-</ol>
-<h4 id="security">Security</h4>
-<ol>
-<li><a href="http://nordicapis.com/why-api-keys-are-not-enough/">API Keys ≠ Security: Why API Keys Are Not Enough | Nordic APIs |</a></li>
-<li><a href="https://zapier.com/engineering/apikey-oauth-jwt/">API Keys vs OAuth Tokens vs JSON Web Tokens - The Zapier Engineering Blog - Zapier</a></li>
-<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">Strict-Transport-Security - HTTP | MDN</a></li>
+<li><a href="http://zalando.github.io/restful-api-guidelines">Zalando RESTful API and Event Scheme Guidelines</a></li>
+</ul>
+<h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="http://nordicapis.com/why-api-keys-are-not-enough/">API Keys ≠ Security: Why API Keys Are Not Enough</a></li>
+<li><a href="https://zapier.com/engineering/apikey-oauth-jwt/">API Keys vs OAuth Tokens vs JSON Web Tokens</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">Strict-Transport-Security</a></li>
 <li><a href="https://martinfowler.com/articles/web-security-basics.html">The Basics of Web Application Security</a></li>
 <li><a href="https://auth0.com/blog/using-json-web-tokens-as-api-keys/">Using JSON Web Tokens as API Keys</a></li>
-</ol>
-<h4 id="tracing">Tracing</h4>
-<ol>
-<li><a href="http://theburningmonk.com/2015/05/a-consistent-approach-to-track-correlation-ids-through-microservices/">A consistent approach to track correlation IDs through microservices | theburningmonk.com</a></li>
-</ol>
-<h4 id="versioning">Versioning</h4>
-<ol>
+</ul>
+<h2 id="tracing">Tracing<a class="headerlink" href="#tracing" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="http://theburningmonk.com/2015/05/a-consistent-approach-to-track-correlation-ids-through-microservices/">A consistent approach to track correlation IDs through microservices</a></li>
+</ul>
+<h2 id="uri">URI<a class="headerlink" href="#uri" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="http://www.jenitennison.com/2009/07/25/opaque-uris-unreadable-uris.html">Opaque URIs != Unreadable URIs</a></li>
+<li><a href="https://www.w3.org/DesignIssues/Axioms.html#opaque">The Opacity Axiom</a></li>
+</ul>
+<h2 id="versioning">Versioning<a class="headerlink" href="#versioning" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="http://blog.restcase.com/restful-api-versioning-insights/">RESTFul API Versioning Insights</a></li>
 <li><a href="https://www.troyhunt.com/your-api-versioning-is-wrong-which-is/">Troy Hunt: Your API versioning is wrong, which is why I decided to do it 3 different wrong ways</a></li>
 <li><a href="http://codebetter.com/howarddierking/2012/11/09/versioning-restful-services/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+CodeBetter+%28CodeBetter.Com%29&amp;utm_content=Google+Reader">Versioning RESTful Services</a></li>
 <li><a href="http://www.jenitennison.com/2009/07/22/versioning-uris.html">Versioning URIs</a></li>
-</ol>
-<hr />
-<h4 id="uncategorized">Uncategorized</h4>
-<ol>
-<li><a href="http://blog.howarddierking.com/2016/10/15/a-linked-data-overview-for-web-api-developers/">A Linked Data Overview for Web API Developers</a></li>
-<li><a href="https://cloudonaut.io/create-a-serverless-restful-api-with-api-gateway-swagger-lambda-and-dynamodb/">Create a serverless RESTful API with API Gateway, Swagger, Lambda, and DynamoDB | cloudonaut</a></li>
-<li><a href="https://andrewlock.net/creating-a-basic-web-api-template-using-dotnet-new-custom-templates/">Creating a basic Web API template using dotnet new custom templates</a></li>
-<li><a href="https://www.tpeczek.com/2017/11/handling-conditional-requests-in-aspnet.html">Handling conditional requests in ASP.NET Core MVC</a></li>
-<li><a href="https://www.alphabot.com/security/blog/2017/net/How-to-configure-Json.NET-to-create-a-vulnerable-web-API.html">How to configure Json.NET to create a vulnerable web API - Alphabot Security</a></li>
-<li><a href="https://andrewlock.net/formatting-response-data-as-xml-or-json-based-on-the-url-in-asp-net-core/">How to format response data as XML or JSON, based on the request URL in ASP.NET Core</a></li>
-<li><a href="https://danielwertheim.se/httprequester-and-in-memory-web-api-testing/">HttpRequester and in-memory Web-API testing</a></li>
-<li><a href="https://www.thoughtworks.com/radar/tools/jsonassert">JSONassert</a></li>
-<li><a href="http://microservices.io/patterns/microservices.html">Microservice Architecture pattern</a></li>
-<li><a href="http://www.jerriepelser.com/blog/paging-in-aspnet-webapi-introduction/?mb=0">Paging in ASP.NET Web API: Introduction - Jerrie Pelser</a></li>
-<li><a href="http://philcalcado.com/2017/03/22/pattern_using_seudo-uris_with_microservices.html">Pattern: Using Pseudo-URIs with Microservices</a></li>
-<li><a href="https://github.com/stefanprodan/WebApiThrottle">stefanprodan/WebApiThrottle: ASP.NET Web API rate limiter for IIS and Owin hosting</a></li>
-<li><a href="https://alastaircrabtree.com/stubbing-your-way-to-automated-e2e-testing-api-first-with-wiremock/">Stubbing your way to automated end to end testing in an API first world</a></li>
-<li><a href="http://apiux.com/2013/03/20/5-laws-api-dates-and-times/">The 5 laws of API dates and times | API UX</a></li>
-<li><a href="https://apihandyman.io/the-api-crash-test-project/">The API crash test project | API Handyman</a></li>
-<li><a href="https://danielwertheim.se/use-identityserver-in-swaggerui-to-consume-a-secured-asp-net-webapi/">Use IdentityServer in SwaggerUI to consume a secured ASP.Net WebAPI</a></li>
-<li><a href="http://cecilphillip.com/using-consul-for-health-checks-with-asp-net-core/amp/">Using Consul for Health Checks with ASP.NET Core</a></li>
-<li><a href="https://www.narwhl.com/">What is the RESTed NARWHL? - The RESTed NARWHL</a></li>
-</ol>
+</ul>
                 
                   
                 
@@ -889,6 +891,20 @@
             </div>
           </a>
         
+        
+          <a href="../examples/" title="Exampls" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Exampls
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>

@@ -42,6 +42,8 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
     
     
       <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
@@ -58,7 +60,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
   
     <svg class="md-svg">
       <defs>
@@ -81,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <i class="md-icon">cloud</i>
           
         </a>
       </div>
@@ -142,6 +146,66 @@
         
       
       
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="Introduction" class="md-tabs__link md-tabs__link--active">
+        Introduction
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -153,7 +217,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <i class="md-icon">cloud</i>
       
     </span>
     API Design Guidelines
@@ -435,6 +499,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../examples/" title="Exampls" class="md-nav__link">
+      Exampls
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -479,14 +555,274 @@
                 
                   <h1>---Other topics</h1>
                 
-                <h2 id="other-topics">Other Topics</h2>
-<pre><code>&lt;!-- TODO --&gt;
+                <h2 id="other-topics">Other Topics<a class="headerlink" href="#other-topics" title="Permanent link">&para;</a></h2>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>&lt;!-- TODO --&gt;
 
 dog-food your own API
 
 ## Chatty APIs
 
-Let's think about how app developers use that API you're designing and dealing with chatty APIs.
+Let&#39;s think about how app developers use that API you&#39;re designing and dealing with chatty APIs.
 
 Imagine how developers will use your API
 
@@ -496,7 +832,7 @@ Some API designs become very chatty - meaning just to build a simple UI or app, 
 
 The API team can sometimes decide not to deal with creating a nice, resource-oriented RESTful API, and just fall back to a mode where they create the 3 or 4 Java-style getter and setter methods they know they need to power a particular user interface.
 
-We don't recommend this. You can design a RESTful API and still mitigate the chattiness.
+We don&#39;t recommend this. You can design a RESTful API and still mitigate the chattiness.
 
 Be complete and RESTful and provide shortcuts
 
@@ -504,7 +840,7 @@ First design your API and its resources according to pragmatic RESTful design pr
 
 What kind of shortcut? Say you know that 80% of all your apps are going to need some sort of composite response, then build the kind of request that gives them what they need.
 
-Just don't do the latter instead of the former. First design using good pragmatic RESTful principles!
+Just don&#39;t do the latter instead of the former. First design using good pragmatic RESTful principles!
 
 Take advantage of the partial response syntax
 
@@ -518,15 +854,15 @@ In the case of our dogs API, the dogs have association with owners, who in turn 
 
 ## Complement with an SDK
 
-It's a common question for API providers - do you need to complement your API with code libraries and software development kits (SDKs)?
+It&#39;s a common question for API providers - do you need to complement your API with code libraries and software development kits (SDKs)?
 
 If your API follows good design practices, is self consistent, standards-based, and well documented, developers may be able to get rolling without a client SDK. Well-documented code samples are also a critical resource.
 
-On the other hand, what about the scenario in which building a UI requires a lot of domain knowledge? This can be a challenging problem for developers even when building UI and apps on top of APIs with pretty simple domains – think about the Twitter API with it's primary object of 140 characters of text.
+On the other hand, what about the scenario in which building a UI requires a lot of domain knowledge? This can be a challenging problem for developers even when building UI and apps on top of APIs with pretty simple domains – think about the Twitter API with it&#39;s primary object of 140 characters of text.
 
-You shouldn't change your API to try to overcome the domain knowledge hurdle. Instead, you can complement your API with code libraries and a software development kit (SDK).
+You shouldn&#39;t change your API to try to overcome the domain knowledge hurdle. Instead, you can complement your API with code libraries and a software development kit (SDK).
 
-In this way, you don't overburden your API design. Often, a lot of what's needed is on the client side and you can push that burden to an SDK.
+In this way, you don&#39;t overburden your API design. Often, a lot of what&#39;s needed is on the client side and you can push that burden to an SDK.
 
 The SDK can provide the platform-specific code, which developers use in their apps to invoke API operations - meaning you keep your API clean.
 
@@ -546,7 +882,7 @@ Yahoo! http://developer.yahoo.com/social/sdk/
 
 Paypal https://cms.paypal.com/us/cgi-bin/?cmd=_rendercontent&amp;content_ID=developer/library_download_sdks
 
-To market your API to a specific community - you upload the SDK to a samples or plugin page on a platform's existing developer community.
+To market your API to a specific community - you upload the SDK to a samples or plugin page on a platform&#39;s existing developer community.
 
 
 &lt;!--
@@ -570,7 +906,7 @@ Rate limiting (Twitter-style):
 
 ### SHOULD:: Reduce Bandwidth Needs and Improve Responsiveness
 
-APIs should support techniques for reducing bandwidth based on client needs. This holds for APIs that (might) have high payloads and/or are used in high-traffic scenarios like the public Internet and telecommunication networks. Typical examples are APIs used by mobile web app clients with (often) less bandwidth connectivity. (Zalando is a 'Mobile First' company, so be mindful of this point.)
+APIs should support techniques for reducing bandwidth based on client needs. This holds for APIs that (might) have high payloads and/or are used in high-traffic scenarios like the public Internet and telecommunication networks. Typical examples are APIs used by mobile web app clients with (often) less bandwidth connectivity. (Zalando is a &#39;Mobile First&#39; company, so be mindful of this point.)
 
 Common techniques include:
 
@@ -595,18 +931,18 @@ The before rules apply even in the case that processing of all individual part f
 
 ### MUST: Use 429 with Headers for Rate Limits
 
-APIs that wish to manage the request rate of clients must use the '429 Too Many Requests' response code if the client exceeded the request rate and therefore the request can't be fulfilled. Such responses must also contain header information providing further details to the client. There are two approaches a service can take for header information:
+APIs that wish to manage the request rate of clients must use the &#39;429 Too Many Requests&#39; response code if the client exceeded the request rate and therefore the request can&#39;t be fulfilled. Such responses must also contain header information providing further details to the client. There are two approaches a service can take for header information:
 
-Return a 'Retry-After' header indicating how long the client ought to wait before making a follow-up request. The Retry-After header can contain a HTTP date value to retry after or the number of seconds to delay. Either is acceptable but APIs should prefer to use a delay in seconds.
+Return a &#39;Retry-After&#39; header indicating how long the client ought to wait before making a follow-up request. The Retry-After header can contain a HTTP date value to retry after or the number of seconds to delay. Either is acceptable but APIs should prefer to use a delay in seconds.
 
-Return a trio of 'X-RateLimit' headers. These headers (described below) allow a server to express a service level in the form of a number of allowing requests within a given window of time and when the window is reset.
+Return a trio of &#39;X-RateLimit&#39; headers. These headers (described below) allow a server to express a service level in the form of a number of allowing requests within a given window of time and when the window is reset.
 
-The 'X-RateLimit' headers are:
+The &#39;X-RateLimit&#39; headers are:
 
 X-RateLimit-Limit: The maximum number of requests that the client is allowed to make in this window.
 X-RateLimit-Remaining: The number of requests allowed in the current window.
 X-RateLimit-Reset: The relative time in seconds when the rate limit window will be reset.
-The reason to allow both approaches is that APIs can have different needs. Retry-After is often sufficient for general load handling and request throttling scenarios and notably, does not strictly require the concept of a calling entity such as a tenant or named account. In turn this allows resource owners to minimise the amount of state they have to carry with respect to client requests. The 'X-RateLimit' headers are suitable for scenarios where clients are associated with pre-existing account or tenancy structures. 'X-RateLimit' headers are generally returned on every request and not just on a 429, which implies the service implementing the API is carrying sufficient state to track the number of requests made within a given window for each named entity.
+The reason to allow both approaches is that APIs can have different needs. Retry-After is often sufficient for general load handling and request throttling scenarios and notably, does not strictly require the concept of a calling entity such as a tenant or named account. In turn this allows resource owners to minimise the amount of state they have to carry with respect to client requests. The &#39;X-RateLimit&#39; headers are suitable for scenarios where clients are associated with pre-existing account or tenancy structures. &#39;X-RateLimit&#39; headers are generally returned on every request and not just on a 429, which implies the service implementing the API is carrying sufficient state to track the number of requests made within a given window for each named entity.
 
 
 # Authentication is Key
@@ -618,21 +954,21 @@ By providing your API users with a unique API token, or API key you can tell exa
 
  This means that you can not only identify abuse quickly, but also help prevent it by limiting their access to certain aspects of your API, and by limiting the number of calls they can make to your API.
 
-# Throttling Isn't Bad
-Throttling and rate limiting isn't a bad thing.
+# Throttling Isn&#39;t Bad
+Throttling and rate limiting isn&#39;t a bad thing.
 
  Again, by throttling your API and setting up different SLA tiers you are able to help prevent abuse – often times completely accidental.
 
  This means that your API is able to operate optimally for all of your users, instead of having one infinite loop bring it crashing down for everyone.
 And yes, you may have partners that need more calls than others, or who the limits do not make sense for.
 
-  But again, by setting up SLA tiers based on your standard API user's needs, and then creating partner tiers, you can easily give the the permissions they need, while limiting the standard user to prevent abuse.
-The API key, or unique identifier for an user's application also helps you identify who your heavier users are – letting you get in contact with them to make sure their needs are being met, while also learning more about how they are using your API.
+  But again, by setting up SLA tiers based on your standard API user&#39;s needs, and then creating partner tiers, you can easily give the the permissions they need, while limiting the standard user to prevent abuse.
+The API key, or unique identifier for an user&#39;s application also helps you identify who your heavier users are – letting you get in contact with them to make sure their needs are being met, while also learning more about how they are using your API.
 # Tools
 
 The demand for flexibility and extensibility has driven the development of APIs and tools alike, and in many regards it has never been easier to create an API than it is today with multitudes of frameworks (such as JAX-RS, Apigility, Django REST Framework, Grape), specs (RAML, Swagger, API Blueprint, IO Docs), and tools (API Designer, API Science, APImatic) available.
 
-# Building an SDK Doesn't Fix Everything
+# Building an SDK Doesn&#39;t Fix Everything
 
 Last but not least, keep in mind that SDKs or code wrappers/ libraries can be extremely helpful.
 
@@ -641,13 +977,13 @@ What SDKs/ Code Wrappers offer is a quick, plug and play way for developers to i
 
  The downside is the more complex your SDK becomes, the more tightly coupled it usually is to your API, making any updates to your API a manual and complex process.
 
- This means that any new features you roll out will receive rather slow adoption, and you may find yourself providing support to your developers on why they can't do something with your SDK.
-When building your SDK you should try to keep it as decoupled from your API as possible, relying on dynamic responses and calls while also following the best coding practices for that language (be sure to watch Keith Casey's SPOIL talk or read about it here).
+ This means that any new features you roll out will receive rather slow adoption, and you may find yourself providing support to your developers on why they can&#39;t do something with your SDK.
+When building your SDK you should try to keep it as decoupled from your API as possible, relying on dynamic responses and calls while also following the best coding practices for that language (be sure to watch Keith Casey&#39;s SPOIL talk or read about it here).
 Another option is to utilize a SDK building service such as APIMatic.io or REST United, which automatically generates SDKs for your API based on your RAML, Swagger, or API Blueprint spec.
 
  This allows you to offer SDKs, automatically have them update when adding new features (although clients will still need to download the updated version), and offer them without adding any additional workload on your end.
 But again, regardless of whether or not you provide an SDK/ Code Library, you will still want to have multiple code examples in your documentation to help developers who want to utilize your API to its fullest capacity, without relying on additional third party libraries to do so.
-To recap, use HTTP Status Codes, use Descriptive Error Messages, and having an SDK may be helpful for a lot of your developers – but make sure you take into consideration all of the challenges that come with it, and remember that having an SDK doesn't replace documentation, if anything – it creates the need for more.
+To recap, use HTTP Status Codes, use Descriptive Error Messages, and having an SDK may be helpful for a lot of your developers – but make sure you take into consideration all of the challenges that come with it, and remember that having an SDK doesn&#39;t replace documentation, if anything – it creates the need for more.
 
 # Deprecation
 
@@ -673,7 +1009,7 @@ Owners of APIs used in production must monitor usage of deprecated APIs until th
 
 ### SHOULD:: Add a Warning Header to Responses
 
-During deprecation phase, the producer should add a Warning header (see RFC 7234 - Warning header) field. When adding the Warning header, the warn-code must be 299 and the warn-text should be in form of "The path/operation/parameter/... {name} is deprecated and will be removed by {date}. Please see {link} for details." with a link to a documentation describing why the API is no longer supported in the current form and what clients should do about it. Adding the Warning header is not sufficient to gain client consent to shut down an API.
+During deprecation phase, the producer should add a Warning header (see RFC 7234 - Warning header) field. When adding the Warning header, the warn-code must be 299 and the warn-text should be in form of &quot;The path/operation/parameter/... {name} is deprecated and will be removed by {date}. Please see {link} for details.&quot; with a link to a documentation describing why the API is no longer supported in the current form and what clients should do about it. Adding the Warning header is not sufficient to gain client consent to shut down an API.
 
 ### SHOULD:: Add Monitoring for Warning Header
 
@@ -697,9 +1033,9 @@ Hint: A preferred way of client detection implementation is by logging of the cl
 
 ## Consolidate API requests in one subdomain
 
-We've talked about things that come after the top-level domain. This time, let's explore stuff on the other side of the URL.
+We&#39;ve talked about things that come after the top-level domain. This time, let&#39;s explore stuff on the other side of the URL.
 
-Here's how Facebook, Foursquare, and Twitter handle this:
+Here&#39;s how Facebook, Foursquare, and Twitter handle this:
 
 Facebook provides two APIs. They started with api.facebook.com, then modified it to orient around the social graph graph.facebook.com.
 
@@ -716,13 +1052,13 @@ Twitter has three APIs; two of them focused on search and streaming.
 - api.twitter.com
 - search.twitter.com
 
-It's easy to understand how Facebook and Twitter ended up with more than one API. It has a lot to do with timing and acquisition, and it's easy to reconfigure a CName entry in your DNS to point requests to different clusters.
+It&#39;s easy to understand how Facebook and Twitter ended up with more than one API. It has a lot to do with timing and acquisition, and it&#39;s easy to reconfigure a CName entry in your DNS to point requests to different clusters.
 
-But if we're making design decisions about what's in the best interest of app developer, we recommend following Foursquare's lead:
+But if we&#39;re making design decisions about what&#39;s in the best interest of app developer, we recommend following Foursquare&#39;s lead:
 
 Consolidate all API requests under one API subdomain.
 
-It's cleaner, easier and more intuitive for developers who you want to build cool apps using your API.
+It&#39;s cleaner, easier and more intuitive for developers who you want to build cool apps using your API.
 
 Facebook, Foursquare, and Twitter also all have dedicated developer portals.
 
@@ -740,8 +1076,9 @@ In keeping with the spirit of REST, your developer portal should follow this pat
 
 Then optionally, if you can sense from requests coming in from the browser where the developer really needs to go, you can redirect.
 
-Say a developer types api.teachdogrest.com in the browser but there's no other information for the GET request, you can probably safely redirect to your developer portal and help get the developer where they really need to be.
-</code></pre>
+Say a developer types api.teachdogrest.com in the browser but there&#39;s no other information for the GET request, you can probably safely redirect to your developer portal and help get the developer where they really need to be.
+</pre></div>
+</td></tr></table>
                 
                   
                 

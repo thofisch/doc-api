@@ -42,6 +42,8 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
     
     
       <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
@@ -58,7 +60,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
   
     <svg class="md-svg">
       <defs>
@@ -81,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <i class="md-icon">cloud</i>
           
         </a>
       </div>
@@ -142,6 +146,66 @@
         
       
       
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="Introduction" class="md-tabs__link md-tabs__link--active">
+        Introduction
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -153,7 +217,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <i class="md-icon">cloud</i>
       
     </span>
     API Design Guidelines
@@ -455,6 +519,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../examples/" title="Exampls" class="md-nav__link">
+      Exampls
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -519,7 +595,7 @@
                 
                   <h1>-Resource Identifiers</h1>
                 
-                <h2 id="resource-identifiers-uris">Resource Identifiers (URIs)</h2>
+                <h2 id="resource-identifiers-uris">Resource Identifiers (URIs)<a class="headerlink" href="#resource-identifiers-uris" title="Permanent link">&para;</a></h2>
 <p>An important aspect of API design is to think about how to design unique resource identifiers, and as such, URIs should be treated as opaque resource identifiers.</p>
 <p>This means that clients should not be concerned with the design of URIs, nor should clients try to pick apart URIs in order to gather information from them. Instead URIs should be discovered through links (and the submission of forms).</p>
 <blockquote>
@@ -530,7 +606,7 @@
 <li><em>readable URIs</em> help developers understand something about the resource.</li>
 <li><em>hackable URIs</em> are manipulated by altering/removing portions of the path or query, and can help developers locate other resources.</li>
 </ul>
-<h3 id="designing-uris">Designing URIs</h3>
+<h3 id="designing-uris">Designing URIs<a class="headerlink" href="#designing-uris" title="Permanent link">&para;</a></h3>
 <p>When done successfully the result, of a thoughtful URI design, can be the most important design affordance (a design property that communicates how something should be used without requiring documentation) of your API. So when designing URIs:</p>
 <ul>
 <li><strong>DO</strong> design URIs to last a long time - <a href="http://www.w3.org/Provider/Style/URI">Cool URIs don't change</a>.</li>
@@ -555,7 +631,7 @@
 <li><strong>DO NOT</strong> use an URI as a generic gateway, by tunneling repeated state changes over <code>POST</code> using the same URI.</li>
 <li><strong>DO NOT</strong> use custom headers to overload URIs.</li>
 </ul>
-<h3 id="uris-for-queries">URIs for Queries</h3>
+<h3 id="uris-for-queries">URIs for Queries<a class="headerlink" href="#uris-for-queries" title="Permanent link">&para;</a></h3>
 <p>Queries usually involve filtering, sorting and projections. When providing query support for these and other actions:</p>
 <ul>
 <li><strong>DO</strong> use snake_case (never camelCase) for Query Parameters.</li>

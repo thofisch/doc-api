@@ -42,6 +42,8 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
     
     
       <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
@@ -58,7 +60,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
   
     <svg class="md-svg">
       <defs>
@@ -81,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <i class="md-icon">cloud</i>
           
         </a>
       </div>
@@ -142,6 +146,66 @@
         
       
       
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="Introduction" class="md-tabs__link md-tabs__link--active">
+        Introduction
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -153,7 +217,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <i class="md-icon">cloud</i>
       
     </span>
     API Design Guidelines
@@ -466,6 +530,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../examples/" title="Exampls" class="md-nav__link">
+      Exampls
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -537,17 +613,17 @@
               
                 
                 
-                <h1 id="application-programming-interfaces">Application Programming Interfaces</h1>
+                <h1 id="application-programming-interfaces">Application Programming Interfaces<a class="headerlink" href="#application-programming-interfaces" title="Permanent link">&para;</a></h1>
 <p>An API specifies how software should interact. Particularly, how a client can use an API, what URIs are available, what HTTP methods may be used, what query string parameters it accepts, what data can be sent, and what responses to expect.</p>
-<h2 id="api-as-a-product">API as a Product</h2>
+<h2 id="api-as-a-product">API as a Product<a class="headerlink" href="#api-as-a-product" title="Permanent link">&para;</a></h2>
 <p>When creating APIs intended for use by someone else, whether it is actually sold or not, it can and should most likely be treated as a product in itself.</p>
 <p>This can be very easy to lose sight of, so before jumping to the more specific advice on how to achieve successful APIs, keep the following overall principles in mind:</p>
-<h3 id="be-customer-centric">Be Customer-Centric</h3>
+<h3 id="be-customer-centric">Be Customer-Centric<a class="headerlink" href="#be-customer-centric" title="Permanent link">&para;</a></h3>
 <p>Do not focus on data rather than customers. Instead focus on target developer's problems, by involving customers early in the design process. Make use of reviews and customers feedback, and provide service level support. Make APIs irresistible by having a high attention to API quality and client developer experience.</p>
 <p><img alt="API as a Product" src="../imgs/api-as-a-product-750-3-v4.png" /></p>
-<h3 id="treat-every-api-as-if-it-was-a-public-api">Treat Every API as if it was a Public API</h3>
+<h3 id="treat-every-api-as-if-it-was-a-public-api">Treat Every API as if it was a Public API<a class="headerlink" href="#treat-every-api-as-if-it-was-a-public-api" title="Permanent link">&para;</a></h3>
 <p>Do not skip on usability and security when creating private or partner APIs, as this can make the transition into a public API difficult. Instead actively improve and maintain API consistency over the long term.</p>
-<h3 id="componentize-your-systems">Componentize Your Systems</h3>
+<h3 id="componentize-your-systems">Componentize Your Systems<a class="headerlink" href="#componentize-your-systems" title="Permanent link">&para;</a></h3>
 <p>Identifying, breaking apart, and isolating small feature sets in big systems:</p>
 <ul>
 <li>can help innovation by creating platforms to enable other organizations to build new applications that better suit their needs</li>

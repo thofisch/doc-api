@@ -42,6 +42,8 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
     
     
       <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
@@ -58,7 +60,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
   
     <svg class="md-svg">
       <defs>
@@ -81,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <i class="md-icon">cloud</i>
           
         </a>
       </div>
@@ -142,6 +146,66 @@
         
       
       
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="Introduction" class="md-tabs__link md-tabs__link--active">
+        Introduction
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -153,7 +217,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <i class="md-icon">cloud</i>
       
     </span>
     API Design Guidelines
@@ -455,6 +519,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../examples/" title="Exampls" class="md-nav__link">
+      Exampls
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -519,18 +595,26 @@
                 
                   <h1>---Caching</h1>
                 
-                <h2 id="caching-and-conditional-requests">Caching and Conditional Requests</h2>
+                <h2 id="caching-and-conditional-requests">Caching and Conditional Requests<a class="headerlink" href="#caching-and-conditional-requests" title="Permanent link">&para;</a></h2>
 <p>Caching is one of the most useful features built on top of HTTP's uniform interface. You can take advantage of caching to reduce end user perceived latency, to increase reliasbility, to reduce bandwidth usage and cost, and to reduce server load. They can be in server network, content delivery networks (CDNs), or in the client network (forward proxies).</p>
 <p>It is common to use the word <em>cache</em> to refer to either an object cache (memcached) or HTTP caches. Both of these caches improve performacne and have key roles to play in the overall web service deployment architecture. But there is an important difference between the two. HTTP caches do not require clients and servers to call any special programming API to manage data in the cache, as long as you are using HTTP as defined.</p>
 <p><em>origin server</em></p>
-<pre><code>They are slightly different - the ETag does not have any information that the client can use to determine whether or not to make a request for that file again in the future. If ETag is all it has, it will always have to make a request. However, when the server reads the ETag from the client request, the server can then determine whether to send the file (HTTP 200) or tell the client to just use their local copy (HTTP 304). An ETag is basically just a checksum for a file that semantically changes when the content of the file changes.
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>They are slightly different - the ETag does not have any information that the client can use to determine whether or not to make a request for that file again in the future. If ETag is all it has, it will always have to make a request. However, when the server reads the ETag from the client request, the server can then determine whether to send the file (HTTP 200) or tell the client to just use their local copy (HTTP 304). An ETag is basically just a checksum for a file that semantically changes when the content of the file changes.
 
 The Expires header is used by the client (and proxies/caches) to determine whether or not it even needs to make a request to the server at all. The closer you are to the Expires date, the more likely it is the client (or proxy) will make an HTTP request for that file from the server.
 
 So really what you want to do is use BOTH headers - set the Expires header to a reasonable value based on how often the content changes. Then configure ETags to be sent so that when clients DO send a request to the server, it can more easily determine whether or not to send the file back.
 
-One last note about ETag - if you are using a load-balanced server setup with multiple machines running Apache you will probably want to turn off ETag generation. This is because inodes are used as part of the ETag hash algorithm which will be different between the servers. You can configure Apache to not use inodes as part of the calculation but then you'd want to make sure the timestamps on the files are exactly the same, to ensure the same ETag gets generated for all servers.
-</code></pre>
+One last note about ETag - if you are using a load-balanced server setup with multiple machines running Apache you will probably want to turn off ETag generation. This is because inodes are used as part of the ETag hash algorithm which will be different between the servers. You can configure Apache to not use inodes as part of the calculation but then you&#39;d want to make sure the timestamps on the files are exactly the same, to ensure the same ETag gets generated for all servers.
+</pre></div>
+</td></tr></table>
+
 <ul>
 <li>How to set Expiration Caching Headers</li>
 </ul>
@@ -568,7 +652,7 @@ One last note about ETag - if you are using a load-balanced server setup with mu
 </li>
 </ul>
 <p>Avoid implementing support for expiration caching within clients, instead deploy a forward proxy in the client network, and avoid implementing you own caching layer in the client code.</p>
-<h3 id="conditional-request">Conditional Request</h3>
+<h3 id="conditional-request">Conditional Request<a class="headerlink" href="#conditional-request" title="Permanent link">&para;</a></h3>
 <p>Conditional request address two programs. For <code>GET</code> request conditional request help clients and caches validate that a cached representation can still be considered fresh. For unsafe request such as <code>PUT</code>, <code>POST</code> and <code>DELETE</code> conditional requests provide concurrency control.</p>
 <p>Not supporting conditional <code>GET</code> request reduces performance.</p>
 <p>Not makeing unsafe requests conditional, when facing concurrency, ay affect the integrity of the application. In absence of adequate concurrency control checks, the server is susceptible to "lost updates" and "stale deletes".</p>
@@ -580,9 +664,12 @@ One last note about ETag - if you are using a load-balanced server setup with mu
 <li>How to Generate <code>Last-Modified</code> and <code>ETag</code> Headers</li>
 </ul>
 <p>Use <code>Last-Modified</code> and <code>ETag</code> response headers to drive conditional requests. Clients use the following:</p>
-<pre><code>- `If-Modified-Since` and `If-None-Match` for validating cached representations
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>- `If-Modified-Since` and `If-None-Match` for validating cached representations
 - `If-Unmodified-Since` and `If-Match` as preconditions for concurrency control
-</code></pre>
+</pre></div>
+</td></tr></table>
+
 <p>a timestamp for the modifed date-time and/or a sequence number of keep track of a version.</p>
 <p>use an MD5 hash of the representation body, or of some field of the data that changes every time the resource ip updated</p>
 <p>make sure to use a different <code>ETag</code> value of each representation of the resource (this include different media types, etc.).</p>
@@ -646,8 +733,8 @@ If the server return <code>412 Precondition Failed</code> submit an unconditiona
 <!-- TODO -->
 
 <p>Common methods of ETag generation include using a collision-resistant hash function of the resource's content, a hash of the last modification timestamp, or even just a revision number.</p>
-<h3 id="may-consider-using-etag-together-with-if-none-match-header">MAY: Consider using ETag together with If-(None-)Match header</h3>
-<p>When creating or updating resources it may be necessary to expose conflicts and to prevent the lost update problem. This can be best accomplished by using the ETag header together with the If-Match and If-None-Match. The contents of an ETag: <entity-tag> header is either (a) a hash of the response body, (b) a hash of the last modified field of the entity, or (c) a version number or identifier of the entity version.</p>
+<h3 id="may-consider-using-etag-together-with-if-none-match-header">MAY: Consider using ETag together with If-(None-)Match header<a class="headerlink" href="#may-consider-using-etag-together-with-if-none-match-header" title="Permanent link">&para;</a></h3>
+<p>When creating or updating resources it may be necessary to expose conflicts and to prevent the lost update problem. This can be best accomplished by using the ETag header together with the If-Match and If-None-Match. The contents of an ETag: <entity-tag> header is either (a) a hash of the response body, (b) a hash of the last modified field of the entity, or &copy; a version number or identifier of the entity version.</p>
 <p>To expose conflicts between concurrent update operations via PUT, POST, or PATCH, the If-Match: <entity-tag> header can be used to force the server to check whether the version of the updated entity is conforming to the requested <entity-tag>. If no matching entity is found, the operation is supposed a to respond with status code 412 - precondition failed.</p>
 <p>Beside other use cases, the If-None-Match: header with parameter * can be used in a similar way to expose conflicts in resource creation. If any matching entity is found, the operation is supposed a to respond with status code 412 - precondition failed.</p>
 <p>The ETag, If-Match, and If-None-Match headers can be defined as follows in the API definition:</p>
@@ -659,11 +746,16 @@ If the server return <code>412 Precondition Failed</code> submit an unconditiona
     a resource over time, regardless whether multiple versions are valid at the same time.
     An entity-tag consists of an opaque quoted string, possibly prefixed by a weakness
     indicator.</p>
-<pre><code>in: header
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>in: header
 type: string
 required: false
-example: W/"xy", "5", "7da7a728-f910-11e6-942a-68f728c1ba70"
-</code></pre>
+example: W/&quot;xy&quot;, &quot;5&quot;, &quot;7da7a728-f910-11e6-942a-68f728c1ba70&quot;
+</pre></div>
+</td></tr></table>
+
 <p>IfMatch:
     name: If-Match
     description: |
@@ -671,11 +763,16 @@ example: W/"xy", "5", "7da7a728-f910-11e6-942a-68f728c1ba70"
     on the resource that matches at least one of the provided entity-tags. This allows
     clients express a precondition that prevent the method from being applied, if there
     have been any changes to the resource.</p>
-<pre><code>in: header
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>in: header
 type: string
 required: false
-example:  "5", "7da7a728-f910-11e6-942a-68f728c1ba70"
-</code></pre>
+example:  &quot;5&quot;, &quot;7da7a728-f910-11e6-942a-68f728c1ba70&quot;
+</pre></div>
+</td></tr></table>
+
 <p>IfNoneMatch:
     name: If-None-Match
     description: |
@@ -683,11 +780,16 @@ example:  "5", "7da7a728-f910-11e6-942a-68f728c1ba70"
     operate on the resource if it does not match any of the provided entity-tags. If
     the provided entity-tag is <code>*</code>, it is required that the resource does not exist
     at all.</p>
-<pre><code>in: header
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>in: header
 type: string
 required: false
-example: "7da7a728-f910-11e6-942a-68f728c1ba70", *
-</code></pre>
+example: &quot;7da7a728-f910-11e6-942a-68f728c1ba70&quot;, *
+</pre></div>
+</td></tr></table>
+
 </li>
 </ul>
                 

@@ -42,6 +42,8 @@
     
       <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
       
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+      
     
     
       <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
@@ -58,7 +60,9 @@
     
   </head>
   
-    <body dir="ltr">
+    
+    
+    <body dir="ltr" data-md-color-primary="blue-grey" data-md-color-accent="pink">
   
     <svg class="md-svg">
       <defs>
@@ -81,7 +85,7 @@
       <div class="md-flex__cell md-flex__cell--shrink">
         <a href=".." title="API Design Guidelines" class="md-header-nav__button md-logo">
           
-            <i class="md-icon"></i>
+            <i class="md-icon">cloud</i>
           
         </a>
       </div>
@@ -142,6 +146,66 @@
         
       
       
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="Introduction" class="md-tabs__link md-tabs__link--active">
+        Introduction
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -153,7 +217,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <i class="md-icon"></i>
+        <i class="md-icon">cloud</i>
       
     </span>
     API Design Guidelines
@@ -410,6 +474,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../examples/" title="Exampls" class="md-nav__link">
+      Exampls
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -438,8 +514,65 @@
               
                 
                 
-                <h2 id="13-versioning-and-extensibility">13. Versioning and Extensibility</h2>
-<pre><code>&lt;!-- TODO --&gt;
+                <h2 id="13-versioning-and-extensibility">13. Versioning and Extensibility<a class="headerlink" href="#13-versioning-and-extensibility" title="Permanent link">&para;</a></h2>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>&lt;!-- TODO --&gt;
 
 &lt;!-- 
 versioning
@@ -463,7 +596,7 @@ https://stripe.com/docs/api#versioning
 --&gt;
 
 - Like building an application it is important to keep your API standardized and extensible.
-- It's easy to want to add "quick fixes" to make customers happy, but everything you do should be carefully thought out in order to make sure your API continues to serve not only your needs, but also your clients.
+- It&#39;s easy to want to add &quot;quick fixes&quot; to make customers happy, but everything you do should be carefully thought out in order to make sure your API continues to serve not only your needs, but also your clients.
 - Remember, when you create an API you are creating a contract- your users are depending on your API not just to make their application work, but in order to make a living and feed their families.
 - When you break things, or when you break backwards compatibility you are taking their time and resources to fix their application instead of adding features and keeping their customers happy.
 
@@ -473,13 +606,13 @@ Keep in mind, when you have multiple versions of your API you end up supporting 
 
 One of the greatest challenges in regards to versioning is getting developers to migrate from one version to another, all while keeping your support staff from going insane.
 
-This doesn't mean that you shouldn't plan for versioning.
+This doesn&#39;t mean that you shouldn&#39;t plan for versioning.
 
 Rather it means that you should plan to incorporate a version identifier (either in the URI or in the content-header of the response), but work under the mindset that you will only version your API if...
 
 - You have backwards incompatible PLATFORM changes – in other words you completely change the UI or way your platform works
 - You find that your API is no longer extendable – which is exactly what we are trying to avoid here
-- You find that your spec no longer meets your developer's needs – for example, they are demanding REST instead of SOAP
+- You find that your spec no longer meets your developer&#39;s needs – for example, they are demanding REST instead of SOAP
 
 You should NOT version your API just because:
 
@@ -488,7 +621,7 @@ You should NOT version your API just because:
 - You changed technologies – your API should be decoupled from your technology stack
 - You changed your applications services or code – your API should be decoupled from your service layer
 
-To clarify on the last two, it shouldn't matter what technologies you are using, or how your services work.
+To clarify on the last two, it shouldn&#39;t matter what technologies you are using, or how your services work.
 
 The API should interact with both, but be decoupled enough that changing something in the background does not effect the API adversely.
 
@@ -497,8 +630,10 @@ Any changes you make to your API in regards to the technology or service layer s
 After all, the less you can break backwards compatibility, the happier you, and your customers will be.
 
 And this can only happen if you go into building your API with a long-term, flexibility, and extensibility focus.
-</code></pre>
-<h1 id="extensibility-and-versioning">Extensibility and Versioning</h1>
+</pre></div>
+</td></tr></table>
+
+<h1 id="extensibility-and-versioning">Extensibility and Versioning<a class="headerlink" href="#extensibility-and-versioning" title="Permanent link">&para;</a></h1>
 <p>Managing change in any distributed client/server environment can be hard. In these environments, clients count on servers to honor their contracts.</p>
 <p>When a change is backward compatible, you need not upgrade clients at the same time as you modify the server.</p>
 <p><em>Forward compatibility</em> may be important when you have several clients and servers upgraded at different points in time. In this case, some newer clients may be interacting with older servers. The purpose of forward compatibility is to ensure that newer clients can continue to use the older servers without disruption albeit with reduced functionality.</p>
@@ -507,7 +642,7 @@ And this can only happen if you go into building your API with a long-term, flex
 <p>It takes discipline, careful planning, and defensive coding practices.</p>
 <p>A one-time simultaneous upgrade of all server and clients is not a realistic task. You need to plan for a gradual rollout of upgrades to servers and clients to maintain the availability of the overall system.</p>
 <p>Note that both clients and server need to take the appropriate steps to operate smoothly under change. For the server, the goal is to keep the clients from breaking. For the clients, the objective is not fail when new unknown data or links appear in representations.</p>
-<h3 id="how-to-maintain-uri-compatibility-url-regression">How to Maintain URI Compatibility (<em>url regression</em>)</h3>
+<h3 id="how-to-maintain-uri-compatibility-url-regression">How to Maintain URI Compatibility (<em>url regression</em>)<a class="headerlink" href="#how-to-maintain-uri-compatibility-url-regression" title="Permanent link">&para;</a></h3>
 <p>Keeps URIs permanent.</p>
 <p>Treat URIs containing the same query parameters but in a different order as the same</p>
 <p>When you add new parameters to URIs, continue to honor existing parameters, and treat new parameters as optional.</p>
@@ -521,16 +656,16 @@ And this can only happen if you go into building your API with a long-term, flex
 <li><strong>DO</strong> communicate an appropriate end-of-life policy for old URIs, when you cannot monitor the old URIs.</li>
 <li><strong>DO</strong> convert <code>301 Moved Permanently</code> to <code>410 Gone</code> or <code>404 Not Found</code> once the traffic has fallen of or the preset time interval has passed.</li>
 </ul>
-<h3 id="how-to-maintain-compatibility-of-xml-and-json-representations">How to Maintain Compatibility of XML and JSON Representations</h3>
+<h3 id="how-to-maintain-compatibility-of-xml-and-json-representations">How to Maintain Compatibility of XML and JSON Representations<a class="headerlink" href="#how-to-maintain-compatibility-of-xml-and-json-representations" title="Permanent link">&para;</a></h3>
 <p>When making changes to JSON preserve the hierarchical structure so that clients can continue to follow the same structure to extract data.</p>
 <p>Make new data elements in requests optional to maintain compatibility with existing clients. Clients that do not send new data fields must be able to continue to function.</p>
 <p>Do not remove or rename any data fields from representaions in reponse bodies.</p>
 <p>Example: Clients that do not understand new fields may not store them locally. If this causes the server to assume the user has no email address, introduce a new version of the resource that contains the email.</p>
-<h3 id="how-to-maintain-compatibility-of-links">How to Maintain Compatibility of Links</h3>
+<h3 id="how-to-maintain-compatibility-of-links">How to Maintain Compatibility of Links<a class="headerlink" href="#how-to-maintain-compatibility-of-links" title="Permanent link">&para;</a></h3>
 <p>Avoid removing links
 Do not change the value of the <code>rel</code> and <code>href</code> attributes of links.
 When introducing new resources, use links to provide URIs of those resources to clients.</p>
-<h3 id="when-to-version">When to Version</h3>
+<h3 id="when-to-version">When to Version<a class="headerlink" href="#when-to-version" title="Permanent link">&para;</a></h3>
 <p>Consider versioning when the server cannot maintain compatibility. Also consider versioning if some clients require behavior or functionality different from other clients.</p>
 <p>Versioning may introduce new problems:</p>
 <ul>
@@ -539,15 +674,229 @@ When introducing new resources, use links to provide URIs of those resources to 
 <li>Maintaining multiple versions of resources at the same time is not trivial.</li>
 <li>When you use links to convey URIs to clients, clients may store them locally. When you assign new URIs, clients will have to upgrade those URIs along with other stored data of resources.</li>
 </ul>
-<h3 id="how-to-version-restful-web-services">How to Version RESTful Web Services</h3>
+<h3 id="how-to-version-restful-web-services">How to Version RESTful Web Services<a class="headerlink" href="#how-to-version-restful-web-services" title="Permanent link">&para;</a></h3>
 <p>Add new resources with new URIs when there is a change in the behavior of resource or a change in the information contained in representations.</p>
 <p>Use easily detectable patterns such as <code>v1</code> or <code>v2</code> in subdomain names, path segments, or query parameters to distinguish URIs by their version.</p>
 <p>Avoid treating each version as a new representation with a new media type of the same resource.</p>
 <p>Versioning involves versioning resources with new URIs. This is because HTTP dictates everything except URIs of resources and their representations. Although you can add custom HTTP methods and headers, such additions may impair interoperability.</p>
 <p>Avoid introducing new media types for each version since it leads to media type proliferation, which reduce interoperability.</p>
-<pre><code># Compatibility
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215</pre></div></td><td class="code"><div class="codehilite"><pre><span></span># Compatibility
 
-### MUST: Don't Break Backward Compatibility
+### MUST: Don&#39;t Break Backward Compatibility
 
 Change APIs, but keep all consumers running.
 
@@ -558,9 +907,9 @@ There are two techniques to change APIs without breaking them:
 - follow rules for compatible extensions
 - introduce new API versions and still support older versions
 
-We strongly encourage using compatible API extensions and discourage versioning. The below guideline rules for service providers and consumers enable us (having Postel's Law in mind) to make compatible changes without versioning.
+We strongly encourage using compatible API extensions and discourage versioning. The below guideline rules for service providers and consumers enable us (having Postel&#39;s Law in mind) to make compatible changes without versioning.
 
-Hint: Please note that the compatibility guarantees are for the "on the wire" format. Binary or source compatibility of code generated from an API definition is not covered by these rules. If client implementations update their generation process to a new version of the API definition, it has to be expected that code changes are necessary.
+Hint: Please note that the compatibility guarantees are for the &quot;on the wire&quot; format. Binary or source compatibility of code generated from an API definition is not covered by these rules. If client implementations update their generation process to a new version of the API definition, it has to be expected that code changes are necessary.
 
 ### SHOULD:: Prefer Compatible Extensions
 
@@ -582,7 +931,7 @@ Service clients should apply the robustness principle:
 
 Service clients must be prepared for compatible API extensions of service providers:
 
-- Be tolerant with unknown fields in the payload (see also Fowler's "TolerantReader" post), i.e. ignore new fields but do not eliminate them from payload if needed for subsequent PUT requests.
+- Be tolerant with unknown fields in the payload (see also Fowler&#39;s &quot;TolerantReader&quot; post), i.e. ignore new fields but do not eliminate them from payload if needed for subsequent PUT requests.
 - Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions. Note also, that status codes are extensible. Default handling is how you would treat the corresponding x00 code (see RFC7231 Section 6).
 - Follow the redirect when the server returns HTTP status 301 Moved Permanently.
 
@@ -594,15 +943,15 @@ Designers of service provider APIs should be conservative and accurate in what t
 - Be accurate in defining input data constraints (like formats, ranges, lengths etc.) — and check constraints and return dedicated error information in case of violations.
 - Prefer being more specific and restrictive (if compliant to functional requirements), e.g. by defining length range of strings. It may simplify implementation while providing freedom for further evolution as compatible extensions.
 
-Not ignoring unknown input fields is a specific deviation from Postel's Law (e.g. see also
+Not ignoring unknown input fields is a specific deviation from Postel&#39;s Law (e.g. see also
 The Robustness Principle Reconsidered) and a strong recommendation. Servers might want to take different approach but should be aware of the following problems and be explicit in what is supported:
 
-Ignoring unknown input fields is actually not an option for PUT, since it becomes asymmetric with subsequent GET response and HTTP is clear about the PUT "replace" semantics and default round-trip expectations (see RFC7231 Section 4.3.4). Note, accepting (i.e. not ignoring) unknown input fields and returning it in subsequent GET responses is a different situation and compliant to PUT semantics.
+Ignoring unknown input fields is actually not an option for PUT, since it becomes asymmetric with subsequent GET response and HTTP is clear about the PUT &quot;replace&quot; semantics and default round-trip expectations (see RFC7231 Section 4.3.4). Note, accepting (i.e. not ignoring) unknown input fields and returning it in subsequent GET responses is a different situation and compliant to PUT semantics.
 
-Certain client errors cannot be recognized by servers, e.g. attribute name typing errors will be ignored without server error feedback. The server cannot differentiate between the client intentionally providing an additional field versus the client sending a mistakenly named field, when the client's actual intent was to provide an optional input field.
+Certain client errors cannot be recognized by servers, e.g. attribute name typing errors will be ignored without server error feedback. The server cannot differentiate between the client intentionally providing an additional field versus the client sending a mistakenly named field, when the client&#39;s actual intent was to provide an optional input field.
 Future extensions of the input data structure might be in conflict with already ignored fields and, hence, will not be compatible, i.e. break clients that already use this field but with different type.
 
-In specific situations, where a (known) input field is not needed anymore, it either can stay in the API definition with "not used anymore" description or can be removed from the API definition as long as the server ignores this specific parameter.
+In specific situations, where a (known) input field is not needed anymore, it either can stay in the API definition with &quot;not used anymore&quot; description or can be removed from the API definition as long as the server ignores this specific parameter.
 
 ### MUST: Always Return JSON Objects As Top-Level Data Structures To Support Extensibility
 
@@ -612,7 +961,7 @@ In a response body, you must always return a JSON objects (and not e.g. an array
 
 When changing your RESTful APIs, do so in a compatible way and avoid generating additional API versions. Multiple versions can significantly complicate understanding, testing, maintaining, evolving, operating and releasing our systems (supplementary reading).
 
-If changing an API can't be done in a compatible way, then proceed in one of these three ways:
+If changing an API can&#39;t be done in a compatible way, then proceed in one of these three ways:
 
 - create a new resource (variant) in addition to the old resource variant
 - create a new service endpoint — i.e. a new application with a new API (with a new domain name)
@@ -638,7 +987,7 @@ Using header versioning should:
 - include versions in request and response headers to increase visibility
 - include Content-Type in the Vary header to enable proxy caches to differ between versions
 
-&gt; Hint: OpenAPI currently doesn't support content negotiation, though a comment in this issue mentions a workaround (using a fragment identifier that gets stripped off). Another way would be to document just the new version, but let the server accept the old one (with the previous content-type).
+&gt; Hint: OpenAPI currently doesn&#39;t support content negotiation, though a comment in this issue mentions a workaround (using a fragment identifier that gets stripped off). Another way would be to document just the new version, but let the server accept the old one (with the previous content-type).
 
 Until an incompatible change is necessary, it is recommended to stay with the standard application/json media type.
 
@@ -691,7 +1040,7 @@ To the contrary, the second opinion, he says, leads to visibility of the message
 - If the goal is versioning, use version identifiers in URIs.
 Giving java-like examples, He asserts that though its possible to peek into the messages to see how a request can be processed, it compromises visibility or opacity as the case may be.
 
-Media types such as application/xml and application/json are good enough for XML and JSON message processing in code. […] URI based approaches are guaranteed to work across the stack. Ignoring real-world interoperability for the sake of "architectual purity" or "RESTful contracts" may eventually back fire.
+Media types such as application/xml and application/json are good enough for XML and JSON message processing in code. […] URI based approaches are guaranteed to work across the stack. Ignoring real-world interoperability for the sake of &quot;architectual purity&quot; or &quot;RESTful contracts&quot; may eventually back fire.
 
 Via the post is the solution presented by Subbu found the right balance between architectural purity and interoperable real-world solutions? Be sure to visit the original post to weigh in your opinion.
 
@@ -701,7 +1050,7 @@ Versioning is one of the most important considerations when designing your Web A
 
 Never release an API without a version and make the version mandatory.
 
-Let's see how three top API providers handle versioning.
+Let&#39;s see how three top API providers handle versioning.
 
 Twilio /2010-04-01/Accounts/
 
@@ -715,29 +1064,29 @@ At compilation time, the developer includes the timestamp of the application whe
 
 When a request arrives, Twilio does a look up. Based on the timestamp they identify the API that was valid when this code was created and route accordingly.
 
-It's a very clever and interesting approach, although we think it is a bit complex. For example, it can be confusing to understand whether the timestamp is the compilation time or the timestamp when the API was released.
+It&#39;s a very clever and interesting approach, although we think it is a bit complex. For example, it can be confusing to understand whether the timestamp is the compilation time or the timestamp when the API was released.
 
 Salesforce.com uses v20.0, placed somewhere in the middle of the URL.
 
-We like the use of the v. notation. However, we don't like using the .0 because it implies that the interface might be changing more frequently than it should. The logic behind an interface can change rapidly but the interface itself shouldn't change frequently.
+We like the use of the v. notation. However, we don&#39;t like using the .0 because it implies that the interface might be changing more frequently than it should. The logic behind an interface can change rapidly but the interface itself shouldn&#39;t change frequently.
 
 Facebook also uses the v. notation but makes the version an optional parameter.
 
-This is problematic because as soon as Facebook forced the API up to the next version, all the apps that didn't include the version number broke and had to be pulled back and version number added.
+This is problematic because as soon as Facebook forced the API up to the next version, all the apps that didn&#39;t include the version number broke and had to be pulled back and version number added.
 
 ## How to think about version numbers in a pragmatic way with REST?
 
 Never release an API without a version. Make the version mandatory.
 
-Specify the version with a 'v' prefix. Move it all the way to the left in the URL so that it has the highest scope (e.g. /v1/dogs).
+Specify the version with a &#39;v&#39; prefix. Move it all the way to the left in the URL so that it has the highest scope (e.g. /v1/dogs).
 
-Use a simple ordinal number. Don't use the dot notation like v1.2 because it implies a granularity of versioning that doesn't work well with APIs--it's an interface not an implementation. Stick with v1, v2, and so on.
+Use a simple ordinal number. Don&#39;t use the dot notation like v1.2 because it implies a granularity of versioning that doesn&#39;t work well with APIs--it&#39;s an interface not an implementation. Stick with v1, v2, and so on.
 
 How many versions should you maintain? Maintain at least one version back.
 
 For how long should you maintain a version? Give developers at least one cycle to react before obsoleting a version.
 
-Sometimes that's 6 months; sometimes it's 2 years. It depends on your developers' development platform, application type, and application users. For example, mobile apps take longer to rev' than Web apps.
+Sometimes that&#39;s 6 months; sometimes it&#39;s 2 years. It depends on your developers&#39; development platform, application type, and application users. For example, mobile apps take longer to rev&#39; than Web apps.
 
 Should version and format be in URLs or headers?
 
@@ -745,22 +1094,23 @@ There is a strong school of thought about putting format and version in the head
 
 Sometimes people are forced to put the version in the header because they have multiple inter-dependent APIs. That is often a symptom of a bigger problem, namely, they are usually exposing their internal mess instead of creating one, usable API facade on top.
 
-That's not to say that putting the version in the header is a symptom of a problematic API design. It's not!
+That&#39;s not to say that putting the version in the header is a symptom of a problematic API design. It&#39;s not!
 
-In fact, using headers is more correct for many reasons: it leverages existing HTTP standards, it's intellectually consistent with Fielding's vision, it solves some hard realworld problems related to inter-dependent APIs, and more.
+In fact, using headers is more correct for many reasons: it leverages existing HTTP standards, it&#39;s intellectually consistent with Fielding&#39;s vision, it solves some hard realworld problems related to inter-dependent APIs, and more.
 
-However, we think the reason most of the popular APIs do not use it is because it's less fun to hack in a browser.
+However, we think the reason most of the popular APIs do not use it is because it&#39;s less fun to hack in a browser.
 
 Simple rules we follow:
 
 If it changes the logic you write to handle the response, put it in the URL so you can see it easily.
 
-If it doesn't change the logic for each response, like OAuth information, put it in the header.
+If it doesn&#39;t change the logic for each response, like OAuth information, put it in the header.
 
 The code we would write to handle the responses would be very different.
 
-There's no question the header is more correct and it is still a very strong API design.
-</code></pre>
+There&#39;s no question the header is more correct and it is still a very strong API design.
+</pre></div>
+</td></tr></table>
                 
                   
                 
