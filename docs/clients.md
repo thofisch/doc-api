@@ -29,6 +29,7 @@
 
 ### How to Treat Errors in Clients
 
+!!! warning
     Even though they might not be documented - they may very much occur in production, so clients should be prepared for unexpected response codes, and in case of doubt handle them like they would handle the corresponding x00 code. Adding new response codes (specially error responses) should be considered a compatible API evolution.
 
 - **DO** treat `400 Bad Request` by looking into the body of the error representation for hints for the root cause of the problem.
@@ -55,7 +56,6 @@
 - **DO** make flow decisions based on the presence or absence of links.
 - **DO** store the knowledge of whether a representation contains a given link.
 - **DO** check the documentation of the link relation to learn any associated business rules regarding authentication, permanence of the URI, methods, and media types supported, etc.
-
 
 ## Content Negotiation
 

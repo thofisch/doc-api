@@ -2,11 +2,17 @@
 
 When designing a RESTful API delivered over HTTP, it is important to maintain a high degree of visibility. This will let the API benefit from existing software and infrastructure for features that you would otherwise have to build yourself.
 
-> Visibility means that one component of an architecture can monitor (and even participate in) the interaction between other components of the same architecture
+!!! info
+    Visibility means that one component of an architecture can monitor (and even participate in) the interaction between other components of the same architecture
 
 Luckily HTTP is an application-level protocol designed to keep communication between clients and servers visible.
 
-HTTP defines operations for transferring representations between clients and servers, eliminating the need for application-specific operations (e.g. *createBooking*, *changeBooking*, etc.). Using the capabilities of HTTP means that caches, proxies, firewalls, etc., can monitor and participate in the protocol.
+HTTP defines operations for transferring representations between clients and servers, eliminating the need for application-specific operations (e.g. *createBooking*, *changeBooking*, etc.).
+
+!!! tip
+    Using the capabilities of HTTP means that caches, proxies, firewalls, etc., can monitor and participate in the protocol.
+
+## Visibility
 
 For better visibility:
 
@@ -16,7 +22,8 @@ For better visibility:
 - **DO** use appropriate status codes and messages.
 - **DO NOT** change syntax and meaning, specified by HTTP, from application to application nor from resource to resource.
 
-Keep in mind that focusing solely on visibility may create too fine-grained resources and poor separation of concern between clients and servers. Trading visibility for other benefits is not necessarily bad.
+!!! warning
+    Keep in mind that focusing solely on visibility may create too fine-grained resources, and poor separation of concern between clients and servers. Trading visibility for other benefits is not necessarily bad.
 
 Consider trading visibility:
 

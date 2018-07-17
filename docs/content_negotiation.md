@@ -1,17 +1,17 @@
-## Content Negotiation (conneg)
+# Content Negotiation (conneg)
 
 There are two types of content negotiation:
 
 - *Server-driven* negotiation, uses request headers to select a variant
 - *Agent-driven* negotiation, uses a distinct URI for each variant
 
-### Server-Driven Negotiation
+## Server-Driven Negotiation
 
 - **DO** support multiple variants only when your clients need them.
 - **DO** support multiple variants only when each variant contains the same information
 - **DO NOT** use server-driven negotiation when the information content is different, use [Agent-Driven Content Negotiation](#agent-driven-content-negotiation) instead.
 
-#### Indicating Client Preferences
+### Indicating Client Preferences
 
 It is important for the client to indicate its preferences and capabilities to the server, including:
 
@@ -22,7 +22,7 @@ It is important for the client to indicate its preferences and capabilities to t
 
 Even when you know out of band this information, clearly indicating the client's preferences and capabilities can help the client in the face of change. It is better to ask for a specific representation instead of getting a default one, because the default can change.
 
-#### Content Type Negotiation
+### Content Type Negotiation
 
 *content negotiation (include or exclude and force to e.g. json)?*
 
@@ -34,7 +34,7 @@ Even when you know out of band this information, clearly indicating the client's
 - **CONSIDER** including a `Vary` (see [Vary](#the-vary-header)) response header.
 - **CONSIDER** using [*agent-driven negotiation*](#agent-driven-negotiation), if the server starts out ignoring `Accept`, e.g. by returning `Content-Type: application/xml` for `Accept: application/json` requests, adding content negotiation (here by adding `Content-Type: application/json`) will likely break compatibility for working clients.
 
-#### Language Negotiation
+### Language Negotiation
 
 - **DO** add an `Accept-Language` header for the preferred language of the representation.
 - **DO** return a representation with all human-readable text in a default language, if the request has no `Accept-Language` header.
@@ -44,7 +44,7 @@ Even when you know out of band this information, clearly indicating the client's
 
 This approach is best suited when representations in different languages differ only in terms of the language used for any human-readable text. If the differences between representations are more significant, use other means of localization such as the client's IP address or region/language-specific URIs.
 
-#### Character Encoding Negotiation
+### Character Encoding Negotiation
 
 - **DO** add an `Accept-Charset` header with the preferred character set, if the client can process characters of a specific character set only, if not, avoid adding this header
 - **DO** encode the textual representation of the response using the encoding the client ask for via the `Accept-Charset` header. Encoding the response using that encoding promotes interoperability.
@@ -55,7 +55,7 @@ This approach is best suited when representations in different languages differ 
 - **CONSIDER** including a `Vary` (see [The Vary Header](#the-vary-header)) response header.
 - **AVOID** using `text/xml` since its default encoidng is `us-ascii`.
 
-#### Supporting Compression
+### Supporting Compression
 
 To support compression or *content encoding*:
 
@@ -67,20 +67,20 @@ To support compression or *content encoding*:
 - **CONSIDER** brotli (`br`).
 - **DO NOT** compress representations, if the request has no `Accept-Encoding` header.
 
-#### The Vary Header
+### The `Vary` Header
 
 When a server uses content negotiation to select a representation, the same URI can yield different representations based on `Accept-*` headers. The `Vary` header tells clients which request headers the server used when selecting a representation. Caches may use the `Vary` header as part of cache keys to maintain variants of a resource.
 
 - **CONSIDER** including a `Vary` header whenever multiple representations are available for a resource. The value of this header is a comma-separated list of *request headers* the server uses when choosing representation.
 - **CONSIDER** including a `Vary` header with a value of `*`, if the server uses information other then the headers in the request, such as a client's IP address, time of day, user personalization, etc.
 
-#### Negotiation Failures
+### Negotiation Failures
 
 - **CONSIDER** that servers are free to serve any available representation for a given resource. However, clients may not be able to handle arbitrary media types.
 - **DO** return `406 Not Acceptable` with either the body of the representation containing the list of representations, or a `Link` in the header, when the server cannot serve a representation that meets the client's preferences and if the client explicitly included a `*;q=0.0`.
 - **DO** serve the representation without applying any content encoding, if the server is unable to support the requested `Accept-Encoding` value.
 
-### Agent-Driven Content Negotiation
+## Agent-Driven Content Negotiation
 
 Although server-driven content negotiation is built into HTTP it does not include elements such as currency units, distance units, date formats, and other regional flavors for any human-readable text in representations.
 

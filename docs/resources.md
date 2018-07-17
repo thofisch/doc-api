@@ -2,13 +2,16 @@
 
 A *resource* is an abstract entity that is identified by a URI, and can be data, processing logic, files, or basically anything else that can be named.
 
-### Identifying and Naming Resources
+## Identifying and Naming Resources
 
 Most often when identifying resources, the use of nouns instead of verbs will be obvious, however, sometimes it is necessary to veer from this naming convention, when exposing certain services through the public API.
 
 There is no single approach that will work for all the situations, so care should be taking when identifying resources and finding the right resource granularity, in order for API consumers to get the desired functionality, the API to behave correctly, and for maintainability.
 
-> Taking business needs, maintainability, extensibility, and perhaps some sort of cost-benefit analysis or ROI, into consideration may be pertinent.
+!!! note
+    Taking business needs, maintainability, extensibility, and perhaps some sort of cost-benefit analysis or ROI, into consideration may be pertinent.
+
+In order to identify and name resources:
 
 - **DO** analyze use cases to find domain nouns that can be operated using *create*, *read*, *update*, or *delete* operations. Designate each noun as a resource. Use `POST`, `GET`, `PUT`, or `DELETE` operations respectively, on each resource.
 - **DO** design resources to suit client's usage patterns and not design them based on what exists in a database or the object model. (Think from the client's perspective)
@@ -25,7 +28,8 @@ There is no single approach that will work for all the situations, so care shoul
 
 Resources almost always have relationships to other resources, and *collection resources* can give the ability to refer to a group of a resources as one, to perform queries on the collection, or use the collection as a factory to create new resources.
 
-> A collection resource does not necessarily imply hierarchical containment. A resource may be part of more than one collection resource.
+!!! tip
+    A collection resource does not necessarily imply hierarchical containment. A resource may be part of more than one collection resource.
 
 A collection resources should provide sufficient filter mechanisms, as well as pagination. So when organizing resources into collections:
 
@@ -64,5 +68,5 @@ A *controller* is a resource that can atomically make changes to resources. It c
 - **DO**, if the output of the operation is the creation of a new resource, return `201 Created` with a `Location` header referring to the URI of the newly created resource.
 - **DO**, if the outcome is the modification of one or more existing resource, return `303 See Other` with a `Location` to a URI that clients can use to fetch a representation of those modifications.
 - **DO**, if the server cannot provide a single URI to all the modified resources, return `200 OK` with a representation in the body that clients can use to learn about the outcome.
-- **DO** handle errors as described in [Errors](#errors)
+- **DO** handle errors as described in [Errors](representations/#error-representations)
 - **AVOID** tunneling at all costs. Instead, use a distinct resource (such as a controller) for each operation. Tunneling occurs whenever the client is using the same method on a single URI for different actions. Tunneling reduces protocol-level visibility, because the visible parts of requests such as the request URI, the HTTP method used, headers, and media types do not unambiguously describe the operation.

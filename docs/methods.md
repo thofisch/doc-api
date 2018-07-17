@@ -1,10 +1,13 @@
-# Methods
-
+## Methods
+    
 Before discussing the individual HTTP methods we will offer some general advise:
 
 - **DO** use HTTP methods correctly.
 - **DO** stay consistent with the HTTP verb definitions.
-- **DO** use **CRUD** for basic operations, as most developers will be familiar with this way of working with an API. This means using `POST` for **C**reating, `GET` for **R**eading, `PUT` for **U**pdating, and `DELETE` for **D**eleting.
+- **DO** use **CRUD** for basic operations, as most developers will be familiar with this way of working with an API.
+
+!!! tip "CRUD"
+    `POST` for **C**reating, `GET` for **R**eading, `PUT` for **U**pdating, and `DELETE` for **D**eleting.
 
 HTTP supports the following methods:
 
@@ -18,10 +21,13 @@ HTTP supports the following methods:
 |`PATCH`  |No  |No        |
 |`POST`   |No  |No        |
 
-Safety and idempotency are guarantees a server must provide to clients. An operation can be:
+_Safety and idempotency are guarantees a server must provide to clients._
 
-- *Safe methods* (or read-only operations) are expected not to cause side-effects, however, it does not mean the server must return the same response every time.
-- *Idempotent methods* must guarantee that every request has the same effect, however, this does not necessarily mean returning the same status code. This is highly important in case of failures.
+!!! tip "Safe methods (or read-only operations)"
+    are expected not to cause side-effects, however, it does not mean the server must return the same response every time.
+
+!!! tip "Idempotent methods"
+    must guarantee that every request has the same effect, however, this does not necessarily mean returning the same status code. This is highly important in case of failures.
 
 ### GET
 
@@ -68,11 +74,11 @@ HEAD requests are used to retrieve header information of resources, and has the 
 
 It is important to understand the difference between `PUT` and `PATCH`.
 
-`PUT` is designed to update/replace the entire resource. This means that omitted fields will be removed, which is rarely the desired effect.
+* `PUT` is designed to update/replace the entire resource. This means that omitted fields will be removed, which is rarely the desired effect.
+* `PATCH` is designed to support partial updates. This means the request should supply a *set of changes* (or instructions) for updating a resource and these should be applied atomically, leaving any fields not passed along intact.
 
-`PATCH` is designed to support partial updates. This means the request should supply a *set of changes* (or instructions) for updating a resource and these should be applied atomically, leaving any fields not passed along intact.
-
-> Be aware, even though `PATCH` has gain a lot of use, `PATCH` is only a proposed standard, and details around the semantics are not widely understood. It's not an alternative to `POST` or `PUT` where you supply a flat list of values to change. Please see [RFC-5789](https://tools.ietf.org/html/rfc5789) for more information.
+!!! warning
+    Be aware, even though `PATCH` has gain a lot of use, `PATCH` is only a proposed standard, and details around the semantics are not widely understood. It's not an alternative to `POST` or `PUT` where you supply a flat list of values to change. Please see [RFC-5789](https://tools.ietf.org/html/rfc5789) for more information.
 
 - **DO** use `PATCH` for partial updates of a single resources, i.e. where only a specific subset of fields should be replaced.
 - **DO** document the semantic of the `PATCH` changeset, as it is not defined in the HTTP standard.
@@ -104,7 +110,7 @@ It is important to understand the difference between `PUT` and `PATCH`.
 - **AVOID** using `POST`for tunneling, like SOAP.
 - **DO NOT** use nonstandard custom HTTP methods. Instead, design a controller resource that can abstract such operations, and `POST`.
 
-### Creating Resources
+## Creating Resources
 
 While it is valid to use either `PUT` or `POST` to create new resources, the general consensus is that creating a new resource without knowing the final URI is a `POST` operation (each call will yield a new resource). If the URI (or part of it) is known, use `PUT`, because successive calls will not create a new resource, as `PUT` is idempotent.
 
@@ -113,7 +119,7 @@ While it is valid to use either `PUT` or `POST` to create new resources, the gen
 - **CONSIDER** include a `Content-Location` header containing the URI of the newly created resource, if the response body includes a complete representation of the newly created resource.
 - **CONSIDER** including the `Last-Modified` and `ETag` headers of the newly created resource for optimistic concurrency.
 
-### Large and Stored Queries
+## Large and Stored Queries
 
 Sometimes it may be necessary to support queries with large inputs, and the query string may no longer be an option. For those cases:
 
@@ -126,7 +132,7 @@ Sometimes it may be necessary to support queries with large inputs, and the quer
   - **DO** support pagination via `GET` instead of `POST`.
   - **CONSIDER** the number of different queries and evaluate cache hit ratio, and whether named queries are a better option.
 
-### Asynchronous Tasks
+## Asynchronous Tasks
 
 To enable asynchronous processing of request, follow these guidelines (these step are also valid for `DELETE`):
 
@@ -136,45 +142,43 @@ To enable asynchronous processing of request, follow these guidelines (these ste
   - **DO** return `303 See Other` and a `Location` header containing a URI of a resource that shows the outcome of the task, once the task has *successfully completed*.
   - **DO** return `200 Ok` with a representation of the task resource informing that the resource creation has *failed*. Clients will need to read the body of the representation to find the reason for failure.
 
-Example of *pending*:
+??? example "Example of *pending*"
+    ```http
+    HTTP/1.1 202 Accepted
+    Content-Type: application/json
+    Content-Location: http://www.example.org/images/task/1
 
-```http
-HTTP/1.1 202 Accepted
-Content-Type: application/json
-Content-Location: http://www.example.org/images/task/1
-
-{
-    "state": "pending",
-    "message": "Your request is being processed shortly.",
-    "pingAfter": "2009-09-13T01:59:27Z",
-    "link": {
-        "href": "http://www.example.org/images/task/1",
-        "rel": "self"
+    {
+        "state": "pending",
+        "message": "Your request is being processed shortly.",
+        "pingAfter": "2009-09-13T01:59:27Z",
+        "link": {
+            "href": "http://www.example.org/images/task/1",
+            "rel": "self"
+        }
     }
-}
+    ```
 
-```
+??? example "Example of *done*"
+    ```http
+    HTTP/1.1 303 See Other
+    Content-Type: application/json
+    Location: http://www.example.org/images/1
+    Content-Location: http://www.example.org/images/task/1
 
-Example of *done*:
-
-```http
-HTTP/1.1 303 See Other
-Content-Type: application/json
-Location: http://www.example.org/images/1
-Content-Location: http://www.example.org/images/task/1
-
-{
-    "state": "done",
-    "message": "Your request has been processed.",
-    "link": {
-        "href": "http://www.example.org/images/task/1",
-        "rel": "self"
+    {
+        "state": "done",
+        "message": "Your request has been processed.",
+        "link": {
+            "href": "http://www.example.org/images/task/1",
+            "rel": "self"
+        }
     }
-}
-```
+    ```
 
-> Note that the `303 See Other` does not mean that the resource at the request URI has moved to a new location. It merely states that the result exists at the URI indicated in the `Location` header.
+!!! note 
+    The `303 See Other` does not mean that the resource at the request URI has moved to a new location. It merely states that the result exists at the URI indicated in the `Location` header.
 
-### **_Batch Operations_**
+## Batch Operations (TBD)
 
 **_TBD_**

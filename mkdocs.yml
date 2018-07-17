@@ -11,17 +11,18 @@ site_name: API Design Guidelines
 theme:
   name: material
   palette:
-    primary: 'blue grey'
-    accent: 'pink'
-  logo:
-    icon: 'cloud'
-  feature:
-    tabs: true
+    primary: indigo
+    accent: indigo
+  logo: #imgs/logo.png
+    icon: code
+#   feature:
+#     tabs: true
+
 markdown_extensions:
 - admonition
 - codehilite:
     guess_lang: false
-    linenums: true
+    linenums: false
 - footnotes
 - toc:
     permalink: true
@@ -33,26 +34,26 @@ markdown_extensions:
 - pymdownx.superfences
 - pymdownx.tasklist:
     custom_checkbox: true
+
 pages:
 - Introduction: index.md
-- -APIs: apis.md
-- -REST: rest.md
-- -HTTP: http.md
-- -Resource Identifiers: resource_identifiers.md
-- -Resources: resources.md
-- -Methods: methods.md
-- ---Representations: representations.md
-- ---Hypermedia: hypermedia.md
-- -Content Negotiation: content_negotiation.md
-- ---Caching: caching.md
-- ---Security: security.md
-- ---Versioning and Extensibility: versioning_and_extensibility.md
-- ---Documentation and Discovery: documentation_and_discovery.md
-- ---Specifications: specifications.md
-- ---Mocking: mocking.md
-- ---Clients: clients.md
-- ---Other topics: other_topics.md
-- ---Misc: misc.md
-- -References: references.md
-- Exampls: examples.md
+- APIs: apis.md
+- REST: rest.md
+- HTTP: http.md
+- Resource Identifiers: resource_identifiers.md
+- Resources: resources.md
+- Methods: methods.md
+- -Representations: representations.md
+- -Hypermedia: hypermedia.md
+- Content Negotiation: content_negotiation.md
+- -Caching: caching.md
+- -Security: security.md
+- -Versioning and Extensibility: versioning_and_extensibility.md
+- -Documentation and Discovery: documentation_and_discovery.md
+- -Specifications: specifications.md
+- -Mocking: mocking.md
+- Clients: clients.md
+- -Other topics: other_topics.md
+- References: references.md
+- Examples: examples.md
 

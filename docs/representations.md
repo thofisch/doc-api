@@ -1,14 +1,14 @@
-## Representations
+# Representations
 
 A *representation* (request/response) is concrete and real. Here we will offer guidelines as to what makes a good response design. To ensure scalability and longevity of the API, along with providing helpful responses that developers can understand and trust, we will cover what HTTP headers are appropriate in a response, which HTTP status codes to return, as well as how to include descriptive error representations on failures.
 
-### HTTP Headers
+## HTTP Headers
 
 Headers ensure visibility, discoverability, routing by proxies, caching, optimistic concurrency, and correct operation of HTTP as an application protocol.
 
 Use the following headers to annotate representations that contains a message body.
 
-#### Content-Type
+### Content-Type
 
 Even though it is perfectly acceptable to use only a single format, in order to keep the API flexible and extendable, it is also important to build for the future. Until recently XML was the format of choice, but then along came JSON.
 
@@ -20,27 +20,28 @@ Even though it is perfectly acceptable to use only a single format, in order to 
 
 > Note that Text and XML media types let you specify the character encoding. The JSON media type `application/json` does not specify a `charset` parameter, but uses `UTF-8` as the default encoding.
 
-#### Content-Length
+### Content-Length
 
 - **DO** use `Content-Length`, to specify the size in bytes of the body. Or specify `Transfer-Encoding: chunked`. Some proxies reject `POST` and `PUT` requests that contain neither of these headers.
 
-#### Content-Language
+### Content-Language
 
 - **DO** use `Content-Language`, two-letter RFC 5646 language tag, optionally followed by a hyphen (-) and any two-letter country code.
 
-#### Content-Encoding
+### Content-Encoding
 
 - **DO** use `Content-Encoding`. Clients can indicate their preference for `Content-Encoding` using the `Accept-Encoding` header, however, there is no standard way for the client to learn whether a server can process representations compressed in a given encoding.
 
-#### Other Common Headers
+### Other Common Headers
 
 - **CONSIDER** using `ETag` and/or `Last-Modified` for caching and/or concurrency, the latter applies for responses only.
 - **CONSIDER** using `Content-MD5`, when sending or receiving large representations over potentially unreliable networks to verify the integrity of the message.
 - **DO NOT** use `Content-MD5` as any measure of security.
 
-### Custom HTTP Headers
+## Custom HTTP Headers
 
-Generally custom HTTP headers should be avoided, as they may impede interoperability. We discourage the use of hop-by-hop custom HTTP headers.
+!!! warning
+    Generally custom HTTP headers should be avoided, as they may impede interoperability. We discourage the use of hop-by-hop custom HTTP headers.
 
 However, depending on what clients and servers use custom headers for, they can be useful in cases where context information needs to be passed through multiple services in an end-to-end fashion. 
 
@@ -53,26 +54,23 @@ However, depending on what clients and servers use custom headers for, they can 
 
 ### End-To-End HTTP Headers
 
-The following may be candidates for end-to-end HTTP headers:
-
-- Correlation ID of the request, which is written into the logs and passed to upstream services. 
-- Generic user id that owns the passed (OAuth2) access token. May save additional token validation round trips
-- Sales channel
-- Device type, OS, and version
-- App version, etc.
-
-<!-- -->
-
 - **DO** use the specified end-to-end HTTP headers.
 - **DO** propagate the end-to-end HTTP headers to upstream servers. Header names and values must remain intact.
 
-### Format and a Media Type
+!!! hint "The following may be candidates for end-to-end HTTP headers"
+    1. Correlation ID of the request, which is written into the logs and passed to upstream services. 
+    1. Generic user id that owns the passed (OAuth2) access token. May save additional token validation round trips
+    1. Sales channel
+    1. Device type, OS, and version
+    1. App version, etc.
+
+## Format and a Media Type
 
 HTTP's message format is designed to allow different media types and formats for requests and responses.
 
 When it comes to format and media type selection, the rule of thumb is to let the use cases and the types of clients dictate the choice. For this reason, it is important not to pick up a development framework that rigidly enforces one or two formats for all resource with no flexibility to use other formats.
 
-- **DO** determine whether there is a standard format and media type that matches your use cases. Check the Internet Assigned Number Authority (IANA, http://www.iana.org/assignments/media-types/) media type registry.
+- **DO** determine whether there is a standard format and media type that matches your use cases. Check IANA [^1].
 - **DO** use extensible formats such as XML, Atom Syndication Format, or JSON, if there is no standard media type and format.
 - **CONSIDER** adding a `Content-Disposition: attachment; filename=<status.xls>` to give a hint of the filename, when using image formats like `image/png` or rich document formats like `application/vnd.ms-excel` or `application/pdf` to provide alternative representations of data.
 
@@ -83,9 +81,10 @@ If you choose to create new media types of your own, consider:
 - **DO** register your media type with IANA as per RFC 4288, if the media type is for public use,
 - **AVOID** introducing new application-specific media types unless they are expected to be broadly used, as this may impede interoperability.
 
-> Note that although custom media types improve protocol-level visibility, existing protocol-level tools for monitoring, filtering, or routing HTTP traffic pay little or no attention to media types. Hence, using custom media types only for the sake of protocol-level visibility is not necessary.
+!!! warning
+    Although custom media types improve protocol-level visibility, existing protocol-level tools for monitoring, filtering, or routing HTTP traffic pay little or no attention to media types. Hence, using custom media types only for the sake of protocol-level visibility is not necessary.
 
-### Use Portable Data Formats in Representations
+## Use Portable Data Formats in Representations
 
 - **DO** use decimal, float and double data types defined in the W3C XML Schema for formatting numbers including currency.
 - **DO** use ISO 3166 (ISO 3166-1-alpha2) codes for countries and dependent territories.
@@ -107,7 +106,7 @@ Also, consider defining the format for numbers and integers. The precision could
 | number  | double  | IEEE 754-2008/ISO 60559:2011 binary128 decimal number |
 | number  | decimal | arbitrarily precise signed decimal number             |
 
-### JSON Representations
+## JSON Representations
 
 JSON has become the de facto format within RESTful APIs, by providing a compact, human-readable format for accessing data, which can help minimalize the bandwidth required.
 
@@ -133,43 +132,42 @@ One of the advantages to REST is that it is not limited to a single format, and 
 - **DO NOT** use `null` for boolean property values must not be null. A boolean is essentially a closed enumeration of two values, true and false. If the content has a meaningful null value, strongly prefer to replace the boolean with enumeration of named values or statuses.
 - **DO NOT** return `null` for empty array values should not be null. Empty array values can unambiguously be represented as the the empty list, [].
 
-Example:
-
-```json
-{
-    "name": "John",
-    "id": "urn:example:user:1234",
-    "link": {
-        "rel": "self",
-        "href": "http://www.example.org/person/john"
-    },
-    "address": {
-        "id": "urn:example:address:4567",
+??? example
+    ```json
+    {
+        "name": "John",
+        "id": "urn:example:user:1234",
         "link": {
             "rel": "self",
-            "href": "http://www.example.org/person/john/address"
+            "href": "http://www.example.org/person/john"
+        },
+        "address": {
+            "id": "urn:example:address:4567",
+            "link": {
+                "rel": "self",
+                "href": "http://www.example.org/person/john/address"
+            }
+        },
+        "content": {
+            "text": [{
+            "value": "..."
+            }, {
+                "lang": "en-GB",
+                "value": "..."
+            }, {
+                "lang": "en-US",
+                "value": "..."
+            }]
         }
-    },
-    "content": {
-        "text": [{
-          "value": "..."
-        }, {
-            "lang": "en-GB",
-            "value": "..."
-        }, {
-            "lang": "en-US",
-            "value": "..."
-        }]
     }
-}
-```
+    ```
 
-#### Representations of Collections
+### Representations of Collections
 
 - **DO** return an empty collection, if the query does not match any resources.
 - **DO** include pagination links.
 
-#### Pagination
+### Pagination
 
 - **DO** add a self link to the collection resource
 - **DO** add link to the next page, if the collection is paginated and has a next page
@@ -177,8 +175,8 @@ Example:
 - **DO** add an indicator of the size of the collection
 - **DO** keep collections homogeneous by include only the homogeneous aspects of its member resources.
 
-> **TIP**
-> Although the size of the collection is useful for building user interfaces, avoid computing the exact size of the collection. It may be expensive to compute, volatile, or even confidential. Providing a hint is usually good enough.
+!!! tip
+    Although the size of the collection is useful for building user interfaces, avoid computing the exact size of the collection. It may be expensive to compute, volatile, or even confidential. Providing a hint is usually good enough.
 
 <!-- TODO -->
 
@@ -384,26 +382,26 @@ Example:
     "last": "https://..."
     }
 
-### _**XML Representations**_
+## _**XML Representations**_
 
 *TBD*
 
 *Suggested topics:*<br/>
 *Atom resources, AtomPub Service, category documents, AtomPub for feed and entry resources, media resources*
 
-### HTML Representations
+## HTML Representations
 
 - **DO** provide HTML representations, for resources that are expected to be consumed by end users.
 - **CONSIDER**  using microformats or RDFx to annotate data within the markup.
 - **AVOID** avoid designing HTML representations for machine clients.
 
-### Binary Data in Representations
+## Binary Data in Representations
 
 - **DO** use multipart media types such as `multipart/mixed`, `multipart/related`, or `multipart/alternative`.
 - **CONSIDER** providing a link to fetch the binary data as a separate resource as an alternative. Creating and parsing multipart messages in some programming languages may be cumbersome and complex.
 - **AVOID** encoding binary data within textual formats using Base64 encoding.
 
-### Error Representations
+##   Error Representations
 
 Communicate errors through standard HTTP status codes along with details supplied in the response body. 
 
@@ -423,53 +421,53 @@ Errors are a key element for providing context and visibility, and status codes 
 - **AVOID** using generic or non-descriptive error messages as they are often one of the biggest hinderances to API integration, as developers may struggle for hours trying to figure out why the call is failing, even misinterpreting the intent of the error message altogether.
 - **DO NOT** return `2xx` and include a message body that describes an error condition. Doing so prevents HTTP-aware software from detecting errors.
 
-Error example:
-
-```json
-{
-    "error" : {
-    "code" : "e3526",
-    "message" : "Missing UserID",
-    "description" : "A UserID is required to edit a user.",
-    "link" : "http://docs.mysite.com/errors/e3526/"
-    }
-}
-```
-
-Validation error example:
-
-```json
-{
-    "code" : 1024,
-    "message" : "Validation Failed",
-    "errors" : [
+??? example "Error example"
+    ```json
     {
-        "code" : 5432,
-        "field" : "first_name",
-        "message" : "First name cannot have fancy characters"
-    },
-    {
-        "code" : 5622,
-        "field" : "password",
-        "message" : "Password cannot be blank"
+        "error" : {
+        "code" : "e3526",
+        "message" : "Missing UserID",
+        "description" : "A UserID is required to edit a user.",
+        "link" : "http://docs.mysite.com/errors/e3526/"
+        }
     }
-    ]
-}
-```
+    ```
 
-### HTTP Status Codes
+??? example "Validation error example"
+    ```json
+    {
+        "code" : 1024,
+        "message" : "Validation Failed",
+        "errors" : [
+        {
+            "code" : 5432,
+            "field" : "first_name",
+            "message" : "First name cannot have fancy characters"
+        },
+        {
+            "code" : 5622,
+            "field" : "password",
+            "message" : "Password cannot be blank"
+        }
+        ]
+    }
+    ```
 
-**Always return meaningful HTTP Status Codes!**  By using meaningful status codes, developers can quickly see what is happening with the application and do a "quick check" for errors without having to rely on the body's response.
+## HTTP Status Codes
+
+!!! tip "**Always return meaningful HTTP Status Codes!**"
+
+By using meaningful status codes, developers can quickly see what is happening with the application and do a "quick check" for errors without having to rely on the body's response.
 
 - **DO** return `2xx` when the request was received, understood, and accepted.
 - **DO** return `3xx` when the client needs to take further action. Include the necessary information in order for the client to complete the request.
-- **DO** return a representation with a `4xx` status code, for errors due to client inputs,
+- **DO** return a representation with a `4xx` status code, for errors due to client inputs.
 - **DO** return a representation with a `5xx` status code, for errors due to server implementation or its current state.
 - **DO** use the most specific HTTP status code for your concrete resource request processing status or error situation.
 - **DO** provide good documentation in the API definition when using HTTP status codes that are less commonly used and not listed below.
 - **DO NOT** invent new HTTP status codes; only use standardized HTTP status codes and consistent with its intended semantics.
  
-#### 2xx Great Success
+### `2xx` Success
 
 - **DO** return `200 OK` when the request completed without issues.
 - **DO** return `201 Created` when a resource was successfully created. Always set the `Location` header with the URI of the newly created resource. Return either an empty response or the created resource.
@@ -477,13 +475,13 @@ Validation error example:
 - **DO** return `204 No content` when there is no response body.
 - **DO** return `207 Multi-Status` when the response body contains multiple status informations for different parts of a batch/bulk request.
 
-#### 3xx Client Action May Be Required
+### `3xx` Client Action May Be Required
 
 - **DO** return `301 Moved Permanently` when this and all future requests should be directed to the URI specified in the `Location` header.
 - **DO** return `303 See Other` when the response to the request can be found under the URI specified in the `Location` header using a GET method.
 - **DO** return `304 Not Modified` when the resource has not been modified since the date or version passed via request headers `If-Modified-Since` or `If-None-Match`.
 
-#### 4xx Client Errors
+### `4xx` Client Errors
 
 - **DO** return `400 Bad Request` when your server cannot decipher client requests because of syntactical errors.
 - **DO** return `401 Unauthorized` when the client is not authorized to access the resource, but may be able to gain access after authentication. If your server will not let the client access the resource even after authentication return `403 Forbidden` instead. When returning this error code, include a WWW-Authenticate header field with the authentication method to use.
@@ -501,13 +499,13 @@ Validation error example:
 - **DO** return `428 Precondition Required` when the server requires the request to be conditional (e.g. to make sure that the "lost update problem" is avoided).
 - **DO** return `429 Too Many Requests` when the client does not consider rate limiting and sent too many requests. Include headers to indicate rate limits.
 
-#### 5xx Server Errors
+### `5xx` Server Errors
 
 - **DO** return `500 Internal Server Error` when your code on the server side failed due to come implementation bug.
 - **DO** return `501 Not Implemented` to indicate that a future feature may become available.
 - **DO** return `503 Service Unavailable` when the server cannot fulfill the request either for some specific interval or undetermined amount of time. If possible, include a `Retry-After` response header with either a date or a number of seconds as a hint.
 
-### Entity Identifiers in Representations
+## Entity Identifiers in Representations
 
 When an API is part of a larger API portfolio or system, information may cross several system boundaries, and entity identifiers can be used to uniformly identify, cross-reference or transform data. Especially when a lot of different technologies are envolved (RPC, SOAP, asynchronous messaging, stored procedures, etc.) and/or third-party applications, the only common denominator may very well be entity identifiers.
 
@@ -515,3 +513,5 @@ When an API is part of a larger API portfolio or system, information may cross s
 - **CONSIDER** using strings rather than number types for identifiers, as this gives more flexibility to evolve the identifier naming scheme. Accordingly, if used as identifiers, UUIDs should not be qualified using a format property.
 - **CONSIDER** using UUIDs as entity identifiers for scaling in high frequency and near real time use cases, as they can be generated without collisions in a distributed, non-coordinated way and without additional server roundtrips.
 - **CONSIDER** limiting the use of UUIDs as entity identifiers when it is not strictly necessary, if it possible to come up with a better naming scheme, if the id volume is low, or if the ids have widespread steering functionality.
+
+[^1]: The Internet Assigned Number Authority ([IANA](http://www.iana.org/assignments/media-types/)) media type registry.

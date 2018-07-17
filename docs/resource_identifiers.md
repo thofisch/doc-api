@@ -1,19 +1,22 @@
-## Resource Identifiers (URIs)
+## Unique Resource Identifiers (URIs)
 
-An important aspect of API design is to think about how to design unique resource identifiers, and as such, URIs should be treated as opaque resource identifiers.
+An important aspect of API design is to think about how to design unique resource identifiers, and as such, URIs should be treated as *opaque*[^1] resource identifiers.
 
-This means that clients should not be concerned with the design of URIs, nor should clients try to pick apart URIs in order to gather information from them. Instead URIs should be discovered through links (and the submission of forms).
-
-> For instance, clients must not use the fact that a URI ends with `.xml` to infer that it resolves to an XML representation, instead it must rely on the `Content-Type` header of the response. 
+!!! tip
+    Clients should not be concerned with the design of URIs, nor should clients try to pick apart URIs in order to gather information from them. Instead URIs should be discovered through links (and the submission of forms).
+    
+    For instance, clients must not use the fact that a URI ends with `.xml` to infer that it resolves to an XML representation, instead it must rely on the `Content-Type` header of the response. 
 
 The opacity of URIs helps reduce coupling between servers and clients. This has nothing to do with readability or hackability, both of which may be extremely important aspects for developers consuming the API, where:
 
 - *readable URIs* help developers understand something about the resource.
 - *hackable URIs* are manipulated by altering/removing portions of the path or query, and can help developers locate other resources.
 
-### Designing URIs
+## Designing URIs
 
-When done successfully the result, of a thoughtful URI design, can be the most important design affordance (a design property that communicates how something should be used without requiring documentation) of your API. So when designing URIs:
+When done successfully the result, of a thoughtful URI design, can be the most important design affordance (a design property that communicates how something should be used without requiring documentation) of your API.
+
+So when designing URIs:
 
 - **DO** design URIs to last a long time - [Cool URIs don't change](<http://www.w3.org/Provider/Style/URI>).
 - **DO** design URIs based on stable concepts, identifiers, and information. URIs cannot be permanent if the concepts or identifiers used cannot be permanent for business, technical, or security reasons. 
@@ -37,7 +40,7 @@ When done successfully the result, of a thoughtful URI design, can be the most i
 - **DO NOT** use an URI as a generic gateway, by tunneling repeated state changes over `POST` using the same URI.
 - **DO NOT** use custom headers to overload URIs.
 
-### URIs for Queries
+## URIs for Queries
 
 Queries usually involve filtering, sorting and projections. When providing query support for these and other actions:
 
@@ -55,4 +58,5 @@ Queries usually involve filtering, sorting and projections. When providing query
 - **CONSIDER** using `limit` and `offset` when resource collections are backed by traditional relation databases, as these ties into the general implementation on the data store. Opt for `cursor` and a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database.
 - **AVOID** ad hoc queries that use general-purpose query languages such as *SQL* or *XPath*.
 - **AVOID** `Range` requests for implementing queries.
-- 
+
+[^1]: [Opaque URIs != Unreadable URIs](http://www.jenitennison.com/2009/07/25/opaque-uris-unreadable-uris.html)

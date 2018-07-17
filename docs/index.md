@@ -32,4 +32,8 @@ Each section will usually be comprised of one or more lists of recommendations:
 - **AVOID** to signify that you should avoid doing this.
 - **DO NOT** to signify that you should not do this.
 
+!!! tip
+    these sections holds tips
+
+
 __*Should we consider using the requirement level keywords "MUST", "SHOULD", etc., from RFC 2119 instead?*__

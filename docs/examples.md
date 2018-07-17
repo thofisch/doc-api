@@ -30,7 +30,7 @@ import boo.baz
 import foo.bar.baz
 ```
 
-``` linenums="1"
+```java 
 import foo.bar
 ```
 
