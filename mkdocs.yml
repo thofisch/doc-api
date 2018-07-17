@@ -1,5 +1,38 @@
+# Project information
 site_name: API Design Guidelines
-theme: material
+#site_description: 'A Material Design theme for MkDocs'
+#site_author: 'Martin Donath'
+#site_url: 'https://squidfunk.github.io/mkdocs-material/'
+
+# Repository
+#repo_name: 'squidfunk/mkdocs-material'
+#repo_url: 'https://github.com/squidfunk/mkdocs-material'
+
+theme:
+  name: material
+  palette:
+    primary: 'blue grey'
+    accent: 'pink'
+  logo:
+    icon: 'cloud'
+  feature:
+    tabs: true
+markdown_extensions:
+- admonition
+- codehilite:
+    guess_lang: false
+    linenums: true
+- footnotes
+- toc:
+    permalink: true
+- pymdownx.details
+- pymdownx.inlinehilite
+- pymdownx.magiclink
+- pymdownx.mark
+- pymdownx.smartsymbols
+- pymdownx.superfences
+- pymdownx.tasklist:
+    custom_checkbox: true
 pages:
 - Introduction: index.md
 - -APIs: apis.md
@@ -21,3 +54,5 @@ pages:
 - ---Other topics: other_topics.md
 - ---Misc: misc.md
 - -References: references.md
+- Exampls: examples.md
+
