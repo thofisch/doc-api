@@ -15,11 +15,13 @@ The motivation behind the *API Guidelines* is to define standards or "best pract
 
 These guidelines are a work in progress, and is maintained by the **API Enablement Team** during their initial work. Later teams are responsible for adhering to these guidelines during API design and development, and to continue to evolve these guidelines.
 
-__*What should we do when the guideline changes? Do existing APIs have to be changed as well?*__
+{>>What should we do when the guideline changes? Do existing APIs have to be changed as well?<<}
 
 ## Conventions Used in These Guidelines
 
-In these guidelines when referring to an API, we implicitly mean a web API delivered over HTTP. The terms: API, web API, and public API may be used interchangeably throughout these guidelines.
+In these guidelines when referring to an API, we implicitly mean a web API delivered over HTTP.
+
+The terms: API, web API, and public API may be used interchangeably throughout these guidelines.
 
 The following typographical conventions are used in these guidelines:
 
@@ -32,8 +34,19 @@ Each section will usually be comprised of one or more lists of recommendations:
 - **AVOID** to signify that you should avoid doing this.
 - **DO NOT** to signify that you should not do this.
 
+{>>Should we consider using the requirement level keywords "MUST", "SHOULD", etc., from RFC 2119 instead?<<}
+
+### Admonitions
+
+!!! note
+    these sections holds additional information
+
 !!! tip
     these sections holds tips
 
+!!! warning
+    these section holds cautions
 
-__*Should we consider using the requirement level keywords "MUST", "SHOULD", etc., from RFC 2119 instead?*__
+!!! example
+    these sections hold snippets of code
+

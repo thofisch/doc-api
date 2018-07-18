@@ -26,6 +26,8 @@ markdown_extensions:
 - footnotes
 - toc:
     permalink: true
+- pymdownx.caret
+- pymdownx.critic
 - pymdownx.details
 - pymdownx.inlinehilite
 - pymdownx.magiclink
@@ -34,6 +36,9 @@ markdown_extensions:
 - pymdownx.superfences
 - pymdownx.tasklist:
     custom_checkbox: true
+
+extra_css:
+  - 'stylesheets/critic.css'
 
 pages:
 - Introduction: index.md

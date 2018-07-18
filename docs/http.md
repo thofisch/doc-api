@@ -1,9 +1,9 @@
-## HTTP as the Uniform Interface
+# HTTP
 
 When designing a RESTful API delivered over HTTP, it is important to maintain a high degree of visibility. This will let the API benefit from existing software and infrastructure for features that you would otherwise have to build yourself.
 
-!!! info
-    Visibility means that one component of an architecture can monitor (and even participate in) the interaction between other components of the same architecture
+!!! info "Visibility in the context of HTTP"
+    Visibility simply means that one component of an architecture can monitor (and even participate in) the interaction between other components of the same architecture.
 
 Luckily HTTP is an application-level protocol designed to keep communication between clients and servers visible.
 

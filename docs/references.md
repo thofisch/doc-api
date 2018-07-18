@@ -101,7 +101,6 @@
 * [Thoughts on RESTful API Design](http://restful-api-design.readthedocs.io/en/latest/)
 * [Top REST API best practices](https://code-maze.com/top-rest-api-best-practices/)
 * [Turning Up The Good On REST APIs](https://8thlight.com/blog/jason-desrosiers/2018/03/21/turning-up-the-good-on-rest-apis.html)
-* [What is REST?](http://whatisrest.com/)
 * [Why REST is not a silver bullet for service integration](http://www.ben-morris.com/why-rest-is-not-a-silver-bullet-for-soa-and-microservice-integration/)
 * [Zalando RESTful API and Event Scheme Guidelines](http://zalando.github.io/restful-api-guidelines)
 
