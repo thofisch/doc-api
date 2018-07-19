@@ -78,3 +78,38 @@ When implementing clients to support extensibility:
 * **DO** store everything, if the client is capable of storing the complete representation locally.
 * **DO NOT** assume that the representation is of a fixed media type, character encoding, content language, or content encoding.
 
+{++
+
+## Complement with an SDK
+
+It's a common question for API providers - do you need to complement your API with code libraries and software development kits (SDKs)?
+If your API follows good design practices, is self consistent, standards-based, and well documented, developers may be able to get rolling without a client SDK. Well-documented code samples are also a critical resource.
+On the other hand, what about the scenario in which building a UI requires a lot of domain knowledge? This can be a challenging problem for developers even when building UI and apps on top of APIs with pretty simple domains – think about the Twitter API with it's primary object of 140 characters of text.
+You shouldn't change your API to try to overcome the domain knowledge hurdle. Instead, you can complement your API with code libraries and a software development kit (SDK).
+In this way, you don't overburden your API design. Often, a lot of what's needed is on the client side and you can push that burden to an SDK.
+The SDK can provide the platform-specific code, which developers use in their apps to invoke API operations - meaning you keep your API clean.
+Other reasons you might consider complementing your API with an SDK include the following:
+Speed adoption on a specific platform. (For example Objective C SDK for iPhone.)
+Many experienced developers are just starting off with objective C+ so an SDK might be helpful.
+Simplify integration effort required to work with your API - If key use cases are complex or need to be complemented by standard on-client processing.
+An SDK can help reduce bad or inefficient code that might slow down service for everyone.
+As a developer resource - good SDKs are a forcing function to create good source code examples and documentation. 
+To market your API to a specific community - you upload the SDK to a samples or plugin page on a platform's existing developer community.
+Last but not least, keep in mind that SDKs or code wrappers/libraries can be extremely helpful.
+What SDKs/ Code Wrappers offer is a quick, plug and play way for developers to incorporate your API, while also (hopefully) handling error checks/ responses.
+
+### Building an SDK Doesn't Fix Everything
+
+However, if you are building a full out SDK instead of a language wrapper that utilizes the hypermedia to handle responses, remember that you are adding a whole new layer of complexity to your API ecosystem – that you will have to maintain.
+The downside is the more complex your SDK becomes, the more tightly coupled it usually is to your API, making any updates to your API a manual and complex process.
+This means that any new features you roll out will receive rather slow adoption, and you may find yourself providing support to your developers on why they can't do something with your SDK.
+When building your SDK you should try to keep it as decoupled from your API as possible, relying on dynamic responses and calls while also following the best coding practices for that language (be sure to watch Keith Casey's SPOIL talk or read about it here).
+
+Another option is to utilize a SDK building service such as APIMatic.io or REST United, which automatically generates SDKs for your API based on your RAML, Swagger, or API Blueprint spec.
+This allows you to offer SDKs, automatically have them update when adding new features (although clients will still need to download the updated version), and offer them without adding any additional workload on your end.
+
+But again, regardless of whether or not you provide an SDK/ Code Library, you will still want to have multiple code examples in your documentation to help developers who want to utilize your API to its fullest capacity, without relying on additional third party libraries to do so.
+
+Remember that having an SDK doesn't replace documentation, if anything – it creates the need for more.
+
+++}
