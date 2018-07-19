@@ -50,12 +50,13 @@ Queries usually involve filtering, sorting and projections. When providing query
 - **DO** document each parameter.
 - **CONSIDER** using `q` (e.g. used by browser tab completion) as the default query parameter.
 - **CONSIDER** using a generic `sort` parameter to describe sorting rules. To accommodate more complex sorting requirements, let the `sort` parameter take a list of comma-separated fields, each with a possible unary negative to imply descending sort order. Like: `GET /tickets?sort=-priority,created_at`
-- **CONSIDER** using a `fields` query parameter for projections, like `http://www.example.org/customers?fields=name,gender,birthday` or `http://example.org/customer?fields=(firstName,user(email))` and `!` to negate field selection. Depending on the use case and payload size, it can reduce network bandwidth and reduce filtering on clients.
+- **CONSIDER** using a `fields` query parameter for projections (partial responses), like `http://www.example.org/customers?fields=name,gender,birthday` or `http://example.org/customer?fields=(firstName,user(email))` and `!` to negate field selection. Depending on the use case and payload size, it can reduce network bandwidth and reduce filtering on clients.
 - **CONSIDER** using a `view` query parameter for predefined projections, like `http://www.example.org/customers?view=summary`
 - **CONSIDER** supporting aliases for commonly used queries (it may also improve cacheability). For instance, `GET /tickets/recently_closed`
 - **CONSIDER** using `embed` to allow for resource expansion. Embedding related resources can help reduce the number of requests.
 - **CONSIDER** using a `format` query parameter, if standard content negotiation is not possible.
-- **CONSIDER** using `limit` and `offset` when resource collections are backed by traditional relation databases, as these ties into the general implementation on the data store. Opt for `cursor` and a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database. For more information see [Pagination](representations/#pagination).
+- **CONSIDER** using `limit` and `offset`, like `http://www.example.org/authors?offset=50&limit=25`, when resource collections are backed by traditional relation databases, as these ties into the general implementation on the data store. Opt for `cursor` and a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database. For more information see [Pagination](representations/#pagination).
+- **CONSIDER** using sensible defaults for pagination, e.g. limit=10 and offset=0. The pagination defaults are dependent on your data size.
 - **AVOID** ad hoc queries that use general-purpose query languages such as *SQL* or *XPath*.
 - **AVOID** `Range` requests for implementing queries.
 
