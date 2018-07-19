@@ -43,22 +43,22 @@ extra_css:
 pages:
 - Introduction: index.md
 - APIs: apis.md
+- API Design: api-design.md
 - REST: rest.md
 - HTTP: http.md
-- Resource Identifiers: resource_identifiers.md
+- Resource Identifiers: resource-identifiers.md
 - Resources: resources.md
 - Methods: methods.md
 - Representations: representations.md
 - -Hypermedia: hypermedia.md
-- Content Negotiation: content_negotiation.md
+- Content Negotiation: content-negotiation.md
 - -Caching: caching.md
 - -Security: security.md
-- -Versioning and Extensibility: versioning_and_extensibility.md
-- -Documentation and Discovery: documentation_and_discovery.md
-- -Specifications: specifications.md
+- -Versioning and Extensibility: versioning-and-extensibility.md
+- -Documentation and Discovery: documentation-and-discovery.md
 - -Mocking: mocking.md
 - Clients: clients.md
-- -Other topics: other_topics.md
+- Throttling: throttling.md
 - References: references.md
 - Examples: examples.md
 
