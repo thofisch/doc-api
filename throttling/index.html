@@ -36,7 +36,7 @@
     
     
       
-        <title>HTTP - API Design Guidelines</title>
+        <title>Throttling - API Design Guidelines</title>
       
     
     
@@ -76,7 +76,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
     
-      <a href="#http" tabindex="1" class="md-skip">
+      <a href="#throttling" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -102,7 +102,7 @@
                 API Design Guidelines
               </span>
               <span class="md-header-nav__topic">
-                HTTP
+                Throttling
               </span>
             
           
@@ -219,49 +219,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        HTTP
-      </label>
-    
-    <a href="./" title="HTTP" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../http/" title="HTTP" class="md-nav__link">
       HTTP
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#visibility" title="Visibility" class="md-nav__link">
-    Visibility
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -413,11 +375,49 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../throttling/" title="Throttling" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Throttling
+      </label>
+    
+    <a href="./" title="Throttling" class="md-nav__link md-nav__link--active">
       Throttling
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#must-use-429-with-headers-for-rate-limits" title="MUST: Use 429 with Headers for Rate Limits" class="md-nav__link">
+    MUST: Use 429 with Headers for Rate Limits
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -466,8 +466,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#visibility" title="Visibility" class="md-nav__link">
-    Visibility
+  <a href="#must-use-429-with-headers-for-rate-limits" title="MUST: Use 429 with Headers for Rate Limits" class="md-nav__link">
+    MUST: Use 429 with Headers for Rate Limits
   </a>
   
 </li>
@@ -489,40 +489,27 @@
               
                 
                 
-                <h1 id="http">HTTP<a class="headerlink" href="#http" title="Permanent link">&para;</a></h1>
-<p>When designing a RESTful API delivered over HTTP, it is important to maintain a high degree of visibility. This will let the API benefit from existing software and infrastructure for features that you would otherwise have to build yourself.</p>
+                <h1 id="throttling">Throttling<a class="headerlink" href="#throttling" title="Permanent link">&para;</a></h1>
+<p>Throttling and rate limiting is not necessarily a bad thing. By throttling your API and setting up different SLA tiers you are able to help prevent abuse – often times completely accidental. This means that your API is able to operate optimally for all of your users, instead of having one infinite loop bring it crashing down for everyone.</p>
+<p>You may have partners that need more calls than others, or who the limits do not make sense for. By setting up SLA tiers based on your standard API user's needs, and then creating partner tiers, you can easily give the the permissions they need, while limiting the standard user to prevent abuse.</p>
+<p>The API key, or unique identifier for an user's application also helps you identify who your heavier users are – letting you get in contact with them to make sure their needs are being met, while also learning more about how they are using your API.</p>
 <div class="admonition info">
-<p class="admonition-title">Visibility in the context of HTTP</p>
-<p>Visibility simply means that one component of an architecture can monitor (and even participate in) the interaction between other components of the same architecture.</p>
-</div>
-<p>Luckily HTTP is an application-level protocol designed to keep communication between clients and servers visible.</p>
-<p>HTTP defines operations for transferring representations between clients and servers, eliminating the need for application-specific operations (e.g. <em>createBooking</em>, <em>changeBooking</em>, etc.).</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Using the capabilities of HTTP means that caches, proxies, firewalls, etc., can monitor and participate in the protocol.</p>
-</div>
-<h2 id="visibility">Visibility<a class="headerlink" href="#visibility" title="Permanent link">&para;</a></h2>
-<p>For better visibility:</p>
+<p class="admonition-title">Rate limiting (Twitter-style)</p>
 <ul>
-<li><strong>DO</strong> make interactions stateless.</li>
-<li><strong>DO</strong> use HTTP methods.</li>
-<li><strong>DO</strong> use appropriate headers to describe requests and responses.</li>
-<li><strong>DO</strong> use appropriate status codes and messages.</li>
-<li><strong>DO NOT</strong> change syntax and meaning, specified by HTTP, from application to application nor from resource to resource.</li>
+<li>X-Rate-Limit-Limit - The number of allowed requests in the current period</li>
+<li>X-Rate-Limit-Remaining - The number of remaining requests in the current period</li>
+<li>X-Rate-Limit-Reset - The number of seconds left in the current period</li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Keep in mind that focusing solely on visibility may create too fine-grained resources, and poor separation of concern between clients and servers. Trading visibility for other benefits is not necessarily bad.</p>
 </div>
-<p>Consider trading visibility:</p>
-<ul>
-<li>when multiple resources share data</li>
-<li>when operations modifies multiple resources</li>
-<li>for better abstraction and loose coupling</li>
-<li>for network efficiency</li>
-<li>for better resource granularity</li>
-<li>or simply for pure client convenience</li>
-</ul>
+<h2 id="must-use-429-with-headers-for-rate-limits">MUST: Use 429 with Headers for Rate Limits<a class="headerlink" href="#must-use-429-with-headers-for-rate-limits" title="Permanent link">&para;</a></h2>
+<p>APIs that wish to manage the request rate of clients must use the '429 Too Many Requests' response code if the client exceeded the request rate and therefore the request can't be fulfilled. Such responses must also contain header information providing further details to the client. There are two approaches a service can take for header information:</p>
+<p>Return a 'Retry-After' header indicating how long the client ought to wait before making a follow-up request. The Retry-After header can contain a HTTP date value to retry after or the number of seconds to delay. Either is acceptable but APIs should prefer to use a delay in seconds.</p>
+<p>Return a trio of 'X-RateLimit' headers. These headers (described below) allow a server to express a service level in the form of a number of allowing requests within a given window of time and when the window is reset.</p>
+<p>The 'X-RateLimit' headers are:</p>
+<p>X-RateLimit-Limit: The maximum number of requests that the client is allowed to make in this window.
+X-RateLimit-Remaining: The number of requests allowed in the current window.
+X-RateLimit-Reset: The relative time in seconds when the rate limit window will be reset.
+The reason to allow both approaches is that APIs can have different needs. Retry-After is often sufficient for general load handling and request throttling scenarios and notably, does not strictly require the concept of a calling entity such as a tenant or named account. In turn this allows resource owners to minimise the amount of state they have to carry with respect to client requests. The 'X-RateLimit' headers are suitable for scenarios where clients are associated with pre-existing account or tenancy structures. 'X-RateLimit' headers are generally returned on every request and not just on a 429, which implies the service implementing the API is carrying sufficient state to track the number of requests made within a given window for each named entity.</p>
                 
                   
                 
@@ -543,7 +530,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../rest/" title="REST" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../clients/" title="Clients" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -552,19 +539,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                REST
+                Clients
               </span>
             </div>
           </a>
         
         
-          <a href="../resource-identifiers/" title="Resource Identifiers" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../references/" title="References" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Resource Identifiers
+                References
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

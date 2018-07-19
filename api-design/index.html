@@ -36,7 +36,7 @@
     
     
       
-        <title>-Specifications - API Design Guidelines</title>
+        <title>API Design - API Design Guidelines</title>
       
     
     
@@ -102,7 +102,7 @@
                 API Design Guidelines
               </span>
               <span class="md-header-nav__topic">
-                -Specifications
+                API Design
               </span>
             
           
@@ -195,6 +195,106 @@
       
       
 
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        API Design
+      </label>
+    
+    <a href="./" title="API Design" class="md-nav__link md-nav__link--active">
+      API Design
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#spec-driven-development" title="Spec-Driven Development" class="md-nav__link">
+    Spec-Driven Development
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feedback" title="Feedback" class="md-nav__link">
+    Feedback
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#must-follow-api-first-principle" title="MUST: Follow API First Principle" class="md-nav__link">
+    MUST: Follow API First Principle
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#must-write-apis-in-us-english" title="MUST: Write APIs in U.S. English" class="md-nav__link">
+    MUST: Write APIs in U.S. English
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#must-provide-online-access-to-openapi-reference-definition" title="MUST: Provide Online Access to OpenAPI Reference Definition" class="md-nav__link">
+    MUST: Provide Online Access to OpenAPI Reference Definition
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dog-food-your-own-api" title="Dog-food your own API" class="md-nav__link">
+    Dog-food your own API
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chatty-apis" title="Chatty APIs" class="md-nav__link">
+    Chatty APIs
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
 
   <li class="md-nav__item">
     <a href="../rest/" title="REST" class="md-nav__link">
@@ -221,7 +321,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../resource_identifiers/" title="Resource Identifiers" class="md-nav__link">
+    <a href="../resource-identifiers/" title="Resource Identifiers" class="md-nav__link">
       Resource Identifiers
     </a>
   </li>
@@ -281,7 +381,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../content_negotiation/" title="Content Negotiation" class="md-nav__link">
+    <a href="../content-negotiation/" title="Content Negotiation" class="md-nav__link">
       Content Negotiation
     </a>
   </li>
@@ -317,7 +417,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../versioning_and_extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
+    <a href="../versioning-and-extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
       -Versioning and Extensibility
     </a>
   </li>
@@ -329,88 +429,9 @@
 
 
   <li class="md-nav__item">
-    <a href="../documentation_and_discovery/" title="-Documentation and Discovery" class="md-nav__link">
+    <a href="../documentation-and-discovery/" title="-Documentation and Discovery" class="md-nav__link">
       -Documentation and Discovery
     </a>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        -Specifications
-      </label>
-    
-    <a href="./" title="-Specifications" class="md-nav__link md-nav__link--active">
-      -Specifications
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#spec-driven-development" title="Spec-Driven Development" class="md-nav__link">
-    Spec-Driven Development
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#feedback" title="Feedback" class="md-nav__link">
-    Feedback
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#must-follow-api-first-principle" title="MUST: Follow API First Principle" class="md-nav__link">
-    MUST: Follow API First Principle
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#must-write-apis-in-us-english" title="MUST: Write APIs in U.S. English" class="md-nav__link">
-    MUST: Write APIs in U.S. English
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -444,8 +465,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../other_topics/" title="-Other topics" class="md-nav__link">
-      -Other topics
+    <a href="../throttling/" title="Throttling" class="md-nav__link">
+      Throttling
     </a>
   </li>
 
@@ -527,8 +548,29 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#must-provide-online-access-to-openapi-reference-definition" title="MUST: Provide Online Access to OpenAPI Reference Definition" class="md-nav__link">
+    MUST: Provide Online Access to OpenAPI Reference Definition
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dog-food-your-own-api" title="Dog-food your own API" class="md-nav__link">
+    Dog-food your own API
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chatty-apis" title="Chatty APIs" class="md-nav__link">
+    Chatty APIs
+  </a>
   
 </li>
       
@@ -549,7 +591,7 @@
               
                 
                 
-                  <h1>-Specifications</h1>
+                  <h1>API Design</h1>
                 
                 <h2 id="spec-driven-development">Spec-Driven Development<a class="headerlink" href="#spec-driven-development" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span>The overall point of view on API design is to approach API design from the &#39;outside-in&#39; perspective.
@@ -617,6 +659,26 @@ If you have taken advantage of the above steps and carefully laid out your API, 
 500 Internal Server Error
 503 Service Unavailable
 </pre></div>
+
+
+<h3 id="must-provide-online-access-to-openapi-reference-definition">MUST: Provide Online Access to OpenAPI Reference Definition<a class="headerlink" href="#must-provide-online-access-to-openapi-reference-definition" title="Permanent link">&para;</a></h3>
+<h2 id="dog-food-your-own-api">Dog-food your own API<a class="headerlink" href="#dog-food-your-own-api" title="Permanent link">&para;</a></h2>
+<h2 id="chatty-apis">Chatty APIs<a class="headerlink" href="#chatty-apis" title="Permanent link">&para;</a></h2>
+<p>Let's think about how app developers use that API you're designing and dealing with chatty APIs.</p>
+<p>Imagine how developers will use your API</p>
+<p>When designing your API and resources, try to imagine how developers will use it to say construct a user interface, an iPhone app, or many other apps.</p>
+<p>Some API designs become very chatty - meaning just to build a simple UI or app, you have dozens or hundreds of API calls back to the server.</p>
+<p>The API team can sometimes decide not to deal with creating a nice, resource-oriented RESTful API, and just fall back to a mode where they create the 3 or 4 Java-style getter and setter methods they know they need to power a particular user interface.</p>
+<p>We don't recommend this. You can design a RESTful API and still mitigate the chattiness.</p>
+<p>Be complete and RESTful and provide shortcuts</p>
+<p>First design your API and its resources according to pragmatic RESTful design principles and then provide shortcuts.</p>
+<p>What kind of shortcut? Say you know that 80% of all your apps are going to need some sort of composite response, then build the kind of request that gives them what they need.</p>
+<p>Just don't do the latter instead of the former. First design using good pragmatic RESTful principles!</p>
+<p>Take advantage of the partial response syntax</p>
+<p>The partial response syntax discussed in a previous section can help.</p>
+<p>To avoid creating one-off base URLs, you can use the partial response syntax to drill down to dependent and associated resources.</p>
+<p>In the case of our dogs API, the dogs have association with owners, who in turn have associations with veterinarians, and so on. Keep nesting the partial response syntax using dot notation to get back just the information you need.</p>
+<p>/owners/5678?fields=name,dogs.name</p>
                 
                   
                 
@@ -637,7 +699,7 @@ If you have taken advantage of the above steps and carefully laid out your API, 
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../documentation_and_discovery/" title="-Documentation and Discovery" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../apis/" title="APIs" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -646,19 +708,19 @@ If you have taken advantage of the above steps and carefully laid out your API, 
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                -Documentation and Discovery
+                APIs
               </span>
             </div>
           </a>
         
         
-          <a href="../mocking/" title="-Mocking" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../rest/" title="REST" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                -Mocking
+                REST
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

@@ -197,6 +197,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../api-design/" title="API Design" class="md-nav__link">
+      API Design
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../rest/" title="REST" class="md-nav__link">
       REST
     </a>
@@ -221,7 +233,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../resource_identifiers/" title="Resource Identifiers" class="md-nav__link">
+    <a href="../resource-identifiers/" title="Resource Identifiers" class="md-nav__link">
       Resource Identifiers
     </a>
   </li>
@@ -355,6 +367,19 @@
     Batch Operations (TBD)
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#must-use-207-for-batch-or-bulk-requests" title="MUST: Use 207 for Batch or Bulk Requests" class="md-nav__link">
+    MUST: Use 207 for Batch or Bulk Requests
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -398,7 +423,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../content_negotiation/" title="Content Negotiation" class="md-nav__link">
+    <a href="../content-negotiation/" title="Content Negotiation" class="md-nav__link">
       Content Negotiation
     </a>
   </li>
@@ -434,7 +459,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../versioning_and_extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
+    <a href="../versioning-and-extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
       -Versioning and Extensibility
     </a>
   </li>
@@ -446,20 +471,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../documentation_and_discovery/" title="-Documentation and Discovery" class="md-nav__link">
+    <a href="../documentation-and-discovery/" title="-Documentation and Discovery" class="md-nav__link">
       -Documentation and Discovery
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../specifications/" title="-Specifications" class="md-nav__link">
-      -Specifications
     </a>
   </li>
 
@@ -494,8 +507,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../other_topics/" title="-Other topics" class="md-nav__link">
-      -Other topics
+    <a href="../throttling/" title="Throttling" class="md-nav__link">
+      Throttling
     </a>
   </li>
 
@@ -629,6 +642,19 @@
   <a href="#batch-operations-tbd" title="Batch Operations (TBD)" class="md-nav__link">
     Batch Operations (TBD)
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#must-use-207-for-batch-or-bulk-requests" title="MUST: Use 207 for Batch or Bulk Requests" class="md-nav__link">
+    MUST: Use 207 for Batch or Bulk Requests
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -833,28 +859,28 @@
 </ul>
 <details class="example"><summary>Example of <em>pending</em></summary><div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">202</span> <span class="ne">Accepted</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Content-Location</span><span class="o">:</span> <span class="l">http://www.example.org/images/task/1</span>
+<span class="na">Content-Location</span><span class="o">:</span> <span class="l">https://www.example.org/images/task/1</span>
 
 <span class="p">{</span>
     <span class="nt">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;pending&quot;</span><span class="p">,</span>
     <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Your request is being processed shortly.&quot;</span><span class="p">,</span>
     <span class="nt">&quot;pingAfter&quot;</span><span class="p">:</span> <span class="s2">&quot;2009-09-13T01:59:27Z&quot;</span><span class="p">,</span>
     <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.example.org/images/task/1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://www.example.org/images/task/1&quot;</span><span class="p">,</span>
         <span class="nt">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;self&quot;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </details><details class="example"><summary>Example of <em>done</em></summary><div class="codehilite"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">303</span> <span class="ne">See Other</span>
 <span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
-<span class="na">Location</span><span class="o">:</span> <span class="l">http://www.example.org/images/1</span>
-<span class="na">Content-Location</span><span class="o">:</span> <span class="l">http://www.example.org/images/task/1</span>
+<span class="na">Location</span><span class="o">:</span> <span class="l">https://www.example.org/images/1</span>
+<span class="na">Content-Location</span><span class="o">:</span> <span class="l">https://www.example.org/images/task/1</span>
 
 <span class="p">{</span>
     <span class="nt">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;done&quot;</span><span class="p">,</span>
     <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Your request has been processed.&quot;</span><span class="p">,</span>
     <span class="nt">&quot;link&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.example.org/images/task/1&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://www.example.org/images/task/1&quot;</span><span class="p">,</span>
         <span class="nt">&quot;rel&quot;</span><span class="p">:</span> <span class="s2">&quot;self&quot;</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -864,7 +890,15 @@
 <p>The <code>303 See Other</code> does not mean that the resource at the request URI has moved to a new location. It merely states that the result exists at the URI indicated in the <code>Location</code> header.</p>
 </div>
 <h2 id="batch-operations-tbd">Batch Operations (TBD)<a class="headerlink" href="#batch-operations-tbd" title="Permanent link">&para;</a></h2>
+<ins class="critic block">
 <p><strong><em>TBD</em></strong></p>
+<h3 id="must-use-207-for-batch-or-bulk-requests">MUST: Use 207 for Batch or Bulk Requests<a class="headerlink" href="#must-use-207-for-batch-or-bulk-requests" title="Permanent link">&para;</a></h3>
+<p>Some APIs are required to provide either batch or bulk requests using POST for performance reasons, i.e. for communication and processing efficiency. In this case services may be in need to signal multiple response codes for each part of an batch or bulk request. As HTTP does not provide proper guidance for handling batch/bulk requests and responses, we herewith define the following approach:</p>
+<p>A batch or bulk request always has to respond with HTTP status code 207, unless it encounters a generic or unexpected failure before looking at individual parts.
+A batch or bulk response with status code 207 always returns a multi-status object containing sufficient status and/or monitoring information for each part of the batch or bulk request.
+A batch or bulk request may result in a status code 400/500, only if the service encounters a failure before looking at individual parts or, if an unanticipated failure occurs.
+The before rules apply even in the case that processing of all individual part fail or each part is executed asynchronously! They are intended to allow clients to act on batch and bulk responses by inspecting the individual results in a consistent way.</p>
+</ins>
                 
                   
                 

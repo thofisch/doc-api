@@ -19,6 +19,14 @@
 
     
     <url>
+     <loc>/api-design/</loc>
+     <lastmod>2018-07-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
      <loc>/rest/</loc>
      <lastmod>2018-07-19</lastmod>
      <changefreq>daily</changefreq>
@@ -35,7 +43,7 @@
 
     
     <url>
-     <loc>/resource_identifiers/</loc>
+     <loc>/resource-identifiers/</loc>
      <lastmod>2018-07-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -75,7 +83,7 @@
 
     
     <url>
-     <loc>/content_negotiation/</loc>
+     <loc>/content-negotiation/</loc>
      <lastmod>2018-07-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -99,7 +107,7 @@
 
     
     <url>
-     <loc>/versioning_and_extensibility/</loc>
+     <loc>/versioning-and-extensibility/</loc>
      <lastmod>2018-07-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -107,15 +115,7 @@
 
     
     <url>
-     <loc>/documentation_and_discovery/</loc>
-     <lastmod>2018-07-19</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/specifications/</loc>
+     <loc>/documentation-and-discovery/</loc>
      <lastmod>2018-07-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -139,7 +139,7 @@
 
     
     <url>
-     <loc>/other_topics/</loc>
+     <loc>/throttling/</loc>
      <lastmod>2018-07-19</lastmod>
      <changefreq>daily</changefreq>
     </url>

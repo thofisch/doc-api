@@ -197,6 +197,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../api-design/" title="API Design" class="md-nav__link">
+      API Design
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../rest/" title="REST" class="md-nav__link">
       REST
     </a>
@@ -329,7 +341,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../content_negotiation/" title="Content Negotiation" class="md-nav__link">
+    <a href="../content-negotiation/" title="Content Negotiation" class="md-nav__link">
       Content Negotiation
     </a>
   </li>
@@ -365,7 +377,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../versioning_and_extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
+    <a href="../versioning-and-extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
       -Versioning and Extensibility
     </a>
   </li>
@@ -377,20 +389,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../documentation_and_discovery/" title="-Documentation and Discovery" class="md-nav__link">
+    <a href="../documentation-and-discovery/" title="-Documentation and Discovery" class="md-nav__link">
       -Documentation and Discovery
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../specifications/" title="-Specifications" class="md-nav__link">
-      -Specifications
     </a>
   </li>
 
@@ -425,8 +425,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../other_topics/" title="-Other topics" class="md-nav__link">
-      -Other topics
+    <a href="../throttling/" title="Throttling" class="md-nav__link">
+      Throttling
     </a>
   </li>
 
@@ -560,12 +560,12 @@
 <li><strong>DO</strong> document each parameter.</li>
 <li><strong>CONSIDER</strong> using <code>q</code> (e.g. used by browser tab completion) as the default query parameter.</li>
 <li><strong>CONSIDER</strong> using a generic <code>sort</code> parameter to describe sorting rules. To accommodate more complex sorting requirements, let the <code>sort</code> parameter take a list of comma-separated fields, each with a possible unary negative to imply descending sort order. Like: <code>GET /tickets?sort=-priority,created_at</code></li>
-<li><strong>CONSIDER</strong> using a <code>fields</code> query parameter for projections (partial responses), like <code>http://www.example.org/customers?fields=name,gender,birthday</code> or <code>http://example.org/customer?fields=(firstName,user(email))</code> and <code>!</code> to negate field selection. Depending on the use case and payload size, it can reduce network bandwidth and reduce filtering on clients.</li>
-<li><strong>CONSIDER</strong> using a <code>view</code> query parameter for predefined projections, like <code>http://www.example.org/customers?view=summary</code></li>
+<li><strong>CONSIDER</strong> using a <code>fields</code> query parameter for projections (partial responses), like <code>https://www.example.org/customers?fields=name,gender,birthday</code> or <code>https://example.org/customer?fields=(firstName,user(email))</code> and <code>!</code> to negate field selection. Depending on the use case and payload size, it can reduce network bandwidth and reduce filtering on clients.</li>
+<li><strong>CONSIDER</strong> using a <code>view</code> query parameter for predefined projections, like <code>https://www.example.org/customers?view=summary</code></li>
 <li><strong>CONSIDER</strong> supporting aliases for commonly used queries (it may also improve cacheability). For instance, <code>GET /tickets/recently_closed</code></li>
 <li><strong>CONSIDER</strong> using <code>embed</code> to allow for resource expansion. Embedding related resources can help reduce the number of requests.</li>
 <li><strong>CONSIDER</strong> using a <code>format</code> query parameter, if standard content negotiation is not possible.</li>
-<li><strong>CONSIDER</strong> using <code>limit</code> and <code>offset</code>, like <code>http://www.example.org/authors?offset=50&amp;limit=25</code>, when resource collections are backed by traditional relation databases, as these ties into the general implementation on the data store. Opt for <code>cursor</code> and a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database. For more information see <a href="../representations/#pagination">Pagination</a>.</li>
+<li><strong>CONSIDER</strong> using <code>limit</code> and <code>offset</code>, like <code>https://www.example.org/authors?offset=50&amp;limit=25</code>, when resource collections are backed by traditional relation databases, as these ties into the general implementation on the data store. Opt for <code>cursor</code> and a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database. For more information see <a href="../representations/#pagination">Pagination</a>.</li>
 <li><strong>CONSIDER</strong> using sensible defaults for pagination, e.g. limit=10 and offset=0. The pagination defaults are dependent on your data size.</li>
 <li><strong>AVOID</strong> ad hoc queries that use general-purpose query languages such as <em>SQL</em> or <em>XPath</em>.</li>
 <li><strong>AVOID</strong> <code>Range</code> requests for implementing queries.</li>

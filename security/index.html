@@ -197,6 +197,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../api-design/" title="API Design" class="md-nav__link">
+      API Design
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../rest/" title="REST" class="md-nav__link">
       REST
     </a>
@@ -221,7 +233,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../resource_identifiers/" title="Resource Identifiers" class="md-nav__link">
+    <a href="../resource-identifiers/" title="Resource Identifiers" class="md-nav__link">
       Resource Identifiers
     </a>
   </li>
@@ -281,7 +293,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../content_negotiation/" title="Content Negotiation" class="md-nav__link">
+    <a href="../content-negotiation/" title="Content Negotiation" class="md-nav__link">
       Content Negotiation
     </a>
   </li>
@@ -341,6 +353,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#authentication-is-key" title="Authentication is Key" class="md-nav__link">
+    Authentication is Key
+  </a>
+  
+</li>
+      
       
       
       
@@ -358,7 +377,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../versioning_and_extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
+    <a href="../versioning-and-extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
       -Versioning and Extensibility
     </a>
   </li>
@@ -370,20 +389,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../documentation_and_discovery/" title="-Documentation and Discovery" class="md-nav__link">
+    <a href="../documentation-and-discovery/" title="-Documentation and Discovery" class="md-nav__link">
       -Documentation and Discovery
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../specifications/" title="-Specifications" class="md-nav__link">
-      -Specifications
     </a>
   </li>
 
@@ -418,8 +425,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../other_topics/" title="-Other topics" class="md-nav__link">
-      -Other topics
+    <a href="../throttling/" title="Throttling" class="md-nav__link">
+      Throttling
     </a>
   </li>
 
@@ -476,6 +483,13 @@
         <li class="md-nav__item">
   <a href="#security_1" title="Security" class="md-nav__link">
     Security
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-is-key" title="Authentication is Key" class="md-nav__link">
+    Authentication is Key
   </a>
   
 </li>
@@ -598,6 +612,13 @@ How to Deal with Sensitive Information in URIs</p>
 <p>How to Maintain the Confidentiality and Integrity of Representations</p>
 <div class="codehilite"><pre><span></span>use TLS and make resource accessible over a server configured to serve request only using HTTPS.
 </pre></div>
+
+
+<h2 id="authentication-is-key">Authentication is Key<a class="headerlink" href="#authentication-is-key" title="Permanent link">&para;</a></h2>
+<p>By providing your API users with a unique API token, or API key you can tell exactly who is making calls to your API.</p>
+<p>Along with having quick access to determining potential malicious users which can immediately be removed, you can also set permissions and SLAs for users depending on their individual needs.</p>
+<p>This means that you can set a default SLA for most users, giving them say only 4 calls per second, but for silver partners they get 10 calls per second, for gold partners 100 calls per second, etc.</p>
+<p>This means that you can not only identify abuse quickly, but also help prevent it by limiting their access to certain aspects of your API, and by limiting the number of calls they can make to your API.</p>
                 
                   
                 
@@ -633,7 +654,7 @@ How to Deal with Sensitive Information in URIs</p>
           </a>
         
         
-          <a href="../versioning_and_extensibility/" title="-Versioning and Extensibility" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../versioning-and-extensibility/" title="-Versioning and Extensibility" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">

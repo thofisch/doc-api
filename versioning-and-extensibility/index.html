@@ -197,6 +197,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../api-design/" title="API Design" class="md-nav__link">
+      API Design
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../rest/" title="REST" class="md-nav__link">
       REST
     </a>
@@ -221,7 +233,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../resource_identifiers/" title="Resource Identifiers" class="md-nav__link">
+    <a href="../resource-identifiers/" title="Resource Identifiers" class="md-nav__link">
       Resource Identifiers
     </a>
   </li>
@@ -281,7 +293,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../content_negotiation/" title="Content Negotiation" class="md-nav__link">
+    <a href="../content-negotiation/" title="Content Negotiation" class="md-nav__link">
       Content Negotiation
     </a>
   </li>
@@ -338,20 +350,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../documentation_and_discovery/" title="-Documentation and Discovery" class="md-nav__link">
+    <a href="../documentation-and-discovery/" title="-Documentation and Discovery" class="md-nav__link">
       -Documentation and Discovery
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../specifications/" title="-Specifications" class="md-nav__link">
-      -Specifications
     </a>
   </li>
 
@@ -386,8 +386,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../other_topics/" title="-Other topics" class="md-nav__link">
-      -Other topics
+    <a href="../throttling/" title="Throttling" class="md-nav__link">
+      Throttling
     </a>
   </li>
 
@@ -769,6 +769,25 @@ The code we would write to handle the responses would be very different.
 
 There&#39;s no question the header is more correct and it is still a very strong API design.
 </pre></div>
+
+
+<h2 id="deprecation">Deprecation<a class="headerlink" href="#deprecation" title="Permanent link">&para;</a></h2>
+<p>Sometimes it is necessary to phase out an API endpoint (or version). I.e. this may be necessary if a field is no longer supported in the result or a whole business functionality behind an endpoint has to be shut down. There are many other reasons as well.</p>
+<h3 id="must-obtain-approval-of-clients">MUST: Obtain Approval of Clients<a class="headerlink" href="#must-obtain-approval-of-clients" title="Permanent link">&para;</a></h3>
+<p>Before shutting down an API (or version of an API) the producer must make sure, that all clients have given their consent to shut down the endpoint. Producers should help consumers to migrate to a potential new endpoint (i.e. by providing a migration manual). After all clients are migrated, the producer may shut down the deprecated API.</p>
+<h3 id="must-external-partners-must-agree-on-deprecation-timespan">MUST: External Partners Must Agree on Deprecation Timespan<a class="headerlink" href="#must-external-partners-must-agree-on-deprecation-timespan" title="Permanent link">&para;</a></h3>
+<p>If the API is consumed by any external partner, the producer must define a reasonable timespan that the API will be maintained after the producer has announced deprecation. The external partner (client) must agree to this minimum after-deprecation-lifespan before he starts using the API.</p>
+<h3 id="must-reflect-deprecation-in-api-definition">MUST: Reflect Deprecation in API Definition<a class="headerlink" href="#must-reflect-deprecation-in-api-definition" title="Permanent link">&para;</a></h3>
+<p>API deprecation must be part of the OpenAPI definition. If a method on a path, a whole path or even a whole API endpoint (multiple paths) should be deprecated, the producers must set deprecated=true on each method / path element that will be deprecated (OpenAPI 2.0 only allows you to define deprecation on this level). If deprecation should happen on a more fine grained level (i.e. query parameter, payload etc.), the producer should set deprecated=true on the affected method / path element and add further explanation to the description section.</p>
+<p>If deprecated is set to true, the producer must describe what clients should use instead and when the API will be shut down in the description section of the API definition.</p>
+<h3 id="must-monitor-usage-of-deprecated-apis">MUST: Monitor Usage of Deprecated APIs<a class="headerlink" href="#must-monitor-usage-of-deprecated-apis" title="Permanent link">&para;</a></h3>
+<p>Owners of APIs used in production must monitor usage of deprecated APIs until the API can be shut down in order to align deprecation and avoid uncontrolled breaking effects. See also the general rule on API usage monitoring</p>
+<h3 id="should-add-a-warning-header-to-responses">SHOULD:: Add a Warning Header to Responses<a class="headerlink" href="#should-add-a-warning-header-to-responses" title="Permanent link">&para;</a></h3>
+<p>During deprecation phase, the producer should add a Warning header (see RFC 7234 - Warning header) field. When adding the Warning header, the warn-code must be 299 and the warn-text should be in form of "The path/operation/parameter/... {name} is deprecated and will be removed by {date}. Please see {link} for details." with a link to a documentation describing why the API is no longer supported in the current form and what clients should do about it. Adding the Warning header is not sufficient to gain client consent to shut down an API.</p>
+<h3 id="should-add-monitoring-for-warning-header">SHOULD:: Add Monitoring for Warning Header<a class="headerlink" href="#should-add-monitoring-for-warning-header" title="Permanent link">&para;</a></h3>
+<p>Clients should monitor the Warning header in HTTP responses to see if an API will be deprecated in future.</p>
+<h3 id="must-not-start-using-deprecated-apis">MUST: Not Start Using Deprecated APIs<a class="headerlink" href="#must-not-start-using-deprecated-apis" title="Permanent link">&para;</a></h3>
+<p>Clients must not start using deprecated parts of an API.</p>
                 
                   
                 
@@ -804,7 +823,7 @@ There&#39;s no question the header is more correct and it is still a very strong
           </a>
         
         
-          <a href="../documentation_and_discovery/" title="-Documentation and Discovery" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../documentation-and-discovery/" title="-Documentation and Discovery" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
