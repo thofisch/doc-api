@@ -1,13 +1,16 @@
-## Methods
+## HTTP Methods
     
-Before discussing the individual HTTP methods we will offer some general advise:
+Before discussing the individual HTTP methods here is some general advise:
 
 - **DO** use HTTP methods correctly.
 - **DO** stay consistent with the HTTP verb definitions.
 - **DO** use **CRUD** for basic operations, as most developers will be familiar with this way of working with an API.
 
-!!! tip "CRUD"
-    `POST` for **C**reating, `GET` for **R**eading, `PUT` for **U**pdating, and `DELETE` for **D**eleting.
+!!! info "CRUD"
+    * **C**reate using `POST`
+    * **R**ead using `GET`
+    * **U**pdate using `PUT` 
+    * **D**elete using`DELETE`
 
 HTTP supports the following methods:
 
@@ -21,13 +24,13 @@ HTTP supports the following methods:
 |`PATCH`  |No  |No        |
 |`POST`   |No  |No        |
 
-_Safety and idempotency are guarantees a server must provide to clients._
+==Safety and idempotency are guarantees a server must provide to clients.==
 
-!!! tip "Safe methods (or read-only operations)"
-    are expected not to cause side-effects, however, it does not mean the server must return the same response every time.
+!!! tip "Safe methods"
+    Safe methods (or read-only operations) are expected not to cause side-effects, however, it does not mean the server must return the same response every time.
 
 !!! tip "Idempotent methods"
-    must guarantee that every request has the same effect, however, this does not necessarily mean returning the same status code. This is highly important in case of failures.
+    Idempotent methods must guarantee that every request has the same effect, however, this does not necessarily mean returning the same status code. This is highly important in case of failures.
 
 ### GET
 
