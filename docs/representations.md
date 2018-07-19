@@ -18,7 +18,8 @@ Even though it is perfectly acceptable to use only a single format, in order to 
 - **DO** let your parser interpret the character set, if you receive an XML representation with a missing `charset` parameter.
 - **AVOID** using the `text/xml` media type for XML-formatted representations. The default charset for `text/xml` is `us-ascii`, whereas `application/xml` uses `UTF-8`.
 
-> Note that Text and XML media types let you specify the character encoding. The JSON media type `application/json` does not specify a `charset` parameter, but uses `UTF-8` as the default encoding.
+!!! tip
+    Note that Text and XML media types let you specify the character encoding. The JSON media type `application/json` does not specify a `charset` parameter, but uses `UTF-8` as the default encoding.
 
 ### Content-Length
 
@@ -390,7 +391,7 @@ For client errors:
 - **DO** return `403 Forbidden` when your serer will not let the client gain access (authenticated or not).
 - **DO** return `404 Not Found` when the resource is not found. If possible, return a reason in the message body.
 - **DO** return `405 Not Allowed` when an HTTP method is not allowed. Return an `Allow` header with methods that are valid for the resource.
-- **DO** return `406 Not Acceptable`. when the resource can only generate content not acceptable according to the `Accept` headers sent in the request.
+- **DO** return `406 Not Acceptable` when the resource can only generate content not acceptable according to the `Accept` headers sent in the request.
 - **DO** return `408 Request Timeout` when the server times out waiting for the resource.
 - **DO** return `409 Conflict` when the request conflicts with the current state of the resource. Include a body explaining the reason.
 - **DO** return `410 Gone` when the resource used to exist, but it does not anymore. You may not be able to return this unless you tracked deleted resources, then return `404 Not Found`.
