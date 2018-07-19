@@ -104,3 +104,12 @@ How to Maintain the Confidentiality and Integrity of Representations
     use TLS and make resource accessible over a server configured to serve request only using HTTPS.
 
 
+## Authentication is Key
+By providing your API users with a unique API token, or API key you can tell exactly who is making calls to your API.
+
+Along with having quick access to determining potential malicious users which can immediately be removed, you can also set permissions and SLAs for users depending on their individual needs.
+
+This means that you can set a default SLA for most users, giving them say only 4 calls per second, but for silver partners they get 10 calls per second, for gold partners 100 calls per second, etc.
+
+This means that you can not only identify abuse quickly, but also help prevent it by limiting their access to certain aspects of your API, and by limiting the number of calls they can make to your API.
+
