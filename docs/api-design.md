@@ -65,3 +65,39 @@ The API Guild drafted and owns this document.
     415 Unsupported Media Type
     500 Internal Server Error
     503 Service Unavailable
+
+### MUST: Provide Online Access to OpenAPI Reference Definition
+
+## Dog-food your own API
+
+## Chatty APIs
+
+Let's think about how app developers use that API you're designing and dealing with chatty APIs.
+
+Imagine how developers will use your API
+
+When designing your API and resources, try to imagine how developers will use it to say construct a user interface, an iPhone app, or many other apps.
+
+Some API designs become very chatty - meaning just to build a simple UI or app, you have dozens or hundreds of API calls back to the server.
+
+The API team can sometimes decide not to deal with creating a nice, resource-oriented RESTful API, and just fall back to a mode where they create the 3 or 4 Java-style getter and setter methods they know they need to power a particular user interface.
+
+We don't recommend this. You can design a RESTful API and still mitigate the chattiness.
+
+Be complete and RESTful and provide shortcuts
+
+First design your API and its resources according to pragmatic RESTful design principles and then provide shortcuts.
+
+What kind of shortcut? Say you know that 80% of all your apps are going to need some sort of composite response, then build the kind of request that gives them what they need.
+
+Just don't do the latter instead of the former. First design using good pragmatic RESTful principles!
+
+Take advantage of the partial response syntax
+
+The partial response syntax discussed in a previous section can help.
+
+To avoid creating one-off base URLs, you can use the partial response syntax to drill down to dependent and associated resources.
+
+In the case of our dogs API, the dogs have association with owners, who in turn have associations with veterinarians, and so on. Keep nesting the partial response syntax using dot notation to get back just the information you need.
+
+/owners/5678?fields=name,dogs.name
