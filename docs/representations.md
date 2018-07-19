@@ -84,7 +84,7 @@ If you choose to create new media types of your own, consider:
 !!! warning
     Although custom media types improve protocol-level visibility, existing protocol-level tools for monitoring, filtering, or routing HTTP traffic pay little or no attention to media types. Hence, using custom media types only for the sake of protocol-level visibility is not necessary.
 
-## Use Portable Data Formats in Representations
+## Portable Data Formats
 
 - **DO** use decimal, float and double data types defined in the W3C XML Schema for formatting numbers including currency.
 - **DO** use ISO 3166 (ISO 3166-1-alpha2) codes for countries and dependent territories.
@@ -106,7 +106,8 @@ Also, consider defining the format for numbers and integers. The precision could
 | number  | double  | IEEE 754-2008/ISO 60559:2011 binary128 decimal number |
 | number  | decimal | arbitrarily precise signed decimal number             |
 
-## JSON Representations
+
+## JSON
 
 JSON has become the de facto format within RESTful APIs, by providing a compact, human-readable format for accessing data, which can help minimalize the bandwidth required.
 
@@ -162,126 +163,129 @@ One of the advantages to REST is that it is not limited to a single format, and 
     }
     ```
 
-### Representations of Collections
+### JSON Collections
 
 - **DO** return an empty collection, if the query does not match any resources.
-- **DO** include pagination links.
+- **DO** include [Pagination Links](#pagination-links).
 
-### Pagination
+## XML
 
-- **DO** add a self link to the collection resource
-- **DO** add link to the next page, if the collection is paginated and has a next page
-- **DO** a link to the previous page, if the collection is paginated and has a previous page
-- **DO** add an indicator of the size of the collection
-- **DO** keep collections homogeneous by include only the homogeneous aspects of its member resources.
+{>>
+Suggested topics: Atom resources, AtomPub Service, category documents, AtomPub for feed and entry resources, media resources
+<<}
+
+## HTML
+
+- **DO** provide HTML representations, for resources that are expected to be consumed by end users.
+- **CONSIDER**  using microformats or RDFx to annotate data within the markup.
+- **AVOID** avoid designing HTML representations for machine clients.
+
+## Binary Data
+
+- **DO** use multipart media types such as `multipart/mixed`, `multipart/related`, or `multipart/alternative`.
+- **CONSIDER** providing a link to fetch the binary data as a separate resource as an alternative. Creating and parsing multipart messages in some programming languages may be cumbersome and complex.
+- **AVOID** encoding binary data within textual formats using Base64 encoding.
+
+## Pagination
+
+Access to lists of data items must support pagination for best client side batch processing and iteration experience. This holds true for all lists that are (potentially) larger than just a few hundred entries. It's almost always a bad idea to return every resource in a database.
+
+There are two overall pagination techniques:
+
+* *Offset/limit* based pagination, where a numeric *offset* identifies the first page entry and a *limit* signifies how many entries are returned.
+* *Cursor* based (or key based) pagination, where a unique key element identifies the first page entry.
+
+??? info "Offset/limit-based vs. cursor-based pagination"
+    Cursor-based pagination is usually better and more efficient when compared to offset/limit-based pagination. Especially when it comes to high-data volumes and/or storage in NoSQL databases, so there may be a tendency to prefer cursor-based pagination, however, before choosing cursor-based pagination, consider the following:
+
+    | Feature                          | Offset/limit | Cursor | Comments                                                                                                                                                                              |
+    |----------------------------------|:------------:|:------:|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | Usability                        |       +      |    -   | Offset/limit-based pagination is more wellknown, so it may be easier to use for most API clients.                                                                                     |
+    | Framework support                |       +      |    -   | Offset/limit-based pagination is more wellknown, so it may have better framework support.                                                                                             |
+    | Total count                      |       +      |    -   | Cursor-based pagination may not work if you need the total count of results and/or backward iteration support.                                                                        |
+    | Use case: Jump to a certain page |       +      |    -   | If jumping to a particular page in a range (e.g., 51 of 100) is really a required use case, cursor-based navigation is not feasible.                                                  |
+    | Performance                      |       -      |    +   | Efficient server-side processing using offset/limit-based pagination is hardly feasible for higher data list volumes, especially if they do not reside in the database's main memory. |
+    | Sharded or NoSQL databases       |       -      |    +   | Not feasable for offset/limit-based pagination for most database implementations.                                                                                                     |
 
 !!! tip
+    The technical conception of pagination should also consider user experience related issues. Jumping to a specific page is far less used than navigation via next/previous page links. This favours *cursor*-based over *offset/limit*-based pagination.
+
+When providing paginated collections:
+
+- **DO** use offset/limit-based pagination when resource collections are backed by traditional relation databases. It is more common, well understood in leading databases, and easy for developers.
+- **DO** use a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database.
+
+!!! warning "Variability"
+    Both pagination strategies suffer when data changes, which may lead to anomalies in result pages.
+    
+    Offset/limit-based pagination may create duplicates or lead to missing entries if rows are inserted or deleted between two subsequent paging requests.
+    
+    When using cursor-based pagination, paging cannot continue when the cursor entry has been deleted while fetching two page
+
+### Links
+
+==Use pagination links where applicable.==
+
+- **DO** add a self link to the collection resource.
+- **DO** add link to the next page, if the collection is paginated and has a next page.
+- **DO** a link to the previous page, if the collection is paginated and has a previous page.
+- **DO** keep collections homogeneous by include only the homogeneous aspects of its member resources.
+- **CONSIDER** adding an indicator of the size of the collection, either embedded in the collection representation or using a custom HTTP header, like `X-Total-Count`.
+- **CONSIDER** using the HTTP `Link` header to supply pagination links.
+
+!!! warning
     Although the size of the collection is useful for building user interfaces, avoid computing the exact size of the collection. It may be expensive to compute, volatile, or even confidential. Providing a hint is usually good enough.
 
-<!-- TODO -->
+    You should avoid providing a total count in your API unless there's a clear need to do so. Very often, there are systems and performance implications to supporting full counts, especially as datasets grow and requests become complex queries or filters that drive full scans (e.g., your database might need to look at all candidate items to count them). While this is an implementation detail relative to the API, it's important to consider your ability to support serving counts over the life of a service.
 
-    ## PAGINATION
+### Representations
 
-    limit — to restrict the number of entries. See Pagination section below. Hint: You can use size as an alternate query string.
-    offset — numeric offset page start. See Pagination section below. Hint: In combination with limit, you can use page as an alternative to offset.
-    cursor — key-based page start. See Pagination section below.
+Pagination links can be represented as simplified hypertext controls for pagination within the collection representation.
 
-    ## Pagination and partial response
+In the following example the collections has an `#!json items: [...]` attribute holding the items of the current page, as well as pagination links (highlighted below). The collection may also contain additional metadata about the collection (e.g. offset, limit) when necessary.
 
-    Partial response allows you to give developers just the information they need.
+!!! Example "JSON representation containing pagination links"
 
-    Take for example a request for a tweet on the Twitter API. You'll get much more than a typical twitter app often needs - including the name of person, the text of the tweet, a timestamp, how often the message was re-tweeted, and a lot of metadata.
+    ```json hl_lines="2 3 4 5 6"
+    {
+        "self": "https://example.org/articles/authors?offset=4&limit=5",
+        "first": "https://example.org/articles/authors?offset=0&limit=5",
+        "next": "https://example.org/articles/authors?offset=9&limit=5",
+        "prev": "https://example.org/articles/authors?offset=0&limit=5",
+        "last": "https://example.org/articles/authors?offset=100&limit=5",
+        "offset": 10,
+        "limit": 5,
+        "items": [
+            {  
+            "href": "https://example.org/authors/123e4567-e89b-12d3-a456-426655440000",
+            "id": "123e4567-e89b-12d3-a456-426655440000",
+            "name": "Kent Beck"
+            },
+            {  
+            "href": "https://example.org/authors/987e2343-e89b-12d3-a456-426655440000",
+            "id": "987e2343-e89b-12d3-a456-426655440000",
+            "name": "Martin Fowler"
+            },
+            ...
+        ]
+    }
+    ```
 
-    Let's look at how several leading APIs handle giving developers just what they need in responses, including Google who pioneered the idea of partial response.
+An alternative approach may be to using HTTP `Link` header introduced by RFC 5988[^2]:
 
-    LinkedIn
-
-    /people:(id,first-name,last-name,industry)
-
-    This request on a person returns the ID, first name, last name, and the industry.
-
-    LinkedIn does partial selection using this terse :(...) syntax which isn't self-evident.
-
-    Plus it's difficult for a developer to reverse engineer the meaning using a search engine.
-
-    Facebook
-
-    /joe.smith/friends?fields=id,name,picture
-
-    Google
-
-    ?fields=title,media:group(media:thumbnail)
-
-    Google and Facebook have a similar approach, which works well.
-
-    They each have an optional parameter called fields after which you put the names of fields you want to be returned.
-
-    As you see in this example, you can also put sub-objects in responses to pull in other information from additional resources.
-
-    Add optional fields in a comma-delimited list The Google approach works extremely well.
-
-    Here's how to get just the information we need from our dogs API using this approach:
-
-    /dogs?fields=name,color,location
-
-    It's simple to read; a developer can select just the information an app needs at a given time; it cuts down on bandwidth issues, which is important for mobile apps.
-
-
-    The partial selection syntax can also be used to include associated resources cutting down on the number of requests needed to get the required information.
-
-    Make it easy for developers to paginate objects in a database 
-
-    It's almost always a bad idea to return every resource in a database.
-
-    Let's look at how Facebook, Twitter, and LinkedIn handle pagination. Facebook uses offset and limit. Twitter uses page and rpp (records per page). LinkedIn uses start and count
-
-    Semantically, Facebook and LinkedIn do the same thing. That is, the LinkedIn start & count is used in the same way as the Facebook offset & limit.
-
-    To get records 50 through 75 from each system, you would use:
-
-    * Facebook - offset 50 and limit 25
-    * Twitter - page 3 and rpp 25 (records per page)
-    * LinkedIn - start 50 and count 25
-
-    ## Use limit and offset
-
-    We recommend limit and offset. It is more common, well understood in leading databases, and easy for developers.
-
-    /dogs?limit=25&offset=50
-
-    ## Metadata
-
-    We also suggest including metadata with each response that is paginated that indicated to the developer the total number of records available.
-
-    What about defaults?
-
-    My loose rule of thumb for default pagination is limit=10 with offset=0. (limit=10&offset=0)
-
-    The pagination defaults are of course dependent on your data size. If your resources are large, you probably want to limit it to fewer than 10; if resources are small, it can make sense to choose a larger limit.
-
-    In summary:
-
-    Support partial response by adding optional fields in a comma delimited list.
-
-    Use limit and offset to make it easy for developers to paginate objects
-
-    <!-- TODO -->
-
-    Pagination: The right way to include pagination details today is using the Link header introduced by RFC 5988. An API that requires sending a count can use a custom HTTP header like X-Total-Count.
-
-    - OData
-    - The GitHub way:
+!!! Example "HTTP header"
+    Using the HTTP `Link` header for pagination links:
     ```
     # Request
-    GET /user/repos?page=4&per_page=2
+    GET /articles/authors?offset=4&limit=5
 
     # Response
-    Link: <https://api.github.com/user/repos?page=5&per_page=2>; rel="next",
-          <https://api.github.com/user/repos?page=8&per_page=2>; rel="last",
-          <https://api.github.com/user/repos?page=1&per_page=2>; rel="first",
-          <https://api.github.com/user/repos?page=3&per_page=2>; rel="prev"
+    Link: <https://example.org/articles/authors?offset=9&limit=5>; rel="next",
+          <https://example.org/articles/authors?offset=100&limit=5>; rel="last",
+          <https://example.org/articles/authors?offset=0&limit=5>; rel="first",
+          <https://example.org/articles/authors?offset=0&limit=5>; rel="prev"
     ```
-    - Pivotal Tracker
+    Or using custom HTTP headers:
     ```
     # Request
     GET projects/1/stories?offset=1300&limit=300
@@ -292,116 +296,8 @@ One of the advantages to REST is that it is not limited to a single format, and 
     X-Tracker-Pagination-Offset: 1300
     X-Tracker-Pagination-Returned: 243
     ```
-    ```
-    # Request
-    GET projects/1/stories?offset=1300&limit=300&envelope=true
 
-    # Response
-    {
-       "data": { /* ... */ },
-       "pagination": {
-           "total": 1543,
-           "limit": 300,
-           "offset": 1300,
-           "returned": 243
-       }
-    }
-    ```
-
-    # Pagination
-
-    ### Support Pagination
-
-    Access to lists of data items must support pagination for best client side batch processing and iteration experience. This holds true for all lists that are (potentially) larger than just a few hundred entries.
-
-    There are two page iteration techniques:
-
-    Offset/Limit-based pagination: numeric offset identifies the first page entry
-    Cursor-based — aka key-based — pagination: a unique key element identifies the first page entry (see also Facebook's guide)
-    The technical conception of pagination should also consider user experience related issues. As mentioned in this article, jumping to a specific page is far less used than navigation via next/previous page links. This favours cursor-based over offset-based pagination.
-
-    ### Prefer Cursor-Based Pagination, Avoid Offset-Based Pagination
-
-    Cursor-based pagination is usually better and more efficient when compared to offset-based pagination. Especially when it comes to high-data volumes and / or storage in NoSQL databases.
-
-    Before choosing cursor-based pagination, consider the following trade-offs:
-
-    Usability/framework support:
-
-    Offset / limit based pagination is more known than cursor-based pagination, so it has more framework support and is easier to use for API clients
-    Use case: Jump to a certain page
-
-    If jumping to a particular page in a range (e.g., 51 of 100) is really a required use case, cursor-based navigation is not feasible
-    Variability of data may lead to anomalies in result pages
-
-    Offset-based pagination may create duplicates or lead to missing entries if rows are inserted or deleted between two subsequent paging requests.
-    When using cursor-based pagination, paging cannot continue when the cursor entry has been deleted while fetching two pages
-    Performance considerations - efficient server-side processing using offset-based pagination is hardly feasible for:
-
-    Higher data list volumes, especially if they do not reside in the database's main memory
-    Sharded or NoSQL databases
-    Cursor-based navigation may not work if you need the total count of results and / or backward iteration support
-
-    Further reading:
-
-    Twitter
-    Use the Index, Luke
-    Paging in PostgreSQL
-
-    ### Use Pagination Links Where Applicable
-
-    API implementing HATEOS may use simplified hypertext controls for pagination within collections.
-    Those collections should then have an items attribute holding the items of the current page. The collection may contain additional metadata about the collection or the current page (e.g. index, page_size) when necessary.
-
-    You should avoid providing a total count in your API unless there's a clear need to do so. Very often, there are systems and performance implications to supporting full counts, especially as datasets grow and requests become complex queries or filters that drive full scans (e.g., your database might need to look at all candidate items to count them). While this is an implementation detail relative to the API, it's important to consider your ability to support serving counts over the life of a service.
-
-    If the collection consists of links to other resources, the collection name should use IANA registered link relations as names whenever appropriate, but use plural form.
-
-    E.g. a service for articles could represent the collection of hyperlinks to an article's authors like that:
-
-    {
-    "self": "https://.../articles/xyz/authors/",
-    "index": 0,
-    "page_size": 5,
-    "items": [
-        {  
-        "href": "https://...",
-        "id": "123e4567-e89b-12d3-a456-426655440000",
-        "name": "Kent Beck"
-        },
-        {  
-        "href": "https://...",
-        "id": "987e2343-e89b-12d3-a456-426655440000",
-        "name": "Mike Beedle"
-        },
-        ...
-    ],
-    "first": "https://...",
-    "next": "https://...",
-    "prev": "https://...",
-    "last": "https://..."
-    }
-
-## _**XML Representations**_
-
-*TBD*
-
-*Suggested topics:*<br/>
-*Atom resources, AtomPub Service, category documents, AtomPub for feed and entry resources, media resources*
-
-## HTML Representations
-
-- **DO** provide HTML representations, for resources that are expected to be consumed by end users.
-- **CONSIDER**  using microformats or RDFx to annotate data within the markup.
-- **AVOID** avoid designing HTML representations for machine clients.
-
-## Binary Data in Representations
-
-- **DO** use multipart media types such as `multipart/mixed`, `multipart/related`, or `multipart/alternative`.
-- **CONSIDER** providing a link to fetch the binary data as a separate resource as an alternative. Creating and parsing multipart messages in some programming languages may be cumbersome and complex.
-- **AVOID** encoding binary data within textual formats using Base64 encoding.
-
-##   Error Representations
+## Error Representations
 
 Communicate errors through standard HTTP status codes along with details supplied in the response body. 
 
@@ -467,7 +363,9 @@ By using meaningful status codes, developers can quickly see what is happening w
 - **DO** provide good documentation in the API definition when using HTTP status codes that are less commonly used and not listed below.
 - **DO NOT** invent new HTTP status codes; only use standardized HTTP status codes and consistent with its intended semantics.
  
-### `2xx` Success
+### `2xx`
+
+For successful responses:
 
 - **DO** return `200 OK` when the request completed without issues.
 - **DO** return `201 Created` when a resource was successfully created. Always set the `Location` header with the URI of the newly created resource. Return either an empty response or the created resource.
@@ -475,13 +373,17 @@ By using meaningful status codes, developers can quickly see what is happening w
 - **DO** return `204 No content` when there is no response body.
 - **DO** return `207 Multi-Status` when the response body contains multiple status informations for different parts of a batch/bulk request.
 
-### `3xx` Client Action May Be Required
+### `3xx`
+
+For any action required by the client:
 
 - **DO** return `301 Moved Permanently` when this and all future requests should be directed to the URI specified in the `Location` header.
 - **DO** return `303 See Other` when the response to the request can be found under the URI specified in the `Location` header using a GET method.
 - **DO** return `304 Not Modified` when the resource has not been modified since the date or version passed via request headers `If-Modified-Since` or `If-None-Match`.
 
-### `4xx` Client Errors
+### `4xx`
+
+For client errors:
 
 - **DO** return `400 Bad Request` when your server cannot decipher client requests because of syntactical errors.
 - **DO** return `401 Unauthorized` when the client is not authorized to access the resource, but may be able to gain access after authentication. If your server will not let the client access the resource even after authentication return `403 Forbidden` instead. When returning this error code, include a WWW-Authenticate header field with the authentication method to use.
@@ -499,7 +401,9 @@ By using meaningful status codes, developers can quickly see what is happening w
 - **DO** return `428 Precondition Required` when the server requires the request to be conditional (e.g. to make sure that the "lost update problem" is avoided).
 - **DO** return `429 Too Many Requests` when the client does not consider rate limiting and sent too many requests. Include headers to indicate rate limits.
 
-### `5xx` Server Errors
+### `5xx`
+
+For server errors:
 
 - **DO** return `500 Internal Server Error` when your code on the server side failed due to come implementation bug.
 - **DO** return `501 Not Implemented` to indicate that a future feature may become available.
@@ -515,3 +419,4 @@ When an API is part of a larger API portfolio or system, information may cross s
 - **CONSIDER** limiting the use of UUIDs as entity identifiers when it is not strictly necessary, if it possible to come up with a better naming scheme, if the id volume is low, or if the ids have widespread steering functionality.
 
 [^1]: The Internet Assigned Number Authority ([IANA](http://www.iana.org/assignments/media-types/)) media type registry.
+[^2]: [Web Linking](https://tools.ietf.org/html/rfc5988).

@@ -48,7 +48,7 @@ pages:
 - Resource Identifiers: resource_identifiers.md
 - Resources: resources.md
 - Methods: methods.md
-- -Representations: representations.md
+- Representations: representations.md
 - -Hypermedia: hypermedia.md
 - Content Negotiation: content_negotiation.md
 - -Caching: caching.md
