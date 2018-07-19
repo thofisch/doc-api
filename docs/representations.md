@@ -140,13 +140,13 @@ One of the advantages to REST is that it is not limited to a single format, and 
         "id": "urn:example:user:1234",
         "link": {
             "rel": "self",
-            "href": "http://www.example.org/person/john"
+            "href": "https://www.example.org/person/john"
         },
         "address": {
             "id": "urn:example:address:4567",
             "link": {
                 "rel": "self",
-                "href": "http://www.example.org/person/john/address"
+                "href": "https://www.example.org/person/john/address"
             }
         },
         "content": {
@@ -324,7 +324,7 @@ Errors are a key element for providing context and visibility, and status codes 
         "code" : "e3526",
         "message" : "Missing UserID",
         "description" : "A UserID is required to edit a user.",
-        "link" : "http://docs.mysite.com/errors/e3526/"
+        "link" : "https://docs.mysite.com/errors/e3526/"
         }
     }
     ```

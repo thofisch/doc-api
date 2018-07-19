@@ -149,14 +149,14 @@ To enable asynchronous processing of request, follow these guidelines (these ste
     ```http
     HTTP/1.1 202 Accepted
     Content-Type: application/json
-    Content-Location: http://www.example.org/images/task/1
+    Content-Location: https://www.example.org/images/task/1
 
     {
         "state": "pending",
         "message": "Your request is being processed shortly.",
         "pingAfter": "2009-09-13T01:59:27Z",
         "link": {
-            "href": "http://www.example.org/images/task/1",
+            "href": "https://www.example.org/images/task/1",
             "rel": "self"
         }
     }
@@ -166,14 +166,14 @@ To enable asynchronous processing of request, follow these guidelines (these ste
     ```http
     HTTP/1.1 303 See Other
     Content-Type: application/json
-    Location: http://www.example.org/images/1
-    Content-Location: http://www.example.org/images/task/1
+    Location: https://www.example.org/images/1
+    Content-Location: https://www.example.org/images/task/1
 
     {
         "state": "done",
         "message": "Your request has been processed.",
         "link": {
-            "href": "http://www.example.org/images/task/1",
+            "href": "https://www.example.org/images/task/1",
             "rel": "self"
         }
     }
