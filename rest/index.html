@@ -57,6 +57,8 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     
+      <link rel="stylesheet" href="../stylesheets/critic.css">
+    
     
   </head>
   
@@ -222,13 +224,6 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#rest" title="REST" class="md-nav__link">
-    REST
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#richardson-maturity-model" title="Richardson Maturity Model" class="md-nav__link">
     Richardson Maturity Model
   </a>
@@ -314,8 +309,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../representations/" title="-Representations" class="md-nav__link">
-      -Representations
+    <a href="../representations/" title="Representations" class="md-nav__link">
+      Representations
     </a>
   </li>
 
@@ -485,13 +480,6 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#rest" title="REST" class="md-nav__link">
-    REST
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#richardson-maturity-model" title="Richardson Maturity Model" class="md-nav__link">
     Richardson Maturity Model
   </a>
@@ -530,19 +518,16 @@
                 
                 
                 <h1 id="representational-state-transfer-rest">REpresentational State Transfer (REST)<a class="headerlink" href="#representational-state-transfer-rest" title="Permanent link">&para;</a></h1>
-<p>Web APIs can typically be broken into two broad categories: <em>RPC</em> and <em>REST</em>.</p>
-<details class="info"><summary>RPC (Remote Procedure Call)</summary><p>RPC (e.g., XML-RPC, SOAP, etc.) is generally a poor fit for most web API implementations, as they usually require special purpose libraries or SDKs to work properly.
-A requirement that a lot of clients cannot meet without a lot of extra work and/or clunky third-party libraries. This, and the fact that most RPC implementations do not use HTTP to its full extend, has led us to <strong>exclude RPC from these guidelines</strong>. However, if all of your clients are using legacy systems that depend on SOAP libraries, it may make more sense in that case to build a SOAP API for them. A lot of documentation, best practices and general advise on how to build RPC APIs can be found throughout the web.</p></details><h2 id="rest">REST<a class="headerlink" href="#rest" title="Permanent link">&para;</a></h2>
-<p>We will focus our discussion on REST. Especially on how to achieve a more RESTful web API, by leveraging the capabilities of HTTP. For more information about REST itself, please refer to the <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">Wikipedia article on REST</a> or <a href="http://whatisrest.com">WhatIsREST</a>.</p>
+<p>We will focus our discussion on REST. Especially on how to achieve a more RESTful web API, by leveraging the capabilities of HTTP. For more information about REST itself, please refer to the <a href="http://en.wikipedia.org/wiki/Representational_state_transfer">Wikipedia article on REST</a> or <a href="https://www.restapitutorial.com/lessons/whatisrest.html">What is REST?</a>.</p>
 <p>Some of the aspects of designing RESTful web APIs include:</p>
 <ul>
-<li><em>Unique identification</em> of resources by using URIs.</li>
-<li>Operation on resources by using the available <em>HTTP methods</em>.</li>
-<li>A choice of <em>media types and formats</em> that allow clients to specify representation formats they can render, and for servers to honor those (or indicate if it cannot).</li>
-<li><em>Linking</em> between resources to indicate relationships (e.g., hypermedia links).</li>
+<li><em><a href="../resource_identifiers">Unique identification</a></em> of resources by using URIs.</li>
+<li>Operation on resources by using the available <em><a href="../methods">HTTP methods</a></em>.</li>
+<li>A choice of <em><a href="../representations/#format-and-a-media-type">formats and media types</a></em> that allow clients to specify representation formats they can render, and for servers to honor those (or indicate if it cannot).</li>
+<li><em><a href="../hypermedia">Linking</a></em> between resources to indicate relationships (e.g., hypermedia links).</li>
 </ul>
 <h2 id="richardson-maturity-model">Richardson Maturity Model<a class="headerlink" href="#richardson-maturity-model" title="Permanent link">&para;</a></h2>
-<p>Today, most web APIs are not truly REST APIs, instead they tend to be of a varying degree of RESTful. Therefore, the <a href="http://martinfowler.com/articles/richardsonMaturityModel.html">Richardson Maturity Model</a> is often used to describe what it takes to make a well-designed REST API:</p>
+<p>Today, most web APIs are not truly RESTful APIs, instead they tend to be of a varying degree of RESTful. Therefore, the <a href="http://martinfowler.com/articles/richardsonMaturityModel.html">Richardson Maturity Model</a> is often used to describe what it takes to make a well-designed RESTful API:</p>
 <p><img alt="ichardson Maturity Model" src="../imgs/richardson-maturity-model.png" /></p>
 <ul>
 <li><strong>Level 0</strong>: Uses HTTP as a transport mechanism for RPC.</li>
@@ -551,7 +536,7 @@ A requirement that a lot of clients cannot meet without a lot of extra work and/
 <li><strong>Level 3</strong>: Uses hypermedia controls for discoverability, which also helps making an API more self-documenting.</li>
 </ul>
 <div class="admonition tip">
-<p class="admonition-title">So a good REST API should</p>
+<p class="admonition-title">So a good RESTful API should</p>
 <ul>
 <li>Use unique URIs to expose resources for clients to use.</li>
 <li>Use the full spectrum of HTTP, to perform operations on those resources, and allow different representations of content.</li>
@@ -568,12 +553,12 @@ A requirement that a lot of clients cannot meet without a lot of extra work and/
 <li>How to handle security, including HTTP authentication, OAuth2, and API tokens</li>
 <li>How to handle hypermedia linking</li>
 <li>How to document your API</li>
-<li><strong><em>And more...</em></strong></li>
 </ul>
+<span class="critic comment">Anything else?</span>
 <h2 id="before-we-get-started">Before we get Started<a class="headerlink" href="#before-we-get-started" title="Permanent link">&para;</a></h2>
 <p>Because REST is an architectural style and not a strict standard, it allows for a lot of flexibly. So before jumping straight into designing an API, it can be helpful to think about:</p>
 <ul>
-<li>target audience (customers, third-party services, or other developers looking to take advantage of your services for their own customers).</li>
+<li>the target audience, i.e. customers, third-party services, or other developers looking to take advantage of your services for their own customers.</li>
 <li>ease of life for the consuming developers</li>
 <li>use cases</li>
 <li>technologies used</li>

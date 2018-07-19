@@ -36,7 +36,7 @@
     
     
       
-        <title>-Representations - API Design Guidelines</title>
+        <title>Representations - API Design Guidelines</title>
       
     
     
@@ -56,6 +56,8 @@
       
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
+    
+      <link rel="stylesheet" href="../stylesheets/critic.css">
     
     
   </head>
@@ -100,7 +102,7 @@
                 API Design Guidelines
               </span>
               <span class="md-header-nav__topic">
-                -Representations
+                Representations
               </span>
             
           
@@ -264,11 +266,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        -Representations
+        Representations
       </label>
     
-    <a href="./" title="-Representations" class="md-nav__link md-nav__link--active">
-      -Representations
+    <a href="./" title="Representations" class="md-nav__link md-nav__link--active">
+      Representations
     </a>
     
       
@@ -357,30 +359,23 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#use-portable-data-formats-in-representations" title="Use Portable Data Formats in Representations" class="md-nav__link">
-    Use Portable Data Formats in Representations
+  <a href="#portable-data-formats" title="Portable Data Formats" class="md-nav__link">
+    Portable Data Formats
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#json-representations" title="JSON Representations" class="md-nav__link">
-    JSON Representations
+  <a href="#json" title="JSON" class="md-nav__link">
+    JSON
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#representations-of-collections" title="Representations of Collections" class="md-nav__link">
-    Representations of Collections
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pagination" title="Pagination" class="md-nav__link">
-    Pagination
+  <a href="#json-collections" title="JSON Collections" class="md-nav__link">
+    JSON Collections
   </a>
   
 </li>
@@ -391,23 +386,50 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#xml-representations" title="XML Representations" class="md-nav__link">
-    XML Representations
+  <a href="#xml" title="XML" class="md-nav__link">
+    XML
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#html-representations" title="HTML Representations" class="md-nav__link">
-    HTML Representations
+  <a href="#html" title="HTML" class="md-nav__link">
+    HTML
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#binary-data-in-representations" title="Binary Data in Representations" class="md-nav__link">
-    Binary Data in Representations
+  <a href="#binary-data" title="Binary Data" class="md-nav__link">
+    Binary Data
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pagination" title="Pagination" class="md-nav__link">
+    Pagination
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#links" title="Links" class="md-nav__link">
+    Links
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representations_1" title="Representations" class="md-nav__link">
+    Representations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -427,29 +449,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#2xx-success" title="2xx Success" class="md-nav__link">
-    2xx Success
+  <a href="#2xx" title="2xx" class="md-nav__link">
+    2xx
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3xx-client-action-may-be-required" title="3xx Client Action May Be Required" class="md-nav__link">
-    3xx Client Action May Be Required
+  <a href="#3xx" title="3xx" class="md-nav__link">
+    3xx
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4xx-client-errors" title="4xx Client Errors" class="md-nav__link">
-    4xx Client Errors
+  <a href="#4xx" title="4xx" class="md-nav__link">
+    4xx
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#5xx-server-errors" title="5xx Server Errors" class="md-nav__link">
-    5xx Server Errors
+  <a href="#5xx" title="5xx" class="md-nav__link">
+    5xx
   </a>
   
 </li>
@@ -717,30 +739,23 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#use-portable-data-formats-in-representations" title="Use Portable Data Formats in Representations" class="md-nav__link">
-    Use Portable Data Formats in Representations
+  <a href="#portable-data-formats" title="Portable Data Formats" class="md-nav__link">
+    Portable Data Formats
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#json-representations" title="JSON Representations" class="md-nav__link">
-    JSON Representations
+  <a href="#json" title="JSON" class="md-nav__link">
+    JSON
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#representations-of-collections" title="Representations of Collections" class="md-nav__link">
-    Representations of Collections
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pagination" title="Pagination" class="md-nav__link">
-    Pagination
+  <a href="#json-collections" title="JSON Collections" class="md-nav__link">
+    JSON Collections
   </a>
   
 </li>
@@ -751,23 +766,50 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#xml-representations" title="XML Representations" class="md-nav__link">
-    XML Representations
+  <a href="#xml" title="XML" class="md-nav__link">
+    XML
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#html-representations" title="HTML Representations" class="md-nav__link">
-    HTML Representations
+  <a href="#html" title="HTML" class="md-nav__link">
+    HTML
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#binary-data-in-representations" title="Binary Data in Representations" class="md-nav__link">
-    Binary Data in Representations
+  <a href="#binary-data" title="Binary Data" class="md-nav__link">
+    Binary Data
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pagination" title="Pagination" class="md-nav__link">
+    Pagination
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#links" title="Links" class="md-nav__link">
+    Links
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#representations_1" title="Representations" class="md-nav__link">
+    Representations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -787,29 +829,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#2xx-success" title="2xx Success" class="md-nav__link">
-    2xx Success
+  <a href="#2xx" title="2xx" class="md-nav__link">
+    2xx
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3xx-client-action-may-be-required" title="3xx Client Action May Be Required" class="md-nav__link">
-    3xx Client Action May Be Required
+  <a href="#3xx" title="3xx" class="md-nav__link">
+    3xx
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4xx-client-errors" title="4xx Client Errors" class="md-nav__link">
-    4xx Client Errors
+  <a href="#4xx" title="4xx" class="md-nav__link">
+    4xx
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#5xx-server-errors" title="5xx Server Errors" class="md-nav__link">
-    5xx Server Errors
+  <a href="#5xx" title="5xx" class="md-nav__link">
+    5xx
   </a>
   
 </li>
@@ -926,7 +968,7 @@
 <p class="admonition-title">Warning</p>
 <p>Although custom media types improve protocol-level visibility, existing protocol-level tools for monitoring, filtering, or routing HTTP traffic pay little or no attention to media types. Hence, using custom media types only for the sake of protocol-level visibility is not necessary.</p>
 </div>
-<h2 id="use-portable-data-formats-in-representations">Use Portable Data Formats in Representations<a class="headerlink" href="#use-portable-data-formats-in-representations" title="Permanent link">&para;</a></h2>
+<h2 id="portable-data-formats">Portable Data Formats<a class="headerlink" href="#portable-data-formats" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>DO</strong> use decimal, float and double data types defined in the W3C XML Schema for formatting numbers including currency.</li>
 <li><strong>DO</strong> use ISO 3166 (ISO 3166-1-alpha2) codes for countries and dependent territories.</li>
@@ -979,7 +1021,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="json-representations">JSON Representations<a class="headerlink" href="#json-representations" title="Permanent link">&para;</a></h2>
+<h2 id="json">JSON<a class="headerlink" href="#json" title="Permanent link">&para;</a></h2>
 <p>JSON has become the de facto format within RESTful APIs, by providing a compact, human-readable format for accessing data, which can help minimalize the bandwidth required.</p>
 <p>One of the advantages to REST is that it is not limited to a single format, and the choice of format should be based on what is most suitable for the clients.</p>
 <ul>
@@ -1030,129 +1072,107 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-</details><h3 id="representations-of-collections">Representations of Collections<a class="headerlink" href="#representations-of-collections" title="Permanent link">&para;</a></h3>
+</details><h3 id="json-collections">JSON Collections<a class="headerlink" href="#json-collections" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>DO</strong> return an empty collection, if the query does not match any resources.</li>
-<li><strong>DO</strong> include pagination links.</li>
+<li><strong>DO</strong> include <a href="#pagination-links">Pagination Links</a>.</li>
 </ul>
-<h3 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">&para;</a></h3>
+<h2 id="xml">XML<a class="headerlink" href="#xml" title="Permanent link">&para;</a></h2>
+<span class="critic comment"> Suggested topics: Atom resources, AtomPub Service, category documents, AtomPub for feed and entry resources, media resources </span>
+<h2 id="html">HTML<a class="headerlink" href="#html" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>DO</strong> add a self link to the collection resource</li>
-<li><strong>DO</strong> add link to the next page, if the collection is paginated and has a next page</li>
-<li><strong>DO</strong> a link to the previous page, if the collection is paginated and has a previous page</li>
-<li><strong>DO</strong> add an indicator of the size of the collection</li>
-<li><strong>DO</strong> keep collections homogeneous by include only the homogeneous aspects of its member resources.</li>
+<li><strong>DO</strong> provide HTML representations, for resources that are expected to be consumed by end users.</li>
+<li><strong>CONSIDER</strong>  using microformats or RDFx to annotate data within the markup.</li>
+<li><strong>AVOID</strong> avoid designing HTML representations for machine clients.</li>
 </ul>
-<div class="admonition tip">
+<h2 id="binary-data">Binary Data<a class="headerlink" href="#binary-data" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>DO</strong> use multipart media types such as <code>multipart/mixed</code>, <code>multipart/related</code>, or <code>multipart/alternative</code>.</li>
+<li><strong>CONSIDER</strong> providing a link to fetch the binary data as a separate resource as an alternative. Creating and parsing multipart messages in some programming languages may be cumbersome and complex.</li>
+<li><strong>AVOID</strong> encoding binary data within textual formats using Base64 encoding.</li>
+</ul>
+<h2 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">&para;</a></h2>
+<p>Access to lists of data items must support pagination for best client side batch processing and iteration experience. This holds true for all lists that are (potentially) larger than just a few hundred entries. It's almost always a bad idea to return every resource in a database.</p>
+<p>There are two overall pagination techniques:</p>
+<ul>
+<li><em>Offset/limit</em> based pagination, where a numeric <em>offset</em> identifies the first page entry and a <em>limit</em> signifies how many entries are returned.</li>
+<li><em>Cursor</em> based (or key based) pagination, where a unique key element identifies the first page entry.</li>
+</ul>
+<details class="info"><summary>Offset/limit-based vs. cursor-based pagination</summary><p>Cursor-based pagination is usually better and more efficient when compared to offset/limit-based pagination. Especially when it comes to high-data volumes and/or storage in NoSQL databases, so there may be a tendency to prefer cursor-based pagination, however, before choosing cursor-based pagination, consider the following:</p><table><thead><tr><th>Feature</th><th align="center">Offset/limit</th><th align="center">Cursor</th><th>Comments</th></tr></thead><tbody><tr><td>Usability</td><td align="center">+</td><td align="center">-</td><td>Offset/limit-based pagination is more wellknown, so it may be easier to use for most API clients.</td></tr><tr><td>Framework support</td><td align="center">+</td><td align="center">-</td><td>Offset/limit-based pagination is more wellknown, so it may have better framework support.</td></tr><tr><td>Total count</td><td align="center">+</td><td align="center">-</td><td>Cursor-based pagination may not work if you need the total count of results and/or backward iteration support.</td></tr><tr><td>Use case: Jump to a certain page</td><td align="center">+</td><td align="center">-</td><td>If jumping to a particular page in a range (e.g., 51 of 100) is really a required use case, cursor-based navigation is not feasible.</td></tr><tr><td>Performance</td><td align="center">-</td><td align="center">+</td><td>Efficient server-side processing using offset/limit-based pagination is hardly feasible for higher data list volumes, especially if they do not reside in the database's main memory.</td></tr><tr><td>Sharded or NoSQL databases</td><td align="center">-</td><td align="center">+</td><td>Not feasable for offset/limit-based pagination for most database implementations.</td></tr></tbody></table></details><div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Although the size of the collection is useful for building user interfaces, avoid computing the exact size of the collection. It may be expensive to compute, volatile, or even confidential. Providing a hint is usually good enough.</p>
+<p>The technical conception of pagination should also consider user experience related issues. Jumping to a specific page is far less used than navigation via next/previous page links. This favours <em>cursor</em>-based over <em>offset/limit</em>-based pagination.</p>
 </div>
-<!-- TODO -->
+<p>When providing paginated collections:</p>
+<ul>
+<li><strong>DO</strong> use offset/limit-based pagination when resource collections are backed by traditional relation databases. It is more common, well understood in leading databases, and easy for developers.</li>
+<li><strong>DO</strong> use a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Variability</p>
+<p>Both pagination strategies suffer when data changes, which may lead to anomalies in result pages.</p>
+<p>Offset/limit-based pagination may create duplicates or lead to missing entries if rows are inserted or deleted between two subsequent paging requests.</p>
+<p>When using cursor-based pagination, paging cannot continue when the cursor entry has been deleted while fetching two page</p>
+</div>
+<h3 id="links">Links<a class="headerlink" href="#links" title="Permanent link">&para;</a></h3>
+<p><mark>Use pagination links where applicable.</mark></p>
+<ul>
+<li><strong>DO</strong> add a self link to the collection resource.</li>
+<li><strong>DO</strong> add link to the next page, if the collection is paginated and has a next page.</li>
+<li><strong>DO</strong> a link to the previous page, if the collection is paginated and has a previous page.</li>
+<li><strong>DO</strong> keep collections homogeneous by include only the homogeneous aspects of its member resources.</li>
+<li><strong>CONSIDER</strong> adding an indicator of the size of the collection, either embedded in the collection representation or using a custom HTTP header, like <code>X-Total-Count</code>.</li>
+<li><strong>CONSIDER</strong> using the HTTP <code>Link</code> header to supply pagination links.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Although the size of the collection is useful for building user interfaces, avoid computing the exact size of the collection. It may be expensive to compute, volatile, or even confidential. Providing a hint is usually good enough.</p>
+<p>You should avoid providing a total count in your API unless there's a clear need to do so. Very often, there are systems and performance implications to supporting full counts, especially as datasets grow and requests become complex queries or filters that drive full scans (e.g., your database might need to look at all candidate items to count them). While this is an implementation detail relative to the API, it's important to consider your ability to support serving counts over the life of a service.</p>
+</div>
+<h3 id="representations_1">Representations<a class="headerlink" href="#representations_1" title="Permanent link">&para;</a></h3>
+<p>Pagination links can be represented as simplified hypertext controls for pagination within the collection representation.</p>
+<p>In the following example the collections has an <code class="codehilite"><span class="err">items:</span> <span class="p">[</span><span class="err">...</span><span class="p">]</span></code> attribute holding the items of the current page, as well as pagination links (highlighted below). The collection may also contain additional metadata about the collection (e.g. offset, limit) when necessary.</p>
+<div class="admonition example">
+<p class="admonition-title">JSON representation containing pagination links</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+<span class="hll">    <span class="nt">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.org/articles/authors?offset=4&amp;limit=5&quot;</span><span class="p">,</span>
+</span><span class="hll">    <span class="nt">&quot;first&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.org/articles/authors?offset=0&amp;limit=5&quot;</span><span class="p">,</span>
+</span><span class="hll">    <span class="nt">&quot;next&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.org/articles/authors?offset=9&amp;limit=5&quot;</span><span class="p">,</span>
+</span><span class="hll">    <span class="nt">&quot;prev&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.org/articles/authors?offset=0&amp;limit=5&quot;</span><span class="p">,</span>
+</span><span class="hll">    <span class="nt">&quot;last&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.org/articles/authors?offset=100&amp;limit=5&quot;</span><span class="p">,</span>
+</span>    <span class="nt">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">&quot;limit&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="nt">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>  
+        <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.org/authors/123e4567-e89b-12d3-a456-426655440000&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;123e4567-e89b-12d3-a456-426655440000&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Kent Beck&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>  
+        <span class="nt">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.org/authors/987e2343-e89b-12d3-a456-426655440000&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;987e2343-e89b-12d3-a456-426655440000&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Martin Fowler&quot;</span>
+        <span class="p">},</span>
+        <span class="err">...</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
 
-<div class="codehilite"><pre><span></span>## PAGINATION
-
-limit — to restrict the number of entries. See Pagination section below. Hint: You can use size as an alternate query string.
-offset — numeric offset page start. See Pagination section below. Hint: In combination with limit, you can use page as an alternative to offset.
-cursor — key-based page start. See Pagination section below.
-
-## Pagination and partial response
-
-Partial response allows you to give developers just the information they need.
-
-Take for example a request for a tweet on the Twitter API. You&#39;ll get much more than a typical twitter app often needs - including the name of person, the text of the tweet, a timestamp, how often the message was re-tweeted, and a lot of metadata.
-
-Let&#39;s look at how several leading APIs handle giving developers just what they need in responses, including Google who pioneered the idea of partial response.
-
-LinkedIn
-
-/people:(id,first-name,last-name,industry)
-
-This request on a person returns the ID, first name, last name, and the industry.
-
-LinkedIn does partial selection using this terse :(...) syntax which isn&#39;t self-evident.
-
-Plus it&#39;s difficult for a developer to reverse engineer the meaning using a search engine.
-
-Facebook
-
-/joe.smith/friends?fields=id,name,picture
-
-Google
-
-?fields=title,media:group(media:thumbnail)
-
-Google and Facebook have a similar approach, which works well.
-
-They each have an optional parameter called fields after which you put the names of fields you want to be returned.
-
-As you see in this example, you can also put sub-objects in responses to pull in other information from additional resources.
-
-Add optional fields in a comma-delimited list The Google approach works extremely well.
-
-Here&#39;s how to get just the information we need from our dogs API using this approach:
-
-/dogs?fields=name,color,location
-
-It&#39;s simple to read; a developer can select just the information an app needs at a given time; it cuts down on bandwidth issues, which is important for mobile apps.
-
-
-The partial selection syntax can also be used to include associated resources cutting down on the number of requests needed to get the required information.
-
-Make it easy for developers to paginate objects in a database
-
-It&#39;s almost always a bad idea to return every resource in a database.
-
-Let&#39;s look at how Facebook, Twitter, and LinkedIn handle pagination. Facebook uses offset and limit. Twitter uses page and rpp (records per page). LinkedIn uses start and count
-
-Semantically, Facebook and LinkedIn do the same thing. That is, the LinkedIn start &amp; count is used in the same way as the Facebook offset &amp; limit.
-
-To get records 50 through 75 from each system, you would use:
-
-* Facebook - offset 50 and limit 25
-* Twitter - page 3 and rpp 25 (records per page)
-* LinkedIn - start 50 and count 25
-
-## Use limit and offset
-
-We recommend limit and offset. It is more common, well understood in leading databases, and easy for developers.
-
-/dogs?limit=25&amp;offset=50
-
-## Metadata
-
-We also suggest including metadata with each response that is paginated that indicated to the developer the total number of records available.
-
-What about defaults?
-
-My loose rule of thumb for default pagination is limit=10 with offset=0. (limit=10&amp;offset=0)
-
-The pagination defaults are of course dependent on your data size. If your resources are large, you probably want to limit it to fewer than 10; if resources are small, it can make sense to choose a larger limit.
-
-In summary:
-
-Support partial response by adding optional fields in a comma delimited list.
-
-Use limit and offset to make it easy for developers to paginate objects
-
-&lt;!-- TODO --&gt;
-
-Pagination: The right way to include pagination details today is using the Link header introduced by RFC 5988. An API that requires sending a count can use a custom HTTP header like X-Total-Count.
-
-- OData
-- The GitHub way:
-```
-# Request
-GET /user/repos?page=4&amp;per_page=2
+</div>
+<p>An alternative approach may be to using HTTP <code>Link</code> header introduced by RFC 5988<sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup>:</p>
+<div class="admonition example">
+<p class="admonition-title">HTTP header</p>
+<p>Using the HTTP <code>Link</code> header for pagination links:
+<div class="codehilite"><pre><span></span># Request
+GET /articles/authors?offset=4&amp;limit=5
 
 # Response
-Link: &lt;https://api.github.com/user/repos?page=5&amp;per_page=2&gt;; rel=&quot;next&quot;,
-      &lt;https://api.github.com/user/repos?page=8&amp;per_page=2&gt;; rel=&quot;last&quot;,
-      &lt;https://api.github.com/user/repos?page=1&amp;per_page=2&gt;; rel=&quot;first&quot;,
-      &lt;https://api.github.com/user/repos?page=3&amp;per_page=2&gt;; rel=&quot;prev&quot;
-```
-- Pivotal Tracker
-```
-# Request
+Link: &lt;https://example.org/articles/authors?offset=9&amp;limit=5&gt;; rel=&quot;next&quot;,
+      &lt;https://example.org/articles/authors?offset=100&amp;limit=5&gt;; rel=&quot;last&quot;,
+      &lt;https://example.org/articles/authors?offset=0&amp;limit=5&gt;; rel=&quot;first&quot;,
+      &lt;https://example.org/articles/authors?offset=0&amp;limit=5&gt;; rel=&quot;prev&quot;
+</pre></div>
+Or using custom HTTP headers:
+<div class="codehilite"><pre><span></span># Request
 GET projects/1/stories?offset=1300&amp;limit=300
 
 # Response
@@ -1160,115 +1180,8 @@ X-Tracker-Pagination-Total: 1543
 X-Tracker-Pagination-Limit: 300
 X-Tracker-Pagination-Offset: 1300
 X-Tracker-Pagination-Returned: 243
-```
-```
-# Request
-GET projects/1/stories?offset=1300&amp;limit=300&amp;envelope=true
-
-# Response
-{
-   &quot;data&quot;: { /* ... */ },
-   &quot;pagination&quot;: {
-       &quot;total&quot;: 1543,
-       &quot;limit&quot;: 300,
-       &quot;offset&quot;: 1300,
-       &quot;returned&quot;: 243
-   }
-}
-```
-
-# Pagination
-
-### Support Pagination
-
-Access to lists of data items must support pagination for best client side batch processing and iteration experience. This holds true for all lists that are (potentially) larger than just a few hundred entries.
-
-There are two page iteration techniques:
-
-Offset/Limit-based pagination: numeric offset identifies the first page entry
-Cursor-based — aka key-based — pagination: a unique key element identifies the first page entry (see also Facebook&#39;s guide)
-The technical conception of pagination should also consider user experience related issues. As mentioned in this article, jumping to a specific page is far less used than navigation via next/previous page links. This favours cursor-based over offset-based pagination.
-
-### Prefer Cursor-Based Pagination, Avoid Offset-Based Pagination
-
-Cursor-based pagination is usually better and more efficient when compared to offset-based pagination. Especially when it comes to high-data volumes and / or storage in NoSQL databases.
-
-Before choosing cursor-based pagination, consider the following trade-offs:
-
-Usability/framework support:
-
-Offset / limit based pagination is more known than cursor-based pagination, so it has more framework support and is easier to use for API clients
-Use case: Jump to a certain page
-
-If jumping to a particular page in a range (e.g., 51 of 100) is really a required use case, cursor-based navigation is not feasible
-Variability of data may lead to anomalies in result pages
-
-Offset-based pagination may create duplicates or lead to missing entries if rows are inserted or deleted between two subsequent paging requests.
-When using cursor-based pagination, paging cannot continue when the cursor entry has been deleted while fetching two pages
-Performance considerations - efficient server-side processing using offset-based pagination is hardly feasible for:
-
-Higher data list volumes, especially if they do not reside in the database&#39;s main memory
-Sharded or NoSQL databases
-Cursor-based navigation may not work if you need the total count of results and / or backward iteration support
-
-Further reading:
-
-Twitter
-Use the Index, Luke
-Paging in PostgreSQL
-
-### Use Pagination Links Where Applicable
-
-API implementing HATEOS may use simplified hypertext controls for pagination within collections.
-Those collections should then have an items attribute holding the items of the current page. The collection may contain additional metadata about the collection or the current page (e.g. index, page_size) when necessary.
-
-You should avoid providing a total count in your API unless there&#39;s a clear need to do so. Very often, there are systems and performance implications to supporting full counts, especially as datasets grow and requests become complex queries or filters that drive full scans (e.g., your database might need to look at all candidate items to count them). While this is an implementation detail relative to the API, it&#39;s important to consider your ability to support serving counts over the life of a service.
-
-If the collection consists of links to other resources, the collection name should use IANA registered link relations as names whenever appropriate, but use plural form.
-
-E.g. a service for articles could represent the collection of hyperlinks to an article&#39;s authors like that:
-
-{
-&quot;self&quot;: &quot;https://.../articles/xyz/authors/&quot;,
-&quot;index&quot;: 0,
-&quot;page_size&quot;: 5,
-&quot;items&quot;: [
-    {  
-    &quot;href&quot;: &quot;https://...&quot;,
-    &quot;id&quot;: &quot;123e4567-e89b-12d3-a456-426655440000&quot;,
-    &quot;name&quot;: &quot;Kent Beck&quot;
-    },
-    {  
-    &quot;href&quot;: &quot;https://...&quot;,
-    &quot;id&quot;: &quot;987e2343-e89b-12d3-a456-426655440000&quot;,
-    &quot;name&quot;: &quot;Mike Beedle&quot;
-    },
-    ...
-],
-&quot;first&quot;: &quot;https://...&quot;,
-&quot;next&quot;: &quot;https://...&quot;,
-&quot;prev&quot;: &quot;https://...&quot;,
-&quot;last&quot;: &quot;https://...&quot;
-}
-</pre></div>
-
-
-<h2 id="xml-representations"><em><strong>XML Representations</strong></em><a class="headerlink" href="#xml-representations" title="Permanent link">&para;</a></h2>
-<p><em>TBD</em></p>
-<p><em>Suggested topics:</em><br/>
-<em>Atom resources, AtomPub Service, category documents, AtomPub for feed and entry resources, media resources</em></p>
-<h2 id="html-representations">HTML Representations<a class="headerlink" href="#html-representations" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>DO</strong> provide HTML representations, for resources that are expected to be consumed by end users.</li>
-<li><strong>CONSIDER</strong>  using microformats or RDFx to annotate data within the markup.</li>
-<li><strong>AVOID</strong> avoid designing HTML representations for machine clients.</li>
-</ul>
-<h2 id="binary-data-in-representations">Binary Data in Representations<a class="headerlink" href="#binary-data-in-representations" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>DO</strong> use multipart media types such as <code>multipart/mixed</code>, <code>multipart/related</code>, or <code>multipart/alternative</code>.</li>
-<li><strong>CONSIDER</strong> providing a link to fetch the binary data as a separate resource as an alternative. Creating and parsing multipart messages in some programming languages may be cumbersome and complex.</li>
-<li><strong>AVOID</strong> encoding binary data within textual formats using Base64 encoding.</li>
-</ul>
+</pre></div></p>
+</div>
 <h2 id="error-representations">Error Representations<a class="headerlink" href="#error-representations" title="Permanent link">&para;</a></h2>
 <p>Communicate errors through standard HTTP status codes along with details supplied in the response body. </p>
 <p>Errors are a key element for providing context and visibility, and status codes enable clients to quickly ascertain the status of their request. While well-formed and descriptive error details will tell the client what happened, why it happened, and how to fix it.</p>
@@ -1327,7 +1240,8 @@ E.g. a service for articles could represent the collection of hyperlinks to an a
 <li><strong>DO</strong> provide good documentation in the API definition when using HTTP status codes that are less commonly used and not listed below.</li>
 <li><strong>DO NOT</strong> invent new HTTP status codes; only use standardized HTTP status codes and consistent with its intended semantics.</li>
 </ul>
-<h3 id="2xx-success"><code>2xx</code> Success<a class="headerlink" href="#2xx-success" title="Permanent link">&para;</a></h3>
+<h3 id="2xx"><code>2xx</code><a class="headerlink" href="#2xx" title="Permanent link">&para;</a></h3>
+<p>For successful responses:</p>
 <ul>
 <li><strong>DO</strong> return <code>200 OK</code> when the request completed without issues.</li>
 <li><strong>DO</strong> return <code>201 Created</code> when a resource was successfully created. Always set the <code>Location</code> header with the URI of the newly created resource. Return either an empty response or the created resource.</li>
@@ -1335,13 +1249,15 @@ E.g. a service for articles could represent the collection of hyperlinks to an a
 <li><strong>DO</strong> return <code>204 No content</code> when there is no response body.</li>
 <li><strong>DO</strong> return <code>207 Multi-Status</code> when the response body contains multiple status informations for different parts of a batch/bulk request.</li>
 </ul>
-<h3 id="3xx-client-action-may-be-required"><code>3xx</code> Client Action May Be Required<a class="headerlink" href="#3xx-client-action-may-be-required" title="Permanent link">&para;</a></h3>
+<h3 id="3xx"><code>3xx</code><a class="headerlink" href="#3xx" title="Permanent link">&para;</a></h3>
+<p>For any action required by the client:</p>
 <ul>
 <li><strong>DO</strong> return <code>301 Moved Permanently</code> when this and all future requests should be directed to the URI specified in the <code>Location</code> header.</li>
 <li><strong>DO</strong> return <code>303 See Other</code> when the response to the request can be found under the URI specified in the <code>Location</code> header using a GET method.</li>
 <li><strong>DO</strong> return <code>304 Not Modified</code> when the resource has not been modified since the date or version passed via request headers <code>If-Modified-Since</code> or <code>If-None-Match</code>.</li>
 </ul>
-<h3 id="4xx-client-errors"><code>4xx</code> Client Errors<a class="headerlink" href="#4xx-client-errors" title="Permanent link">&para;</a></h3>
+<h3 id="4xx"><code>4xx</code><a class="headerlink" href="#4xx" title="Permanent link">&para;</a></h3>
+<p>For client errors:</p>
 <ul>
 <li><strong>DO</strong> return <code>400 Bad Request</code> when your server cannot decipher client requests because of syntactical errors.</li>
 <li><strong>DO</strong> return <code>401 Unauthorized</code> when the client is not authorized to access the resource, but may be able to gain access after authentication. If your server will not let the client access the resource even after authentication return <code>403 Forbidden</code> instead. When returning this error code, include a WWW-Authenticate header field with the authentication method to use.</li>
@@ -1359,7 +1275,8 @@ E.g. a service for articles could represent the collection of hyperlinks to an a
 <li><strong>DO</strong> return <code>428 Precondition Required</code> when the server requires the request to be conditional (e.g. to make sure that the "lost update problem" is avoided).</li>
 <li><strong>DO</strong> return <code>429 Too Many Requests</code> when the client does not consider rate limiting and sent too many requests. Include headers to indicate rate limits.</li>
 </ul>
-<h3 id="5xx-server-errors"><code>5xx</code> Server Errors<a class="headerlink" href="#5xx-server-errors" title="Permanent link">&para;</a></h3>
+<h3 id="5xx"><code>5xx</code><a class="headerlink" href="#5xx" title="Permanent link">&para;</a></h3>
+<p>For server errors:</p>
 <ul>
 <li><strong>DO</strong> return <code>500 Internal Server Error</code> when your code on the server side failed due to come implementation bug.</li>
 <li><strong>DO</strong> return <code>501 Not Implemented</code> to indicate that a future feature may become available.</li>
@@ -1378,6 +1295,9 @@ E.g. a service for articles could represent the collection of hyperlinks to an a
 <ol>
 <li id="fn:1">
 <p>The Internet Assigned Number Authority (<a href="http://www.iana.org/assignments/media-types/">IANA</a>) media type registry.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://tools.ietf.org/html/rfc5988">Web Linking</a>.&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>

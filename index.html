@@ -57,6 +57,8 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     
+      <link rel="stylesheet" href="./stylesheets/critic.css">
+    
     
   </head>
   
@@ -216,6 +218,19 @@
     Conventions Used in These Guidelines
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#admonitions" title="Admonitions" class="md-nav__link">
+    Admonitions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -307,8 +322,8 @@
 
 
   <li class="md-nav__item">
-    <a href="representations/" title="-Representations" class="md-nav__link">
-      -Representations
+    <a href="representations/" title="Representations" class="md-nav__link">
+      Representations
     </a>
   </li>
 
@@ -496,6 +511,19 @@
     Conventions Used in These Guidelines
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#admonitions" title="Admonitions" class="md-nav__link">
+    Admonitions
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -527,9 +555,10 @@
 </ul>
 <h2 id="about-these-guidelines">About These Guidelines<a class="headerlink" href="#about-these-guidelines" title="Permanent link">&para;</a></h2>
 <p>These guidelines are a work in progress, and is maintained by the <strong>API Enablement Team</strong> during their initial work. Later teams are responsible for adhering to these guidelines during API design and development, and to continue to evolve these guidelines.</p>
-<p><strong><em>What should we do when the guideline changes? Do existing APIs have to be changed as well?</em></strong></p>
+<span class="critic comment">What should we do when the guideline changes? Do existing APIs have to be changed as well?</span>
 <h2 id="conventions-used-in-these-guidelines">Conventions Used in These Guidelines<a class="headerlink" href="#conventions-used-in-these-guidelines" title="Permanent link">&para;</a></h2>
-<p>In these guidelines when referring to an API, we implicitly mean a web API delivered over HTTP. The terms: API, web API, and public API may be used interchangeably throughout these guidelines.</p>
+<p>In these guidelines when referring to an API, we implicitly mean a web API delivered over HTTP.</p>
+<p>The terms: API, web API, and public API may be used interchangeably throughout these guidelines.</p>
 <p>The following typographical conventions are used in these guidelines:</p>
 <p><code>Constant width</code> program listings, as well as within paragraphs to refer to URLs, mime types, HTTP methods, HTTP headers, and HTTP status codes.</p>
 <p>Each section will usually be comprised of one or more lists of recommendations:</p>
@@ -539,11 +568,24 @@
 <li><strong>AVOID</strong> to signify that you should avoid doing this.</li>
 <li><strong>DO NOT</strong> to signify that you should not do this.</li>
 </ul>
+<span class="critic comment">Should we consider using the requirement level keywords &quot;MUST&quot;, &quot;SHOULD&quot;, etc., from RFC 2119 instead?</span>
+<h3 id="admonitions">Admonitions<a class="headerlink" href="#admonitions" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>these sections holds additional information</p>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>these sections holds tips</p>
 </div>
-<p><strong><em>Should we consider using the requirement level keywords "MUST", "SHOULD", etc., from RFC 2119 instead?</em></strong></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>these section holds cautions</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>these sections hold snippets of code</p>
+</div>
                 
                   
                 

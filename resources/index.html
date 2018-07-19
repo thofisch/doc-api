@@ -57,6 +57,8 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     
+      <link rel="stylesheet" href="../stylesheets/critic.css">
+    
     
   </head>
   
@@ -236,6 +238,8 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="toc">
         Resources
@@ -249,16 +253,11 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#resources" title="Resources" class="md-nav__link">
-    Resources
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#identifying-and-naming-resources" title="Identifying and Naming Resources" class="md-nav__link">
@@ -330,8 +329,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../representations/" title="-Representations" class="md-nav__link">
-      -Representations
+    <a href="../representations/" title="Representations" class="md-nav__link">
+      Representations
     </a>
   </li>
 
@@ -494,16 +493,11 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#resources" title="Resources" class="md-nav__link">
-    Resources
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#identifying-and-naming-resources" title="Identifying and Naming Resources" class="md-nav__link">
@@ -563,13 +557,11 @@
               
                 
                 
-                  <h1>Resources</h1>
-                
-                <h2 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
+                <h1 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h1>
 <p>A <em>resource</em> is an abstract entity that is identified by a URI, and can be data, processing logic, files, or basically anything else that can be named.</p>
 <h2 id="identifying-and-naming-resources">Identifying and Naming Resources<a class="headerlink" href="#identifying-and-naming-resources" title="Permanent link">&para;</a></h2>
 <p>Most often when identifying resources, the use of nouns instead of verbs will be obvious, however, sometimes it is necessary to veer from this naming convention, when exposing certain services through the public API.</p>
-<p>There is no single approach that will work for all the situations, so care should be taking when identifying resources and finding the right resource granularity, in order for API consumers to get the desired functionality, the API to behave correctly, and for maintainability.</p>
+<p><mark>There is no single approach that will work for all the situations, so care should be taking when identifying resources and finding the right resource granularity, in order for API consumers to get the desired functionality, the API to behave correctly, and for maintainability.</mark></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Taking business needs, maintainability, extensibility, and perhaps some sort of cost-benefit analysis or ROI, into consideration may be pertinent.</p>
@@ -577,14 +569,14 @@
 <p>In order to identify and name resources:</p>
 <ul>
 <li><strong>DO</strong> analyze use cases to find domain nouns that can be operated using <em>create</em>, <em>read</em>, <em>update</em>, or <em>delete</em> operations. Designate each noun as a resource. Use <code>POST</code>, <code>GET</code>, <code>PUT</code>, or <code>DELETE</code> operations respectively, on each resource.</li>
-<li><strong>DO</strong> design resources to suit client's usage patterns and not design them based on what exists in a database or the object model. (Think from the client's perspective)</li>
+<li><strong>DO</strong> design resources to suit client's usage patterns and not design them based on what exists in a database or the object model. <em>Think from the client's perspective</em>.</li>
 <li><strong>DO</strong> use network efficiency, size of representations, and client convenience to guide resource granularity.</li>
 <li><strong>DO</strong> think about frequency of change and cacheability. Try to separate immutable (less frequently changing) resources from less cacheable resources.</li>
-<li><strong>CONSIDER</strong> keeping verbs out of your URIs, instead HTTP verbs to operate on them.</li>
-<li><strong>CONSIDER</strong> blindly apply the same techniques for identifying resources, as for object-oriented design and database modeling.</li>
-<li><strong>CONSIDER</strong> bluntly map domain entities into resources, as this may lead to resources that are inefficient and inconvenient to use and also leak irrelevant implementation details out to your public API.</li>
 <li><strong>CONSIDER</strong> the level of abstraction, as it is not always meaningful for developers, if the information conveyed in URIs are too abstract. </li>
-<li><strong>CONSIDER</strong> limiting the number of resources to between <em><strong>(4/12)</strong></em> and <em><strong>(8/24)</strong></em> to keep maintenance and service evolution manageable. Avoid mixing different business functionalities in same API.</li>
+<li><strong>CONSIDER</strong> limiting the number of resources to between <del class="critic">12</del><ins class="critic">4</ins> and <del class="critic">24</del><ins class="critic">8</ins> to keep maintenance and service evolution manageable. Avoid mixing different business functionalities in same API.</li>
+<li><strong>AVOID</strong> using verbs in your URIs, instead use HTTP verbs to operate on them.</li>
+<li><strong>AVOID</strong> blindly applying the same techniques for identifying resources, as for object-oriented design and database modeling.</li>
+<li><strong>AVOID</strong> bluntly mapping domain entities into resources, as this may lead to resources that are inefficient and inconvenient to use and also leak irrelevant implementation details out to your public API.</li>
 <li><strong>DO NOT</strong> limit yourself to identifying resources based on domain nouns alone, you are likely to find that the fixed set of methods in HTTP is quite a limitation. <em>E.g., using a root-level "Me" endpoint is perfectly valid.</em></li>
 </ul>
 <h3 id="collection-resources">Collection Resources<a class="headerlink" href="#collection-resources" title="Permanent link">&para;</a></h3>
@@ -593,9 +585,9 @@
 <p class="admonition-title">Tip</p>
 <p>A collection resource does not necessarily imply hierarchical containment. A resource may be part of more than one collection resource.</p>
 </div>
-<p>A collection resources should provide sufficient filter mechanisms, as well as pagination. So when organizing resources into collections:</p>
+<p>A collection resource should provide sufficient filter mechanisms, as well as pagination. So when organizing resources into collections:</p>
 <ul>
-<li><strong>DO</strong> pluralizing collection resource names. To keep things simple, pragmatic and consistent always use plural to avoid odd pluralization (person/people). Using a mixed model, in which you use singular for some resources and plural for others will make it harder for developers reason about the API.</li>
+<li><strong>DO</strong> pluralizing collection resource names. To keep things simple, pragmatic and consistent always use plural to avoid odd pluralization (person/people). Using a mixed model, in which you use singular for some resources and plural for others will make it harder for developers to reason about the API.</li>
 <li><strong>DO</strong> provide a way of searching the collection for it members, if applicable.</li>
 <li><strong>DO</strong> provide a filtered view of the collection, if applicable.</li>
 <li><strong>DO</strong> provide a paginated view of a collection, when appropriate.</li>
@@ -612,12 +604,14 @@
 <li><strong>CONSIDER</strong>, if requests for composites are rare, or if network latency is an issue, whether caching may be a better option.</li>
 </ul>
 <h3 id="processing-functions">Processing Functions<a class="headerlink" href="#processing-functions" title="Permanent link">&para;</a></h3>
-<p>Having the public API expose means to support business processes, like, calculate, translate, and convert, is not uncommon depending on the domain. These may often not map well to nouns in our domain, but usually are in the form of verbs. By using processing functions to abstract specific services the clients is able to perform tasks such computation or data validation.</p>
+<p>Having the public API expose means to support business processes, like, calculate, translate, and convert, is not uncommon depending on the domain.</p>
+<p>These may often not map well to nouns in our domain, but usually are in the form of verbs.</p>
+<p>By using processing functions to abstract specific services the clients is able to perform tasks such computation or data validation.</p>
 <ul>
-<li><strong>DO</strong> treat the processing function as a resourcee, as most often it will be difficult to find appropriate nouns. So when validating a vehicle registration number: <code>http://www.example.org/vehicles/validate?regnum=ZY12345</code></li>
+<li><strong>DO</strong> treat the processing function as a resource, as most often it will be difficult to find appropriate nouns. So when validating a vehicle registration number: <code>http://www.example.org/vehicles/validate?regnum=ZY12345</code></li>
 <li><strong>DO</strong> use <code>GET</code> to fetch a representation containing the output of the processing function.</li>
 <li><strong>DO</strong> use query parameters to supply inputs to the processing function.</li>
-<li><strong>DO</strong> document these resources, and make use verbs clear.</li>
+<li><strong>DO</strong> document these resources, and make use of verbs clear.</li>
 </ul>
 <h3 id="controller-resources">Controller Resources<a class="headerlink" href="#controller-resources" title="Permanent link">&para;</a></h3>
 <p>A <em>controller</em> is a resource that can atomically make changes to resources. It can help abstract complex business operations, which increase the separation of concerns and reduces coupling between clients and servers, which in turn may improve network efficiency.</p>
@@ -627,7 +621,7 @@
 <li><strong>DO</strong>, if the output of the operation is the creation of a new resource, return <code>201 Created</code> with a <code>Location</code> header referring to the URI of the newly created resource.</li>
 <li><strong>DO</strong>, if the outcome is the modification of one or more existing resource, return <code>303 See Other</code> with a <code>Location</code> to a URI that clients can use to fetch a representation of those modifications.</li>
 <li><strong>DO</strong>, if the server cannot provide a single URI to all the modified resources, return <code>200 OK</code> with a representation in the body that clients can use to learn about the outcome.</li>
-<li><strong>DO</strong> handle errors as described in <a href="../representations/#error-representations">Errors</a></li>
+<li><strong>DO</strong> handle errors as described in <a href="../representations/#error-representations">Errors</a>.</li>
 <li><strong>AVOID</strong> tunneling at all costs. Instead, use a distinct resource (such as a controller) for each operation. Tunneling occurs whenever the client is using the same method on a single URI for different actions. Tunneling reduces protocol-level visibility, because the visible parts of requests such as the request URI, the HTTP method used, headers, and media types do not unambiguously describe the operation.</li>
 </ul>
                 

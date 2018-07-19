@@ -57,6 +57,8 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     
+      <link rel="stylesheet" href="../stylesheets/critic.css">
+    
     
   </head>
   
@@ -303,8 +305,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../representations/" title="-Representations" class="md-nav__link">
-      -Representations
+    <a href="../representations/" title="Representations" class="md-nav__link">
+      Representations
     </a>
   </li>
 
@@ -512,19 +514,19 @@
                   <h1>Resource Identifiers</h1>
                 
                 <h2 id="unique-resource-identifiers-uris">Unique Resource Identifiers (URIs)<a class="headerlink" href="#unique-resource-identifiers-uris" title="Permanent link">&para;</a></h2>
-<p>An important aspect of API design is to think about how to design unique resource identifiers, and as such, URIs should be treated as <em>opaque</em><sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup> resource identifiers.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Clients should not be concerned with the design of URIs, nor should clients try to pick apart URIs in order to gather information from them. Instead URIs should be discovered through links (and the submission of forms).</p>
-<p>For instance, clients must not use the fact that a URI ends with <code>.xml</code> to infer that it resolves to an XML representation, instead it must rely on the <code>Content-Type</code> header of the response. </p>
-</div>
+<p>An important aspect of API design is to think about how to design unique resource identifiers, and as such, URIs should be treated as <em>opaque resource identifiers</em><sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>.</p>
 <p>The opacity of URIs helps reduce coupling between servers and clients. This has nothing to do with readability or hackability, both of which may be extremely important aspects for developers consuming the API, where:</p>
 <ul>
 <li><em>readable URIs</em> help developers understand something about the resource.</li>
 <li><em>hackable URIs</em> are manipulated by altering/removing portions of the path or query, and can help developers locate other resources.</li>
 </ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Clients should not be concerned with the design of URIs, nor should clients try to pick apart URIs in order to gather information from them. Instead URIs should be discovered through links (and the submission of forms).</p>
+<p>For instance, clients must not use the fact that a URI ends with <code>.xml</code> to infer that it resolves to an XML representation, instead it must rely on the <code>Content-Type</code> header of the response. </p>
+</div>
 <h2 id="designing-uris">Designing URIs<a class="headerlink" href="#designing-uris" title="Permanent link">&para;</a></h2>
-<p>When done successfully the result, of a thoughtful URI design, can be the most important design affordance (a design property that communicates how something should be used without requiring documentation) of your API.</p>
+<p>When done successfully the result, of a thoughtful URI design, can be the most important <em>design affordance</em><sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup> of your API.</p>
 <p>So when designing URIs:</p>
 <ul>
 <li><strong>DO</strong> design URIs to last a long time - <a href="http://www.w3.org/Provider/Style/URI">Cool URIs don't change</a>.</li>
@@ -533,12 +535,12 @@
 <li><strong>DO</strong> use lowercase for URIs.</li>
 <li><strong>DO</strong> use domains and subdomains to logically group or partition resources for localization, distribution, or to enforce various monitoring or security policies.</li>
 <li><strong>DO</strong> use forward-slash (<code>/</code>) in the path segment to indicate a hierarchical relationship between resources.</li>
-<li><strong>DO</strong> use the hyphen (<code>-</code>) or (<code>_</code>) characters to improve the readability of long path segments. Pick one or the other for consistency.</li>
+<li><strong>DO</strong> use the hyphen (<code>-</code>) or (<code>_</code>) characters to improve the readability of long path segments. <em>Pick one or the other for consistency</em>.</li>
 <li><strong>DO</strong> use ampersand (<code>&amp;</code>) to separate query parameters.</li>
 <li><strong>DO</strong> use the URI only to determine which resource should process a request.</li>
-<li><strong>CONSIDER</strong> provide URIs at runtime using links in the body of representations or headers, whenever appropriate.</li>
+<li><strong>CONSIDER</strong> providing URIs at runtime using links in the body of representations or headers, whenever appropriate.</li>
 <li><strong>CONSIDER</strong> using <code>/api</code> as the first path segment, when the API also supports non-public APIs, e.g., for specific operational support functions. Otherwise, consider forgoing the <code>/api</code> prefix.</li>
-<li><strong>CONSIDER</strong> using comma (<code>,</code>) and semi-colon (<code>;</code>) to indicate nonhierarchical elements in the path segment. The semi-colon (<code>;</code>) convention is used to identify matrix parameters. <em>As not all libraries recognize these as separators and may require custom coding to extract these parameters</em>.</li>
+<li><strong>CONSIDER</strong> using comma (<code>,</code>) and semi-colon (<code>;</code>) to indicate nonhierarchical elements in the path segment. The semi-colon (<code>;</code>) convention is used to identify matrix parameters. <em>Not all libraries recognize these as separators and may require custom coding to extract these parameters</em>.</li>
 <li><strong>CONSIDER</strong> using URI templates, if it is impractical to supply all the possible URIs in the representation (e.g., ad hoc searching).</li>
 <li><strong>CONSIDER</strong> disregarding opacity to protect against tampering using digitally signed URIs, or to protect sensitive information by encrypting parts of the URI.</li>
 <li><strong>AVOID</strong> including file extensions, instead rely on the media types.</li>
@@ -552,18 +554,19 @@
 <h2 id="uris-for-queries">URIs for Queries<a class="headerlink" href="#uris-for-queries" title="Permanent link">&para;</a></h2>
 <p>Queries usually involve filtering, sorting and projections. When providing query support for these and other actions:</p>
 <ul>
-<li><strong>DO</strong> use snake_case (never camelCase) for Query Parameters.</li>
+<li><strong>DO</strong> use snake_case (<em>never camelCase</em>) for Query Parameters.</li>
 <li><strong>DO</strong> use query parameters to let clients specify filter conditions, sort fields, and projections.</li>
 <li><strong>DO</strong> treat query parameters as optional with sensible defaults.</li>
 <li><strong>DO</strong> document each parameter.</li>
 <li><strong>CONSIDER</strong> using <code>q</code> (e.g. used by browser tab completion) as the default query parameter.</li>
-<li><strong>CONSIDER</strong> using a generic <code>sort</code> parameter to describe sorting rules. To accommodate more complex sorting requirements, let the <code>sort</code> parameter take a lift of comma-separated fields, each with a possible unary negative to imply descending sort order. Like: <code>GET /tickets?sort=-priority,created_at</code></li>
-<li><strong>CONSIDER</strong> using a <code>fields</code> query parameter for projections, like <code>http://www.example.org/customers?fields=name,gender,birthday</code> or <code>http://example.org/customer?fields=(firstName,user(email))</code> and <code>!</code> to negate field selection. Depending on the use case and payload size, it can reduce network bandwidth and reduce filtering on clients.</li>
+<li><strong>CONSIDER</strong> using a generic <code>sort</code> parameter to describe sorting rules. To accommodate more complex sorting requirements, let the <code>sort</code> parameter take a list of comma-separated fields, each with a possible unary negative to imply descending sort order. Like: <code>GET /tickets?sort=-priority,created_at</code></li>
+<li><strong>CONSIDER</strong> using a <code>fields</code> query parameter for projections (partial responses), like <code>http://www.example.org/customers?fields=name,gender,birthday</code> or <code>http://example.org/customer?fields=(firstName,user(email))</code> and <code>!</code> to negate field selection. Depending on the use case and payload size, it can reduce network bandwidth and reduce filtering on clients.</li>
 <li><strong>CONSIDER</strong> using a <code>view</code> query parameter for predefined projections, like <code>http://www.example.org/customers?view=summary</code></li>
 <li><strong>CONSIDER</strong> supporting aliases for commonly used queries (it may also improve cacheability). For instance, <code>GET /tickets/recently_closed</code></li>
 <li><strong>CONSIDER</strong> using <code>embed</code> to allow for resource expansion. Embedding related resources can help reduce the number of requests.</li>
 <li><strong>CONSIDER</strong> using a <code>format</code> query parameter, if standard content negotiation is not possible.</li>
-<li><strong>CONSIDER</strong> using <code>limit</code> and <code>offset</code> when resource collections are backed by traditional relation databases, as these ties into the general implementation on the data store. Opt for <code>cursor</code> and a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database.</li>
+<li><strong>CONSIDER</strong> using <code>limit</code> and <code>offset</code>, like <code>http://www.example.org/authors?offset=50&amp;limit=25</code>, when resource collections are backed by traditional relation databases, as these ties into the general implementation on the data store. Opt for <code>cursor</code> and a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database. For more information see <a href="../representations/#pagination">Pagination</a>.</li>
+<li><strong>CONSIDER</strong> using sensible defaults for pagination, e.g. limit=10 and offset=0. The pagination defaults are dependent on your data size.</li>
 <li><strong>AVOID</strong> ad hoc queries that use general-purpose query languages such as <em>SQL</em> or <em>XPath</em>.</li>
 <li><strong>AVOID</strong> <code>Range</code> requests for implementing queries.</li>
 </ul>
@@ -572,6 +575,9 @@
 <ol>
 <li id="fn:1">
 <p><a href="http://www.jenitennison.com/2009/07/25/opaque-uris-unreadable-uris.html">Opaque URIs != Unreadable URIs</a>&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>a design property that communicates how something should be used without requiring documentation&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>

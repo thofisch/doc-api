@@ -57,6 +57,8 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     
+      <link rel="stylesheet" href="../stylesheets/critic.css">
+    
     
   </head>
   
@@ -237,6 +239,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#types-of-apis" title="Types of APIs" class="md-nav__link">
+    Types of APIs
+  </a>
+  
+</li>
+      
       
       
       
@@ -314,8 +323,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../representations/" title="-Representations" class="md-nav__link">
-      -Representations
+    <a href="../representations/" title="Representations" class="md-nav__link">
+      Representations
     </a>
   </li>
 
@@ -512,6 +521,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#types-of-apis" title="Types of APIs" class="md-nav__link">
+    Types of APIs
+  </a>
+  
+</li>
+      
       
       
       
@@ -546,6 +562,14 @@
 <li>offers a higher degree of composability, which makes it possible to offer products as open systems instead of inflexible off-the-shelf solutions</li>
 <li>may help monetize existing assets</li>
 </ul>
+<h2 id="types-of-apis">Types of APIs<a class="headerlink" href="#types-of-apis" title="Permanent link">&para;</a></h2>
+<p>Web APIs can typically be broken into two broad categories: <strong>RPC</strong> and <strong>REST</strong>. These guidelines will only deal with REST.</p>
+<div class="admonition info">
+<p class="admonition-title">RPC (Remote Procedure Call)</p>
+<p>RPC (e.g., gRPC and SOAP) is generally a poor fit for most public API implementations, as they usually require special purpose libraries or SDKs to work properly. A requirement that a lot of clients cannot meet without a lot of extra work and/or clunky third-party libraries.</p>
+<p>This, and the fact that most RPC implementations do not use HTTP to its full extend, has led us to <strong>exclude RPC from these guidelines</strong>. However, if all of your clients are using legacy systems that depend on SOAP libraries, it may make more sense in that case to build a SOAP API for them.</p>
+<p>A lot of documentation, best practices and general advise on how to build RPC APIs can be found throughout the web.</p>
+</div>
                 
                   
                 

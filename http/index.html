@@ -57,6 +57,8 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     
+      <link rel="stylesheet" href="../stylesheets/critic.css">
+    
     
   </head>
   
@@ -74,7 +76,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
     
-      <a href="#http-as-the-uniform-interface" tabindex="1" class="md-skip">
+      <a href="#http" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -212,6 +214,8 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="toc">
         HTTP
@@ -225,16 +229,11 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#http-as-the-uniform-interface" title="HTTP as the Uniform Interface" class="md-nav__link">
-    HTTP as the Uniform Interface
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#visibility" title="Visibility" class="md-nav__link">
@@ -296,8 +295,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../representations/" title="-Representations" class="md-nav__link">
-      -Representations
+    <a href="../representations/" title="Representations" class="md-nav__link">
+      Representations
     </a>
   </li>
 
@@ -460,16 +459,11 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#http-as-the-uniform-interface" title="HTTP as the Uniform Interface" class="md-nav__link">
-    HTTP as the Uniform Interface
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#visibility" title="Visibility" class="md-nav__link">
@@ -495,13 +489,11 @@
               
                 
                 
-                  <h1>HTTP</h1>
-                
-                <h2 id="http-as-the-uniform-interface">HTTP as the Uniform Interface<a class="headerlink" href="#http-as-the-uniform-interface" title="Permanent link">&para;</a></h2>
+                <h1 id="http">HTTP<a class="headerlink" href="#http" title="Permanent link">&para;</a></h1>
 <p>When designing a RESTful API delivered over HTTP, it is important to maintain a high degree of visibility. This will let the API benefit from existing software and infrastructure for features that you would otherwise have to build yourself.</p>
 <div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>Visibility means that one component of an architecture can monitor (and even participate in) the interaction between other components of the same architecture</p>
+<p class="admonition-title">Visibility in the context of HTTP</p>
+<p>Visibility simply means that one component of an architecture can monitor (and even participate in) the interaction between other components of the same architecture.</p>
 </div>
 <p>Luckily HTTP is an application-level protocol designed to keep communication between clients and servers visible.</p>
 <p>HTTP defines operations for transferring representations between clients and servers, eliminating the need for application-specific operations (e.g. <em>createBooking</em>, <em>changeBooking</em>, etc.).</p>
