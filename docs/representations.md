@@ -2,25 +2,18 @@
 
 A *representation* (request/response) is concrete and real. Here we will offer guidelines as to what makes a good response design. To ensure scalability and longevity of the API, along with providing helpful responses that developers can understand and trust, we will cover what HTTP headers are appropriate in a response, which HTTP status codes to return, as well as how to include descriptive error representations on failures.
 
-{++
+!!! tip "Bandwidth"
+    It might be pertinent to support techniques for reducing bandwidth based on client needs. This is especially true for APIs that have large payloads and/or are used in high-traffic scenarios. Supporting mobile clients with less bandwidth connectivity, would be one such case.
 
-## SHOULD: Reduce Bandwidth Needs and Improve Responsiveness
+    To reduce bandwidth and improve responsiveness consider:
 
-APIs should support techniques for reducing bandwidth based on client needs. This holds for APIs that (might) have high payloads and/or are used in high-traffic scenarios like the public Internet and telecommunication networks. Typical examples are APIs used by mobile web app clients with (often) less bandwidth connectivity. (Zalando is a 'Mobile First' company, so be mindful of this point.)
+    - Compression using [`Content-Encoding`](#content-encoding).
+    - [Partial responses](resource-identifiers/#partial-responses) using query parameters.
+    - Dividing the size of the payload using [Pagination](#pagination).
+    - `ETag` and `If-Modified-Since`/`If-None-Match` for [Caching](caching).
+    - Using [Batch Operations](methods/#batch-operations).
 
-Common techniques include:
-
-gzip compression
-querying field filters to retrieve a subset of resource attributes (see Support Filtering of Resource Fields below)
-paginate lists of data items (see Pagination below)
-ETag and If-(None-)Match headers to avoid re-fetching of unchanged resources (see Common Headers
-pagination for incremental access of larger (result) lists
-
-Each of these items is described in greater detail below.
-
-Note: while a batch defines a collection of requests triggering independent processes, a bulk defines a collection of independent resources created or updated together in one request. With respect to response processing this distinction normally does not matter.
-
-++}
+     All these common techniques are discussed in details elsewhere in these guidelines.
 
 ## HTTP Headers
 
