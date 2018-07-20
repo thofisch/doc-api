@@ -182,7 +182,7 @@ To enable asynchronous processing of request, follow these guidelines (these ste
 !!! note 
     The `303 See Other` does not mean that the resource at the request URI has moved to a new location. It merely states that the result exists at the URI indicated in the `Location` header.
 
-## Batch Operations (TBD)
+## Batch Operations
 
 {++
 
@@ -196,5 +196,9 @@ A batch or bulk request always has to respond with HTTP status code 207, unless 
 A batch or bulk response with status code 207 always returns a multi-status object containing sufficient status and/or monitoring information for each part of the batch or bulk request.
 A batch or bulk request may result in a status code 400/500, only if the service encounters a failure before looking at individual parts or, if an unanticipated failure occurs.
 The before rules apply even in the case that processing of all individual part fail or each part is executed asynchronously! They are intended to allow clients to act on batch and bulk responses by inspecting the individual results in a consistent way.
+
+---
+
+Note: while a batch defines a collection of requests triggering independent processes, a bulk defines a collection of independent resources created or updated together in one request. With respect to response processing this distinction normally does not matter.
 
 ++}
