@@ -363,8 +363,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#batch-operations-tbd" title="Batch Operations (TBD)" class="md-nav__link">
-    Batch Operations (TBD)
+  <a href="#batch-operations" title="Batch Operations" class="md-nav__link">
+    Batch Operations
   </a>
   
     <nav class="md-nav">
@@ -411,8 +411,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../hypermedia/" title="-Hypermedia" class="md-nav__link">
-      -Hypermedia
+    <a href="../hypermedia/" title="Hypermedia" class="md-nav__link">
+      Hypermedia
     </a>
   </li>
 
@@ -435,8 +435,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../caching/" title="-Caching" class="md-nav__link">
-      -Caching
+    <a href="../caching/" title="Caching" class="md-nav__link">
+      Caching
     </a>
   </li>
 
@@ -447,8 +447,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../security/" title="-Security" class="md-nav__link">
-      -Security
+    <a href="../security/" title="Security" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -459,8 +459,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../versioning-and-extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
-      -Versioning and Extensibility
+    <a href="../versioning-and-extensibility/" title="Versioning and Extensibility" class="md-nav__link">
+      Versioning and Extensibility
     </a>
   </li>
 
@@ -471,8 +471,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../documentation-and-discovery/" title="-Documentation and Discovery" class="md-nav__link">
-      -Documentation and Discovery
+    <a href="../documentation-and-discovery/" title="Documentation and Discovery" class="md-nav__link">
+      Documentation and Discovery
     </a>
   </li>
 
@@ -639,8 +639,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#batch-operations-tbd" title="Batch Operations (TBD)" class="md-nav__link">
-    Batch Operations (TBD)
+  <a href="#batch-operations" title="Batch Operations" class="md-nav__link">
+    Batch Operations
   </a>
   
     <nav class="md-nav">
@@ -889,7 +889,7 @@
 <p class="admonition-title">Note</p>
 <p>The <code>303 See Other</code> does not mean that the resource at the request URI has moved to a new location. It merely states that the result exists at the URI indicated in the <code>Location</code> header.</p>
 </div>
-<h2 id="batch-operations-tbd">Batch Operations (TBD)<a class="headerlink" href="#batch-operations-tbd" title="Permanent link">&para;</a></h2>
+<h2 id="batch-operations">Batch Operations<a class="headerlink" href="#batch-operations" title="Permanent link">&para;</a></h2>
 <ins class="critic block">
 <p><strong><em>TBD</em></strong></p>
 <h3 id="must-use-207-for-batch-or-bulk-requests">MUST: Use 207 for Batch or Bulk Requests<a class="headerlink" href="#must-use-207-for-batch-or-bulk-requests" title="Permanent link">&para;</a></h3>
@@ -898,6 +898,8 @@
 A batch or bulk response with status code 207 always returns a multi-status object containing sufficient status and/or monitoring information for each part of the batch or bulk request.
 A batch or bulk request may result in a status code 400/500, only if the service encounters a failure before looking at individual parts or, if an unanticipated failure occurs.
 The before rules apply even in the case that processing of all individual part fail or each part is executed asynchronously! They are intended to allow clients to act on batch and bulk responses by inspecting the individual results in a consistent way.</p>
+<hr />
+<p>Note: while a batch defines a collection of requests triggering independent processes, a bulk defines a collection of independent resources created or updated together in one request. With respect to response processing this distinction normally does not matter.</p>
 </ins>
                 
                   

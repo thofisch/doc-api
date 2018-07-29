@@ -296,13 +296,6 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#should-reduce-bandwidth-needs-and-improve-responsiveness" title="SHOULD: Reduce Bandwidth Needs and Improve Responsiveness" class="md-nav__link">
-    SHOULD: Reduce Bandwidth Needs and Improve Responsiveness
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#http-headers" title="HTTP Headers" class="md-nav__link">
     HTTP Headers
   </a>
@@ -434,8 +427,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#should-use-simple-hypertext-controls-for-pagination-and-self-references" title="SHOULD:: Use Simple Hypertext Controls for Pagination and Self-References" class="md-nav__link">
+    SHOULD:: Use Simple Hypertext Controls for Pagination and Self-References
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#links" title="Links" class="md-nav__link">
     Links
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#must-not-use-link-headers-with-json-entities" title="MUST: Not Use Link Headers with JSON entities" class="md-nav__link">
+    MUST: Not Use Link Headers with JSON entities
   </a>
   
 </li>
@@ -524,8 +531,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../hypermedia/" title="-Hypermedia" class="md-nav__link">
-      -Hypermedia
+    <a href="../hypermedia/" title="Hypermedia" class="md-nav__link">
+      Hypermedia
     </a>
   </li>
 
@@ -548,8 +555,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../caching/" title="-Caching" class="md-nav__link">
-      -Caching
+    <a href="../caching/" title="Caching" class="md-nav__link">
+      Caching
     </a>
   </li>
 
@@ -560,8 +567,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../security/" title="-Security" class="md-nav__link">
-      -Security
+    <a href="../security/" title="Security" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -572,8 +579,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../versioning-and-extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
-      -Versioning and Extensibility
+    <a href="../versioning-and-extensibility/" title="Versioning and Extensibility" class="md-nav__link">
+      Versioning and Extensibility
     </a>
   </li>
 
@@ -584,8 +591,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../documentation-and-discovery/" title="-Documentation and Discovery" class="md-nav__link">
-      -Documentation and Discovery
+    <a href="../documentation-and-discovery/" title="Documentation and Discovery" class="md-nav__link">
+      Documentation and Discovery
     </a>
   </li>
 
@@ -669,13 +676,6 @@
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#should-reduce-bandwidth-needs-and-improve-responsiveness" title="SHOULD: Reduce Bandwidth Needs and Improve Responsiveness" class="md-nav__link">
-    SHOULD: Reduce Bandwidth Needs and Improve Responsiveness
-  </a>
-  
-</li>
       
         <li class="md-nav__item">
   <a href="#http-headers" title="HTTP Headers" class="md-nav__link">
@@ -809,8 +809,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#should-use-simple-hypertext-controls-for-pagination-and-self-references" title="SHOULD:: Use Simple Hypertext Controls for Pagination and Self-References" class="md-nav__link">
+    SHOULD:: Use Simple Hypertext Controls for Pagination and Self-References
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#links" title="Links" class="md-nav__link">
     Links
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#must-not-use-link-headers-with-json-entities" title="MUST: Not Use Link Headers with JSON entities" class="md-nav__link">
+    MUST: Not Use Link Headers with JSON entities
   </a>
   
 </li>
@@ -901,18 +915,19 @@
                 
                 <h1 id="representations">Representations<a class="headerlink" href="#representations" title="Permanent link">&para;</a></h1>
 <p>A <em>representation</em> (request/response) is concrete and real. Here we will offer guidelines as to what makes a good response design. To ensure scalability and longevity of the API, along with providing helpful responses that developers can understand and trust, we will cover what HTTP headers are appropriate in a response, which HTTP status codes to return, as well as how to include descriptive error representations on failures.</p>
-<ins class="critic block">
-<h2 id="should-reduce-bandwidth-needs-and-improve-responsiveness">SHOULD: Reduce Bandwidth Needs and Improve Responsiveness<a class="headerlink" href="#should-reduce-bandwidth-needs-and-improve-responsiveness" title="Permanent link">&para;</a></h2>
-<p>APIs should support techniques for reducing bandwidth based on client needs. This holds for APIs that (might) have high payloads and/or are used in high-traffic scenarios like the public Internet and telecommunication networks. Typical examples are APIs used by mobile web app clients with (often) less bandwidth connectivity. (Zalando is a 'Mobile First' company, so be mindful of this point.)</p>
-<p>Common techniques include:</p>
-<p>gzip compression
-querying field filters to retrieve a subset of resource attributes (see Support Filtering of Resource Fields below)
-paginate lists of data items (see Pagination below)
-ETag and If-(None-)Match headers to avoid re-fetching of unchanged resources (see Common Headers
-pagination for incremental access of larger (result) lists</p>
-<p>Each of these items is described in greater detail below.</p>
-<p>Note: while a batch defines a collection of requests triggering independent processes, a bulk defines a collection of independent resources created or updated together in one request. With respect to response processing this distinction normally does not matter.</p>
-</ins>
+<div class="admonition tip">
+<p class="admonition-title">Bandwidth</p>
+<p>It might be pertinent to support techniques for reducing bandwidth based on client needs. This is especially true for APIs that have large payloads and/or are used in high-traffic scenarios. Supporting mobile clients with less bandwidth connectivity, would be one such case.</p>
+<p>To reduce bandwidth and improve responsiveness consider:</p>
+<ul>
+<li>Compression using <a href="#content-encoding"><code>Content-Encoding</code></a>.</li>
+<li><a href="../resource-identifiers/#partial-responses">Partial responses</a> using query parameters.</li>
+<li>Dividing the size of the payload using <a href="#pagination">Pagination</a>.</li>
+<li><code>ETag</code> and <code>If-Modified-Since</code>/<code>If-None-Match</code> for <a href="../caching">Caching</a>.</li>
+<li>Using <a href="../methods/#batch-operations">Batch Operations</a>.</li>
+</ul>
+<p>All these common techniques are discussed in details elsewhere in these guidelines.</p>
+</div>
 <h2 id="http-headers">HTTP Headers<a class="headerlink" href="#http-headers" title="Permanent link">&para;</a></h2>
 <p>Headers ensure visibility, discoverability, routing by proxies, caching, optimistic concurrency, and correct operation of HTTP as an application protocol.</p>
 <p>Use the following headers to annotate representations that contains a message body.</p>
@@ -1134,6 +1149,11 @@ pagination for incremental access of larger (result) lists</p>
 <li><strong>DO</strong> use offset/limit-based pagination when resource collections are backed by traditional relation databases. It is more common, well understood in leading databases, and easy for developers.</li>
 <li><strong>DO</strong> use a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database.</li>
 </ul>
+<ins class="critic block">
+<h3 id="should-use-simple-hypertext-controls-for-pagination-and-self-references">SHOULD:: Use Simple Hypertext Controls for Pagination and Self-References<a class="headerlink" href="#should-use-simple-hypertext-controls-for-pagination-and-self-references" title="Permanent link">&para;</a></h3>
+<p>Hypertext controls for pagination inside collections and self-references should use a simple URI value in combination with their corresponding link relations (next, prev, first, last, self) instead of the extensible common hypertext control</p>
+<p>See Pagination for information how to best represent paginateable collections.</p>
+</ins>
 <div class="admonition warning">
 <p class="admonition-title">Variability</p>
 <p>Both pagination strategies suffer when data changes, which may lead to anomalies in result pages.</p>
@@ -1150,6 +1170,10 @@ pagination for incremental access of larger (result) lists</p>
 <li><strong>CONSIDER</strong> adding an indicator of the size of the collection, either embedded in the collection representation or using a custom HTTP header, like <code>X-Total-Count</code>.</li>
 <li><strong>CONSIDER</strong> using the HTTP <code>Link</code> header to supply pagination links.</li>
 </ul>
+<ins class="critic block">
+<h3 id="must-not-use-link-headers-with-json-entities">MUST: Not Use Link Headers with JSON entities<a class="headerlink" href="#must-not-use-link-headers-with-json-entities" title="Permanent link">&para;</a></h3>
+<p>We don't allow the use of the Link Header defined by RFC 5988 in conjunction with JSON media types. We prefer links directly embedded in JSON payloads to the uncommon link header syntax.</p>
+</ins>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Although the size of the collection is useful for building user interfaces, avoid computing the exact size of the collection. It may be expensive to compute, volatile, or even confidential. Providing a hint is usually good enough.</p>
@@ -1363,13 +1387,13 @@ X-Tracker-Pagination-Returned: 243
           </a>
         
         
-          <a href="../hypermedia/" title="-Hypermedia" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../hypermedia/" title="Hypermedia" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                -Hypermedia
+                Hypermedia
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

@@ -36,7 +36,7 @@
     
     
       
-        <title>-Security - API Design Guidelines</title>
+        <title>Security - API Design Guidelines</title>
       
     
     
@@ -102,7 +102,7 @@
                 API Design Guidelines
               </span>
               <span class="md-header-nav__topic">
-                -Security
+                Security
               </span>
             
           
@@ -281,8 +281,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../hypermedia/" title="-Hypermedia" class="md-nav__link">
-      -Hypermedia
+    <a href="../hypermedia/" title="Hypermedia" class="md-nav__link">
+      Hypermedia
     </a>
   </li>
 
@@ -305,8 +305,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../caching/" title="-Caching" class="md-nav__link">
-      -Caching
+    <a href="../caching/" title="Caching" class="md-nav__link">
+      Caching
     </a>
   </li>
 
@@ -324,11 +324,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        -Security
+        Security
       </label>
     
-    <a href="./" title="-Security" class="md-nav__link md-nav__link--active">
-      -Security
+    <a href="./" title="Security" class="md-nav__link md-nav__link--active">
+      Security
     </a>
     
       
@@ -342,6 +342,33 @@
         <li class="md-nav__item">
   <a href="#security" title="Security" class="md-nav__link">
     Security
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#must-secure-endpoints-with-oauth-20" title="MUST: Secure Endpoints with OAuth 2.0" class="md-nav__link">
+    MUST: Secure Endpoints with OAuth 2.0
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#but-security-is-hard" title="But... Security is Hard" class="md-nav__link">
+    But... Security is Hard
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" title="Authentication" class="md-nav__link">
+    Authentication
   </a>
   
 </li>
@@ -377,8 +404,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../versioning-and-extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
-      -Versioning and Extensibility
+    <a href="../versioning-and-extensibility/" title="Versioning and Extensibility" class="md-nav__link">
+      Versioning and Extensibility
     </a>
   </li>
 
@@ -389,8 +416,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../documentation-and-discovery/" title="-Documentation and Discovery" class="md-nav__link">
-      -Documentation and Discovery
+    <a href="../documentation-and-discovery/" title="Documentation and Discovery" class="md-nav__link">
+      Documentation and Discovery
     </a>
   </li>
 
@@ -478,6 +505,33 @@
     Security
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#must-secure-endpoints-with-oauth-20" title="MUST: Secure Endpoints with OAuth 2.0" class="md-nav__link">
+    MUST: Secure Endpoints with OAuth 2.0
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#but-security-is-hard" title="But... Security is Hard" class="md-nav__link">
+    But... Security is Hard
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication" title="Authentication" class="md-nav__link">
+    Authentication
+  </a>
+  
 </li>
       
         <li class="md-nav__item">
@@ -511,95 +565,62 @@
               
                 
                 
-                  <h1>-Security</h1>
+                  <h1>Security</h1>
                 
                 <h2 id="security">Security<a class="headerlink" href="#security" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span>&lt;!-- TODO --&gt;
-
-## Security
-
-### MUST: Secure Endpoints with OAuth 2.0
-
-&lt;!--
-Out-of-band authentication
-CORS
-
-Use Access and Refresh Tokens
-    Access Tokens
-    Refresh Tokens
-    Logging In
-    Renewing a Token
-    Validating a Token
-    Terminating a Session
-    Keep JWTs Small
-
-Always use SSL. No exceptions. One thing to watch out for is non-SSL access to API URLs. Do not redirect these to their SSL counterparts. Throw a hard error instead!
-
-A RESTful API should be stateless. This means that request authentication should not depend on cookies or sessions. Instead, each request should come with some sort authentication credentials.
-
---&gt;
-
-# Security.
-
-Security.
-
-Security.
-An API Manager should also be designed to handle security, not just by validating a boarding pass (API key) and directing them to their appropriate gate (permissions, SLA tier), but your API Manager should watch out for other dangerous threats, such as malicious IPs, DDoS, content threats (such as with JSON or XML), and others.
-It should also be designed to work with your current user validation systems such as OAuth2 to help protect your user&#39;s sensitive data (such as their username and password) within your API.
-
- Keep in mind that even the most righteous of applications are still prone to being hacked – and if they have access to your user&#39;s sensitive data, that means that hackers might get access to it too.
-
- It&#39;s always better to never have your users expose their credentials through the API (such as with basic auth) but instead rely on your website to handle logins and then return back an access token as OAuth2 does.
-
-## But... Security is Hard
-
-One of my favorite talks, by Anthony Ferrara sums this up very nicely...  Don&#39;t do it.
-
- Leave it for the Experts.
-
- Granted, his talk was specifically on encryption, but there&#39;s a lot of careful thought, planning, and considerations that need to be taken when building an API Management tool.
-
- You can certainly build it yourself, and handling API keys or doing IP white-listing/ black-listing is fairly easy to do.
-
- However, like an airport, what you don&#39;t see is all of the stuff happening in the background, all the things being monitored carefully, security measures implemented by experts with years of experience in risk mitigation.
-For that reason, as tempting as it might be to build one yourself, I would strongly encourage you to take a look at a professional API Management company- such as MuleSoft (of course, I might be a little biased).
-
-## Authentication
-
-There are many schools of thought. My colleagues at Apigee and I don&#39;t always agree on how to handle authentication - but overall here&#39;s my take.
-
-Let&#39;s look at these three top services. See how each of these services handles things differently:
-
-PayPal
-
-Permissions Service API
-
-Facebook
-
-OAuth 2.0
-
-Twitter
-
-OAuth 1.0a
-
-Note that PayPal&#39;s proprietary three-legged permissions API was in place long before OAuth was conceived.
-
-What should you do?
-
-Use the latest and greatest OAuth - OAuth 2.0 (as of this writing). It means that Web or mobile apps that expose APIs don&#39;t have to share passwords. It allows the API provider to revoke tokens for an individual user, for an entire app, without requiring the user to change their original password. This is critical if a mobile device is compromised or if a rogue app is discovered.
-
-Above all, OAuth 2.0 will mean improved security and better end-user and consumer experiences with Web and mobile apps.
-
-Don&#39;t do something *like* OAuth, but different. It will be frustrating for app developers if they can&#39;t use an OAuth library in their language because of your variation.
-</pre></div>
-
-
+<h3 id="must-secure-endpoints-with-oauth-20">MUST: Secure Endpoints with OAuth 2.0<a class="headerlink" href="#must-secure-endpoints-with-oauth-20" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Out-of-band authentication</li>
+<li>CORS</li>
+<li>Use Access and Refresh Tokens<ul>
+<li>Access Tokens</li>
+<li>Refresh Tokens</li>
+<li>Logging In</li>
+<li>Renewing a Token</li>
+<li>Validating a Token</li>
+<li>Terminating a Session</li>
+<li>Keep JWTs Small</li>
+</ul>
+</li>
+</ul>
+<p>Always use SSL. No exceptions. One thing to watch out for is non-SSL access to API URLs. Do not redirect these to their SSL counterparts. Throw a hard error instead!</p>
+<p>A RESTful API should be stateless. This means that request authentication should not depend on cookies or sessions. Instead, each request should come with some sort authentication credentials.</p>
+<hr />
+<p>An API Manager should also be designed to handle security, not just by validating a boarding pass (API key) and directing them to their appropriate gate (permissions, SLA tier), but your API Manager should watch out for other dangerous threats, such as malicious IPs, DDoS, content threats (such as with JSON or XML), and others.
+It should also be designed to work with your current user validation systems such as OAuth2 to help protect your user's sensitive data (such as their username and password) within your API.</p>
+<p>Keep in mind that even the most righteous of applications are still prone to being hacked – and if they have access to your user's sensitive data, that means that hackers might get access to it too.</p>
+<p>It's always better to never have your users expose their credentials through the API (such as with basic auth) but instead rely on your website to handle logins and then return back an access token as OAuth2 does.</p>
+<h2 id="but-security-is-hard">But... Security is Hard<a class="headerlink" href="#but-security-is-hard" title="Permanent link">&para;</a></h2>
+<p>One of my favorite talks, by Anthony Ferrara sums this up very nicely...  Don't do it.</p>
+<p>Leave it for the Experts.</p>
+<p>Granted, his talk was specifically on encryption, but there's a lot of careful thought, planning, and considerations that need to be taken when building an API Management tool.</p>
+<p>You can certainly build it yourself, and handling API keys or doing IP white-listing/ black-listing is fairly easy to do.</p>
+<p>However, like an airport, what you don't see is all of the stuff happening in the background, all the things being monitored carefully, security measures implemented by experts with years of experience in risk mitigation.</p>
+<p>For that reason, as tempting as it might be to build one yourself, I would strongly encourage you to take a look at a professional API Management company- such as MuleSoft (of course, I might be a little biased).</p>
+<h2 id="authentication">Authentication<a class="headerlink" href="#authentication" title="Permanent link">&para;</a></h2>
+<p>There are many schools of thought. My colleagues at Apigee and I don't always agree on how to handle authentication - but overall here's my take.</p>
+<p>Let's look at these three top services. See how each of these services handles things differently:</p>
+<ul>
+<li>PayPal</li>
+<li>Permissions Service API</li>
+<li>Facebook</li>
+<li>OAuth 2.0</li>
+<li>Twitter</li>
+<li>OAuth 1.0a</li>
+</ul>
+<p>Note that PayPal's proprietary three-legged permissions API was in place long before OAuth was conceived.</p>
+<p>What should you do?</p>
+<p>Use the latest and greatest OAuth - OAuth 2.0 (as of this writing). It means that Web or mobile apps that expose APIs don't have to share passwords. It allows the API provider to revoke tokens for an individual user, for an entire app, without requiring the user to change their original password. This is critical if a mobile device is compromised or if a rogue app is discovered.</p>
+<p>Above all, OAuth 2.0 will mean improved security and better end-user and consumer experiences with Web and mobile apps.</p>
+<p>Don't do something <em>like</em> OAuth, but different. It will be frustrating for app developers if they can't use an OAuth library in their language because of your variation.</p>
 <h2 id="security_1">Security<a class="headerlink" href="#security_1" title="Permanent link">&para;</a></h2>
-<p>Securing may require:
-- ensure that only authenticated users access resources
-- ensure the condidentiality and integrity of information right from the moment it is collected until the time it is stored and later presented to authorized entities or users.
-- prevent unauthorized or malicious clients from abusing resources and data.
-- maintain privacy, and follow the laws of the land that govern various security aspects.</p>
+<p>Securing may require:</p>
+<ul>
+<li>ensure that only authenticated users access resources</li>
+<li>ensure the condidentiality and integrity of information right from the moment it is collected until the time it is stored and later presented to authorized entities or users.</li>
+<li>prevent unauthorized or malicious clients from abusing resources and data.</li>
+<li>maintain privacy, and follow the laws of the land that govern various security aspects.</li>
+</ul>
 <p>How to use Basic Authentication to Authenticate Clients</p>
 <ul>
 <li>return <code>401 Authorization Required</code> along with a <code>WWW-Authenticate: Basic realm=&quot;Some name&quot;</code>.</li>
@@ -610,10 +631,7 @@ Don&#39;t do something *like* OAuth, but different. It will be frustrating for a
 How to use Two-Legged OAuth
 How to Deal with Sensitive Information in URIs</p>
 <p>How to Maintain the Confidentiality and Integrity of Representations</p>
-<div class="codehilite"><pre><span></span>use TLS and make resource accessible over a server configured to serve request only using HTTPS.
-</pre></div>
-
-
+<p>use TLS and make resource accessible over a server configured to serve request only using HTTPS.</p>
 <h2 id="authentication-is-key">Authentication is Key<a class="headerlink" href="#authentication-is-key" title="Permanent link">&para;</a></h2>
 <p>By providing your API users with a unique API token, or API key you can tell exactly who is making calls to your API.</p>
 <p>Along with having quick access to determining potential malicious users which can immediately be removed, you can also set permissions and SLAs for users depending on their individual needs.</p>
@@ -639,7 +657,7 @@ How to Deal with Sensitive Information in URIs</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../caching/" title="-Caching" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../caching/" title="Caching" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -648,19 +666,19 @@ How to Deal with Sensitive Information in URIs</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                -Caching
+                Caching
               </span>
             </div>
           </a>
         
         
-          <a href="../versioning-and-extensibility/" title="-Versioning and Extensibility" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../versioning-and-extensibility/" title="Versioning and Extensibility" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                -Versioning and Extensibility
+                Versioning and Extensibility
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

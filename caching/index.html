@@ -36,7 +36,7 @@
     
     
       
-        <title>-Caching - API Design Guidelines</title>
+        <title>Caching - API Design Guidelines</title>
       
     
     
@@ -102,7 +102,7 @@
                 API Design Guidelines
               </span>
               <span class="md-header-nav__topic">
-                -Caching
+                Caching
               </span>
             
           
@@ -281,8 +281,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../hypermedia/" title="-Hypermedia" class="md-nav__link">
-      -Hypermedia
+    <a href="../hypermedia/" title="Hypermedia" class="md-nav__link">
+      Hypermedia
     </a>
   </li>
 
@@ -312,11 +312,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        -Caching
+        Caching
       </label>
     
-    <a href="./" title="-Caching" class="md-nav__link md-nav__link--active">
-      -Caching
+    <a href="./" title="Caching" class="md-nav__link md-nav__link--active">
+      Caching
     </a>
     
       
@@ -334,6 +334,13 @@
   
     <nav class="md-nav">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#origin-server" title="origin server" class="md-nav__link">
+    origin server
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#conditional-request" title="Conditional Request" class="md-nav__link">
@@ -371,8 +378,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../security/" title="-Security" class="md-nav__link">
-      -Security
+    <a href="../security/" title="Security" class="md-nav__link">
+      Security
     </a>
   </li>
 
@@ -383,8 +390,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../versioning-and-extensibility/" title="-Versioning and Extensibility" class="md-nav__link">
-      -Versioning and Extensibility
+    <a href="../versioning-and-extensibility/" title="Versioning and Extensibility" class="md-nav__link">
+      Versioning and Extensibility
     </a>
   </li>
 
@@ -395,8 +402,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../documentation-and-discovery/" title="-Documentation and Discovery" class="md-nav__link">
-      -Documentation and Discovery
+    <a href="../documentation-and-discovery/" title="Documentation and Discovery" class="md-nav__link">
+      Documentation and Discovery
     </a>
   </li>
 
@@ -488,6 +495,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#origin-server" title="origin server" class="md-nav__link">
+    origin server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#conditional-request" title="Conditional Request" class="md-nav__link">
     Conditional Request
   </a>
@@ -523,22 +537,16 @@
               
                 
                 
-                  <h1>-Caching</h1>
+                  <h1>Caching</h1>
                 
                 <h2 id="caching-and-conditional-requests">Caching and Conditional Requests<a class="headerlink" href="#caching-and-conditional-requests" title="Permanent link">&para;</a></h2>
 <p>Caching is one of the most useful features built on top of HTTP's uniform interface. You can take advantage of caching to reduce end user perceived latency, to increase reliasbility, to reduce bandwidth usage and cost, and to reduce server load. They can be in server network, content delivery networks (CDNs), or in the client network (forward proxies).</p>
 <p>It is common to use the word <em>cache</em> to refer to either an object cache (memcached) or HTTP caches. Both of these caches improve performacne and have key roles to play in the overall web service deployment architecture. But there is an important difference between the two. HTTP caches do not require clients and servers to call any special programming API to manage data in the cache, as long as you are using HTTP as defined.</p>
-<p><em>origin server</em></p>
-<div class="codehilite"><pre><span></span>They are slightly different - the ETag does not have any information that the client can use to determine whether or not to make a request for that file again in the future. If ETag is all it has, it will always have to make a request. However, when the server reads the ETag from the client request, the server can then determine whether to send the file (HTTP 200) or tell the client to just use their local copy (HTTP 304). An ETag is basically just a checksum for a file that semantically changes when the content of the file changes.
-
-The Expires header is used by the client (and proxies/caches) to determine whether or not it even needs to make a request to the server at all. The closer you are to the Expires date, the more likely it is the client (or proxy) will make an HTTP request for that file from the server.
-
-So really what you want to do is use BOTH headers - set the Expires header to a reasonable value based on how often the content changes. Then configure ETags to be sent so that when clients DO send a request to the server, it can more easily determine whether or not to send the file back.
-
-One last note about ETag - if you are using a load-balanced server setup with multiple machines running Apache you will probably want to turn off ETag generation. This is because inodes are used as part of the ETag hash algorithm which will be different between the servers. You can configure Apache to not use inodes as part of the calculation but then you&#39;d want to make sure the timestamps on the files are exactly the same, to ensure the same ETag gets generated for all servers.
-</pre></div>
-
-
+<h3 id="origin-server"><em>origin server</em><a class="headerlink" href="#origin-server" title="Permanent link">&para;</a></h3>
+<p>They are slightly different - the ETag does not have any information that the client can use to determine whether or not to make a request for that file again in the future. If ETag is all it has, it will always have to make a request. However, when the server reads the ETag from the client request, the server can then determine whether to send the file (HTTP 200) or tell the client to just use their local copy (HTTP 304). An ETag is basically just a checksum for a file that semantically changes when the content of the file changes.</p>
+<p>The Expires header is used by the client (and proxies/caches) to determine whether or not it even needs to make a request to the server at all. The closer you are to the Expires date, the more likely it is the client (or proxy) will make an HTTP request for that file from the server.</p>
+<p>So really what you want to do is use BOTH headers - set the Expires header to a reasonable value based on how often the content changes. Then configure ETags to be sent so that when clients DO send a request to the server, it can more easily determine whether or not to send the file back.</p>
+<p>One last note about ETag - if you are using a load-balanced server setup with multiple machines running Apache you will probably want to turn off ETag generation. This is because inodes are used as part of the ETag hash algorithm which will be different between the servers. You can configure Apache to not use inodes as part of the calculation but then you'd want to make sure the timestamps on the files are exactly the same, to ensure the same ETag gets generated for all servers.</p>
 <ul>
 <li>How to set Expiration Caching Headers</li>
 </ul>
@@ -588,11 +596,10 @@ One last note about ETag - if you are using a load-balanced server setup with mu
 <li>How to Generate <code>Last-Modified</code> and <code>ETag</code> Headers</li>
 </ul>
 <p>Use <code>Last-Modified</code> and <code>ETag</code> response headers to drive conditional requests. Clients use the following:</p>
-<div class="codehilite"><pre><span></span>- `If-Modified-Since` and `If-None-Match` for validating cached representations
-- `If-Unmodified-Since` and `If-Match` as preconditions for concurrency control
-</pre></div>
-
-
+<ul>
+<li><code>If-Modified-Since</code> and <code>If-None-Match</code> for validating cached representations</li>
+<li><code>If-Unmodified-Since</code> and <code>If-Match</code> as preconditions for concurrency control</li>
+</ul>
 <p>a timestamp for the modifed date-time and/or a sequence number of keep track of a version.</p>
 <p>use an MD5 hash of the representation body, or of some field of the data that changes every time the resource ip updated</p>
 <p>make sure to use a different <code>ETag</code> value of each representation of the resource (this include different media types, etc.).</p>
@@ -651,61 +658,54 @@ If the server return <code>412 Precondition Failed</code> submit an unconditiona
 <p>Do not use <code>HEAD</code> to obtain fresh <code>Last-Modified</code> and <code>ETag</code> you will also new the current satet of the resource to determine if you can go ahead with the operation.</p>
 <ul>
 <li>How to Make <code>POST</code> Requests Conditional</li>
-<li>
-<p>How to Generate One-Time URIs</p>
-<!-- TODO -->
-
+<li>How to Generate One-Time URIs</li>
+</ul>
 <p>Common methods of ETag generation include using a collision-resistant hash function of the resource's content, a hash of the last modification timestamp, or even just a revision number.</p>
 <h3 id="may-consider-using-etag-together-with-if-none-match-header">MAY: Consider using ETag together with If-(None-)Match header<a class="headerlink" href="#may-consider-using-etag-together-with-if-none-match-header" title="Permanent link">&para;</a></h3>
 <p>When creating or updating resources it may be necessary to expose conflicts and to prevent the lost update problem. This can be best accomplished by using the ETag header together with the If-Match and If-None-Match. The contents of an ETag: <entity-tag> header is either (a) a hash of the response body, (b) a hash of the last modified field of the entity, or &copy; a version number or identifier of the entity version.</p>
 <p>To expose conflicts between concurrent update operations via PUT, POST, or PATCH, the If-Match: <entity-tag> header can be used to force the server to check whether the version of the updated entity is conforming to the requested <entity-tag>. If no matching entity is found, the operation is supposed a to respond with status code 412 - precondition failed.</p>
 <p>Beside other use cases, the If-None-Match: header with parameter * can be used in a similar way to expose conflicts in resource creation. If any matching entity is found, the operation is supposed a to respond with status code 412 - precondition failed.</p>
 <p>The ETag, If-Match, and If-None-Match headers can be defined as follows in the API definition:</p>
-<p>Etag:
-    name: Etag
-    description: |
-    The RFC7232 ETag header field in a response provides the current entity-tag for the
-    selected resource. An entity-tag is an opaque identifier for different versions of
-    a resource over time, regardless whether multiple versions are valid at the same time.
-    An entity-tag consists of an opaque quoted string, possibly prefixed by a weakness
-    indicator.</p>
-<div class="codehilite"><pre><span></span>in: header
-type: string
-required: false
-example: W/&quot;xy&quot;, &quot;5&quot;, &quot;7da7a728-f910-11e6-942a-68f728c1ba70&quot;
+<div class="codehilite"><pre><span></span>    Etag:
+        name: Etag
+        description: |
+        The RFC7232 ETag header field in a response provides the current entity-tag for the
+        selected resource. An entity-tag is an opaque identifier for different versions of
+        a resource over time, regardless whether multiple versions are valid at the same time.
+        An entity-tag consists of an opaque quoted string, possibly prefixed by a weakness
+        indicator.
+
+        in: header
+        type: string
+        required: false
+        example: W/&quot;xy&quot;, &quot;5&quot;, &quot;7da7a728-f910-11e6-942a-68f728c1ba70&quot;
+
+    IfMatch:
+        name: If-Match
+        description: |
+        The RFC7232 If-Match header field in a request requires the server to only operate
+        on the resource that matches at least one of the provided entity-tags. This allows
+        clients express a precondition that prevent the method from being applied, if there
+        have been any changes to the resource.
+
+        in: header
+        type: string
+        required: false
+        example:  &quot;5&quot;, &quot;7da7a728-f910-11e6-942a-68f728c1ba70&quot;
+
+    IfNoneMatch:
+        name: If-None-Match
+        description: |
+        The RFC7232 If-None-Match header field in a request requires the server to only
+        operate on the resource if it does not match any of the provided entity-tags. If
+        the provided entity-tag is `*`, it is required that the resource does not exist
+        at all.
+
+        in: header
+        type: string
+        required: false
+        example: &quot;7da7a728-f910-11e6-942a-68f728c1ba70&quot;, *
 </pre></div>
-
-
-<p>IfMatch:
-    name: If-Match
-    description: |
-    The RFC7232 If-Match header field in a request requires the server to only operate
-    on the resource that matches at least one of the provided entity-tags. This allows
-    clients express a precondition that prevent the method from being applied, if there
-    have been any changes to the resource.</p>
-<div class="codehilite"><pre><span></span>in: header
-type: string
-required: false
-example:  &quot;5&quot;, &quot;7da7a728-f910-11e6-942a-68f728c1ba70&quot;
-</pre></div>
-
-
-<p>IfNoneMatch:
-    name: If-None-Match
-    description: |
-    The RFC7232 If-None-Match header field in a request requires the server to only
-    operate on the resource if it does not match any of the provided entity-tags. If
-    the provided entity-tag is <code>*</code>, it is required that the resource does not exist
-    at all.</p>
-<div class="codehilite"><pre><span></span>in: header
-type: string
-required: false
-example: &quot;7da7a728-f910-11e6-942a-68f728c1ba70&quot;, *
-</pre></div>
-
-
-</li>
-</ul>
                 
                   
                 
@@ -741,13 +741,13 @@ example: &quot;7da7a728-f910-11e6-942a-68f728c1ba70&quot;, *
           </a>
         
         
-          <a href="../security/" title="-Security" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../security/" title="Security" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                -Security
+                Security
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
