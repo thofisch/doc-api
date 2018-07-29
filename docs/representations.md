@@ -229,6 +229,16 @@ When providing paginated collections:
 - **DO** use offset/limit-based pagination when resource collections are backed by traditional relation databases. It is more common, well understood in leading databases, and easy for developers.
 - **DO** use a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database.
 
+{++
+
+### SHOULD:: Use Simple Hypertext Controls for Pagination and Self-References
+
+Hypertext controls for pagination inside collections and self-references should use a simple URI value in combination with their corresponding link relations (next, prev, first, last, self) instead of the extensible common hypertext control
+
+See Pagination for information how to best represent paginateable collections.
+
+++}
+
 !!! warning "Variability"
     Both pagination strategies suffer when data changes, which may lead to anomalies in result pages.
     
@@ -246,6 +256,14 @@ When providing paginated collections:
 - **DO** keep collections homogeneous by include only the homogeneous aspects of its member resources.
 - **CONSIDER** adding an indicator of the size of the collection, either embedded in the collection representation or using a custom HTTP header, like `X-Total-Count`.
 - **CONSIDER** using the HTTP `Link` header to supply pagination links.
+
+{++
+
+### MUST: Not Use Link Headers with JSON entities
+
+We don't allow the use of the Link Header defined by RFC 5988 in conjunction with JSON media types. We prefer links directly embedded in JSON payloads to the uncommon link header syntax.
+
+++}
 
 !!! warning
     Although the size of the collection is useful for building user interfaces, avoid computing the exact size of the collection. It may be expensive to compute, volatile, or even confidential. Providing a hint is usually good enough.
