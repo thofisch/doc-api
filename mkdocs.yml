@@ -52,10 +52,10 @@ pages:
 - Representations: representations.md
 - -Hypermedia: hypermedia.md
 - Content Negotiation: content-negotiation.md
-- -Caching: caching.md
-- -Security: security.md
-- -Versioning and Extensibility: versioning-and-extensibility.md
-- -Documentation and Discovery: documentation-and-discovery.md
+- Caching: caching.md
+- Security: security.md
+- Versioning and Extensibility: versioning-and-extensibility.md
+- Documentation and Discovery: documentation-and-discovery.md
 - -Mocking: mocking.md
 - Clients: clients.md
 - Throttling: throttling.md

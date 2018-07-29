@@ -1,65 +1,60 @@
-## 13. Versioning and Extensibility
+## Versioning and Extensibility
 
-    <!-- TODO -->
+* versioning
+    * Use API Versioning
+* what is a breaking change
+* breaking changes
 
-    <!-- 
-    versioning
-        Use API Versioning
-    what is a breaking change
-    breaking changes
+http://www.jenitennison.com/2009/07/22/versioning-uris.html
 
-    http://www.jenitennison.com/2009/07/22/versioning-uris.html
+A lot of things that we want to talk about (make RDF assertions about) are non-information resources. We give them URIs to name them, so that we can talk about them unambiguously, and we give them HTTP URIs so that we have a way of finding information resources (documents) that give us information about them.
 
-    A lot of things that we want to talk about (make RDF assertions about) are non-information resources. We give them URIs to name them, so that we can talk about them unambiguously, and we give them HTTP URIs so that we have a way of finding information resources (documents) that give us information about them.
-
-    non-information resource URIs must not include information that is likely to change
-    non-information resource URIs must not include unnecessary hierarchy
+* non-information resource URIs must not include information that is likely to change
+* non-information resource URIs must not include unnecessary hierarchy
 
 
-    Always version your API. Versioning helps you iterate faster and prevents invalid requests from hitting updated endpoints. It also helps smooth over any major API version transitions as you can continue to offer old API versions for a period of time.
-    However, the version needs to be in the URL to ensure browser explorability of the resources across versions
-    Well documented and announced multi-month deprecation schedules can be an acceptable practice for many APIs.
-    https://stripe.com/docs/api#versioning
+Always version your API. Versioning helps you iterate faster and prevents invalid requests from hitting updated endpoints. It also helps smooth over any major API version transitions as you can continue to offer old API versions for a period of time.
+However, the version needs to be in the URL to ensure browser explorability of the resources across versions
+Well documented and announced multi-month deprecation schedules can be an acceptable practice for many APIs.
+https://stripe.com/docs/api#versioning
 
-    -->
+- Like building an application it is important to keep your API standardized and extensible.
+- It's easy to want to add "quick fixes" to make customers happy, but everything you do should be carefully thought out in order to make sure your API continues to serve not only your needs, but also your clients.
+- Remember, when you create an API you are creating a contract- your users are depending on your API not just to make their application work, but in order to make a living and feed their families.
+- When you break things, or when you break backwards compatibility you are taking their time and resources to fix their application instead of adding features and keeping their customers happy.
 
-    - Like building an application it is important to keep your API standardized and extensible.
-    - It's easy to want to add "quick fixes" to make customers happy, but everything you do should be carefully thought out in order to make sure your API continues to serve not only your needs, but also your clients.
-    - Remember, when you create an API you are creating a contract- your users are depending on your API not just to make their application work, but in order to make a living and feed their families.
-    - When you break things, or when you break backwards compatibility you are taking their time and resources to fix their application instead of adding features and keeping their customers happy.
+The industry solution to this has been versioning, however, versioning is merely a Band-Aid, a temporary solution to make migration to the new system less stressful for your clients, but increasingly difficult on you.
 
-    The industry solution to this has been versioning, however, versioning is merely a Band-Aid, a temporary solution to make migration to the new system less stressful for your clients, but increasingly difficult on you.
+Keep in mind, when you have multiple versions of your API you end up supporting and maintaining those versions.
 
-    Keep in mind, when you have multiple versions of your API you end up supporting and maintaining those versions.
+One of the greatest challenges in regards to versioning is getting developers to migrate from one version to another, all while keeping your support staff from going insane.
 
-    One of the greatest challenges in regards to versioning is getting developers to migrate from one version to another, all while keeping your support staff from going insane.
+This doesn't mean that you shouldn't plan for versioning.
 
-    This doesn't mean that you shouldn't plan for versioning.
+Rather it means that you should plan to incorporate a version identifier (either in the URI or in the content-header of the response), but work under the mindset that you will only version your API if...
 
-    Rather it means that you should plan to incorporate a version identifier (either in the URI or in the content-header of the response), but work under the mindset that you will only version your API if...
+- You have backwards incompatible PLATFORM changes – in other words you completely change the UI or way your platform works
+- You find that your API is no longer extendable – which is exactly what we are trying to avoid here
+- You find that your spec no longer meets your developer's needs – for example, they are demanding REST instead of SOAP
 
-    - You have backwards incompatible PLATFORM changes – in other words you completely change the UI or way your platform works
-    - You find that your API is no longer extendable – which is exactly what we are trying to avoid here
-    - You find that your spec no longer meets your developer's needs – for example, they are demanding REST instead of SOAP
+You should NOT version your API just because:
 
-    You should NOT version your API just because:
+- You added additional endpoints
+- You added additional data in the response
+- You changed technologies – your API should be decoupled from your technology stack
+- You changed your applications services or code – your API should be decoupled from your service layer
 
-    - You added additional endpoints
-    - You added additional data in the response
-    - You changed technologies – your API should be decoupled from your technology stack
-    - You changed your applications services or code – your API should be decoupled from your service layer
+To clarify on the last two, it shouldn't matter what technologies you are using, or how your services work.
 
-    To clarify on the last two, it shouldn't matter what technologies you are using, or how your services work.
+The API should interact with both, but be decoupled enough that changing something in the background does not effect the API adversely.
 
-    The API should interact with both, but be decoupled enough that changing something in the background does not effect the API adversely.
+Any changes you make to your API in regards to the technology or service layer should be as seamless and transparent as possible.
 
-    Any changes you make to your API in regards to the technology or service layer should be as seamless and transparent as possible.
+After all, the less you can break backwards compatibility, the happier you, and your customers will be.
 
-    After all, the less you can break backwards compatibility, the happier you, and your customers will be.
+And this can only happen if you go into building your API with a long-term, flexibility, and extensibility focus.
 
-    And this can only happen if you go into building your API with a long-term, flexibility, and extensibility focus.
-
-# Extensibility and Versioning
+### Extensibility and Versioning
 
 Managing change in any distributed client/server environment can be hard. In these environments, clients count on servers to honor their contracts.
 
@@ -135,223 +130,214 @@ Versioning involves versioning resources with new URIs. This is because HTTP dic
 
 Avoid introducing new media types for each version since it leads to media type proliferation, which reduce interoperability.
 
+## Compatibility
 
+### MUST: Don't Break Backward Compatibility
 
-    # Compatibility
+Change APIs, but keep all consumers running.
 
-    ### MUST: Don't Break Backward Compatibility
+Consumers usually have independent release life-cycles, focus on stability, and avoid changes that do not provide additional value. APIs are contracts between service providers and service consumers that cannot be broken via unilateral decisions.
 
-    Change APIs, but keep all consumers running.
+There are two techniques to change APIs without breaking them:
 
-    Consumers usually have independent release life-cycles, focus on stability, and avoid changes that do not provide additional value. APIs are contracts between service providers and service consumers that cannot be broken via unilateral decisions.
+- follow rules for compatible extensions
+- introduce new API versions and still support older versions
 
-    There are two techniques to change APIs without breaking them:
+We strongly encourage using compatible API extensions and discourage versioning. The below guideline rules for service providers and consumers enable us (having Postel's Law in mind) to make compatible changes without versioning.
 
-    - follow rules for compatible extensions
-    - introduce new API versions and still support older versions
+Hint: Please note that the compatibility guarantees are for the "on the wire" format. Binary or source compatibility of code generated from an API definition is not covered by these rules. If client implementations update their generation process to a new version of the API definition, it has to be expected that code changes are necessary.
 
-    We strongly encourage using compatible API extensions and discourage versioning. The below guideline rules for service providers and consumers enable us (having Postel's Law in mind) to make compatible changes without versioning.
+### SHOULD:: Prefer Compatible Extensions
 
-    Hint: Please note that the compatibility guarantees are for the "on the wire" format. Binary or source compatibility of code generated from an API definition is not covered by these rules. If client implementations update their generation process to a new version of the API definition, it has to be expected that code changes are necessary.
+API designers should apply the following rules to evolve RESTful APIs for services in a backward-compatible way:
 
-    ### SHOULD:: Prefer Compatible Extensions
+- Add only optional, never mandatory fields.
+- Never change the semantic of fields (e.g. changing the semantic from customer-number to customer-id, as both are different unique customer keys)
+- Input fields may have (complex) constraints being validated via server-side business logic. - - Never change the validation logic to be more restrictive and make sure that all constraints a clearly defined in description.
+- Enum ranges can be reduced when used as input parameters, only if the server is ready to accept and handle old range values too. Enum range can be reduced when used as output parameters.
+- Enum ranges cannot not be extended when used for output parameters — clients may not be prepared to handle it. However, enum ranges can be extended when used for input parameters.
+- Support redirection in case an URL has to change (301 Moved Permanently).
 
-    API designers should apply the following rules to evolve RESTful APIs for services in a backward-compatible way:
+### MUST: Prepare Clients To Not Crash On Compatible API Extensions
 
-    - Add only optional, never mandatory fields.
-    - Never change the semantic of fields (e.g. changing the semantic from customer-number to customer-id, as both are different unique customer keys)
-    - Input fields may have (complex) constraints being validated via server-side business logic. - - Never change the validation logic to be more restrictive and make sure that all constraints a clearly defined in description.
-    - Enum ranges can be reduced when used as input parameters, only if the server is ready to accept and handle old range values too. Enum range can be reduced when used as output parameters.
-    - Enum ranges cannot not be extended when used for output parameters — clients may not be prepared to handle it. However, enum ranges can be extended when used for input parameters.
-    - Support redirection in case an URL has to change (301 Moved Permanently).
+Service clients should apply the robustness principle:
 
-    ### MUST: Prepare Clients To Not Crash On Compatible API Extensions
+- Be conservative with API requests and data passed as input, e.g. avoid to exploit definition eficits like passing megabytes for strings with unspecified maximum length.
+- Be tolerant in processing and reading data of API responses, more specifically...
 
-    Service clients should apply the robustness principle:
+Service clients must be prepared for compatible API extensions of service providers:
 
-    - Be conservative with API requests and data passed as input, e.g. avoid to exploit definition eficits like passing megabytes for strings with unspecified maximum length.
-    - Be tolerant in processing and reading data of API responses, more specifically...
+- Be tolerant with unknown fields in the payload (see also Fowler's "TolerantReader" post), i.e. ignore new fields but do not eliminate them from payload if needed for subsequent PUT requests.
+- Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions. Note also, that status codes are extensible. Default handling is how you would treat the corresponding x00 code (see RFC7231 Section 6).
+- Follow the redirect when the server returns HTTP status 301 Moved Permanently.
 
-    Service clients must be prepared for compatible API extensions of service providers:
+### SHOULD:: Design APIs Conservatively
 
-    - Be tolerant with unknown fields in the payload (see also Fowler's "TolerantReader" post), i.e. ignore new fields but do not eliminate them from payload if needed for subsequent PUT requests.
-    - Be prepared to handle HTTP status codes not explicitly specified in endpoint definitions. Note also, that status codes are extensible. Default handling is how you would treat the corresponding x00 code (see RFC7231 Section 6).
-    - Follow the redirect when the server returns HTTP status 301 Moved Permanently.
+Designers of service provider APIs should be conservative and accurate in what they accept from clients:
 
-    ### SHOULD:: Design APIs Conservatively
+- Unknown input fields in payload or URL should not be ignored; servers should provide error feedback to clients via an HTTP 400 response code.
+- Be accurate in defining input data constraints (like formats, ranges, lengths etc.) — and check constraints and return dedicated error information in case of violations.
+- Prefer being more specific and restrictive (if compliant to functional requirements), e.g. by defining length range of strings. It may simplify implementation while providing freedom for further evolution as compatible extensions.
 
-    Designers of service provider APIs should be conservative and accurate in what they accept from clients:
+Not ignoring unknown input fields is a specific deviation from Postel's Law (e.g. see also
+The Robustness Principle Reconsidered) and a strong recommendation. Servers might want to take different approach but should be aware of the following problems and be explicit in what is supported:
 
-    - Unknown input fields in payload or URL should not be ignored; servers should provide error feedback to clients via an HTTP 400 response code.
-    - Be accurate in defining input data constraints (like formats, ranges, lengths etc.) — and check constraints and return dedicated error information in case of violations.
-    - Prefer being more specific and restrictive (if compliant to functional requirements), e.g. by defining length range of strings. It may simplify implementation while providing freedom for further evolution as compatible extensions.
+Ignoring unknown input fields is actually not an option for PUT, since it becomes asymmetric with subsequent GET response and HTTP is clear about the PUT "replace" semantics and default round-trip expectations (see RFC7231 Section 4.3.4). Note, accepting (i.e. not ignoring) unknown input fields and returning it in subsequent GET responses is a different situation and compliant to PUT semantics.
 
-    Not ignoring unknown input fields is a specific deviation from Postel's Law (e.g. see also
-    The Robustness Principle Reconsidered) and a strong recommendation. Servers might want to take different approach but should be aware of the following problems and be explicit in what is supported:
+Certain client errors cannot be recognized by servers, e.g. attribute name typing errors will be ignored without server error feedback. The server cannot differentiate between the client intentionally providing an additional field versus the client sending a mistakenly named field, when the client's actual intent was to provide an optional input field.
+Future extensions of the input data structure might be in conflict with already ignored fields and, hence, will not be compatible, i.e. break clients that already use this field but with different type.
 
-    Ignoring unknown input fields is actually not an option for PUT, since it becomes asymmetric with subsequent GET response and HTTP is clear about the PUT "replace" semantics and default round-trip expectations (see RFC7231 Section 4.3.4). Note, accepting (i.e. not ignoring) unknown input fields and returning it in subsequent GET responses is a different situation and compliant to PUT semantics.
+In specific situations, where a (known) input field is not needed anymore, it either can stay in the API definition with "not used anymore" description or can be removed from the API definition as long as the server ignores this specific parameter.
 
-    Certain client errors cannot be recognized by servers, e.g. attribute name typing errors will be ignored without server error feedback. The server cannot differentiate between the client intentionally providing an additional field versus the client sending a mistakenly named field, when the client's actual intent was to provide an optional input field.
-    Future extensions of the input data structure might be in conflict with already ignored fields and, hence, will not be compatible, i.e. break clients that already use this field but with different type.
+### MUST: Always Return JSON Objects As Top-Level Data Structures To Support Extensibility
 
-    In specific situations, where a (known) input field is not needed anymore, it either can stay in the API definition with "not used anymore" description or can be removed from the API definition as long as the server ignores this specific parameter.
+In a response body, you must always return a JSON objects (and not e.g. an array) as a top level data structure to support future extensibility. JSON objects support compatible extension by additional attributes. This allows you to easily extend your response and e.g. add pagination later, without breaking backwards compatibility.
 
-    ### MUST: Always Return JSON Objects As Top-Level Data Structures To Support Extensibility
+### SHOULD:: Avoid Versioning
 
-    In a response body, you must always return a JSON objects (and not e.g. an array) as a top level data structure to support future extensibility. JSON objects support compatible extension by additional attributes. This allows you to easily extend your response and e.g. add pagination later, without breaking backwards compatibility.
+When changing your RESTful APIs, do so in a compatible way and avoid generating additional API versions. Multiple versions can significantly complicate understanding, testing, maintaining, evolving, operating and releasing our systems (supplementary reading).
 
-    ### SHOULD:: Avoid Versioning
+If changing an API can't be done in a compatible way, then proceed in one of these three ways:
 
-    When changing your RESTful APIs, do so in a compatible way and avoid generating additional API versions. Multiple versions can significantly complicate understanding, testing, maintaining, evolving, operating and releasing our systems (supplementary reading).
+- create a new resource (variant) in addition to the old resource variant
+- create a new service endpoint — i.e. a new application with a new API (with a new domain name)
+- create a new API version supported in parallel with the old API by the same microservice
 
-    If changing an API can't be done in a compatible way, then proceed in one of these three ways:
+As we discourage versioning by all means because of the manifold disadvantages, we suggest to only use the first two approaches.
 
-    - create a new resource (variant) in addition to the old resource variant
-    - create a new service endpoint — i.e. a new application with a new API (with a new domain name)
-    - create a new API version supported in parallel with the old API by the same microservice
+### MUST: Use Media Type Versioning
 
-    As we discourage versioning by all means because of the manifold disadvantages, we suggest to only use the first two approaches.
+When API versioning is unavoidable, you have to design your multi-version RESTful APIs using media type versioning (instead of URI versioning, see below). Media type versioning is less tightly coupled since it supports content negotiation and hence reduces complexity of release management.
 
-    ### MUST: Use Media Type Versioning
+Media type versioning: Here, version information and media type are provided together via the HTTP Content-Type header — e.g. application/x.zalando.cart+json;version=2. For incompatible changes, a new media type version for the resource is created. To generate the new representation version, consumer and producer can do content negotiation using the HTTP Content-Type and Accept headers. Note: This versioning only applies to the request and response content schema, not to URI or method semantics.
 
-    When API versioning is unavoidable, you have to design your multi-version RESTful APIs using media type versioning (instead of URI versioning, see below). Media type versioning is less tightly coupled since it supports content negotiation and hence reduces complexity of release management.
+In this example, a client wants only the new version of the response:
 
-    Media type versioning: Here, version information and media type are provided together via the HTTP Content-Type header — e.g. application/x.zalando.cart+json;version=2. For incompatible changes, a new media type version for the resource is created. To generate the new representation version, consumer and producer can do content negotiation using the HTTP Content-Type and Accept headers. Note: This versioning only applies to the request and response content schema, not to URI or method semantics.
+Accept: application/x.zalando.cart+json;version=2
+A server responding to this, as well as a client sending a request with content should use the Content-Type header, declaring that one is sending the new version:
 
-    In this example, a client wants only the new version of the response:
+Content-Type: application/x.zalando.cart+json;version=2
 
-    Accept: application/x.zalando.cart+json;version=2
-    A server responding to this, as well as a client sending a request with content should use the Content-Type header, declaring that one is sending the new version:
+Using header versioning should:
 
-    Content-Type: application/x.zalando.cart+json;version=2
+- include versions in request and response headers to increase visibility
+- include Content-Type in the Vary header to enable proxy caches to differ between versions
 
-    Using header versioning should:
+> Hint: OpenAPI currently doesn't support content negotiation, though a comment in this issue mentions a workaround (using a fragment identifier that gets stripped off). Another way would be to document just the new version, but let the server accept the old one (with the previous content-type).
 
-    - include versions in request and response headers to increase visibility
-    - include Content-Type in the Vary header to enable proxy caches to differ between versions
+Until an incompatible change is necessary, it is recommended to stay with the standard application/json media type.
 
-    > Hint: OpenAPI currently doesn't support content negotiation, though a comment in this issue mentions a workaround (using a fragment identifier that gets stripped off). Another way would be to document just the new version, but let the server accept the old one (with the previous content-type).
+### MUST: Do Not Use URI Versioning
 
-    Until an incompatible change is necessary, it is recommended to stay with the standard application/json media type.
+With URI versioning a (major) version number is included in the path, e.g. /v1/customers. The consumer has to wait until the provider has been released and deployed. If the consumer also supports hypermedia links — even in their APIs — to drive workflows (HATEOAS), this quickly becomes complex. So does coordinating version upgrades — especially with hyperlinked service dependencies — when using URL versioning. To avoid this tighter coupling and complexer release management we do not use URI versioning, and go instead with media type versioning and content negotiation (see above).
 
-    ### MUST: Do Not Use URI Versioning
+The API will inevitably need to be modified in ways that will impact customer client code. Not all customer clients will be able to make the necessary changes in their code right away, so the API should maintain older versions for some time after releasing the new version, usually a minimum of 90 days.
 
-    With URI versioning a (major) version number is included in the path, e.g. /v1/customers. The consumer has to wait until the provider has been released and deployed. If the consumer also supports hypermedia links — even in their APIs — to drive workflows (HATEOAS), this quickly becomes complex. So does coordinating version upgrades — especially with hyperlinked service dependencies — when using URL versioning. To avoid this tighter coupling and complexer release management we do not use URI versioning, and go instead with media type versioning and content negotiation (see above).
+In the ‘When to Version’ section should you mention APIs that use enum types? My company’s API reference documentation has attributes with an enum type and we list all values. We ran into a problem when a requirement added an enum value to an existing attribute and it broke a partner app. The partner had coded to the defined enum values in the documentation and their app wasn’t expecting new values with future releases. I corrected the problem by removing the new enum value and I defined any request to add a new enum value to an existing attribute requires a new API version. Last, going forward new attributes with an enum type will be defined as String in the documentation and we will indicate the values are not limited to the ones defined.
 
+Versioning Content Types
 
+The use of content negotiation with custom MIME types allows for finer grained versioning at the resource level without the need to create a plethora of new endpoints. New versions must be communicated to developers through existing channels – email, developer blogs, etc. When a content version is no longer supported, the body of the HTTP error should include a list of supported content types.
 
-    The API will inevitably need to be modified in ways that will impact customer client code. Not all customer clients will be able to make the necessary changes in their code right away, so the API should maintain older versions for some time after releasing the new version, usually a minimum of 90 days.
+Versioning URIs
 
+The use of both hyper links and content negotiation should all but eliminate the need to version at the URI level. However, there may be instances where the entire structure of the API must be changed, particularly when moving from one API style to another, such when moving from an RPC-type style to NARWHL. To prepare for these possibilities, it’s recommended that a version be embedded within each API endpoint. The version can either be embedded at the root for all endpoints of a given API, such as:
 
+http://api.example.com/v1
 
-    In the ‘When to Version’ section should you mention APIs that use enum types? My company’s API reference documentation has attributes with an enum type and we list all values. We ran into a problem when a requirement added an enum value to an existing attribute and it broke a partner app. The partner had coded to the defined enum values in the documentation and their app wasn’t expecting new values with future releases. I corrected the problem by removing the new enum value and I defined any request to add a new enum value to an existing attribute requires a new API version. Last, going forward new attributes with an enum type will be defined as String in the documentation and we will indicate the values are not limited to the ones defined.
+Or within the fully qualified domain name for the endpoint:
 
+http://apiv1.example.com
 
+The version need not be numeric, nor specified using the “v[x]” syntax. Alternatives include dates, project names, seasons or other identifiers that are meaningful enough to the team producing the APIs and flexible enough to change as the versions change.
 
-    Versioning Content Types
+Subbu Allamaraju, revisits one of the recurring debates in the REST community; the standard media types vs. custom media types and tries to determine the best practices when using them. He starts with the stating dichotomous views on the use of media types.
 
-    The use of content negotiation with custom MIME types allows for finer grained versioning at the resource level without the need to create a plethora of new endpoints. New versions must be communicated to developers through existing channels – email, developer blogs, etc. When a content version is no longer supported, the body of the HTTP error should include a list of supported content types.
+Opinion 1: Web services must use standard media types to be RESTful.
+Opinion 2: Custom media types are necessary to keep interactions visible, and to serve as contracts.
+The first opinion which, if adhered to strictly, per Roy Fieldings thesis, “the use of media types such as application/vnd.example.myway+xml is not RESTful”. Subbu believes that understanding the impact of such media type usage in the real world is more important than following the thesis to the letter. There are however comments that suggest that this interpretation of the thesis might be up for debate as well.
 
-    Versioning URIs
+To the contrary, the second opinion, he says, leads to visibility of the messages at the protocol level via the use of custom media types.
 
-    The use of both hyper links and content negotiation should all but eliminate the need to version at the URI level. However, there may be instances where the entire structure of the API must be changed, particularly when moving from one API style to another, such when moving from an RPC-type style to NARWHL. To prepare for these possibilities, it’s recommended that a version be embedded within each API endpoint. The version can either be embedded at the root for all endpoints of a given API, such as:
+[…] For instance, how can anyone know if a representation that uses application/xml media type describes a purchase order, or a photo album? If the web service uses media types likeapplication/vnd.example.po and application/vnd.example.album, then any one can interpret the semantics of the representation without parsing the body of the representation. Per this line of thinking, a media type is an identifier for message semantics, and message recipients use media types to trigger processing code.
 
-    http://api.example.com/v1
+“So what is the right thing to do?”  He asks, as he puts forth his idea, in a effort to democratically determine the best practices
 
-    Or within the fully qualified domain name for the endpoint:
+- If the sender is formatting representations using standard extensible formats such as XML or JSON, use standard media types such as application/xml and application/json.
+- Mint new media types when you invent new formats.
+- If you are just looking for a way to communicate application level semantics for XML and JSON messages, use something else (e.g. XML namespaces and conventions).
+- If the goal is versioning, use version identifiers in URIs.
+Giving java-like examples, He asserts that though its possible to peek into the messages to see how a request can be processed, it compromises visibility or opacity as the case may be.
 
-    http://apiv1.example.com
+Media types such as application/xml and application/json are good enough for XML and JSON message processing in code. […] URI based approaches are guaranteed to work across the stack. Ignoring real-world interoperability for the sake of "architectual purity" or "RESTful contracts" may eventually back fire.
 
-    The version need not be numeric, nor specified using the “v[x]” syntax. Alternatives include dates, project names, seasons or other identifiers that are meaningful enough to the team producing the APIs and flexible enough to change as the versions change.
+Via the post is the solution presented by Subbu found the right balance between architectural purity and interoperable real-world solutions? Be sure to visit the original post to weigh in your opinion.
 
+## Tips for versioning
 
-    Subbu Allamaraju, revisits one of the recurring debates in the REST community; the standard media types vs. custom media types and tries to determine the best practices when using them. He starts with the stating dichotomous views on the use of media types.
+Versioning is one of the most important considerations when designing your Web API.
 
-    Opinion 1: Web services must use standard media types to be RESTful.
-    Opinion 2: Custom media types are necessary to keep interactions visible, and to serve as contracts.
-    The first opinion which, if adhered to strictly, per Roy Fieldings thesis, “the use of media types such as application/vnd.example.myway+xml is not RESTful”. Subbu believes that understanding the impact of such media type usage in the real world is more important than following the thesis to the letter. There are however comments that suggest that this interpretation of the thesis might be up for debate as well.
+Never release an API without a version and make the version mandatory.
 
-    To the contrary, the second opinion, he says, leads to visibility of the messages at the protocol level via the use of custom media types.
+Let's see how three top API providers handle versioning.
 
-    […] For instance, how can anyone know if a representation that uses application/xml media type describes a purchase order, or a photo album? If the web service uses media types likeapplication/vnd.example.po and application/vnd.example.album, then any one can interpret the semantics of the representation without parsing the body of the representation. Per this line of thinking, a media type is an identifier for message semantics, and message recipients use media types to trigger processing code.
+Twilio /2010-04-01/Accounts/
 
-    “So what is the right thing to do?”  He asks, as he puts forth his idea, in a effort to democratically determine the best practices
+salesforce.com /services/data/v20.0/sobjects/Account
 
-    - If the sender is formatting representations using standard extensible formats such as XML or JSON, use standard media types such as application/xml and application/json.
-    - Mint new media types when you invent new formats.
-    - If you are just looking for a way to communicate application level semantics for XML and JSON messages, use something else (e.g. XML namespaces and conventions).
-    - If the goal is versioning, use version identifiers in URIs.
-    Giving java-like examples, He asserts that though its possible to peek into the messages to see how a request can be processed, it compromises visibility or opacity as the case may be.
+Facebook ?v=1.0
 
-    Media types such as application/xml and application/json are good enough for XML and JSON message processing in code. […] URI based approaches are guaranteed to work across the stack. Ignoring real-world interoperability for the sake of "architectual purity" or "RESTful contracts" may eventually back fire.
+Twilio uses a timestamp in the URL (note the European format).
 
-    Via the post is the solution presented by Subbu found the right balance between architectural purity and interoperable real-world solutions? Be sure to visit the original post to weigh in your opinion.
+At compilation time, the developer includes the timestamp of the application when the code was compiled. That timestamp goes in all the HTTP requests.
 
-    ## Tips for versioning
+When a request arrives, Twilio does a look up. Based on the timestamp they identify the API that was valid when this code was created and route accordingly.
 
-    Versioning is one of the most important considerations when designing your Web API.
+It's a very clever and interesting approach, although we think it is a bit complex. For example, it can be confusing to understand whether the timestamp is the compilation time or the timestamp when the API was released.
 
-    Never release an API without a version and make the version mandatory.
+Salesforce.com uses v20.0, placed somewhere in the middle of the URL.
 
-    Let's see how three top API providers handle versioning.
+We like the use of the v. notation. However, we don't like using the .0 because it implies that the interface might be changing more frequently than it should. The logic behind an interface can change rapidly but the interface itself shouldn't change frequently.
 
-    Twilio /2010-04-01/Accounts/
+Facebook also uses the v. notation but makes the version an optional parameter.
 
-    salesforce.com /services/data/v20.0/sobjects/Account
+This is problematic because as soon as Facebook forced the API up to the next version, all the apps that didn't include the version number broke and had to be pulled back and version number added.
 
-    Facebook ?v=1.0
+## How to think about version numbers in a pragmatic way with REST?
 
-    Twilio uses a timestamp in the URL (note the European format).
+Never release an API without a version. Make the version mandatory.
 
-    At compilation time, the developer includes the timestamp of the application when the code was compiled. That timestamp goes in all the HTTP requests.
+Specify the version with a 'v' prefix. Move it all the way to the left in the URL so that it has the highest scope (e.g. /v1/dogs).
 
-    When a request arrives, Twilio does a look up. Based on the timestamp they identify the API that was valid when this code was created and route accordingly.
+Use a simple ordinal number. Don't use the dot notation like v1.2 because it implies a granularity of versioning that doesn't work well with APIs--it's an interface not an implementation. Stick with v1, v2, and so on.
 
-    It's a very clever and interesting approach, although we think it is a bit complex. For example, it can be confusing to understand whether the timestamp is the compilation time or the timestamp when the API was released.
+How many versions should you maintain? Maintain at least one version back.
 
-    Salesforce.com uses v20.0, placed somewhere in the middle of the URL.
+For how long should you maintain a version? Give developers at least one cycle to react before obsoleting a version.
 
-    We like the use of the v. notation. However, we don't like using the .0 because it implies that the interface might be changing more frequently than it should. The logic behind an interface can change rapidly but the interface itself shouldn't change frequently.
+Sometimes that's 6 months; sometimes it's 2 years. It depends on your developers' development platform, application type, and application users. For example, mobile apps take longer to rev' than Web apps.
 
-    Facebook also uses the v. notation but makes the version an optional parameter.
+Should version and format be in URLs or headers?
 
-    This is problematic because as soon as Facebook forced the API up to the next version, all the apps that didn't include the version number broke and had to be pulled back and version number added.
+There is a strong school of thought about putting format and version in the header.
 
-    ## How to think about version numbers in a pragmatic way with REST?
+Sometimes people are forced to put the version in the header because they have multiple inter-dependent APIs. That is often a symptom of a bigger problem, namely, they are usually exposing their internal mess instead of creating one, usable API facade on top.
 
-    Never release an API without a version. Make the version mandatory.
+That's not to say that putting the version in the header is a symptom of a problematic API design. It's not!
 
-    Specify the version with a 'v' prefix. Move it all the way to the left in the URL so that it has the highest scope (e.g. /v1/dogs).
+In fact, using headers is more correct for many reasons: it leverages existing HTTP standards, it's intellectually consistent with Fielding's vision, it solves some hard realworld problems related to inter-dependent APIs, and more.
 
-    Use a simple ordinal number. Don't use the dot notation like v1.2 because it implies a granularity of versioning that doesn't work well with APIs--it's an interface not an implementation. Stick with v1, v2, and so on.
+However, we think the reason most of the popular APIs do not use it is because it's less fun to hack in a browser.
 
-    How many versions should you maintain? Maintain at least one version back.
+Simple rules we follow:
 
-    For how long should you maintain a version? Give developers at least one cycle to react before obsoleting a version.
+If it changes the logic you write to handle the response, put it in the URL so you can see it easily.
 
-    Sometimes that's 6 months; sometimes it's 2 years. It depends on your developers' development platform, application type, and application users. For example, mobile apps take longer to rev' than Web apps.
+If it doesn't change the logic for each response, like OAuth information, put it in the header.
 
-    Should version and format be in URLs or headers?
+The code we would write to handle the responses would be very different.
 
-    There is a strong school of thought about putting format and version in the header.
-
-    Sometimes people are forced to put the version in the header because they have multiple inter-dependent APIs. That is often a symptom of a bigger problem, namely, they are usually exposing their internal mess instead of creating one, usable API facade on top.
-
-    That's not to say that putting the version in the header is a symptom of a problematic API design. It's not!
-
-    In fact, using headers is more correct for many reasons: it leverages existing HTTP standards, it's intellectually consistent with Fielding's vision, it solves some hard realworld problems related to inter-dependent APIs, and more.
-
-    However, we think the reason most of the popular APIs do not use it is because it's less fun to hack in a browser.
-
-    Simple rules we follow:
-
-    If it changes the logic you write to handle the response, put it in the URL so you can see it easily.
-
-    If it doesn't change the logic for each response, like OAuth information, put it in the header.
-
-    The code we would write to handle the responses would be very different.
-
-    There's no question the header is more correct and it is still a very strong API design.
+There's no question the header is more correct and it is still a very strong API design.
 
 ## Deprecation
 

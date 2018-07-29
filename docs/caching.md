@@ -4,15 +4,15 @@ Caching is one of the most useful features built on top of HTTP's uniform interf
 
 It is common to use the word *cache* to refer to either an object cache (memcached) or HTTP caches. Both of these caches improve performacne and have key roles to play in the overall web service deployment architecture. But there is an important difference between the two. HTTP caches do not require clients and servers to call any special programming API to manage data in the cache, as long as you are using HTTP as defined.
 
-*origin server*
+### *origin server*
 
-    They are slightly different - the ETag does not have any information that the client can use to determine whether or not to make a request for that file again in the future. If ETag is all it has, it will always have to make a request. However, when the server reads the ETag from the client request, the server can then determine whether to send the file (HTTP 200) or tell the client to just use their local copy (HTTP 304). An ETag is basically just a checksum for a file that semantically changes when the content of the file changes.
+They are slightly different - the ETag does not have any information that the client can use to determine whether or not to make a request for that file again in the future. If ETag is all it has, it will always have to make a request. However, when the server reads the ETag from the client request, the server can then determine whether to send the file (HTTP 200) or tell the client to just use their local copy (HTTP 304). An ETag is basically just a checksum for a file that semantically changes when the content of the file changes.
 
-    The Expires header is used by the client (and proxies/caches) to determine whether or not it even needs to make a request to the server at all. The closer you are to the Expires date, the more likely it is the client (or proxy) will make an HTTP request for that file from the server.
+The Expires header is used by the client (and proxies/caches) to determine whether or not it even needs to make a request to the server at all. The closer you are to the Expires date, the more likely it is the client (or proxy) will make an HTTP request for that file from the server.
 
-    So really what you want to do is use BOTH headers - set the Expires header to a reasonable value based on how often the content changes. Then configure ETags to be sent so that when clients DO send a request to the server, it can more easily determine whether or not to send the file back.
+So really what you want to do is use BOTH headers - set the Expires header to a reasonable value based on how often the content changes. Then configure ETags to be sent so that when clients DO send a request to the server, it can more easily determine whether or not to send the file back.
 
-    One last note about ETag - if you are using a load-balanced server setup with multiple machines running Apache you will probably want to turn off ETag generation. This is because inodes are used as part of the ETag hash algorithm which will be different between the servers. You can configure Apache to not use inodes as part of the calculation but then you'd want to make sure the timestamps on the files are exactly the same, to ensure the same ETag gets generated for all servers.
+One last note about ETag - if you are using a load-balanced server setup with multiple machines running Apache you will probably want to turn off ETag generation. This is because inodes are used as part of the ETag hash algorithm which will be different between the servers. You can configure Apache to not use inodes as part of the calculation but then you'd want to make sure the timestamps on the files are exactly the same, to ensure the same ETag gets generated for all servers.
 
 - How to set Expiration Caching Headers
 
@@ -72,8 +72,8 @@ Conditional `GET` request can extend the life of stale representations.
 
 Use `Last-Modified` and `ETag` response headers to drive conditional requests. Clients use the following:
 
-    - `If-Modified-Since` and `If-None-Match` for validating cached representations
-    - `If-Unmodified-Since` and `If-Match` as preconditions for concurrency control
+- `If-Modified-Since` and `If-None-Match` for validating cached representations
+- `If-Unmodified-Since` and `If-Match` as preconditions for concurrency control
 
 a timestamp for the modifed date-time and/or a sequence number of keep track of a version.
 
@@ -140,20 +140,19 @@ Do not use `HEAD` to obtain fresh `Last-Modified` and `ETag` you will also new t
 - How to Make `POST` Requests Conditional
 - How to Generate One-Time URIs
 
-    <!-- TODO -->
+Common methods of ETag generation include using a collision-resistant hash function of the resource's content, a hash of the last modification timestamp, or even just a revision number.
 
-    Common methods of ETag generation include using a collision-resistant hash function of the resource's content, a hash of the last modification timestamp, or even just a revision number.
+### MAY: Consider using ETag together with If-(None-)Match header
 
-    ### MAY: Consider using ETag together with If-(None-)Match header
+When creating or updating resources it may be necessary to expose conflicts and to prevent the lost update problem. This can be best accomplished by using the ETag header together with the If-Match and If-None-Match. The contents of an ETag: <entity-tag> header is either (a) a hash of the response body, (b) a hash of the last modified field of the entity, or (c) a version number or identifier of the entity version.
 
-    When creating or updating resources it may be necessary to expose conflicts and to prevent the lost update problem. This can be best accomplished by using the ETag header together with the If-Match and If-None-Match. The contents of an ETag: <entity-tag> header is either (a) a hash of the response body, (b) a hash of the last modified field of the entity, or (c) a version number or identifier of the entity version.
+To expose conflicts between concurrent update operations via PUT, POST, or PATCH, the If-Match: <entity-tag> header can be used to force the server to check whether the version of the updated entity is conforming to the requested <entity-tag>. If no matching entity is found, the operation is supposed a to respond with status code 412 - precondition failed.
 
-    To expose conflicts between concurrent update operations via PUT, POST, or PATCH, the If-Match: <entity-tag> header can be used to force the server to check whether the version of the updated entity is conforming to the requested <entity-tag>. If no matching entity is found, the operation is supposed a to respond with status code 412 - precondition failed.
+Beside other use cases, the If-None-Match: header with parameter * can be used in a similar way to expose conflicts in resource creation. If any matching entity is found, the operation is supposed a to respond with status code 412 - precondition failed.
 
-    Beside other use cases, the If-None-Match: header with parameter * can be used in a similar way to expose conflicts in resource creation. If any matching entity is found, the operation is supposed a to respond with status code 412 - precondition failed.
+The ETag, If-Match, and If-None-Match headers can be defined as follows in the API definition:
 
-    The ETag, If-Match, and If-None-Match headers can be defined as follows in the API definition:
-
+```
     Etag:
         name: Etag
         description: |
@@ -193,4 +192,4 @@ Do not use `HEAD` to obtain fresh `Last-Modified` and `ETag` you will also new t
         type: string
         required: false
         example: "7da7a728-f910-11e6-942a-68f728c1ba70", *
-
+```

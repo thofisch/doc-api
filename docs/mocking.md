@@ -22,6 +22,6 @@ It's better to take the time now, up front and ensure that your API is well desi
 
 ---
 
-testing api’s
-automated in-memory integration tests (with live dependencies stubed out)
-Implement a “Health-Check” Endpoint
+* testing api’s
+* automated in-memory integration tests (with live dependencies stubed out)
+* Implement a “Health-Check” Endpoint
