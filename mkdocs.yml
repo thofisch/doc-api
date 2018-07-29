@@ -50,7 +50,7 @@ pages:
 - Resources: resources.md
 - Methods: methods.md
 - Representations: representations.md
-- -Hypermedia: hypermedia.md
+- Hypermedia: hypermedia.md
 - Content Negotiation: content-negotiation.md
 - Caching: caching.md
 - Security: security.md

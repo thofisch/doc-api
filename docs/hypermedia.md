@@ -1,5 +1,6 @@
-
 # Hypermedia
+
+## What is Hypermedia?
 
 One of the challenges to implementing and correctly using hypermedia in your REST API is first understanding what hypermedia is, and what it means to use hypermedia as the engine of application state (HATEOAS).
 The term "hypermedia" was coined back in 1965 by Ted Nelson, and over the years has dominated the technology industry.
@@ -28,13 +29,13 @@ By adding these links, because REST is stateless, we are providing the client wi
 
 In other words, we are using Hypermedia as the Engine of the Application's State, or implementing HATEOAS.
 
-# The HATEOAS Debate
+## The HATEOAS Debate
 
 Currently, there is a lot of disagreement around hypermedia's place in RESTful APIs– with Dr. Roy Fielding saying it is critical to REST, and without it your API cannot be RESTful; and hypermedia skeptics arguing that you are doing nothing more than bloating your API and making it more difficult to use under the guise of usability.
 This means you will find many different stances on the web today, ranging from Peter Williams explanation of how hypermedia has helped him, Jeff Krupp's rant against hypermedia, and even Kin Lane's summary of the whole debate.
 But what it really comes down to isn't what do others think about hypermedia, as most major frameworks for building APIs now include hypermedia specs such as HAL, JSON-LD, JSON API, Siren, or Collection+JSON, but rather what benefit does hypermedia offer- and is that benefit enough to outweigh the cost/ disadvantages of incorporating hypermedia.
 
-# The Claims For and Against Hypermedia
+## The Claims For and Against Hypermedia
 
 Some of the most common arguments for and against hypermedia include:
 
@@ -153,7 +154,7 @@ These gains, I believe, become more and more noticeable the larger and more comp
 However, the best features of utilizing HATEOAS, in my opinion, are yet to be seen as technology and API exploration tools continue to advance.
 Be sure to join us next week as we take a look at implementing hypermedia into your API and the current specs out there to help you do so.
 
-# The Harsh Reality of the State of Hypermedia Specs
+## The Harsh Reality of the State of Hypermedia Specs
 
 Hypermedia sounds great in theory, but theory only goes so far.
 
@@ -196,7 +197,7 @@ And as more and more formats become available and change in popularity, it may b
 
 Something that will allow you to take advantage of this best practice, while also being prepared for whatever the future may hold.
 
-# Specs
+### Specs
 
 What essentially every hypertext linking spec does provide is a name for the link and a hypertext reference, but outside of that, it's a crapshoot.
 
@@ -204,7 +205,7 @@ As such, it's important to understand the different specs that are out there, wh
 
 We may not be able to get it down to one spec, but at least we'll be able to provide our users with a uniform response that they can easily incorporate into their application:
 
-### Collection+JSON
+#### Collection+JSON
 
 Collection+JSON is a JSON-based read/write hypermedia-type designed by Mike Amundsen back in 2011 to support the management and querying of simple collections.
 
@@ -213,7 +214,7 @@ It's based on the Atom Publication and Syndication specs, defining both in a sin
 While originally widely used among APIs, Collection+JSON has struggled to maintain its popularity against JSON API and HAL.
 Strengths: strong choice for collections, templated queries, early wide adoption, recognized as a standard Weaknesses: JSON only, lack of identifier for documentation, more complex/ difficult to implement
 
-### JSON API
+#### JSON API
 
 JSON API is a newer spec created in 2013 by Steve Klabnik and Yahuda Klaz.
 
@@ -225,7 +226,7 @@ JSON API currently bares a warning that it is a work in progress, and while wide
 Strengths: simple versatile format, easy to read/ implement, flat link grouping, URL templating, wide adoption, strong community, recognized as a hypermedia standard
 Weaknesses: JSON only, lack of identifier for documentation, still a work in progress
 
-### HAL
+#### HAL
 
 HAL is an older spec, created in 2011 by Mike Kelly to be easily consumed across multiple formats including XML and JSON.
 
@@ -236,7 +237,7 @@ HAL also incorporates CURIEs, a feature that makes it unique in that it allows f
 HAL is one of the most supported and most widely used hypermedia specs out there today, and is surrounded by a strong and vocal community.
 Strengths: dynamic, nestable, easy to read/ implement, multi-format, URL templating, inclusion of documentation, wide adoption, strong community, recognized as a standard hypermedia spec, RFC proposed Weaknesses: JSON/XML formats architecturally different, CURIEs are tightly coupled
 
-### JSON-LD
+#### JSON-LD
 
 JSON-LD is a lightweight spec focused on machine to machine readable data.
 
@@ -248,7 +249,7 @@ However, it has built a strong community around it with a fairly active mailing 
 Strengths: strong format for data linking, can be used across multiple data formats (Web API & Databases), strong community, large working group, recognized by W3C as a standard
 Weaknesses: JSON only, more complex to integrate/ interpret, no identifier for documentation
 
-### Siren
+#### Siren
 
 Created in 2012 by Kevin Swiber, Siren is a more descriptive spec made up of classes, entities, actions, and links.
 
@@ -262,7 +263,7 @@ Siren is still listed as a work in progress.
 Strengths: provides a more verbose spec, query templating, incorporates actions, multi-format
 Weaknesses: poor adoption, lacks documentation, work in progress
 
-### Other Specs
+#### Other Specs
 
 Along with some of the leading specs mentioned above, new specs are being created every day including UBER, Mason, Yahapi, and CPHL.
 
@@ -285,28 +286,44 @@ For more on the different specs, I highly recommend reading Kevin Sookocheff's r
 
 I'd also love to hear your thoughts in the comments below.
 
-### MUST: Use REST Maturity Level 2
 
-We strive for a good implementation of REST Maturity Level 2 as it enables us to build resource-oriented APIs that make full use of HTTP verbs and status codes. You can see this expressed by many rules throughout these guidelines, e.g.:
 
-Avoid Actions — Think About Resources
-Keep URLs Verb-Free
-Use HTTP Methods Correctly
-Use Meaningful HTTP Status Codes
-Although this is not HATEOAS, it should not prevent you from designing proper link relationships in your APIs as stated in rules below.
+## Linking and Application State
 
-### MAY: Use REST Maturity Level 3 - HATEOAS
+<!-- TODO -->
 
-We do not generally recommend to implement REST Maturity Level 3. HATEOAS comes with additional API complexity without real value in our SOA context where client and server interact via REST APIs and provide complex business functions as part of our e-commerce SaaS platform.
+    <!--
+    HATEOS / HAL / JSONAPI etc.
+    -->
 
-Our major concerns regarding the promised advantages of HATEOAS (see also RESTistential Crisis over Hypermedia APIs, Why I Hate HATEOAS and others):
+    A link provides a mean to navigate from one resource to another.
 
-We follow the API First principle with APIs explicitly defined outside the code with standard specification language. HATEOAS does not really add value for SOA client engineers in terms of API self-descriptiveness: a client engineer finds necessary links and usage description (depending on resource state) in the API reference definition anyway.
-Generic HATEOAS clients which need no prior knowledge about APIs and explore API capabilities based on hypermedia information provided, is a theoretical concept that we haven't seen working in practise and does not fit to our SOA set-up. The OpenAPI description format (and tooling based on OpenAPI) doesn't provide sufficient support for HATEOAS either.
-In practice relevant HATEOAS approximations (e.g. following specifications like HAL or JSON API) support API navigation by abstracting from URL endpoint and HTTP method aspects via link types. So, Hypermedia does not prevent clients from required manual changes when domain model changes over time.
-Hypermedia make sense for humans, less for SOA machine clients. We would expect use cases where it may provide value more likely in the frontend and human facing service domain.
-Hypermedia does not prevent API clients to implement shortcuts and directly target resources without 'discovering' them
-However, we do not forbid HATEOAS; you could use it, if you checked its limitations and still see clear value for your usage scenario that justifies its additional complexity. If you use HATEOAS please share experience and present your findings in the API Guild [internal link].
+    Application state is the state the server needs to maintain between each request for each client. Keeping state in clients does not mean serializing session state into URIs or HTML forms.
+
+    If the amount of data is small, the best place to maintain application state is within links in representations of resources, where the server can encode the state within the URI itself. However, the server can stores data in a durable storage and encodes its primary key in the URI. Use a combination of both approaches for managing application state to strike a balance between network performance, scalability and reliability.
+
+    ```
+    HTTP/1.1 200 OK
+    Content-Type: application/xml;charset=UTF-8
+
+    <quote xmlns:atom="http://www.w3.org/2005/Atom">
+        <driver>...</driver>
+        <vehicle>...</vehicle>
+        <offer>
+            <valid-until>2009-10-02</valid-until>
+            <atom:link href="http://www.example.org/quotes/buy?quote=abc1234" rel="http://www.example.org/rels/quotes/buy" />
+        </offer>
+    </quote>
+    ```
+
+- **DO** encode application state into URIs, and include those URIs into representations via links.
+- **DO** store the application state in a durable storage, and encode a reference to that state in URIs, if the state is large or cannot be transported to the clients for security or privacy reasons.
+- **DO** make sure to add checks (such as signatures) to detect/prevent tampering of state, when using application state in links.
+
+<!-- TODO -->
+    #### *Links in XML Representations*
+
+    *[Atom](http://www.w3.org/2005/Atom)*
 
 ### MUST: Use Common Hypertext Controls
 
@@ -344,58 +361,7 @@ E.g. a service providing "Person" resources could model a person who is married 
 }
 Hypertext controls are allowed anywhere within a JSON model. While this specification would allow HAL, we actually don't recommend/enforce the usage of HAL anymore as the structural separation of meta-data and data creates more harm than value to the understandability and usability of an API.
 
-### SHOULD:: Use Simple Hypertext Controls for Pagination and Self-References
-
-Hypertext controls for pagination inside collections and self-references should use a simple URI value in combination with their corresponding link relations (next, prev, first, last, self) instead of the extensible common hypertext control
-
-See Pagination for information how to best represent paginateable collections.
-
-### MUST: Not Use Link Headers with JSON entities
-
-We don't allow the use of the Link Header defined by RFC 5988 in conjunction with JSON media types. We prefer links directly embedded in JSON payloads to the uncommon link header syntax.
-
-### MUST: Follow Hypertext Control Conventions
-
-APIs that provide hypertext controls (links) to interconnect API resources must follow the conventions for naming and modeling of hypertext controls as defined in section Hypermedia.
-
-### Linking and Application State
-
-<!-- TODO -->
-
-    <!--
-    HATEOS / HAL / JSONAPI etc.
-    -->
-
-    A link provides a mean to navigate from one resource to another.
-
-    Application state is the state the server needs to maintain between each request for each client. Keeping state in clients does not mean serializing session state into URIs or HTML forms.
-
-    If the amount of data is small, the best place to maintain application state is within links in representations of resources, where the server can encode the state within the URI itself. However, the server can stores data in a durable storage and encodes its primary key in the URI. Use a combination of both approaches for managing application state to strike a balance between network performance, scalability and reliability.
-
-    ```
-    HTTP/1.1 200 OK
-    Content-Type: application/xml;charset=UTF-8
-
-    <quote xmlns:atom="http://www.w3.org/2005/Atom">
-        <driver>...</driver>
-        <vehicle>...</vehicle>
-        <offer>
-            <valid-until>2009-10-02</valid-until>
-            <atom:link href="http://www.example.org/quotes/buy?quote=abc1234" rel="http://www.example.org/rels/quotes/buy" />
-        </offer>
-    </quote>
-    ```
-
-- **DO** encode application state into URIs, and include those URIs into representations via links.
-- **DO** store the application state in a durable storage, and encode a reference to that state in URIs, if the state is large or cannot be transported to the clients for security or privacy reasons.
-- **DO** make sure to add checks (such as signatures) to detect/prevent tampering of state, when using application state in links.
-
-<!-- TODO -->
-    #### *Links in XML Representations*
-
-    *[Atom](http://www.w3.org/2005/Atom)*
-
-#### Links in JSON Representations
+### Links in JSON Representations
 
     ## What about attribute names?
 
@@ -490,7 +456,7 @@ Examples:
 }
 ```
 
-#### Link Header
+### Link Header
 
 The `Link` header provides a format-independent means to convey links, which is one of the key benefits, along with visibility at the protocol level. Also the need for documentation on how to discover links in XML or JSON representations is lowered.
 
@@ -505,7 +471,7 @@ Link: <{URI}>;rel="{relation}";type="{media type"};title="{title}"...
    - Formats that do not allow for easy discovery of links (e.g., plain-text documents)
    - When your client/server software needs to add links or read links without parsing the body of representations
 
-#### Link Relation Types
+### Link Relation Types
 
 - **ALWAYS** supply a link relation to act as an identifier for the semantics associated with the link
 - **ALWAYS** use URIs (such as http://www.example.org/rels/create-po) to express extended link relation types
@@ -517,7 +483,7 @@ Link: <{URI}>;rel="{relation}";type="{media type"};title="{title}"...
 
 > Link relation types meant for public use should register that link relation per the process outlined in section 6.2 of the Web Linking Internet-Draft.
 
-#### Managing Application Flow with Links
+### Managing Application Flow with Links
 
 One of the key applications of hypermedia and links is the ability to decouple the client from learning about the rules the server uses to manage its application flow. The server can provide links containing application state, thereby using Hypermedia As The Engine Of Application State.
 
@@ -528,7 +494,9 @@ This prevents clients from having to learn and hard-code application flow, howev
 - **DO** document how to find links and the semantics of all extended link relation types.
 - **DO**, for clients, assume that absent links means the transition is not possible.
 
-#### Ephemeral URIs
+## Ephemeral URIs
+
+{>>Does this belong in Resource Identifiers?<<}
 
 A URI may be temporary and valid only for a single use or may expire after a fixed period of time.
 
@@ -536,7 +504,7 @@ A URI may be temporary and valid only for a single use or may expire after a fix
 - **DO** assign extended relation types for those links and document how long such URIs are valid and what the client should do after expiry.
 - **DO** return appropriate `4xx` code when responding to expired URIs, with an instructions in the body of any actions the client can take.
 
-#### URI Template
+### URI Template
 
 When the server does not have all the information necessary to generate a valid and complete URI for each link.
 
