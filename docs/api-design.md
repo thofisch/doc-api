@@ -1,22 +1,24 @@
+{++
+
 ## Spec-Driven Development 
 
-    The overall point of view on API design is to approach API design from the 'outside-in' perspective.
-    
-    The orientation for APIs is to think about design choices from the application developer's point of view. 
-    
-    The goal is to make the developers as successful as possible.
-    
-    The primary design principle when crafting your API should be to maximize developer productivity and success. This is what we call pragmatic REST.
-    
-    You have to get the design right, because design communicates how something will be used.
-    
-    The question becomes - what is the design with optimal benefit for the app developer?
-    
-    The developer point of view is the guiding principle for all the specific tips and best practices we've compiled
-    
-    We call our point of view in API design "pragmatic REST", because it places the success of the developer over and above any other design principle. The developer is the customer for the Web API.
-    
-    The success of an API design is measured by how quickly developers can get up to speed and start enjoying success using your API.
+The overall point of view on API design is to approach API design from the 'outside-in' perspective.
+
+The orientation for APIs is to think about design choices from the application developer's point of view. 
+
+The goal is to make the developers as successful as possible.
+
+The primary design principle when crafting your API should be to maximize developer productivity and success. This is what we call pragmatic REST.
+
+You have to get the design right, because design communicates how something will be used.
+
+The question becomes - what is the design with optimal benefit for the app developer?
+
+The developer point of view is the guiding principle for all the specific tips and best practices we've compiled
+
+We call our point of view in API design "pragmatic REST", because it places the success of the developer over and above any other design principle. The developer is the customer for the Web API.
+
+The success of an API design is measured by how quickly developers can get up to speed and start enjoying success using your API.
 
 ### Feedback
 
@@ -26,9 +28,9 @@ One of the quickest ways to get feedback on your API is to define it using a spe
 
 > Be aware that none of the popular specification frameworks support Hypermedia Links (let alone HATEOS). <!-- TODO: link to Jimmy Bogart blog -->
 
-    ### Code to the Spec... and Don't Deviate
+### Code to the Spec... and Don't Deviate
 
-    If you have taken advantage of the above steps and carefully laid out your API, carefully designed your spec, user tested, and perfected your API – there is nothing worse than throwing all that work away by deviating from the spec and doing one-off things.
+If you have taken advantage of the above steps and carefully laid out your API, carefully designed your spec, user tested, and perfected your API – there is nothing worse than throwing all that work away by deviating from the spec and doing one-off things.
 
 ## MUST: Follow API First Principle
 
@@ -52,21 +54,45 @@ It is important to learn, that API First is not in conflict with the agile devel
 
 The API Guild drafted and owns this document.
 
-    The list of status code that can be omitted from API specifications includes but is not limited to:
+The list of status code that can be omitted from API specifications includes but is not limited to:
 
-    401 Unauthorized
-    403 Forbidden
-    404 Not Found unless it has some additional semantics
-    405 Method Not Allowed
-    406 Not Acceptable
-    408 Request Timeout
-    413 Payload Too Large
-    414 URI Too Long
-    415 Unsupported Media Type
-    500 Internal Server Error
-    503 Service Unavailable
+401 Unauthorized
+403 Forbidden
+404 Not Found unless it has some additional semantics
+405 Method Not Allowed
+406 Not Acceptable
+408 Request Timeout
+413 Payload Too Large
+414 URI Too Long
+415 Unsupported Media Type
+500 Internal Server Error
+503 Service Unavailable
 
 ### MUST: Provide Online Access to OpenAPI Reference Definition
+
+## MUST: Use REST Maturity Level 2
+
+We strive for a good implementation of REST Maturity Level 2 as it enables us to build resource-oriented APIs that make full use of HTTP verbs and status codes. You can see this expressed by many rules throughout these guidelines, e.g.:
+
+Avoid Actions — Think About Resources
+Keep URLs Verb-Free
+Use HTTP Methods Correctly
+Use Meaningful HTTP Status Codes
+Although this is not HATEOAS, it should not prevent you from designing proper link relationships in your APIs as stated in rules below.
+
+### MAY: Use REST Maturity Level 3 - HATEOAS
+
+We do not generally recommend to implement REST Maturity Level 3. HATEOAS comes with additional API complexity without real value in our SOA context where client and server interact via REST APIs and provide complex business functions as part of our e-commerce SaaS platform.
+
+Our major concerns regarding the promised advantages of HATEOAS (see also RESTistential Crisis over Hypermedia APIs, Why I Hate HATEOAS and others):
+
+We follow the API First principle with APIs explicitly defined outside the code with standard specification language. HATEOAS does not really add value for SOA client engineers in terms of API self-descriptiveness: a client engineer finds necessary links and usage description (depending on resource state) in the API reference definition anyway.
+Generic HATEOAS clients which need no prior knowledge about APIs and explore API capabilities based on hypermedia information provided, is a theoretical concept that we haven't seen working in practise and does not fit to our SOA set-up. The OpenAPI description format (and tooling based on OpenAPI) doesn't provide sufficient support for HATEOAS either.
+In practice relevant HATEOAS approximations (e.g. following specifications like HAL or JSON API) support API navigation by abstracting from URL endpoint and HTTP method aspects via link types. So, Hypermedia does not prevent clients from required manual changes when domain model changes over time.
+Hypermedia make sense for humans, less for SOA machine clients. We would expect use cases where it may provide value more likely in the frontend and human facing service domain.
+Hypermedia does not prevent API clients to implement shortcuts and directly target resources without 'discovering' them
+However, we do not forbid HATEOAS; you could use it, if you checked its limitations and still see clear value for your usage scenario that justifies its additional complexity. If you use HATEOAS please share experience and present your findings in the API Guild [internal link].
+
 
 ## Dog-food your own API
 
@@ -101,3 +127,5 @@ To avoid creating one-off base URLs, you can use the partial response syntax to 
 In the case of our dogs API, the dogs have association with owners, who in turn have associations with veterinarians, and so on. Keep nesting the partial response syntax using dot notation to get back just the information you need.
 
 /owners/5678?fields=name,dogs.name
+
+++}
