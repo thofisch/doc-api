@@ -40,7 +40,7 @@ markdown_extensions:
 extra_css:
   - 'stylesheets/critic.css'
 
-pages:
+nav:
 - Introduction: index.md
 - APIs: apis.md
 - API Design: api-design.md
