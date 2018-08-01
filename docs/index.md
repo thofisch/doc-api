@@ -1,6 +1,6 @@
 # Introduction
 
-When designing and building APIs, there are a lot of things to consider. Among these are security, media types, documentation, and versioning. These, and a lot of other concerns, are what we address here, in order to offer comprehensible guidelines on how to design APIs.
+When designing and building APIs, there are a lot of things to consider. Among these are [security](security), [media types](representations/#format-and-a-media-type), [documentation](documentation-and-discovery), and [versioning](versioning-and-extensibility). These, and a lot of other concerns, are what we address here, in order to offer comprehensible guidelines on how to design APIs.
 
 ## Motivation
 
@@ -13,7 +13,7 @@ The motivation behind the *API Guidelines* is to define standards or "best pract
 
 ## About These Guidelines
 
-These guidelines are a work in progress, and is maintained by the **API Enablement Team** during their initial work. Later teams are responsible for adhering to these guidelines during API design and development, and to continue to evolve these guidelines.
+These guidelines are a work in progress, and is maintained by the **API Enablement Team** {>>Now defunct - who then?<<} during their initial work. Later teams are responsible for adhering to these guidelines during API design and development, and to continue to evolve these guidelines.
 
 {>>What should we do when the guideline changes? Do existing APIs have to be changed as well?<<}
 
@@ -39,14 +39,15 @@ Each section will usually be comprised of one or more lists of recommendations:
 ### Admonitions
 
 !!! note
-    these sections holds additional information
+    these sections hold additional information
 
-!!! tip
-    these sections holds tips
+!!! tip 
+    these sections hold tips
 
 !!! warning
-    these section holds cautions
+    these sections hold cautions
 
-!!! example
-    these sections hold snippets of code
-
+!!! example "Larger blocks of code and examples"
+    ```bash
+    curl https://example.org/api/resource | jq
+    ```

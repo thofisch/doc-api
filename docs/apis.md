@@ -37,64 +37,37 @@ Web APIs can typically be broken into two broad categories: **RPC** and **REST**
     
     A lot of documentation, best practices and general advise on how to build RPC APIs can be found throughout the web.
 
-{++
+## Organizing APIs
+
+Large API vendors (like Facebook, Twitter, and Foursquare) usually have their APIs organized behind one or more subdomains, like e.g.:
+
+| Facebook           | Twitter            | Forsquare          |
+|--------------------|--------------------|--------------------|
+| graph.facebook.com | stream.twitter.com | api.foursquare.com |
+| api.facebook.com   | api.twitter.com    |                    |
+|                    | search.twitter.com |                    |
+
+It is not difficult to imagine how Facebook and Twitter ended up with more than one API - timing, team organization, acquisitions have likely played their part. However, following Foursquare's lead and consolidating all API requests under one API subdomain, might be the best interest of API consumers.
+
+- **DO** consolidate API requests in one subdomain, e.g. `https://api.example.org`. It is cleaner, easier and more intuitive for developers who want to build cool stuff using your APIs.
+
+### Developer Portal
+
+A developer portal might be a good idea for hosting examples, application notes, authentication guidance, human-readable documentation, error scenarios and descriptions, etc. Again some of the major API vendors all have dedicated developer portals:
+
+| Facebook                | Twitter         | Forsquare                 |
+|-------------------------|-----------------|---------------------------|
+| developers.facebook.com | dev.twitter.com | developers.foursquare.com |
+
+- **DO** use the `dev.example.org` or `developers.example.org` subdomains to expose your developer portal, if the API subdomain resides on `api.example.org`.
+- **CONSIDER** using redirects, if you can gather based on the incoming request from a browser where the developer really needs to go. E.g., if a developer types `api.example.org` in the browser without any furher information in the `GET` request, it is probably safe to redirect to the developer portal and help get the developer.
 
 ## API Operation
 
-### SHOULD:: Monitor API Usage
+- **DO** setup instrumentation from the outset of the API implementation to monitor important business metrics/KPIs.
+- **DO** gather information about the clients. This information, for instance, is useful to identify potential review partners for API changes.
 
-Owners of APIs used in production should monitor API service to get information about its using clients. This information, for instance, is useful to identify potential review partner for API changes.
-
-Hint: A preferred way of client detection implementation is by logging of the client-id retrieved from the OAuth token.
-
-## Organizing APIs
-
-### Consolidate API requests in one subdomain
-
-We've talked about things that come after the top-level domain. This time, let's explore stuff on the other side of the URL.
-
-Here's how Facebook, Foursquare, and Twitter handle this:
-
-Facebook provides two APIs. They started with api.facebook.com, then modified it to orient around the social graph graph.facebook.com.
-
-- graph.facebook.com
-- api.facebook.com
-
-Foursquare has one API.
-
-- api.foursquare.com
-
-Twitter has three APIs; two of them focused on search and streaming.
-
-- stream.twitter.com
-- api.twitter.com
-- search.twitter.com
-
-It's easy to understand how Facebook and Twitter ended up with more than one API. It has a lot to do with timing and acquisition, and it's easy to reconfigure a CName entry in your DNS to point requests to different clusters.
-
-But if we're making design decisions about what's in the best interest of app developer, we recommend following Foursquare's lead:
-
-Consolidate all API requests under one API subdomain.
-
-It's cleaner, easier and more intuitive for developers who you want to build cool apps using your API.
-
-Facebook, Foursquare, and Twitter also all have dedicated developer portals.
-
-- developers.facebook.com
-- developers.foursquare.com
-- dev.twitter.com
-
-### How to organize all of this?
-
-Your API gateway should be the top-level domain. For example, api.teachdogrest.com
-
-In keeping with the spirit of REST, your developer portal should follow this pattern: developers.yourtopleveldomain.
-
-### Do Web redirects
-
-Then optionally, if you can sense from requests coming in from the browser where the developer really needs to go, you can redirect.
-
-Say a developer types api.teachdogrest.com in the browser but there's no other information for the GET request, you can probably safely redirect to your developer portal and help get the developer where they really need to be.
+{++
 
 ## Tools
 
