@@ -342,7 +342,7 @@ Errors are a key element for providing context and visibility, and status codes 
 - **DO** include a brief message describing the error condition
 - **DO** include a longer description with information on how to fix the error condition, if applicable
 - **DO** describe any action that the client can take to correct the error or to help the server debug and fix the error, if appropriate.
-- **CONSIDER** Use Problem JSON: RFC 7807 defines the media type application/problem+json. Operations should return that (together with a suitable status code) when any problem occurred during processing and you can give more details than the status code itself can supply, whether it be caused by the client or the server (i.e. both for 4xx or 5xx errors).
+- **CONSIDER** using Problem Detail. The RFC 7807 [^3] defines the media type application/problem+json. Operations should return that (together with a suitable status code) when any problem occurred during processing and you can give more details than the status code itself can supply, whether it be caused by the client or the server (i.e. both for 4xx or 5xx errors).
 - **CONSIDER** adding a field breakdown, providing detailed errors, along with a fixed top-level error description, for `PUT`, `PATCH` and `POST` requests.
 - **CONSIDER** including a link to that document via a `Link` header or a link in the body, if information to correct or debug the error is available as a separate human-readable document. Also consider tracking the hits to these pages to see what areas tend to be more troublesome for your users – allowing you to provide even better documentation and/or build a better API.
 - **AVOID** including details such as stack traces, errors from database connections failures, etc.
@@ -452,3 +452,4 @@ When an API is part of a larger API portfolio or system, information may cross s
 
 [^1]: The Internet Assigned Number Authority ([IANA](http://www.iana.org/assignments/media-types/)) media type registry.
 [^2]: [Web Linking](https://tools.ietf.org/html/rfc5988).
+[^3]: [Problem Details for HTTP APIs](https://tools.ietf.org/html/rfc7807).
