@@ -4,15 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-07-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/apis/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <lastmod>2018-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,71 +12,15 @@
     
     <url>
      <loc>/api-design/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <lastmod>2018-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
     <url>
-     <loc>/rest/</loc>
-     <lastmod>2018-07-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/http/</loc>
-     <lastmod>2018-07-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/resource-identifiers/</loc>
-     <lastmod>2018-07-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/resources/</loc>
-     <lastmod>2018-07-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/methods/</loc>
-     <lastmod>2018-07-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/representations/</loc>
-     <lastmod>2018-07-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/hypermedia/</loc>
-     <lastmod>2018-07-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/content-negotiation/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>/apis/</loc>
+     <lastmod>2018-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -92,39 +28,7 @@
     
     <url>
      <loc>/caching/</loc>
-     <lastmod>2018-07-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/security/</loc>
-     <lastmod>2018-07-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/versioning-and-extensibility/</loc>
-     <lastmod>2018-07-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/documentation-and-discovery/</loc>
-     <lastmod>2018-07-29</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>/mocking/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <lastmod>2018-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -132,23 +36,23 @@
     
     <url>
      <loc>/clients/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <lastmod>2018-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
     <url>
-     <loc>/throttling/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>/content-negotiation/</loc>
+     <lastmod>2018-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
     <url>
-     <loc>/references/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <loc>/documentation-and-discovery/</loc>
+     <lastmod>2018-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -156,7 +60,103 @@
     
     <url>
      <loc>/examples/</loc>
-     <lastmod>2018-07-29</lastmod>
+     <lastmod>2018-08-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/http/</loc>
+     <lastmod>2018-08-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/hypermedia/</loc>
+     <lastmod>2018-08-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/methods/</loc>
+     <lastmod>2018-08-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/mocking/</loc>
+     <lastmod>2018-08-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/references/</loc>
+     <lastmod>2018-08-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/representations/</loc>
+     <lastmod>2018-08-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/resource-identifiers/</loc>
+     <lastmod>2018-08-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/resources/</loc>
+     <lastmod>2018-08-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/rest/</loc>
+     <lastmod>2018-08-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/security/</loc>
+     <lastmod>2018-08-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/throttling/</loc>
+     <lastmod>2018-08-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/versioning-and-extensibility/</loc>
+     <lastmod>2018-08-01</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

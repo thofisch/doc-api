@@ -36,7 +36,7 @@
     
     
       
-        <title>APIs - API Design Guidelines</title>
+        <title>Application Programming Interfaces - API Design Guidelines</title>
       
     
     
@@ -102,7 +102,7 @@
                 API Design Guidelines
               </span>
               <span class="md-header-nav__topic">
-                APIs
+                Application Programming Interfaces
               </span>
             
           
@@ -183,6 +183,18 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../api-design/" title="Api design" class="md-nav__link">
+      Api design
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
@@ -194,11 +206,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        APIs
+        Application Programming Interfaces
       </label>
     
-    <a href="./" title="APIs" class="md-nav__link md-nav__link--active">
-      APIs
+    <a href="./" title="Application Programming Interfaces" class="md-nav__link md-nav__link--active">
+      Application Programming Interfaces
     </a>
     
       
@@ -247,16 +259,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-operation" title="API Operation" class="md-nav__link">
-    API Operation
+  <a href="#organizing-apis" title="Organizing APIs" class="md-nav__link">
+    Organizing APIs
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#should-monitor-api-usage" title="SHOULD:: Monitor API Usage" class="md-nav__link">
-    SHOULD:: Monitor API Usage
+  <a href="#developer-portal" title="Developer Portal" class="md-nav__link">
+    Developer Portal
   </a>
   
 </li>
@@ -267,36 +279,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#organizing-apis" title="Organizing APIs" class="md-nav__link">
-    Organizing APIs
+  <a href="#api-operation" title="API Operation" class="md-nav__link">
+    API Operation
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#consolidate-api-requests-in-one-subdomain" title="Consolidate API requests in one subdomain" class="md-nav__link">
-    Consolidate API requests in one subdomain
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-to-organize-all-of-this" title="How to organize all of this?" class="md-nav__link">
-    How to organize all of this?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#do-web-redirects" title="Do Web redirects" class="md-nav__link">
-    Do Web redirects
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -324,164 +309,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../api-design/" title="API Design" class="md-nav__link">
-      API Design
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../rest/" title="REST" class="md-nav__link">
-      REST
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../http/" title="HTTP" class="md-nav__link">
-      HTTP
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../resource-identifiers/" title="Resource Identifiers" class="md-nav__link">
-      Resource Identifiers
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../resources/" title="Resources" class="md-nav__link">
-      Resources
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../methods/" title="Methods" class="md-nav__link">
-      Methods
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../representations/" title="Representations" class="md-nav__link">
-      Representations
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../hypermedia/" title="Hypermedia" class="md-nav__link">
-      Hypermedia
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../content-negotiation/" title="Content Negotiation" class="md-nav__link">
-      Content Negotiation
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
     <a href="../caching/" title="Caching" class="md-nav__link">
       Caching
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../security/" title="Security" class="md-nav__link">
-      Security
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../versioning-and-extensibility/" title="Versioning and Extensibility" class="md-nav__link">
-      Versioning and Extensibility
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../documentation-and-discovery/" title="Documentation and Discovery" class="md-nav__link">
-      Documentation and Discovery
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../mocking/" title="-Mocking" class="md-nav__link">
-      -Mocking
     </a>
   </li>
 
@@ -504,8 +333,80 @@
 
 
   <li class="md-nav__item">
-    <a href="../throttling/" title="Throttling" class="md-nav__link">
-      Throttling
+    <a href="../content-negotiation/" title="Content negotiation" class="md-nav__link">
+      Content negotiation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../documentation-and-discovery/" title="Documentation and discovery" class="md-nav__link">
+      Documentation and discovery
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../examples/" title="Examples" class="md-nav__link">
+      Examples
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../http/" title="Http" class="md-nav__link">
+      Http
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../hypermedia/" title="Hypermedia" class="md-nav__link">
+      Hypermedia
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../methods/" title="Methods" class="md-nav__link">
+      Methods
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../mocking/" title="Mocking" class="md-nav__link">
+      Mocking
     </a>
   </li>
 
@@ -528,8 +429,80 @@
 
 
   <li class="md-nav__item">
-    <a href="../examples/" title="Examples" class="md-nav__link">
-      Examples
+    <a href="../representations/" title="Representations" class="md-nav__link">
+      Representations
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../resource-identifiers/" title="Resource identifiers" class="md-nav__link">
+      Resource identifiers
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../resources/" title="Resources" class="md-nav__link">
+      Resources
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../rest/" title="Rest" class="md-nav__link">
+      Rest
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../security/" title="Security" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../throttling/" title="Throttling" class="md-nav__link">
+      Throttling
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../versioning-and-extensibility/" title="Versioning and extensibility" class="md-nav__link">
+      Versioning and extensibility
     </a>
   </li>
 
@@ -590,16 +563,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-operation" title="API Operation" class="md-nav__link">
-    API Operation
+  <a href="#organizing-apis" title="Organizing APIs" class="md-nav__link">
+    Organizing APIs
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#should-monitor-api-usage" title="SHOULD:: Monitor API Usage" class="md-nav__link">
-    SHOULD:: Monitor API Usage
+  <a href="#developer-portal" title="Developer Portal" class="md-nav__link">
+    Developer Portal
   </a>
   
 </li>
@@ -610,36 +583,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#organizing-apis" title="Organizing APIs" class="md-nav__link">
-    Organizing APIs
+  <a href="#api-operation" title="API Operation" class="md-nav__link">
+    API Operation
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#consolidate-api-requests-in-one-subdomain" title="Consolidate API requests in one subdomain" class="md-nav__link">
-    Consolidate API requests in one subdomain
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#how-to-organize-all-of-this" title="How to organize all of this?" class="md-nav__link">
-    How to organize all of this?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#do-web-redirects" title="Do Web redirects" class="md-nav__link">
-    Do Web redirects
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -686,46 +632,66 @@
 </ul>
 <h2 id="types-of-apis">Types of APIs<a class="headerlink" href="#types-of-apis" title="Permanent link">&para;</a></h2>
 <p>Web APIs can typically be broken into two broad categories: <strong>RPC</strong> and <strong>REST</strong>. These guidelines will only deal with REST.</p>
-<details class="info"><summary>RPC (Remote Procedure Call)</summary><p>RPC (e.g., gRPC and SOAP) is generally a poor fit for most public API implementations, as they usually require special purpose libraries or SDKs to work properly. A requirement that a lot of clients cannot meet without a lot of extra work and/or clunky third-party libraries.</p><p>This, and the fact that most RPC implementations do not use HTTP to its full extend, has led us to <strong>exclude RPC from these guidelines</strong>. However, if all of your clients are using legacy systems that depend on SOAP libraries, it may make more sense in that case to build a SOAP API for them.</p><p>A lot of documentation, best practices and general advise on how to build RPC APIs can be found throughout the web.</p></details><ins class="critic block">
+<details class="info"><summary>RPC (Remote Procedure Call)</summary><p>RPC (e.g., gRPC and SOAP) is generally a poor fit for most public API implementations, as they usually require special purpose libraries or SDKs to work properly. A requirement that a lot of clients cannot meet without a lot of extra work and/or clunky third-party libraries.</p><p>This, and the fact that most RPC implementations do not use HTTP to its full extend, has led us to <strong>exclude RPC from these guidelines</strong>. However, if all of your clients are using legacy systems that depend on SOAP libraries, it may make more sense in that case to build a SOAP API for them.</p><p>A lot of documentation, best practices and general advise on how to build RPC APIs can be found throughout the web.</p></details><h2 id="organizing-apis">Organizing APIs<a class="headerlink" href="#organizing-apis" title="Permanent link">&para;</a></h2>
+<p>Large API vendors (like Facebook, Twitter, and Foursquare) usually have their APIs organized behind one or more subdomains, like e.g.:</p>
+<table>
+<thead>
+<tr>
+<th>Facebook</th>
+<th>Twitter</th>
+<th>Forsquare</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>graph.facebook.com</td>
+<td>stream.twitter.com</td>
+<td>api.foursquare.com</td>
+</tr>
+<tr>
+<td>api.facebook.com</td>
+<td>api.twitter.com</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>search.twitter.com</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>It is not difficult to imagine how Facebook and Twitter ended up with more than one API - timing, team organization, acquisitions have likely played their part. However, following Foursquare's lead and consolidating all API requests under one API subdomain, might be the best interest of API consumers.</p>
+<ul>
+<li><strong>DO</strong> consolidate API requests in one subdomain, e.g. <code>https://api.example.org</code>. It is cleaner, easier and more intuitive for developers who want to build cool stuff using your APIs.</li>
+</ul>
+<h3 id="developer-portal">Developer Portal<a class="headerlink" href="#developer-portal" title="Permanent link">&para;</a></h3>
+<p>A developer portal might be a good idea for hosting examples, application notes, authentication guidance, human-readable documentation, error scenarios and descriptions, etc. Again some of the major API vendors all have dedicated developer portals:</p>
+<table>
+<thead>
+<tr>
+<th>Facebook</th>
+<th>Twitter</th>
+<th>Forsquare</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>developers.facebook.com</td>
+<td>dev.twitter.com</td>
+<td>developers.foursquare.com</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>DO</strong> use the <code>dev.example.org</code> or <code>developers.example.org</code> subdomains to expose your developer portal, if the API subdomain resides on <code>api.example.org</code>.</li>
+<li><strong>CONSIDER</strong> using redirects, if you can gather based on the incoming request from a browser where the developer really needs to go. E.g., if a developer types <code>api.example.org</code> in the browser without any furher information in the <code>GET</code> request, it is probably safe to redirect to the developer portal and help get the developer.</li>
+</ul>
 <h2 id="api-operation">API Operation<a class="headerlink" href="#api-operation" title="Permanent link">&para;</a></h2>
-<h3 id="should-monitor-api-usage">SHOULD:: Monitor API Usage<a class="headerlink" href="#should-monitor-api-usage" title="Permanent link">&para;</a></h3>
-<p>Owners of APIs used in production should monitor API service to get information about its using clients. This information, for instance, is useful to identify potential review partner for API changes.</p>
-<p>Hint: A preferred way of client detection implementation is by logging of the client-id retrieved from the OAuth token.</p>
-<h2 id="organizing-apis">Organizing APIs<a class="headerlink" href="#organizing-apis" title="Permanent link">&para;</a></h2>
-<h3 id="consolidate-api-requests-in-one-subdomain">Consolidate API requests in one subdomain<a class="headerlink" href="#consolidate-api-requests-in-one-subdomain" title="Permanent link">&para;</a></h3>
-<p>We've talked about things that come after the top-level domain. This time, let's explore stuff on the other side of the URL.</p>
-<p>Here's how Facebook, Foursquare, and Twitter handle this:</p>
-<p>Facebook provides two APIs. They started with api.facebook.com, then modified it to orient around the social graph graph.facebook.com.</p>
 <ul>
-<li>graph.facebook.com</li>
-<li>api.facebook.com</li>
+<li><strong>DO</strong> setup instrumentation from the outset of the API implementation to monitor important business metrics/KPIs.</li>
+<li><strong>DO</strong> gather information about the clients. This information, for instance, is useful to identify potential review partners for API changes.</li>
 </ul>
-<p>Foursquare has one API.</p>
-<ul>
-<li>api.foursquare.com</li>
-</ul>
-<p>Twitter has three APIs; two of them focused on search and streaming.</p>
-<ul>
-<li>stream.twitter.com</li>
-<li>api.twitter.com</li>
-<li>search.twitter.com</li>
-</ul>
-<p>It's easy to understand how Facebook and Twitter ended up with more than one API. It has a lot to do with timing and acquisition, and it's easy to reconfigure a CName entry in your DNS to point requests to different clusters.</p>
-<p>But if we're making design decisions about what's in the best interest of app developer, we recommend following Foursquare's lead:</p>
-<p>Consolidate all API requests under one API subdomain.</p>
-<p>It's cleaner, easier and more intuitive for developers who you want to build cool apps using your API.</p>
-<p>Facebook, Foursquare, and Twitter also all have dedicated developer portals.</p>
-<ul>
-<li>developers.facebook.com</li>
-<li>developers.foursquare.com</li>
-<li>dev.twitter.com</li>
-</ul>
-<h3 id="how-to-organize-all-of-this">How to organize all of this?<a class="headerlink" href="#how-to-organize-all-of-this" title="Permanent link">&para;</a></h3>
-<p>Your API gateway should be the top-level domain. For example, api.teachdogrest.com</p>
-<p>In keeping with the spirit of REST, your developer portal should follow this pattern: developers.yourtopleveldomain.</p>
-<h3 id="do-web-redirects">Do Web redirects<a class="headerlink" href="#do-web-redirects" title="Permanent link">&para;</a></h3>
-<p>Then optionally, if you can sense from requests coming in from the browser where the developer really needs to go, you can redirect.</p>
-<p>Say a developer types api.teachdogrest.com in the browser but there's no other information for the GET request, you can probably safely redirect to your developer portal and help get the developer where they really need to be.</p>
+<ins class="critic block">
 <h2 id="tools">Tools<a class="headerlink" href="#tools" title="Permanent link">&para;</a></h2>
 <p>The demand for flexibility and extensibility has driven the development of APIs and tools alike, and in many regards it has never been easier to create an API than it is today with multitudes of frameworks (such as JAX-RS, Apigility, Django REST Framework, Grape), specs (RAML, Swagger, API Blueprint, IO Docs), and tools (API Designer, API Science, APImatic) available.</p>
 </ins>
@@ -749,7 +715,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href=".." title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../api-design/" title="Api design" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -758,19 +724,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Introduction
+                Api design
               </span>
             </div>
           </a>
         
         
-          <a href="../api-design/" title="API Design" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../caching/" title="Caching" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                API Design
+                Caching
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
