@@ -19,40 +19,40 @@ In addition to the API as OpenAPI Reference Definition, it's good practice to pr
 
 how to document api’s
 
-* swagger
-* for internal developers (readme.md in the repo)
+- swagger
+- for internal developers (readme.md in the repo)
 
 API documentation (https://apihandyman.io/the-data-the-hypermedia-and-the-documentation/)
 
-* Machine readable documentation
+- Machine readable documentation
     * RAML, Swagger and Blueprint.
     * None of them, for now, handles hypermedia APIs definition.
     * ALPS
-* Human readable documentation
+- Human readable documentation
 
 Documentation: https://blog.smartbear.com/documentation/the-utopia-of-api-documentation/
 
 For some more or less agreed-upon qualities of good API documentation. It must be:
 
-* adapted for audience — like all good marketing and customer support, perhaps multiple documentation depending on the audience’s needs
-* DX-first — made for humans, by humans
-* machine-readable
-* Google-readable — search engine optimization matters when most people are typing “X API” into Google
-* well-organized like a reference guide or table of contents
-* entwined with the API itself — dual-screens or opening in new window, allowing users to try something out right away
-* not a burden to create
-* with pricing and usage policies
-* with contact information
-* adapted to the learner or user
-* riddled with use cases and code examples
-* made up of everything you could need to use the API
-* paired with a story — why you are doing this to achieve that
-* easy to produce, publish and maintain
-* adapted to what kind of software is being documented, like SaaS versus platform
-* adapted to audience to the people that will use it — end user versus inside your company
-* adapted to context — when in the discovery process and how people will use it
-* equipped with some sort of way to collect user feedback on how you can further improve it
-* easily found, whether within the developer portal or prominently placed on your website
+- adapted for audience — like all good marketing and customer support, perhaps multiple documentation depending on the audience’s needs
+- DX-first — made for humans, by humans
+- machine-readable
+- Google-readable — search engine optimization matters when most people are typing “X API” into Google
+- well-organized like a reference guide or table of contents
+- entwined with the API itself — dual-screens or opening in new window, allowing users to try something out right away
+- not a burden to create
+- with pricing and usage policies
+- with contact information
+- adapted to the learner or user
+- riddled with use cases and code examples
+- made up of everything you could need to use the API
+- paired with a story — why you are doing this to achieve that
+- easy to produce, publish and maintain
+- adapted to what kind of software is being documented, like SaaS versus platform
+- adapted to audience to the people that will use it — end user versus inside your company
+- adapted to context — when in the discovery process and how people will use it
+- equipped with some sort of way to collect user feedback on how you can further improve it
+- easily found, whether within the developer portal or prominently placed on your website
 
 > “If all your APIs are true REST APIs and you always them design them the same way, you lessen the need for documentation. If you write documentation using command and shared structures, templates, and common and shared vocabulary and concepts, they become easier to write, read, understand.”
 > 

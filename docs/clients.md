@@ -75,8 +75,8 @@ When using links in clients:
 
 When implementing clients to support extensibility:
 
-* **DO** store everything, if the client is capable of storing the complete representation locally.
-* **DO NOT** assume that the representation is of a fixed media type, character encoding, content language, or content encoding.
+- **DO** store everything, if the client is capable of storing the complete representation locally.
+- **DO NOT** assume that the representation is of a fixed media type, character encoding, content language, or content encoding.
 
 {++
 

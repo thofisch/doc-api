@@ -1,5 +1,15 @@
 # REpresentational State Transfer (REST)
 
+{++
+
+## Why should I build RESTful APIs?
+
+REST imposes a couple of architectural constraints on your API design.
+
+Regard the REST constraints not as a limitation, but rather as a support for building great APIs, i.e. APIs that are simple, clear, clean and approachable.
+
+++}
+
 We will focus our discussion on REST. Especially on how to achieve a more RESTful web API, by leveraging the capabilities of HTTP. For more information about REST itself, please refer to the [Wikipedia article on REST](http://en.wikipedia.org/wiki/Representational_state_transfer) or [What is REST?](<https://www.restapitutorial.com/lessons/whatisrest.html>).
 
 Some of the aspects of designing RESTful web APIs include:

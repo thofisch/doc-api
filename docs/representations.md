@@ -206,8 +206,8 @@ Access to lists of data items must support pagination for best client side batch
 
 There are two overall pagination techniques:
 
-* *Offset/limit* based pagination, where a numeric *offset* identifies the first page entry and a *limit* signifies how many entries are returned.
-* *Cursor* based (or key based) pagination, where a unique key element identifies the first page entry.
+- *Offset/limit* based pagination, where a numeric *offset* identifies the first page entry and a *limit* signifies how many entries are returned.
+- *Cursor* based (or key based) pagination, where a unique key element identifies the first page entry.
 
 ??? info "Offset/limit-based vs. cursor-based pagination"
     Cursor-based pagination is usually better and more efficient when compared to offset/limit-based pagination. Especially when it comes to high-data volumes and/or storage in NoSQL databases, so there may be a tendency to prefer cursor-based pagination, however, before choosing cursor-based pagination, consider the following:

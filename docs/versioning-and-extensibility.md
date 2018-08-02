@@ -1,16 +1,16 @@
 ## Versioning and Extensibility
 
-* versioning
+- versioning
     * Use API Versioning
-* what is a breaking change
-* breaking changes
+- what is a breaking change
+- breaking changes
 
 http://www.jenitennison.com/2009/07/22/versioning-uris.html
 
 A lot of things that we want to talk about (make RDF assertions about) are non-information resources. We give them URIs to name them, so that we can talk about them unambiguously, and we give them HTTP URIs so that we have a way of finding information resources (documents) that give us information about them.
 
-* non-information resource URIs must not include information that is likely to change
-* non-information resource URIs must not include unnecessary hierarchy
+- non-information resource URIs must not include information that is likely to change
+- non-information resource URIs must not include unnecessary hierarchy
 
 
 Always version your API. Versioning helps you iterate faster and prevents invalid requests from hitting updated endpoints. It also helps smooth over any major API version transitions as you can continue to offer old API versions for a period of time.

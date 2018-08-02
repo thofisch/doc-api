@@ -2,9 +2,9 @@
 
 ### MUST: Secure Endpoints with OAuth 2.0
 
-* Out-of-band authentication
-* CORS
-* Use Access and Refresh Tokens
+- Out-of-band authentication
+- CORS
+- Use Access and Refresh Tokens
     * Access Tokens
     * Refresh Tokens
     * Logging In
@@ -46,12 +46,12 @@ There are many schools of thought. My colleagues at Apigee and I don't always ag
 
 Let's look at these three top services. See how each of these services handles things differently:
 
-* PayPal
-* Permissions Service API
-* Facebook
-* OAuth 2.0
-* Twitter
-* OAuth 1.0a
+- PayPal
+- Permissions Service API
+- Facebook
+- OAuth 2.0
+- Twitter
+- OAuth 1.0a
 
 Note that PayPal's proprietary three-legged permissions API was in place long before OAuth was conceived.
 

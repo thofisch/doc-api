@@ -77,8 +77,8 @@ HEAD requests are used to retrieve header information of resources, and has the 
 
 It is important to understand the difference between `PUT` and `PATCH`.
 
-* `PUT` is designed to update/replace the entire resource. This means that omitted fields will be removed, which is rarely the desired effect.
-* `PATCH` is designed to support partial updates. This means the request should supply a *set of changes* (or instructions) for updating a resource and these should be applied atomically, leaving any fields not passed along intact.
+- `PUT` is designed to update/replace the entire resource. This means that omitted fields will be removed, which is rarely the desired effect.
+- `PATCH` is designed to support partial updates. This means the request should supply a *set of changes* (or instructions) for updating a resource and these should be applied atomically, leaving any fields not passed along intact.
 
 !!! warning
     Be aware, even though `PATCH` has gain a lot of use, `PATCH` is only a proposed standard, and details around the semantics are not widely understood. It's not an alternative to `POST` or `PUT` where you supply a flat list of values to change. Please see [RFC-5789](https://tools.ietf.org/html/rfc5789) for more information.
