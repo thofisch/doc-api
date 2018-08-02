@@ -2,8 +2,39 @@
 
 An API specifies how software should interact. Particularly, how a client can use an API, what URIs are available, what HTTP methods may be used, what query string parameters it accepts, what data can be sent, and what responses to expect.
 
+{++
+
+## Why APIs?
+
+The business of an enterprise can be expanded by linking the business to partners up and down the value chain.
+
+Another reason for using APIs is their use as an innovation lab of the enterprise. To fulfill this vision, the API portfolio should enable the enterprise to build innovative apps with little effort and spark creativity. By making company assets easily available through API, new uses of these assets can be found. Since APIs provide a new, simple way for accessing company assets, assets can be used in new ways within the company. Providing external access to the assets of your organization via APIs, enables external third party developers to create innovations for your organization by using your organization’s assets.
+
+++}
+
 ## API as a Product
 
+{++
+
+Great products are designed with rigorous customer focus, a deep understanding of the customers, their needs and desires.
+
+To design great APIs, you first need to realize, that APIs are in fact products. APIs are products of their own!
+
+++}
+
+{++
+
+## APIs are Products
+
+To design great APIs, we first need to realize, that APIs are in fact products.
+
+They are intended to be highly reusable software.
+
+It may be, that the idea for an API originates from one particular use case for one particular customer, but successful APIs are always more generic.
+
+++}
+
+The customers are the developers of the API consumer.
 When creating APIs intended for use by someone else, whether it is actually sold or not, it can and should most likely be treated as a product in itself.
 
 This can be very easy to lose sight of, so before jumping to the more specific advice on how to achieve successful APIs, keep the following overall principles in mind:
@@ -47,7 +78,7 @@ Large API vendors (like Facebook, Twitter, and Foursquare) usually have their AP
 | api.facebook.com   | api.twitter.com    |                    |
 |                    | search.twitter.com |                    |
 
-It is not difficult to imagine how Facebook and Twitter ended up with more than one API - timing, team organization, acquisitions have likely played their part. However, following Foursquare's lead and consolidating all API requests under one API subdomain, might be the best interest of API consumers.
+It is not difficult to imagine how Facebook and Twitter ended up with more than one API - timing, team organization, acquisitions have likely played their part. However, following Foursquare's lead and consolidating all API requests under one API subdomain, might be in the best interest of API consumers.
 
 - **DO** consolidate API requests in one subdomain, e.g. `https://api.example.org`. It is cleaner, easier and more intuitive for developers who want to build cool stuff using your APIs.
 
@@ -66,11 +97,3 @@ A developer portal might be a good idea for hosting examples, application notes,
 
 - **DO** setup instrumentation from the outset of the API implementation to monitor important business metrics/KPIs.
 - **DO** gather information about the clients. This information, for instance, is useful to identify potential review partners for API changes.
-
-{++
-
-## Tools
-
-The demand for flexibility and extensibility has driven the development of APIs and tools alike, and in many regards it has never been easier to create an API than it is today with multitudes of frameworks (such as JAX-RS, Apigility, Django REST Framework, Grape), specs (RAML, Swagger, API Blueprint, IO Docs), and tools (API Designer, API Science, APImatic) available.
-
-++}
