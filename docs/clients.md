@@ -1,3 +1,11 @@
+{++
+
+## Contract-First (Client)
+
+* Based on this contract, the consumer can already start implementing a solution before having access to the API.
+
+++}
+
 ## Resource Identifiers
 
 When using URIs in clients: 
