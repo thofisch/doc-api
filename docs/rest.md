@@ -1,15 +1,5 @@
 # REpresentational State Transfer (REST)
 
-{++
-
-## Why should I build RESTful APIs?
-
-REST imposes a couple of architectural constraints on your API design.
-
-Regard the REST constraints not as a limitation, but rather as a support for building great APIs, i.e. APIs that are simple, clear, clean and approachable.
-
-++}
-
 We will focus our discussion on REST. Especially on how to achieve a more RESTful web API, by leveraging the capabilities of HTTP. For more information about REST itself, please refer to the [Wikipedia article on REST](http://en.wikipedia.org/wiki/Representational_state_transfer) or [What is REST?](<https://www.restapitutorial.com/lessons/whatisrest.html>).
 
 Some of the aspects of designing RESTful web APIs include:
@@ -19,11 +9,14 @@ Some of the aspects of designing RESTful web APIs include:
 - A choice of *[formats and media types](representations/#format-and-a-media-type)* that allow clients to specify representation formats they can render, and for servers to honor those (or indicate if it cannot).
 - *[Linking](hypermedia)* between resources to indicate relationships (e.g., hypermedia links).
 
+!!! note "Why REST?"
+    REST imposes architectural constraints on your API design, but instead of regarding them as limitations, see them as support for building great APIs, i.e. APIs that are simple, clear, clean and approachable.
+
 ## Richardson Maturity Model
 
 Today, most web APIs are not truly RESTful APIs, instead they tend to be of a varying degree of RESTful. Therefore, the [Richardson Maturity Model](http://martinfowler.com/articles/richardsonMaturityModel.html) is often used to describe what it takes to make a well-designed RESTful API:
 
-![ichardson Maturity Model](./imgs/richardson-maturity-model.png)
+![Richardson Maturity Model](./imgs/richardson-maturity-model.png)
 
 - **Level 0**: Uses HTTP as a transport mechanism for RPC.
 - **Level 1**: Uses URIs for individual resources, but does not use HTTP methods, media types, or linking between resources.
