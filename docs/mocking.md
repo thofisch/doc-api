@@ -25,3 +25,19 @@ It's better to take the time now, up front and ensure that your API is well desi
 - testing api’s
 - automated in-memory integration tests (with live dependencies stubed out)
 - Implement a “Health-Check” Endpoint
+
+---
+
+#### Simulation
+
+* Basically every software system has dependencies to other software,
+* The consequence is sequential development of the components,
+* Simulations offer a solution: they make it possible to break up the dependencies between software components and allow for integration and development of software components, even though their dependencies have not been developed, yet.
+* Dependencies are replaced by simulations.
+* In API design there are two use cases for simulations:
+    * The simulation of backend systems allows for developing APIs without fully implemented backend systems. If the real backend is not available yet, a simulation of the backend can be used in its place.
+    * The simulation of APIs allows for developing apps (or other API solutions) without fully implemented APIs.
+    * Both types of simulations have their place in API design - but in different scenarios.
+* The development of the API and the development of the mobile app can take place in parallel. The simulation speeds up the development time of the overall API solution,
+* Simulation-based design of APIs and the contract-first design for APIs actually go hand-in-hand. The contract for the API can be used as a specification for the simulation.
+* Applying ideas of the simulation approach allows for breaking up the dependencies during development. It allows for an independent development of client and API, despite the dependencies between them.
