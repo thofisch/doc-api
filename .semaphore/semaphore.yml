@@ -1,0 +1,14 @@
+version: v1.0
+name: First pipeline example
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: "gh-pages"
+    task:
+      jobs:
+      - name: Docker build
+        commands:
+          - checkout
+          - docker run --rm -it -v ~/.ssh:/root/.ssh -v ${PWD}:/docs squidfunk/mkdocs-material gh-deploy
