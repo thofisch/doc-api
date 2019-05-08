@@ -12,5 +12,3 @@ blocks:
         commands:
           - checkout
           - docker run --rm -it -v ~/.ssh:/root/.ssh -v ${PWD}:/docs squidfunk/mkdocs-material gh-deploy
-      secrets:
-        - name: gh-ssh # name of secret
