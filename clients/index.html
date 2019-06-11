@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.2">
     
     
       
@@ -40,24 +40,33 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.3020aac5.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
       
     
     
-      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../assets/javascripts/modernizr.01ccdecf.js"></script>
     
     
-      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
       
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
-      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
     
     
       <link rel="stylesheet" href="../stylesheets/critic.css">
+    
+    
+      
     
     
   </head>
@@ -72,11 +81,11 @@
         
       </defs>
     </svg>
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
-    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#resource-identifiers" tabindex="1" class="md-skip">
+      <a href="#contract-first-client" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -92,33 +101,30 @@
         </a>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
       </div>
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                API Design Guidelines
-              </span>
-              <span class="md-header-nav__topic">
-                Clients
-              </span>
-            
+            <span class="md-header-nav__topic">
+              API Design Guidelines
+            </span>
+            <span class="md-header-nav__topic">
+              Clients
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="search"></label>
+  <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
-      <label class="md-icon md-search__icon" for="search"></label>
+      <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
       </button>
@@ -135,7 +141,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -156,12 +161,12 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
-  <label class="md-nav__title md-nav__title--site" for="drawer">
-    <span class="md-nav__button md-logo">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href=".." title="API Design Guidelines" class="md-nav__button md-logo">
       
         <i class="md-icon">code</i>
       
-    </span>
+    </a>
     API Design Guidelines
   </label>
   
@@ -185,8 +190,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../api-design/" title="Api design" class="md-nav__link">
-      Api design
+    <a href="../apis/" title="APIs" class="md-nav__link">
+      APIs
     </a>
   </li>
 
@@ -197,8 +202,104 @@
 
 
   <li class="md-nav__item">
-    <a href="../apis/" title="Application Programming Interfaces" class="md-nav__link">
-      Application Programming Interfaces
+    <a href="../api-design/" title="API Design" class="md-nav__link">
+      API Design
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../rest/" title="REST" class="md-nav__link">
+      REST
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../http/" title="HTTP" class="md-nav__link">
+      HTTP
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../resource-identifiers/" title="Resource Identifiers" class="md-nav__link">
+      Resource Identifiers
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../resources/" title="Resources" class="md-nav__link">
+      Resources
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../methods/" title="Methods" class="md-nav__link">
+      Methods
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../representations/" title="Representations" class="md-nav__link">
+      Representations
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../hypermedia/" title="Hypermedia" class="md-nav__link">
+      Hypermedia
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../content-negotiation/" title="Content Negotiation" class="md-nav__link">
+      Content Negotiation
     </a>
   </li>
 
@@ -219,15 +320,63 @@
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../security/" title="Security" class="md-nav__link">
+      Security
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../versioning-and-extensibility/" title="Versioning and Extensibility" class="md-nav__link">
+      Versioning and Extensibility
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../documentation-and-discovery/" title="Documentation and Discovery" class="md-nav__link">
+      Documentation and Discovery
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../mocking/" title="-Mocking" class="md-nav__link">
+      -Mocking
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
   <li class="md-nav__item md-nav__item--active">
     
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
-      <label class="md-nav__link md-nav__link--active" for="toc">
+      <label class="md-nav__link md-nav__link--active" for="__toc">
         Clients
       </label>
     
@@ -240,8 +389,15 @@
   
   
   
-    <label class="md-nav__title" for="toc">Table of contents</label>
+    <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contract-first-client" title="Contract-First (Client)" class="md-nav__link">
+    Contract-First (Client)
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#resource-identifiers" title="Resource Identifiers" class="md-nav__link">
@@ -335,80 +491,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../content-negotiation/" title="Content negotiation" class="md-nav__link">
-      Content negotiation
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../documentation-and-discovery/" title="Documentation and discovery" class="md-nav__link">
-      Documentation and discovery
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../examples/" title="Examples" class="md-nav__link">
-      Examples
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../http/" title="Http" class="md-nav__link">
-      Http
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../hypermedia/" title="Hypermedia" class="md-nav__link">
-      Hypermedia
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../methods/" title="Methods" class="md-nav__link">
-      Methods
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../mocking/" title="Mocking" class="md-nav__link">
-      Mocking
+    <a href="../throttling/" title="Throttling" class="md-nav__link">
+      Throttling
     </a>
   </li>
 
@@ -431,80 +515,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../representations/" title="Representations" class="md-nav__link">
-      Representations
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../resource-identifiers/" title="Resource identifiers" class="md-nav__link">
-      Resource identifiers
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../resources/" title="Resources" class="md-nav__link">
-      Resources
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../rest/" title="Rest" class="md-nav__link">
-      Rest
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../security/" title="Security" class="md-nav__link">
-      Security
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../throttling/" title="Throttling" class="md-nav__link">
-      Throttling
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../versioning-and-extensibility/" title="Versioning and extensibility" class="md-nav__link">
-      Versioning and extensibility
+    <a href="../examples/" title="Examples" class="md-nav__link">
+      Examples
     </a>
   </li>
 
@@ -524,8 +536,15 @@
   
   
   
-    <label class="md-nav__title" for="toc">Table of contents</label>
+    <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contract-first-client" title="Contract-First (Client)" class="md-nav__link">
+    Contract-First (Client)
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#resource-identifiers" title="Resource Identifiers" class="md-nav__link">
@@ -621,7 +640,13 @@
                 
                   <h1>Clients</h1>
                 
-                <h2 id="resource-identifiers">Resource Identifiers<a class="headerlink" href="#resource-identifiers" title="Permanent link">&para;</a></h2>
+                <ins class="critic block">
+<h2 id="contract-first-client">Contract-First (Client)<a class="headerlink" href="#contract-first-client" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Based on this contract, the consumer can already start implementing a solution before having access to the API.</li>
+</ul>
+</ins>
+<h2 id="resource-identifiers">Resource Identifiers<a class="headerlink" href="#resource-identifiers" title="Permanent link">&para;</a></h2>
 <p>When using URIs in clients: </p>
 <ul>
 <li><strong>DO</strong> update local copies of old URIs when receiving <code>301 Moved Permanently</code>.</li>
@@ -659,10 +684,10 @@
 <li><strong>DO</strong> retry the request on <code>401 Unauthorized</code> responses with the <code>Authorization</code> header containing the credentials. If the client is user-facing, prompt the user to supply credentials. In other cases, obtain the necessary security credentials.</li>
 <li><strong>DO</strong> clean up client stored data on <code>404 Not Found</code>.</li>
 <li><strong>DO</strong> look for the <code>Allow</code> header for valid methods on <code>405 Not Allowed</code>.</li>
-<li><strong>DO</strong> treat <code>406 Not Acceptable</code>. See <a href="../content_negotiation">Content Negotiation</a>.</li>
+<li><strong>DO</strong> treat <code>406 Not Acceptable</code>. See <a href="/content_negotiation">Content Negotiation</a>.</li>
 <li><strong>DO</strong> treat <code>409 Conflict</code> by looking for the conflicts listed in the body of the representation.</li>
 <li><strong>DO</strong> treat <code>410 Gone</code> the same as <code>404 Not Found</code>.</li>
-<li><strong>DO</strong> treat <code>412 Precondition Failed</code>. See <a href="../caching">Caching</a>.</li>
+<li><strong>DO</strong> treat <code>412 Precondition Failed</code>. See <a href="/caching">Caching</a>.</li>
 <li><strong>DO</strong> look for hints on valid size in the body of the error on <code>413 Request Entity Too Large</code>.</li>
 <li><strong>DO</strong> see the body of the representation to learn the supported media types for the request on <code>415 Unsupported Media Type</code>.</li>
 <li><strong>DO</strong> log the error, and then notify the server developers of <code>500 Internal Server Error</code>.</li>
@@ -745,7 +770,7 @@ This allows you to offer SDKs, automatically have them update when adding new fe
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../caching/" title="Caching" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../mocking/" title="-Mocking" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -754,19 +779,19 @@ This allows you to offer SDKs, automatically have them update when adding new fe
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Caching
+                -Mocking
               </span>
             </div>
           </a>
         
         
-          <a href="../content-negotiation/" title="Content negotiation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../throttling/" title="Throttling" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Content negotiation
+                Throttling
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -782,13 +807,11 @@ This allows you to offer SDKs, automatically have them update when adding new fe
       <div class="md-footer-copyright">
         
         powered by
-        <a href="http://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org">MkDocs</a>
         and
         <a href="https://squidfunk.github.io/mkdocs-material/">
           Material for MkDocs</a>
       </div>
-      
-        
       
     </div>
   </div>
@@ -796,12 +819,9 @@ This allows you to offer SDKs, automatically have them update when adding new fe
       
     </div>
     
-      <script src="../assets/javascripts/application.b438e6c5.js"></script>
+      <script src="../assets/javascripts/application.267712eb.js"></script>
       
-      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
-      
-    
-    
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
     
   </body>

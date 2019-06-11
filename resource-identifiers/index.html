@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -32,32 +32,41 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.3">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.2">
     
     
       
-        <title>Resource identifiers - API Design Guidelines</title>
+        <title>Resource Identifiers - API Design Guidelines</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.8d40d89b.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.3020aac5.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
       
     
     
-      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../assets/javascripts/modernizr.01ccdecf.js"></script>
     
     
-      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
       
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
-      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
     
     
       <link rel="stylesheet" href="../stylesheets/critic.css">
+    
+    
+      
     
     
   </head>
@@ -72,9 +81,9 @@
         
       </defs>
     </svg>
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
-    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
       <a href="#unique-resource-identifiers-uris" tabindex="1" class="md-skip">
         Skip to content
@@ -92,33 +101,30 @@
         </a>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
       </div>
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                API Design Guidelines
-              </span>
-              <span class="md-header-nav__topic">
-                Resource identifiers
-              </span>
-            
+            <span class="md-header-nav__topic">
+              API Design Guidelines
+            </span>
+            <span class="md-header-nav__topic">
+              Resource Identifiers
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="search"></label>
+  <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
-      <label class="md-icon md-search__icon" for="search"></label>
+      <label class="md-icon md-search__icon" for="__search"></label>
       <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
         &#xE5CD;
       </button>
@@ -135,7 +141,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -156,12 +161,12 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
-  <label class="md-nav__title md-nav__title--site" for="drawer">
-    <span class="md-nav__button md-logo">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href=".." title="API Design Guidelines" class="md-nav__button md-logo">
       
         <i class="md-icon">code</i>
       
-    </span>
+    </a>
     API Design Guidelines
   </label>
   
@@ -185,8 +190,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../api-design/" title="Api design" class="md-nav__link">
-      Api design
+    <a href="../apis/" title="APIs" class="md-nav__link">
+      APIs
     </a>
   </li>
 
@@ -197,8 +202,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../apis/" title="Application Programming Interfaces" class="md-nav__link">
-      Application Programming Interfaces
+    <a href="../api-design/" title="API Design" class="md-nav__link">
+      API Design
     </a>
   </li>
 
@@ -209,56 +214,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../caching/" title="Caching" class="md-nav__link">
-      Caching
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../clients/" title="Clients" class="md-nav__link">
-      Clients
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../content-negotiation/" title="Content Negotiation (conneg)" class="md-nav__link">
-      Content Negotiation (conneg)
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../documentation-and-discovery/" title="Documentation and discovery" class="md-nav__link">
-      Documentation and discovery
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../examples/" title="Examples" class="md-nav__link">
-      Examples
+    <a href="../rest/" title="REST" class="md-nav__link">
+      REST
     </a>
   </li>
 
@@ -279,80 +236,20 @@
       
       
 
-
-  <li class="md-nav__item">
-    <a href="../hypermedia/" title="Hypermedia" class="md-nav__link">
-      Hypermedia
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../methods/" title="Methods" class="md-nav__link">
-      Methods
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../mocking/" title="Mocking" class="md-nav__link">
-      Mocking
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../references/" title="References" class="md-nav__link">
-      References
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../representations/" title="Representations" class="md-nav__link">
-      Representations
-    </a>
-  </li>
-
-    
-      
-      
-      
-
   
 
 
   <li class="md-nav__item md-nav__item--active">
     
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Resource identifiers
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Resource Identifiers
       </label>
     
-    <a href="./" title="Resource identifiers" class="md-nav__link md-nav__link--active">
-      Resource identifiers
+    <a href="./" title="Resource Identifiers" class="md-nav__link md-nav__link--active">
+      Resource Identifiers
     </a>
     
       
@@ -360,7 +257,7 @@
   
   
   
-    <label class="md-nav__title" for="toc">Table of contents</label>
+    <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
@@ -440,8 +337,56 @@
 
 
   <li class="md-nav__item">
-    <a href="../rest/" title="Rest" class="md-nav__link">
-      Rest
+    <a href="../methods/" title="Methods" class="md-nav__link">
+      Methods
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../representations/" title="Representations" class="md-nav__link">
+      Representations
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../hypermedia/" title="Hypermedia" class="md-nav__link">
+      Hypermedia
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../content-negotiation/" title="Content Negotiation" class="md-nav__link">
+      Content Negotiation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../caching/" title="Caching" class="md-nav__link">
+      Caching
     </a>
   </li>
 
@@ -464,6 +409,54 @@
 
 
   <li class="md-nav__item">
+    <a href="../versioning-and-extensibility/" title="Versioning and Extensibility" class="md-nav__link">
+      Versioning and Extensibility
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../documentation-and-discovery/" title="Documentation and Discovery" class="md-nav__link">
+      Documentation and Discovery
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../mocking/" title="-Mocking" class="md-nav__link">
+      -Mocking
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../clients/" title="Clients" class="md-nav__link">
+      Clients
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../throttling/" title="Throttling" class="md-nav__link">
       Throttling
     </a>
@@ -476,8 +469,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../versioning-and-extensibility/" title="Versioning and extensibility" class="md-nav__link">
-      Versioning and extensibility
+    <a href="../references/" title="References" class="md-nav__link">
+      References
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../examples/" title="Examples" class="md-nav__link">
+      Examples
     </a>
   </li>
 
@@ -497,7 +502,7 @@
   
   
   
-    <label class="md-nav__title" for="toc">Table of contents</label>
+    <label class="md-nav__title" for="__toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
@@ -565,10 +570,10 @@
               
                 
                 
-                  <h1>Resource identifiers</h1>
+                  <h1>Resource Identifiers</h1>
                 
                 <h2 id="unique-resource-identifiers-uris">Unique Resource Identifiers (URIs)<a class="headerlink" href="#unique-resource-identifiers-uris" title="Permanent link">&para;</a></h2>
-<p>An important aspect of API design is to think about how to design unique resource identifiers, and as such, URIs should be treated as <em>opaque resource identifiers</em><sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>.</p>
+<p>An important aspect of API design is to think about how to design unique resource identifiers, and as such, URIs should be treated as <em>opaque resource identifiers</em><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
 <p>The opacity of URIs helps reduce coupling between servers and clients. This has nothing to do with readability or hackability, both of which may be extremely important aspects for developers consuming the API, where:</p>
 <ul>
 <li><em>readable URIs</em> help developers understand something about the resource.</li>
@@ -580,7 +585,7 @@
 <p>For instance, clients must not use the fact that a URI ends with <code>.xml</code> to infer that it resolves to an XML representation, instead it must rely on the <code>Content-Type</code> header of the response. </p>
 </div>
 <h2 id="designing-uris">Designing URIs<a class="headerlink" href="#designing-uris" title="Permanent link">&para;</a></h2>
-<p>When done successfully the result, of a thoughtful URI design, can be the most important <em>design affordance</em><sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup> of your API.</p>
+<p>When done successfully the result, of a thoughtful URI design, can be the most important <em>design affordance</em><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> of your API.</p>
 <p>So when designing URIs:</p>
 <ul>
 <li><strong>DO</strong> design URIs to last a long time - <a href="http://www.w3.org/Provider/Style/URI">Cool URIs don't change</a>.</li>
@@ -630,17 +635,17 @@
 </ul>
 <h3 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>CONSIDER</strong> using <code>limit</code> and <code>offset</code>, like <code>https://www.example.org/authors?offset=50&amp;limit=25</code>, when resource collections are backed by traditional relation databases, as these ties into the general implementation on the data store. Opt for <code>cursor</code> and a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database. For more information see <a href="../representations/#pagination">Pagination</a>.</li>
+<li><strong>CONSIDER</strong> using <code>limit</code> and <code>offset</code>, like <code>https://www.example.org/authors?offset=50&amp;limit=25</code>, when resource collections are backed by traditional relation databases, as these ties into the general implementation on the data store. Opt for <code>cursor</code> and a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database. For more information see <a href="representations/#pagination">Pagination</a>.</li>
 <li><strong>CONSIDER</strong> using sensible defaults for pagination, e.g. limit=10 and offset=0. The pagination defaults are dependent on your data size.</li>
 </ul>
 <div class="footnote">
 <hr />
 <ol>
 <li id="fn:1">
-<p><a href="http://www.jenitennison.com/2009/07/25/opaque-uris-unreadable-uris.html">Opaque URIs != Unreadable URIs</a>&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p><a href="http://www.jenitennison.com/2009/07/25/opaque-uris-unreadable-uris.html">Opaque URIs != Unreadable URIs</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:2">
-<p>a design property that communicates how something should be used without requiring documentation&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+<p>a design property that communicates how something should be used without requiring documentation&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -664,7 +669,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../representations/" title="Representations" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../http/" title="HTTP" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -673,7 +678,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Representations
+                HTTP
               </span>
             </div>
           </a>
@@ -701,13 +706,11 @@
       <div class="md-footer-copyright">
         
         powered by
-        <a href="http://www.mkdocs.org">MkDocs</a>
+        <a href="https://www.mkdocs.org">MkDocs</a>
         and
         <a href="https://squidfunk.github.io/mkdocs-material/">
           Material for MkDocs</a>
       </div>
-      
-        
       
     </div>
   </div>
@@ -715,12 +718,9 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.b438e6c5.js"></script>
+      <script src="../assets/javascripts/application.267712eb.js"></script>
       
-      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
-      
-    
-    
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
     
   </body>
