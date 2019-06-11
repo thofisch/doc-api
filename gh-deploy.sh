@@ -1,3 +1,7 @@
 #!/bin/bash
 
-docker exec -ti api_mkdocs_1 mkdocs gh-deploy
+docker run --rm -it                 \
+    -v ~/.ssh:/root/.ssh            \
+    -v ${PWD}:/docs                 \
+    squidfunk/mkdocs-material:4.1.2 \
+    gh-deploy
