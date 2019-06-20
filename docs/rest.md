@@ -4,10 +4,10 @@ We will focus our discussion on REST. Especially on how to achieve a more RESTfu
 
 Some of the aspects of designing RESTful web APIs include:
 
-- *[Unique identification](resource_identifiers)* of resources by using URIs.
-- Operation on resources by using the available *[HTTP methods](methods)*.
-- A choice of *[formats and media types](representations/#format-and-a-media-type)* that allow clients to specify representation formats they can render, and for servers to honor those (or indicate if it cannot).
-- *[Linking](hypermedia)* between resources to indicate relationships (e.g., hypermedia links).
+- *[Unique identification](/resource_identifiers)* of resources by using URIs.
+- Operation on resources by using the available *[HTTP methods](/methods)*.
+- A choice of *[formats and media types](/representations/#format-and-a-media-type)* that allow clients to specify representation formats they can render, and for servers to honor those (or indicate if it cannot).
+- *[Linking](/hypermedia)* between resources to indicate relationships (e.g., hypermedia links).
 
 !!! note "Why REST?"
     REST imposes architectural constraints on your API design, but instead of regarding them as limitations, see them as support for building great APIs, i.e. APIs that are simple, clear, clean and approachable.

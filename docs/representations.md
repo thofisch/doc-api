@@ -10,8 +10,8 @@ A *representation* (request/response) is concrete and real. Here we will offer g
     - Compression using [`Content-Encoding`](#content-encoding).
     - [Partial responses](resource-identifiers/#partial-responses) using query parameters.
     - Dividing the size of the payload using [Pagination](#pagination).
-    - `ETag` and `If-Modified-Since`/`If-None-Match` for [Caching](caching).
-    - Using [Batch Operations](methods/#batch-operations).
+    - `ETag` and `If-Modified-Since`/`If-None-Match` for [Caching](/caching).
+    - Using [Batch Operations](/methods/#batch-operations).
 
      All these common techniques are discussed in details elsewhere in these guidelines.
 

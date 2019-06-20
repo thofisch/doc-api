@@ -13,7 +13,7 @@ The motivation behind the *API Guidelines* is to define standards or "best pract
 
 ## About These Guidelines
 
-These guidelines are a work in progress, and is maintained by the **API Enablement Team** {>>Now defunct - who then?<<} during their initial work. Later teams are responsible for adhering to these guidelines during API design and development, and to continue to evolve these guidelines.
+These guidelines are a work in progress, and are maintained by the **API Enablement Team** {>>Now defunct - who then?<<} during their initial work. Later teams are responsible for adhering to these guidelines during API design and development, and to continue to evolve these guidelines.
 
 {>>What should we do when the guideline changes? Do existing APIs have to be changed as well?<<}
 

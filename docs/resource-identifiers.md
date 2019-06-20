@@ -66,7 +66,7 @@ Queries usually involve filtering, sorting and projections. When providing query
 
 ### Pagination
 
-- **CONSIDER** using `limit` and `offset`, like `https://www.example.org/authors?offset=50&limit=25`, when resource collections are backed by traditional relation databases, as these ties into the general implementation on the data store. Opt for `cursor` and a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database. For more information see [Pagination](representations/#pagination).
+- **CONSIDER** using `limit` and `offset`, like `https://www.example.org/authors?offset=50&limit=25`, when resource collections are backed by traditional relation databases, as these ties into the general implementation on the data store. Opt for `cursor` and a cursor-based pagination strategy, when the dataset is very large and/or backed by a non-traditional relational data store, like a document database. For more information see [Pagination](/representations/#pagination).
 - **CONSIDER** using sensible defaults for pagination, e.g. limit=10 and offset=0. The pagination defaults are dependent on your data size.
 
 [^1]: [Opaque URIs != Unreadable URIs](http://www.jenitennison.com/2009/07/25/opaque-uris-unreadable-uris.html)

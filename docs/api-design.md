@@ -50,7 +50,7 @@ Any type of design requires taking well-informed decisions, in order to make a b
 
 ## Architectural Design Decisions
 
-- **DO** use [Richardson Maturity Model](rest/#richardson-maturity-model) Level 2. Strive for a good implementation of Level 2 as it enables building resource-oriented APIs that make full use of HTTP verbs and status codes. Although this is not HATEOAS, it should not prevent you from designing proper link relationships in your APIs.
+- **DO** use [Richardson Maturity Model](/rest/#richardson-maturity-model) Level 2. Strive for a good implementation of Level 2 as it enables building resource-oriented APIs that make full use of HTTP verbs and status codes. Although this is not HATEOAS, it should not prevent you from designing proper link relationships in your APIs.
 
 !!! note "What is the difference between API Design and API Architecture?"
     * API architecture may refer to the architecture of the complete solution, consisting not only of the API itself.
