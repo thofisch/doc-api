@@ -20,6 +20,7 @@
 - [The 5 laws of API dates and times](http://apiux.com/2013/03/20/5-laws-api-dates-and-times/)
 - [Web API Design - Crafting Interfaces that Developers Love](https://pages.apigee.com/rs/apigee/images/api-design-ebook-2012-03.pdf)
 - [What Is an API?](https://apigility.org/documentation/api-primer/what-is-an-api)
+- [How to Tackle API-First Redesigns for Legacy Applications](https://nordicapis.com/how-to-tackle-api-first-redesigns-for-legacy-applications/)
 
 ## API First
 
@@ -60,10 +61,13 @@
 - [Is using OData\IQueryable in your Web API an inherently bad thing?](https://roysvork.wordpress.com/2013/06/24/is-using-odataiqueryable-in-your-web-api-an-inherently-bad-thing/)
 - [So what’s this GraphQL thing I keep hearing about?](https://medium.freecodecamp.org/so-whats-this-graphql-thing-i-keep-hearing-about-baf4d36c20cf)
 - [You Might Not Need GraphQL](https://blog.runscope.com/posts/you-might-not-need-graphql)
+- [How Does JSON:API Compare To REST and GraphQL?](https://nordicapis.com/how-does-jsonapi-compare-to-rest-and-graphql/)
+- [GraphQL Blog: Learning GraphQL, Tutorials, Examples, Tools](https://blog.graphqleditor.com/the-state-of-graphql/)
 
 ## HTTP
 
 - [HTTP headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
+- [HTTP headers for the responsible developer ](https://www.twilio.com/blog/a-http-headers-for-the-responsible-developer?utm_source=programmingdigest&utm_medium=web&utm_campaign=featured)
 
 ## Hypermedia
 
@@ -111,6 +115,7 @@
 - [Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security)
 - [The Basics of Web Application Security](https://martinfowler.com/articles/web-security-basics.html)
 - [Using JSON Web Tokens as API Keys](https://auth0.com/blog/using-json-web-tokens-as-api-keys/)
+- [Securing REST APIs](https://developer.okta.com/blog/2019/09/04/securing-rest-apis)
 
 ## Tracing
 
@@ -127,3 +132,25 @@
 - [Troy Hunt: Your API versioning is wrong, which is why I decided to do it 3 different wrong ways](https://www.troyhunt.com/your-api-versioning-is-wrong-which-is/)
 - [Versioning RESTful Services](http://codebetter.com/howarddierking/2012/11/09/versioning-restful-services/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+CodeBetter+%28CodeBetter.Com%29&utm_content=Google+Reader)
 - [Versioning URIs](http://www.jenitennison.com/2009/07/22/versioning-uris.html)
+- [Versioning Web API](https://www.blogofpi.com/versioning-web-api/)
+
+## Pagination
+
+- [Pagination with Relative Cursors](https://engineering.shopify.com/blogs/engineering/pagination-relative-cursors)
+
+## Unsorted
+
+- [(10) API Gateways in Microservices world(Kong Vs Tyk)](https://www.linkedin.com/pulse/api-gateways-microservices-worldkong-vs-tyk-amaresh-kumar/)
+- [API Is Dead – Long Live the APIs - DZone Integration](https://dzone.com/articles/api-is-dead-long-live-the-apis)
+- [API Mindset at eBay](https://www.ebayinc.com/stories/blogs/tech/api-mindset-at-ebay/)
+- [Approval Testing your Open API/Swagger Documents](http://josephwoodward.co.uk/2019/08/approval-testing-open-api-swagger-documents)
+- [Design system and API-Driven UI](https://drivy.engineering/mobile-api-driven/)
+- [Enums & APIs](https://dev.to/timothymcgrath/enums-apis-15n4)
+- [From API Craftsmanship to API Landscaping](https://nordicapis.com/from-api-craftsmanship-to-api-landscaping/)
+- [Everything You Need To Know About API Rate Limiting](https://nordicapis.com/everything-you-need-to-know-about-api-rate-limiting/)
+- [Exposing microservices running in AWS EKS with a microservices/API gateway like Solo Gloo](https://medium.com/solo-io/exposing-microservices-running-in-aws-eks-with-a-microservices-api-gateway-like-solo-gloo-263651e309f8)
+- [The Future Of APIs Will Be In The Browser](http://apievangelist.com/2019/08/01/the-future-of-apis-will-be-in-the-browser/)
+- [The Need for an API Composition Layer](https://nordicapis.com/the-need-for-an-api-composition-layer/)
+- [Webhooks vs WebSub? Actually they&#39;re different beasts | Ably Blog: Data in Motion](https://www.ably.io/blog/webhooks-vs-websub/)
+- [WebSockets vs SSE | Ably Blog: Data in Motion](https://www.ably.io/blog/websockets-vs-sse/)
+- [What is API Orchestration?](https://nordicapis.com/what-is-api-orchestration/)
