@@ -13,52 +13,49 @@ theme:
   palette:
     primary: indigo
     accent: indigo
-  logo: #imgs/logo.png
-    icon: code
-#   feature:
-#     tabs: true
+  icon:
+    logo: material/api
 
 markdown_extensions:
-- admonition
-- codehilite:
-    guess_lang: false
-    linenums: false
-- footnotes
-- toc:
-    permalink: true
-- pymdownx.caret
-- pymdownx.critic
-- pymdownx.details
-- pymdownx.inlinehilite
-- pymdownx.magiclink
-- pymdownx.mark
-- pymdownx.smartsymbols
-- pymdownx.superfences
-- pymdownx.tasklist:
-    custom_checkbox: true
+  - admonition
+  - codehilite:
+      guess_lang: false
+      linenums: false
+  - footnotes
+  - toc:
+      permalink: true
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
 
 extra_css:
-  - 'stylesheets/critic.css'
+  - "stylesheets/critic.css"
 
-pages:
-- Introduction: index.md
-- APIs: apis.md
-- API Design: api-design.md
-- REST: rest.md
-- HTTP: http.md
-- Resource Identifiers: resource-identifiers.md
-- Resources: resources.md
-- Methods: methods.md
-- Representations: representations.md
-- Hypermedia: hypermedia.md
-- Content Negotiation: content-negotiation.md
-- Caching: caching.md
-- Security: security.md
-- Versioning and Extensibility: versioning-and-extensibility.md
-- Documentation and Discovery: documentation-and-discovery.md
-- -Mocking: mocking.md
-- Clients: clients.md
-- Throttling: throttling.md
-- References: references.md
-- Examples: examples.md
-
+nav:
+  - Introduction: index.md
+  - APIs: apis.md
+  - API Design: api-design.md
+  - REST: rest.md
+  - HTTP: http.md
+  - Resource Identifiers: resource-identifiers.md
+  - Resources: resources.md
+  - Methods: methods.md
+  - Representations: representations.md
+  - Hypermedia: hypermedia.md
+  - Content Negotiation: content-negotiation.md
+  - Caching: caching.md
+  - Security: security.md
+  - Versioning and Extensibility: versioning-and-extensibility.md
+  - Documentation and Discovery: documentation-and-discovery.md
+  - -Mocking: mocking.md
+  - Clients: clients.md
+  - Throttling: throttling.md
+  - References: references.md
+  - Examples: examples.md
